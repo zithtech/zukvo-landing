@@ -5,6 +5,7 @@ import ProductsIndex from "@/pages/products/ProductsIndex";
 import TicketManagement from "@/pages/products/TicketManagement";
 import DocumentHub from "@/pages/products/DocumentHub";
 import ProjectManagement from "@/pages/products/ProjectManagement";
+import Invoice from "@/pages/products/Invoice";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                         path="/products/project-management"
                         element={<ProjectManagement />}
                     />
+                    <Route path="/products/invoice" element={<Invoice />} />
                 </Routes>
             </BrowserRouter>
         </div>

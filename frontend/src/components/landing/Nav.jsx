@@ -78,7 +78,8 @@ export default function Nav() {
                                                     to={
                                                         p.slug === "ticket-management" ||
                                                         p.slug === "document-hub" ||
-                                                        p.slug === "project-management"
+                                                        p.slug === "project-management" ||
+                                                        p.slug === "invoice"
                                                             ? `/products/${p.slug}`
                                                             : `/products#${p.slug}`
                                                     }

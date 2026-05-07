@@ -9,6 +9,7 @@ const READY = new Set([
     "ticket-management",
     "document-hub",
     "project-management",
+    "invoice",
 ]);
 
 export default function ProductsIndex() {
