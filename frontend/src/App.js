@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "@/pages/Landing";
 import ProductsIndex from "@/pages/products/ProductsIndex";
 import TicketManagement from "@/pages/products/TicketManagement";
+import DocumentHub from "@/pages/products/DocumentHub";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                         path="/products/ticket-management"
                         element={<TicketManagement />}
                     />
+                    <Route path="/products/document-hub" element={<DocumentHub />} />
                 </Routes>
             </BrowserRouter>
         </div>

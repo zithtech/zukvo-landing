@@ -76,8 +76,9 @@ export default function Nav() {
                                                 <Link
                                                     key={p.slug}
                                                     to={
-                                                        p.slug === "ticket-management"
-                                                            ? "/products/ticket-management"
+                                                        p.slug === "ticket-management" ||
+                                                        p.slug === "document-hub"
+                                                            ? `/products/${p.slug}`
                                                             : `/products#${p.slug}`
                                                     }
                                                     data-testid={`nav-product-${p.slug}`}
