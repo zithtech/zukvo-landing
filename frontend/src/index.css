@@ -143,6 +143,14 @@ code {
     animation: zk-marquee 30s linear infinite;
 }
 
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    scrollbar-width: none;
+}
+
 /* Glow */
 .zk-glow {
     box-shadow:
