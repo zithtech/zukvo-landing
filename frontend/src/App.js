@@ -4,6 +4,7 @@ import Landing from "@/pages/Landing";
 import ProductsIndex from "@/pages/products/ProductsIndex";
 import TicketManagement from "@/pages/products/TicketManagement";
 import DocumentHub from "@/pages/products/DocumentHub";
+import ProjectManagement from "@/pages/products/ProjectManagement";
 
 function App() {
     return (
@@ -17,6 +18,10 @@ function App() {
                         element={<TicketManagement />}
                     />
                     <Route path="/products/document-hub" element={<DocumentHub />} />
+                    <Route
+                        path="/products/project-management"
+                        element={<ProjectManagement />}
+                    />
                 </Routes>
             </BrowserRouter>
         </div>

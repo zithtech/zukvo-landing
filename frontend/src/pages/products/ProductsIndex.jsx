@@ -5,7 +5,11 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import { PRODUCTS } from "@/data/products";
 
-const READY = new Set(["ticket-management", "document-hub"]);
+const READY = new Set([
+    "ticket-management",
+    "document-hub",
+    "project-management",
+]);
 
 export default function ProductsIndex() {
     useEffect(() => {
