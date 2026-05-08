@@ -12,6 +12,14 @@ const LINKS = [
     { label: "FAQ", href: "/#faq" },
 ];
 
+const READY_SLUGS = new Set([
+    "ticket-management",
+    "document-hub",
+    "project-management",
+    "invoice",
+    "daily-updates",
+]);
+
 export default function Nav() {
     const [scrolled, setScrolled] = useState(false);
     const [open, setOpen] = useState(false);
@@ -76,10 +84,7 @@ export default function Nav() {
                                                 <Link
                                                     key={p.slug}
                                                     to={
-                                                        p.slug === "ticket-management" ||
-                                                        p.slug === "document-hub" ||
-                                                        p.slug === "project-management" ||
-                                                        p.slug === "invoice"
+                                                        READY_SLUGS.has(p.slug)
                                                             ? `/products/${p.slug}`
                                                             : `/products#${p.slug}`
                                                     }

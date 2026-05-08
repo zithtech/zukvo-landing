@@ -10,6 +10,7 @@ const READY = new Set([
     "document-hub",
     "project-management",
     "invoice",
+    "daily-updates",
 ]);
 
 export default function ProductsIndex() {
