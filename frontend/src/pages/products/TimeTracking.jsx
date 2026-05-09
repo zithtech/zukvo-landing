@@ -24,6 +24,9 @@ import {
     AlertTriangle,
     BarChart3,
     Hash,
+    MousePointerClick,
+    ExternalLink,
+    FileText,
 } from "lucide-react";
 import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
@@ -37,6 +40,8 @@ const TT_TEAM_IMG =
     "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/7fgod7hr_image.png";
 const TT_LOG_IMG =
     "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/vaqv85zj_image.png";
+const TT_TICKET_IMG =
+    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/xhlqj0b2_image.png";
 
 const SUBMODULES = [
     { id: "start", label: "Start a timer", icon: Play },
@@ -44,6 +49,7 @@ const SUBMODULES = [
     { id: "my", label: "My tracking", icon: User },
     { id: "team", label: "Team tracking", icon: Users },
     { id: "manager", label: "Manager adjust", icon: PenLine },
+    { id: "ticket", label: "Ticket deep-dive", icon: Hash },
     { id: "activity", label: "Activity", icon: Activity },
 ];
 
@@ -78,6 +84,7 @@ export default function TimeTracking() {
             <MyTracking />
             <TeamTracking />
             <ManagerAdjust />
+            <TicketDeepDive />
             <ActivitySection />
             <FinalCTA />
             <Footer />
@@ -879,6 +886,110 @@ function Step({ n, icon: Icon, title, body }) {
             <div className="mt-3 font-heading text-lg text-white tracking-tight">{title}</div>
             <p className="mt-1 text-[13.5px] text-zinc-400 leading-relaxed">{body}</p>
         </div>
+    );
+}
+
+/* ---------------- TICKET DEEP-DIVE ---------------- */
+
+function TicketDeepDive() {
+    return (
+        <section
+            id="ticket"
+            data-testid="tt-ticket"
+            className="relative bg-[#0A0A0A] text-white border-t border-white/5"
+        >
+            <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-end">
+                    <div className="lg:col-span-7">
+                        <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-300">
+                            <MousePointerClick className="size-3" /> One-click context
+                        </span>
+                        <h2 className="mt-5 font-heading font-medium text-4xl md:text-5xl tracking-[-0.03em]">
+                            Click the ticket. <br />
+                            <span className="text-zinc-500">Get the whole story.</span>
+                        </h2>
+                        <p className="mt-5 text-zinc-400 leading-relaxed text-[15px] md:text-base max-w-2xl">
+                            Every entry in the Time Tracking activity is a live link. Click the
+                            ticket number — managers and members get the full ticket panel right
+                            in place, with description, acceptance criteria, planning, and the
+                            entire activity timeline. No tab switching. No context loss.
+                        </p>
+                    </div>
+                    <div className="lg:col-span-5">
+                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
+                            <div className="text-[10.5px] uppercase tracking-[0.2em] text-zinc-500">
+                                Try it
+                            </div>
+                            <div className="mt-3 space-y-2">
+                                {[
+                                    ["[001-0533]", "Notification content Enhancements", "In Progress", "emerald"],
+                                    ["[001-0574]", "Invoice UI Updates", "In Progress", "emerald"],
+                                    ["[001-0537]", "SOS Alerts From User App", "In Progress", "emerald"],
+                                ].map((r, i) => (
+                                    <button
+                                        key={i}
+                                        data-testid={`tt-ticket-link-${i}`}
+                                        className="w-full group rounded-xl border border-white/10 bg-white/[0.02] hover:border-cyan-400/40 hover:bg-cyan-500/[0.04] transition-colors px-3.5 py-3 flex items-center gap-3 text-left"
+                                    >
+                                        <span className="font-mono text-[12px] text-cyan-300 bg-cyan-500/10 border border-cyan-400/20 rounded-md px-2 py-0.5 shrink-0">
+                                            {r[0]}
+                                        </span>
+                                        <span className="text-[12.5px] text-zinc-200 truncate flex-1">
+                                            {r[1]}
+                                        </span>
+                                        <ExternalLink className="size-3.5 text-zinc-500 group-hover:text-cyan-300 transition-colors shrink-0" />
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="mt-3 text-[11px] text-zinc-500 leading-relaxed">
+                                Same panel everywhere — Time Tracking, Sprint board, Daily Updates.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="zk-reveal mt-12">
+                    <ImageSlot
+                        testid="tt-image-ticket"
+                        src={TT_TICKET_IMG}
+                        alt="Ticket detail panel from Time Tracking activity"
+                        label="Ticket panel · opened from Time Tracking"
+                        chromeUrl="zukvo.app/work/time-tracking → 001-0533"
+                        aspect="16/10"
+                        caption="Live screenshot — clicking a ticket number opens the full ticket panel without leaving Time Tracking."
+                    />
+                </div>
+
+                <div className="zk-reveal mt-10 grid grid-cols-2 lg:grid-cols-4 gap-3">
+                    {[
+                        { i: FileText, t: "Description & acceptance criteria", c: "cyan" },
+                        { i: User, t: "Assignee, reporter & RBAC", c: "violet" },
+                        { i: Hash, t: "Tags, priority, story points", c: "amber" },
+                        { i: Activity, t: "Activity timeline & status", c: "emerald" },
+                    ].map((b, i) => (
+                        <div
+                            key={i}
+                            className="rounded-xl border border-white/10 bg-[#0E0E10] p-4 flex items-center gap-3"
+                        >
+                            <span
+                                className={`inline-flex size-9 items-center justify-center rounded-lg border ${
+                                    b.c === "cyan"
+                                        ? "bg-cyan-500/10 text-cyan-300 border-cyan-400/20"
+                                        : b.c === "violet"
+                                          ? "bg-violet-500/10 text-violet-300 border-violet-400/20"
+                                          : b.c === "amber"
+                                            ? "bg-amber-500/10 text-amber-300 border-amber-400/20"
+                                            : "bg-emerald-500/10 text-emerald-300 border-emerald-400/20"
+                                }`}
+                            >
+                                <b.i className="size-4" />
+                            </span>
+                            <div className="text-[12.5px] text-zinc-300 leading-snug">{b.t}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
     );
 }
 
