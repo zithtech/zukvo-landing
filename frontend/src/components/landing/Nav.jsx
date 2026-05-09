@@ -18,6 +18,7 @@ const READY_SLUGS = new Set([
     "project-management",
     "invoice",
     "daily-updates",
+    "time-tracking",
 ]);
 
 export default function Nav() {

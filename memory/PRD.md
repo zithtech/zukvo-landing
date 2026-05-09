@@ -30,6 +30,16 @@ screenshots (dark dashboard, sprint completion modal, Create-with-Zai modal).
 - Sections: Nav → Hero (light) → Social Proof → Features Bento → Workflow
   rows → Audiences → Pricing → FAQ → Final CTA → Footer (all dark).
 
+## What's been implemented (2026-02 update)
+- Module deep-dive pages live: Ticket Management, Document Hub, Project
+  Management, Invoice, Daily Updates, **Time Tracking** (route
+  `/products/time-tracking`, wired in `App.js` + `Nav.jsx` READY_SLUGS).
+- Time Tracking page sections: hero (light), in-module pill nav, Start a
+  timer, interactive Start/Pause/Resume/Stop controls with animated SVG
+  ring, My Tracking (KPIs + activity timeline), Team Tracking (manager
+  KPIs + table w/ capacity bars), Manager backfill 3-step explainer with
+  Log Time Session screenshot, 7-day activity bar chart, final CTA.
+
 ## What's been implemented (2026-12-06)
 - Tailwind config with custom `zukvo` color palette + heading/body fonts.
 - Global styles (`index.css`): scroll reveal, dot grid, marquee, tracing
