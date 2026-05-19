@@ -13,10 +13,27 @@ import {
     Calculator,
     Receipt,
     Mail,
+    Chrome,
 } from "lucide-react";
 
 // Central product catalog — used by nav dropdown and /products page
 export const PRODUCTS = [
+    {
+        slug: "zithport",
+        name: "ZithPort Extension",
+        tagline: "Capture every Upwork job in one click.",
+        kicker: "Grow",
+        icon: Chrome,
+        accent: "violet",
+        description:
+            "Chrome extension that extracts Upwork job posts, scores them, runs a skill-alignment check against your profile, and saves the qualified ones straight into your Zukvo Leads pipeline.",
+        bullets: [
+            "1-click job extraction",
+            "Lead value 0–100 score",
+            "Skill alignment vs. profile",
+            "Auto-sync to Leads",
+        ],
+    },
     {
         slug: "ticket-management",
         name: "Ticket Management",

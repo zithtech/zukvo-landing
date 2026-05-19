@@ -19,6 +19,7 @@ const READY_SLUGS = new Set([
     "invoice",
     "daily-updates",
     "time-tracking",
+    "zithport",
 ]);
 
 export default function Nav() {

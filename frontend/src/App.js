@@ -8,6 +8,7 @@ import ProjectManagement from "@/pages/products/ProjectManagement";
 import Invoice from "@/pages/products/Invoice";
 import DailyUpdates from "@/pages/products/DailyUpdates";
 import TimeTracking from "@/pages/products/TimeTracking";
+import ZithPort from "@/pages/products/ZithPort";
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                     <Route path="/products/invoice" element={<Invoice />} />
                     <Route path="/products/daily-updates" element={<DailyUpdates />} />
                     <Route path="/products/time-tracking" element={<TimeTracking />} />
+                    <Route path="/products/zithport" element={<ZithPort />} />
                 </Routes>
             </BrowserRouter>
         </div>
