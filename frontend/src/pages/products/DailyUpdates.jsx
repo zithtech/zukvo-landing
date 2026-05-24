@@ -71,7 +71,7 @@ export default function DailyUpdates() {
     return (
         <main
             data-testid="daily-updates-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-hidden"
+            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
             <Nav />
             <Hero />

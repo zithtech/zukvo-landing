@@ -77,7 +77,7 @@ export default function Invoice() {
     return (
         <main
             data-testid="invoice-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-hidden"
+            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
             <Nav />
             <Hero />

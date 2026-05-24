@@ -53,7 +53,7 @@ export default function Workflow() {
             data-testid="workflow-section"
             className="relative bg-[#0A0A0A] text-white"
         >
-            <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-32 space-y-28 md:space-y-40">
+            <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-14 md:py-20 space-y-16 md:space-y-20">
                 {ROWS.map((r, i) => (
                     <div
                         key={i}

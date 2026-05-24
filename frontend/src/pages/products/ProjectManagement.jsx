@@ -66,7 +66,7 @@ export default function ProjectManagement() {
     return (
         <main
             data-testid="project-management-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-hidden"
+            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
             <Nav />
             <Hero />

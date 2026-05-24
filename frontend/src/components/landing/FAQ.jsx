@@ -36,7 +36,7 @@ export default function FAQ() {
             data-testid="faq-section"
             className="relative bg-[#0A0A0A] text-white"
         >
-            <div className="relative mx-auto max-w-5xl px-6 md:px-10 py-24 md:py-32">
+            <div className="relative mx-auto max-w-5xl px-6 md:px-10 py-14 md:py-20">
                 <div className="zk-reveal grid grid-cols-1 lg:grid-cols-12 gap-10">
                     <div className="lg:col-span-5">
                         <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-300">

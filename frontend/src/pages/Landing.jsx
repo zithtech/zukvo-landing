@@ -30,7 +30,7 @@ export default function Landing() {
     }, []);
 
     return (
-        <main data-testid="landing-page" className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-hidden">
+        <main data-testid="landing-page" className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip">
             <Nav />
             <Hero />
             <SocialProof />

@@ -74,7 +74,7 @@ export default function TimeTracking() {
     return (
         <main
             data-testid="time-tracking-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-hidden"
+            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
             <Nav />
             <Hero />

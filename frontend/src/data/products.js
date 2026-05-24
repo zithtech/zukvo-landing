@@ -14,6 +14,8 @@ import {
     Receipt,
     Mail,
     Chrome,
+    LayoutDashboard,
+    Siren,
 } from "lucide-react";
 
 // Central product catalog — used by nav dropdown and /products page
@@ -114,22 +116,22 @@ export const PRODUCTS = [
             "Trash & restore",
         ],
     },
-    {
-        slug: "time-sheet",
-        name: "Time Sheet",
-        tagline: "Approvals without spreadsheets.",
-        kicker: "Operate",
-        icon: CalendarRange,
-        accent: "emerald",
-        description:
-            "Weekly time sheets for every team member with manager approvals, lock-after-submit, and automated pay-period exports.",
-        bullets: [
-            "Weekly submission + approvals",
-            "Lock after submit",
-            "Payroll-friendly exports",
-            "Policy + overtime rules",
-        ],
-    },
+    // {
+    //     slug: "time-sheet",
+    //     name: "Time Sheet",
+    //     tagline: "Approvals without spreadsheets.",
+    //     kicker: "Operate",
+    //     icon: CalendarRange,
+    //     accent: "emerald",
+    //     description:
+    //         "Weekly time sheets for every team member with manager approvals, lock-after-submit, and automated pay-period exports.",
+    //     bullets: [
+    //         "Weekly submission + approvals",
+    //         "Lock after submit",
+    //         "Payroll-friendly exports",
+    //         "Policy + overtime rules",
+    //     ],
+    // },
     {
         slug: "proposals",
         name: "Proposals",
@@ -192,6 +194,38 @@ export const PRODUCTS = [
             "Linked projects & invoices",
             "Client portal",
             "Communication timeline",
+        ],
+    },
+    {
+        slug: "client-portal",
+        name: "Client Portal",
+        tagline: "Give clients a window into the work.",
+        kicker: "Grow",
+        icon: LayoutDashboard,
+        accent: "violet",
+        description:
+            "A branded, secure portal where clients track project progress, review deliverables, approve proposals, pay invoices, and message your team — without another login to manage.",
+        bullets: [
+            "Branded subdomain + theme",
+            "Project progress & milestones",
+            "Invoice view + online payment",
+            "Shared files & approvals",
+        ],
+    },
+    {
+        slug: "escalation-management",
+        name: "Escalations",
+        tagline: "Quality & performance — never silent.",
+        kicker: "Operate",
+        icon: Siren,
+        accent: "indigo",
+        description:
+            "Manual escalations for quality and performance concerns. Raise with evidence, route to leads, and resolve against a 24-hour review SLA — with categories, priorities and statuses you control.",
+        bullets: [
+            "Raise with evidence + attachments",
+            "24-hour review SLA",
+            "Configurable categories + priorities",
+            "Lifecycle statuses + workflow",
         ],
     },
     {

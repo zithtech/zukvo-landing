@@ -71,7 +71,7 @@ export default function DocumentHub() {
     return (
         <main
             data-testid="document-hub-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-hidden"
+            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
             <Nav />
             <Hero />

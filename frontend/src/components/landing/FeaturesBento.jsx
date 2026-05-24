@@ -28,7 +28,7 @@ export default function FeaturesBento() {
             {/* subtle dot grid */}
             <div className="absolute inset-0 zk-dot-grid opacity-40 pointer-events-none [mask-image:radial-gradient(60%_50%_at_50%_30%,black,transparent_75%)]" />
 
-            <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-32">
+            <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-14 md:py-20">
                 {/* Heading */}
                 <div className="max-w-3xl">
                     <span className="zk-reveal inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-300">

@@ -69,7 +69,7 @@ export default function TicketManagement() {
     return (
         <main
             data-testid="ticket-management-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-hidden"
+            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
             <Nav />
             <Hero />

@@ -20,6 +20,15 @@ const READY_SLUGS = new Set([
     "daily-updates",
     "time-tracking",
     "zithport",
+    "proposals",
+    "leads-management",
+    "client-management",
+    "client-portal",
+    "performance-management",
+    "squads",
+    "accounts",
+    "mail-calendar",
+    "escalation-management",
 ]);
 
 export default function Nav() {
@@ -181,7 +190,11 @@ export default function Nav() {
                             {PRODUCTS.map((p) => (
                                 <Link
                                     key={p.slug}
-                                    to={`/products#${p.slug}`}
+                                    to={
+                                        READY_SLUGS.has(p.slug)
+                                            ? `/products/${p.slug}`
+                                            : `/products#${p.slug}`
+                                    }
                                     onClick={() => setOpen(false)}
                                     className="flex items-center gap-2 px-3 py-1.5 text-[13px] text-zinc-600 hover:text-zukvo-600"
                                 >

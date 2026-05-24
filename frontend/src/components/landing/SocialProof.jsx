@@ -12,7 +12,7 @@ export default function SocialProof() {
             data-testid="social-proof-section"
             className="relative bg-[#0A0A0A] text-white overflow-hidden"
         >
-            <div className="relative mx-auto max-w-7xl px-6 md:px-10 pt-10 pb-16">
+            <div className="relative mx-auto max-w-7xl px-6 md:px-10 pt-8 pb-10">
                 <p
                     data-testid="social-proof-label"
                     className="zk-reveal text-center text-[11px] font-bold uppercase tracking-[0.28em] text-zinc-400"

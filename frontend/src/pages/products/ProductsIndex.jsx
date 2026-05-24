@@ -11,6 +11,15 @@ const READY = new Set([
     "project-management",
     "invoice",
     "daily-updates",
+    "proposals",
+    "leads-management",
+    "client-management",
+    "client-portal",
+    "performance-management",
+    "squads",
+    "accounts",
+    "mail-calendar",
+    "escalation-management",
 ]);
 
 export default function ProductsIndex() {
@@ -40,7 +49,7 @@ export default function ProductsIndex() {
     return (
         <main
             data-testid="products-index-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-hidden"
+            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
             <Nav />
             <section className="relative pt-32 md:pt-40 pb-16 zk-mesh">

@@ -27,7 +27,7 @@ export default function Footer() {
             data-testid="site-footer"
             className="relative bg-[#0A0A0A] text-white border-t border-white/10"
         >
-            <div className="mx-auto max-w-7xl px-6 md:px-10 pt-20 pb-10">
+            <div className="mx-auto max-w-7xl px-6 md:px-10 pt-12 pb-8">
                 <div className="grid grid-cols-2 md:grid-cols-6 gap-10">
                     <div className="col-span-2">
                         <ZukvoLogo variant="dark" size={30} />
@@ -70,9 +70,9 @@ export default function Footer() {
                     ))}
                 </div>
 
-                <div className="mt-16 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-zinc-500">
+                <div className="mt-10 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-zinc-500">
                     <div data-testid="footer-copyright">
-                        © {new Date().getFullYear()} Zukvo Labs. All rights reserved.
+                        © {new Date().getFullYear()} Zithtech. All rights reserved.
                     </div>
                     <div className="flex items-center gap-2">
                         <span className="size-1.5 rounded-full bg-emerald-400" /> All systems

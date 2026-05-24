@@ -224,6 +224,45 @@ code {
     pointer-events: none;
 }
 
+/* Hero perspective grid floor */
+@keyframes zk-grid-scroll {
+    from { background-position: 0 0; }
+    to   { background-position: 0 80px; }
+}
+.zk-grid-floor {
+    background-image:
+        linear-gradient(to right, rgba(99, 102, 241, 0.42) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(99, 102, 241, 0.42) 1px, transparent 1px);
+    background-size: 80px 80px;
+    animation: zk-grid-scroll 5s linear infinite;
+    transform-origin: 50% 0%;
+    will-change: background-position;
+}
+
+@keyframes zk-tab-progress {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+@keyframes zk-flow-x {
+    from { transform: translateX(0); }
+    to   { transform: translateX(400%); }
+}
+@keyframes zk-flow-y {
+    from { transform: translateY(0); }
+    to   { transform: translateY(400%); }
+}
+
+@keyframes zk-horizon-pulse {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 0.9; }
+}
+.zk-horizon { animation: zk-horizon-pulse 6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+    .zk-grid-floor, .zk-horizon { animation: none !important; }
+}
+
 /* Gradient mesh hero accent */
 .zk-mesh {
     background:
