@@ -12,6 +12,7 @@ export default function ImageSlot({
     caption,
     aspect = "16/9",
     objectPosition = "top",
+    objectFit = "cover",
     className = "",
     chromeUrl = "zukvo.app",
     testid,
@@ -31,15 +32,15 @@ export default function ImageSlot({
             </div>
             <div
                 className="overflow-hidden rounded-[10px] border border-white/5 bg-[#0E0E10] relative"
-                style={{ aspectRatio: aspect }}
+                style={aspect && aspect !== "auto" ? { aspectRatio: aspect } : {}}
             >
                 {src ? (
                     <img
                         src={src}
                         alt={alt}
                         loading="lazy"
-                        className="block w-full h-full object-cover"
-                        style={{ objectPosition }}
+                        className={`block w-full ${aspect && aspect !== "auto" ? "h-full" : "h-auto"}`}
+                        style={{ objectPosition, objectFit }}
                     />
                 ) : (
                     <div className="absolute inset-0 flex items-center justify-center">

@@ -35,6 +35,8 @@ import {
 import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
+import squardImg from "@/assets/squard.png";
+import squardCreateImg from "@/assets/squard-create.png";
 
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -234,10 +236,13 @@ function Dashboard() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="squads-image-dashboard"
+                            src={squardImg}
+                            alt="Squad Management Dashboard"
                             label="Squad Management · Dashboard"
                             chromeUrl="zukvo.app/work/squads"
-                            aspect="16/10"
-                            caption="Replace with your Squad dashboard screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            caption="Squad management dashboard view."
                         />
                     </div>
                 </div>
@@ -727,10 +732,14 @@ function CreateSquad() {
                         </div>
                         <ImageSlot
                             testid="squads-image-create"
+                            src={squardCreateImg}
+                            alt="Create Squad drawer"
                             label="Create Squad · Drawer"
                             chromeUrl="zukvo.app/work/squads/new"
-                            aspect="16/10"
-                            caption="Replace with your Create Squad screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[480px] mx-auto"
+                            caption="Live screenshot — Create Squad drawer."
                         />
                     </div>
                 </div>

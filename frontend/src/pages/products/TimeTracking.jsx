@@ -32,16 +32,18 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
-const TT_MY_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/bjghvprm_image.png";
-const TT_START_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/yjjcw5ru_image.png";
-const TT_TEAM_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/7fgod7hr_image.png";
-const TT_LOG_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/vaqv85zj_image.png";
-const TT_TICKET_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/xhlqj0b2_image.png";
+import timeTrackingImg from "@/assets/time-tracking.png";
+import myTrackingImg from "@/assets/my-tracking.png";
+import teamTrackingImg from "@/assets/team-tracking.png";
+import manageTimeImg from "@/assets/manage-time.png";
+import particularTicketsImg from "@/assets/particulartickets.png";
+
+const TT_MY_IMG = myTrackingImg;
+const TT_START_IMG = timeTrackingImg;
+const TT_TEAM_IMG = teamTrackingImg;
+const TT_LOG_IMG = manageTimeImg;
+const TT_TICKET_IMG = particularTicketsImg;
+
 
 const SUBMODULES = [
     { id: "start", label: "Start a timer", icon: Play },
@@ -249,6 +251,9 @@ function StartTimer() {
                             alt="Start a timer popover"
                             label="Start a timer · header popover"
                             chromeUrl="zukvo.app/home"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[440px] mx-auto"
                             caption="Live screenshot — start-timer popover with project + ticket selectors."
                         />
                     </div>
@@ -543,7 +548,9 @@ function MyTracking() {
                         alt="My Time Tracking"
                         label="My Time Tracking — full page"
                         chromeUrl="zukvo.app/work/time-tracking"
-                        aspect="16/10"
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
                         caption="Live screenshot — personal tracking view with KPIs, entries & 7-day activity."
                     />
                 </div>
@@ -718,7 +725,8 @@ function TeamTracking() {
                             alt="Team Tracking"
                             label="Team Tracking — manager view"
                             chromeUrl="zukvo.app/work/time-tracking/team"
-                            aspect="16/10"
+                            aspect="auto"
+                            objectFit="contain"
                             caption="Live screenshot — team tracking with KPIs, activity table & timeline."
                         />
                     </div>
@@ -838,7 +846,8 @@ function ManagerAdjust() {
                             alt="Log Time Session manager modal"
                             label="Log Time Session · 3 steps"
                             chromeUrl="zukvo.app/work/time-tracking/log"
-                            aspect="16/10"
+                            aspect="auto"
+                            objectFit="contain"
                             caption="Live screenshot — Log Time Session modal for manager backfills."
                         />
                     </div>
@@ -955,7 +964,9 @@ function TicketDeepDive() {
                         alt="Ticket detail panel from Time Tracking activity"
                         label="Ticket panel · opened from Time Tracking"
                         chromeUrl="zukvo.app/work/time-tracking → 001-0533"
-                        aspect="16/10"
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
                         caption="Live screenshot — clicking a ticket number opens the full ticket panel without leaving Time Tracking."
                     />
                 </div>

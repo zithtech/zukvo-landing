@@ -32,12 +32,14 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
-const DU_OVERVIEW_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/4izsphso_image.png";
-const DU_DETAIL_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/jr6m70nc_image.png";
-const DU_FORM_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/hij57ncu_image.png";
+import dailyUpdatesImg from "@/assets/daily-updates.png";
+import viewUpdatesImg from "@/assets/view-updates.png";
+import submitUpdateImg from "@/assets/submit-update.png";
+
+const DU_OVERVIEW_IMG = dailyUpdatesImg;
+const DU_DETAIL_IMG = viewUpdatesImg;
+const DU_FORM_IMG = submitUpdateImg;
+
 
 const SUBMODULES = [
     { id: "overview", label: "Overview", icon: LayoutGrid },
@@ -247,6 +249,8 @@ function Overview() {
                             alt="Daily Status Updates overview"
                             label="Daily Updates — team overview"
                             chromeUrl="zukvo.app/work/daily-updates"
+                            aspect="auto"
+                            objectFit="contain"
                             caption="Live screenshot — team overview with EOD / BOD / MISSED badges."
                         />
                     </div>
@@ -521,7 +525,8 @@ function SubmitFlow() {
                         alt="Submit Daily Update form"
                         label="Submit daily update"
                         chromeUrl="zukvo.app/work/daily-updates/new"
-                        aspect="16/10"
+                        aspect="auto"
+                        objectFit="contain"
                         caption="Live screenshot — full submit-update form."
                     />
                 </div>
@@ -775,7 +780,8 @@ function UpdateDetail() {
                             alt="Daily update detail panel"
                             label="Update detail · side panel"
                             chromeUrl="zukvo.app/work/daily-updates/priyadharshini"
-                            aspect="16/10"
+                            aspect="auto"
+                            objectFit="contain"
                             caption="Live screenshot — EOD detail panel for Priyadharshini's update."
                         />
                     </div>

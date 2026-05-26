@@ -30,12 +30,25 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
-const SPRINT_IMG =
-    "https://customer-assets.emergentagent.com/job_39f817a0-5131-43e1-a744-33b263e6d84a/artifacts/meqjpr4p_image.png";
-const ZAI_IMG =
-    "https://customer-assets.emergentagent.com/job_39f817a0-5131-43e1-a744-33b263e6d84a/artifacts/rap6qk77_image.png";
-const MAIN_IMG =
-    "https://customer-assets.emergentagent.com/job_39f817a0-5131-43e1-a744-33b263e6d84a/artifacts/9vyiu5cd_image.png";
+import ticketSprintImg from "@/assets/ticket-sprint.png";
+import ticketCreateWithZaiImg from "@/assets/ticket-create-with-zai.png";
+import ticketsImg from "@/assets/tickets.png";
+import ticketBucketImg from "@/assets/ticket-bucket.png";
+import ticketBuglistImg from "@/assets/ticket-buglist.png";
+import ticketTrashImg from "@/assets/ticket-trash.png";
+import ticketArchiveImg from "@/assets/ticket-archive.png";
+import ticketPerformanceImg from "@/assets/ticket-performance.png";
+import ticketViewImg from "@/assets/ticket-view.png";
+
+const SPRINT_IMG = ticketSprintImg;
+const ZAI_IMG = ticketCreateWithZaiImg;
+const MAIN_IMG = ticketsImg;
+const BUCKET_IMG = ticketBucketImg;
+const BUGLIST_IMG = ticketBuglistImg;
+const TRASH_IMG = ticketTrashImg;
+const ARCHIVE_IMG = ticketArchiveImg;
+const CONFIG_IMG = ticketPerformanceImg;
+const DETAIL_IMG = ticketViewImg;
 
 const SUBMODULES = [
     { id: "tickets", label: "Tickets", icon: Ticket },
@@ -238,7 +251,10 @@ function MainView() {
                             alt="Ticket Management main view"
                             label="Tickets — main view"
                             chromeUrl="zukvo.app/work/tickets"
-                            caption="Replace with your screenshot of the main Tickets list."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — main Tickets backlog and active list view."
                         />
                     </div>
                 </div>
@@ -505,7 +521,9 @@ function SprintBacklog() {
                                 alt="Sprint completion"
                                 label="Sprint board"
                                 chromeUrl="zukvo.app/work/sprint"
-                                aspect="16/10"
+                                aspect="auto"
+                                objectFit="contain"
+                                caption="Live screenshot — active sprint board."
                             />
                             <ImageSlot
                                 testid="tm-image-creation"
@@ -513,8 +531,9 @@ function SprintBacklog() {
                                 alt="Ticket creation"
                                 label="Create ticket"
                                 chromeUrl="zukvo.app/work/new"
-                                aspect="16/10"
-                                objectPosition="top"
+                                aspect="auto"
+                                objectFit="contain"
+                                caption="Live screenshot — create a ticket with Zai."
                             />
                         </div>
                     </div>
@@ -766,7 +785,9 @@ function SprintCompletion() {
                             alt="Sprint completion modal"
                             label="Sprint completion"
                             chromeUrl="zukvo.app/work/sprint/complete"
-                            aspect="16/10"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
                             caption="The actual Sprint Completion panel inside Zukvo."
                         />
                         <div className="mt-5 grid sm:grid-cols-3 gap-3">
@@ -910,10 +931,14 @@ function BucketsSection() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="tm-image-buckets"
+                            src={BUCKET_IMG}
+                            alt="Buckets workspace"
                             label="Buckets workspace"
                             chromeUrl="zukvo.app/work/buckets"
-                            aspect="16/10"
-                            caption="Replace with a screenshot of the Buckets view."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — Buckets workspace for backlog themes."
                         />
                     </div>
                 </div>
@@ -953,10 +978,14 @@ function BugListSection() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="tm-image-buglist"
+                            src={BUGLIST_IMG}
+                            alt="QA workspace bug list"
                             label="Bug list — collections + sheets"
                             chromeUrl="zukvo.app/work/bugs"
-                            aspect="16/10"
-                            caption="QA workspace — folders on the left, bug sheet on the right."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — QA workspace showing collections list and bug details."
                         />
                     </div>
 
@@ -1063,9 +1092,13 @@ function TrashArchived() {
                         />
                         <ImageSlot
                             testid="tm-image-trash"
+                            src={TRASH_IMG}
+                            alt="Trash list view"
                             label="Trash — restore in one click"
                             chromeUrl="zukvo.app/work/trash"
-                            aspect="16/10"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
                         />
                     </div>
                     <div id="archived" className="zk-reveal space-y-4">
@@ -1077,9 +1110,13 @@ function TrashArchived() {
                         />
                         <ImageSlot
                             testid="tm-image-archived"
+                            src={ARCHIVE_IMG}
+                            alt="Archived tickets view"
                             label="Archived tickets"
                             chromeUrl="zukvo.app/work/archived"
-                            aspect="16/10"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
                         />
                     </div>
                 </div>
@@ -1147,17 +1184,26 @@ function ConfigSection() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="tm-image-configurations"
+                            src={CONFIG_IMG}
+                            alt="Ticket configurations"
                             label="Ticket configurations"
                             chromeUrl="zukvo.app/admin/tickets"
-                            aspect="16/10"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — ticket settings and workspace configurations."
                         />
                         <div className="mt-5">
                             <ImageSlot
                                 testid="tm-image-detail"
+                                src={DETAIL_IMG}
+                                alt="Ticket details panel view"
                                 label="Ticket details panel"
                                 chromeUrl="zukvo.app/work/tickets/002-0731"
-                                aspect="16/10"
-                                caption="Full ticket detail view — replace with your screenshot."
+                                aspect="auto"
+                                objectFit="contain"
+                                className="max-w-[480px] mx-auto"
+                                caption="Live screenshot — full ticket detail panel showing subtasks, attachments and log history."
                             />
                         </div>
                     </div>

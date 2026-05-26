@@ -48,6 +48,13 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
+import proposalPageImg from "@/assets/proposal-page.png";
+import proposalCreateImg from "@/assets/proposal-create.png";
+import proposalCreateWithZaiImg from "@/assets/proposal-create-with-zai.png";
+import proposalEnhanceWithZaiImg from "@/assets/proposal-enhance-with-zai.png";
+import proposalLivepreviewImg from "@/assets/proposal-livepreview.png";
+import proposalMailImg from "@/assets/proposal-mail.png";
+
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
     { id: "builder", label: "Builder", icon: FilePlus2 },
@@ -256,10 +263,14 @@ function Dashboard() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="prop-image-dashboard"
+                            src={proposalPageImg}
+                            alt="Proposals Dashboard"
                             label="Proposals — Dashboard"
                             chromeUrl="zukvo.app/work/proposals"
-                            aspect="16/10"
-                            caption="Replace with your Proposals dashboard screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — company proposals dashboard listing and KPIs."
                         />
                     </div>
                 </div>
@@ -607,10 +618,14 @@ function Builder() {
                 <div className="zk-reveal mt-6">
                     <ImageSlot
                         testid="prop-image-builder"
+                        src={proposalCreateImg}
+                        alt="Proposal Builder editor"
                         label="Proposal Builder · Section editor"
                         chromeUrl="zukvo.app/work/proposals/new"
-                        aspect="16/9"
-                        caption="Replace with your Proposal Builder screenshot."
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
+                        caption="Live screenshot — draft and design sections in real-time."
                     />
                 </div>
             </div>
@@ -786,10 +801,14 @@ function ZaiCreate() {
                 <div className="zk-reveal mt-10">
                     <ImageSlot
                         testid="prop-image-zai-create"
+                        src={proposalCreateWithZaiImg}
+                        alt="AI proposal generator tool"
                         label="Zai · Create an entire proposal"
                         chromeUrl="zukvo.app/work/proposals/new?zai=1"
-                        aspect="16/9"
-                        caption="Replace with the Create with Zai screenshot."
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
+                        caption="Live screenshot — scaffold an entire proposal from a single brief with Zai."
                     />
                 </div>
             </div>
@@ -972,10 +991,14 @@ function ZaiEnhance() {
                 <div className="zk-reveal mt-6">
                     <ImageSlot
                         testid="prop-image-zai-enhance"
+                        src={proposalEnhanceWithZaiImg}
+                        alt="Zai section enhancer"
                         label="Enhance with Zai · Smart Refinement"
                         chromeUrl="zukvo.app/work/proposals/new?enhance=1"
-                        aspect="16/9"
-                        caption="Replace with the Enhance with Zai screenshot."
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
+                        caption="Live screenshot — enhance, shorten or expand text block-by-block with Zai."
                     />
                 </div>
             </div>
@@ -1024,10 +1047,14 @@ function PreviewSection() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="prop-image-preview"
+                            src={proposalLivepreviewImg}
+                            alt="Live Proposal Preview"
                             label="Proposal · Live Preview"
                             chromeUrl="zukvo.app/work/proposals/preview"
-                            aspect="16/10"
-                            caption="Replace with your Live Preview screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — real-time rendering of the proposal as it will be seen by the client."
                         />
                     </div>
                 </div>
@@ -1265,10 +1292,14 @@ function MailSection() {
 
                         <ImageSlot
                             testid="prop-image-mail"
+                            src={proposalMailImg}
+                            alt="Send proposal via mail"
                             label="Compose Email · Send proposal"
                             chromeUrl="zukvo.app/work/proposals/send"
-                            aspect="16/10"
-                            caption="Replace with the Compose Email screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[480px] mx-auto"
+                            caption="Live screenshot — composing email to send proposal with automated PDF attachment."
                         />
                     </div>
                 </div>

@@ -46,6 +46,13 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
+import leadspageImg from "@/assets/leadspage.png";
+import newleadImg from "@/assets/newlead.png";
+import bidiqImg from "@/assets/bidiq.png";
+import leadDetailViewImg from "@/assets/lead-detail-view.png";
+import leadProposalImg from "@/assets/lead-proposal.png";
+import leadsTimelineImg from "@/assets/leads-timeline.png";
+
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
     { id: "create", label: "Create Lead", icon: UserPlus },
@@ -247,10 +254,14 @@ function Dashboard() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="leads-image-dashboard"
+                            src={leadspageImg}
+                            alt="Leads Management Dashboard"
                             label="Leads Management — Dashboard"
                             chromeUrl="zukvo.app/work/leads"
-                            aspect="16/10"
-                            caption="Replace with your Leads dashboard screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — Leads Management dashboard and opportunity tracking."
                         />
                     </div>
                 </div>
@@ -513,10 +524,14 @@ function CreateLead() {
                         </div>
                         <ImageSlot
                             testid="leads-image-create"
+                            src={newleadImg}
+                            alt="Create Lead drawer form"
                             label="New Lead Entry · Drawer"
                             chromeUrl="zukvo.app/work/leads/new"
-                            aspect="16/10"
-                            caption="Replace with your New Lead Entry screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[440px] mx-auto"
+                            caption="Live screenshot — new lead creation and AI intelligence summary."
                         />
                     </div>
                 </div>
@@ -880,10 +895,14 @@ function BidIQSection() {
                 <div className="zk-reveal mt-10">
                     <ImageSlot
                         testid="leads-image-bidiq"
+                        src={bidiqImg}
+                        alt="BidIQ Intelligence verdict report"
                         label="BidIQ · Lead intelligence report"
                         chromeUrl="zukvo.app/work/leads/bidiq/lead-1"
-                        aspect="16/9"
-                        caption="Replace with your BidIQ Intelligence screenshot."
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
+                        caption="Live screenshot — BidIQ AI intelligence analysis and budget-reality-gap estimation."
                     />
                 </div>
             </div>
@@ -1227,10 +1246,14 @@ function LeadDetail() {
                 <div className="zk-reveal mt-6">
                     <ImageSlot
                         testid="leads-image-detail"
+                        src={leadDetailViewImg}
+                        alt="Lead detail view"
                         label="Lead detail · One-page view"
                         chromeUrl="zukvo.app/work/leads/lead-1"
-                        aspect="16/10"
-                        caption="Replace with your Lead detail screenshot."
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
+                        caption="Live screenshot — full lead detailed overview and history panel."
                     />
                 </div>
             </div>
@@ -1372,10 +1395,14 @@ function ProposalLink() {
                         <div className="mt-5">
                             <ImageSlot
                                 testid="leads-image-proposal"
+                                src={leadProposalImg}
+                                alt="Lead proposal creation"
                                 label="Lead · Generate proposal"
                                 chromeUrl="zukvo.app/work/leads/lead-1/proposal"
-                                aspect="16/9"
-                                caption="Replace with your Generate proposal screenshot."
+                                aspect="auto"
+                                objectFit="contain"
+                                className="max-w-[800px] mx-auto"
+                                caption="Live screenshot — generating a proposal directly linked to lead specification."
                             />
                         </div>
                     </div>
@@ -1675,10 +1702,14 @@ function TimelineSection() {
                         </div>
                         <ImageSlot
                             testid="leads-image-timeline"
+                            src={leadsTimelineImg}
+                            alt="Lead activity timeline"
                             label="Lead · Activity timeline"
                             chromeUrl="zukvo.app/work/leads/lead-1/timeline"
-                            aspect="16/10"
-                            caption="Replace with your Timeline screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — full audit trail and history of lead updates."
                         />
                     </div>
                 </div>
