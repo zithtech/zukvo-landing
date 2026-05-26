@@ -292,7 +292,7 @@ export default function Hero() {
                 {/* CTAs */}
                 <div className="zk-reveal mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
                     <a
-                        href="#start"
+                        href="/signup"
                         data-testid="hero-cta-primary"
                         className="group inline-flex items-center gap-2 rounded-full bg-zukvo-ink text-white px-6 py-3.5 text-sm font-medium shadow-[0_10px_40px_-10px_rgba(99,102,241,0.55)] hover:bg-zukvo-600 transition-all"
                     >

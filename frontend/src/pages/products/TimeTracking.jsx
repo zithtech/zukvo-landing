@@ -132,7 +132,7 @@ function Hero() {
                         </p>
                         <div className="zk-reveal mt-8 flex flex-col sm:flex-row gap-3">
                             <a
-                                href="/#start"
+                                href="/signup"
                                 data-testid="tt-cta-primary"
                                 className="group inline-flex items-center gap-2 rounded-full bg-zukvo-ink text-white px-6 py-3.5 text-sm font-medium hover:bg-zukvo-600 transition-colors"
                             >
@@ -140,7 +140,7 @@ function Hero() {
                                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                             </a>
                             <a
-                                href="#start"
+                                href="/signup"
                                 className="inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white px-6 py-3.5 text-sm font-medium text-zinc-800 hover:border-zinc-400 transition-colors"
                             >
                                 See every feature
@@ -1120,7 +1120,7 @@ function FinalCTA() {
                     </h2>
                     <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
                         <a
-                            href="/#start"
+                            href="/signup"
                             data-testid="tt-final-cta-primary"
                             className="inline-flex items-center gap-2 rounded-full bg-emerald-500 hover:bg-emerald-600 transition-colors text-white px-6 py-3.5 text-sm font-medium"
                         >

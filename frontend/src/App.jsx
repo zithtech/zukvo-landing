@@ -2,6 +2,7 @@ import "@/App.css";
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Landing from "@/pages/Landing";
+import Signup from "@/pages/Signup";
 import ProductsIndex from "@/pages/products/ProductsIndex";
 import TicketManagement from "@/pages/products/TicketManagement";
 import DocumentHub from "@/pages/products/DocumentHub";
@@ -44,6 +45,7 @@ function App() {
                 <ScrollToTop />
                 <Routes>
                     <Route path="/" element={<Landing />} />
+                    <Route path="/signup" element={<Signup />} />
                     <Route path="/products" element={<ProductsIndex />} />
                     <Route
                         path="/products/ticket-management"

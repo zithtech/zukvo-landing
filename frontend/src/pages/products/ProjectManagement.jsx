@@ -125,7 +125,7 @@ function Hero() {
                         </p>
                         <div className="zk-reveal mt-8 flex flex-col sm:flex-row gap-3">
                             <a
-                                href="/#start"
+                                href="/signup"
                                 data-testid="pm-cta-primary"
                                 className="group inline-flex items-center gap-2 rounded-full bg-zukvo-ink text-white px-6 py-3.5 text-sm font-medium hover:bg-zukvo-600 transition-colors"
                             >
@@ -1312,7 +1312,7 @@ function FinalCTA() {
                     </h2>
                     <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
                         <a
-                            href="/#start"
+                            href="/signup"
                             data-testid="pm-final-cta-primary"
                             className="inline-flex items-center gap-2 rounded-full bg-zukvo-500 hover:bg-zukvo-600 transition-colors text-white px-6 py-3.5 text-sm font-medium"
                         >

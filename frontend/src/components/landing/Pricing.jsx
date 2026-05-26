@@ -4,54 +4,102 @@ import { Check, Sparkles, Plus, Wand2 } from "lucide-react";
 const TIERS = [
     {
         id: "solo",
-        name: "Solo Freelancer",
+        name: "Solo",
         kicker: "For independents",
-        priceMonthly: 12,
-        priceYearly: 9,
-        cta: "Start free",
+        priceINR: 499,
+        priceUSD: 9,
+        cta: "Get started",
+        includesLabel: "Includes",
         features: [
-            "Zithport extension",
-            "BidIQ AI · 50 verdicts / mo",
-            "Zai proposals · 30 / mo",
-            "Up to 3 active clients",
-            "Invoices + time tracking",
-            "Document Hub · 5GB",
+            { text: "1 Member" },
+            { text: "Ticket Management", children: ["Tickets", "Sprints", "Buckets"] },
+            { text: "Project Management" },
+            { text: "Document Hub (5GB)" },
+            { text: "ZithPort Extension" },
+            { text: "Leads Management (Up to 30 Leads)" },
+            { text: "Proposals" },
+            { text: "Client Management (Up to 10 Clients)" },
+            { text: "Calendar Integration" },
+            { text: "Mail Integration" },
+            { text: "Dashboard Access" },
+        ],
+    },
+    {
+        id: "solo-pro",
+        name: "Solo Pro",
+        kicker: "For power solos",
+        priceINR: 1499,
+        priceUSD: 24,
+        cta: "Start trial",
+        featured: true,
+        includesLabel: "Includes Everything in Solo +",
+        features: [
+            { text: "1 Member" },
+            { text: "BugList" },
+            { text: "Document Hub (15GB)" },
+            { text: "BidiQ AI" },
+            { text: "Leads Management (Up to 100 Leads)" },
+            { text: "Client Management (Up to 30 Clients)" },
+            { text: "Advanced Client Portal (30 Portal Access)" },
+            { text: "Invoice Management" },
+            { text: "Accounts Management" },
         ],
     },
     {
         id: "team",
         name: "Team",
-        kicker: "For freelance studios",
-        priceMonthly: 29,
-        priceYearly: 24,
-        priceUnit: "/ user",
-        cta: "Start 14-day trial",
-        featured: true,
+        kicker: "For growing teams",
+        priceINR: 4999,
+        priceUSD: 79,
+        cta: "Start trial",
+        includesLabel: "Includes Everything in Solo Pro +",
         features: [
-            "Everything in Solo",
-            "Unlimited clients & projects",
-            "Sprints, Buckets, Bug list",
-            "RBAC for up to 25 users",
-            "Daily updates + standups",
-            "Document Hub · 100GB",
-            "BidIQ · unlimited",
+            { text: "Up to 15 Members" },
+            { text: "SQuads" },
+            { text: "Time Tracking", children: ["My Tracking", "Team Tracking"] },
+            { text: "Daily Updates" },
+            { text: "Ticket Reports" },
+            { text: "Advanced Sprint Reports" },
+            { text: "Roles & Permissions" },
+            { text: "Members Management" },
+            { text: "Leads Management (Up to 150 Leads)" },
+            { text: "Document Hub (25GB)" },
         ],
     },
     {
-        id: "company",
-        name: "Company",
-        kicker: "For services companies",
-        priceMonthly: null,
-        priceYearly: null,
-        cta: "Talk to sales",
+        id: "growth",
+        name: "Growth",
+        kicker: "For scaling orgs",
+        priceINR: 9999,
+        priceUSD: 149,
+        cta: "Start trial",
+        includesLabel: "Includes Everything in Team +",
         features: [
-            "Everything in Team",
-            "Granular RBAC + audit trail",
-            "SSO / SAML",
-            "Custom contracts & SOWs",
-            "Dedicated CSM",
-            "On-prem option",
-            "Priority SLAs",
+            { text: "Up to 30 Members" },
+            { text: "Performance Management" },
+            { text: "Escalation Management" },
+            { text: "Advanced Workforce Operations" },
+            { text: "Document Hub (50GB)" },
+        ],
+    },
+    {
+        id: "scale",
+        name: "Scale",
+        kicker: "For enterprises",
+        priceINR: null,
+        priceUSD: null,
+        custom: true,
+        cta: "Contact sales",
+        includesLabel: "Includes Everything in Growth +",
+        features: [
+            { text: "Up to 200 Members" },
+            { text: "Unlimited Clients" },
+            { text: "Unlimited Leads" },
+            { text: "Document Hub (100GB)" },
+            { text: "Priority Support" },
+            { text: "Dedicated Onboarding" },
+            { text: "Custom Workspace Setup" },
+            { text: "Enterprise Support" },
         ],
     },
 ];
@@ -143,6 +191,7 @@ const SETS = [
 
 export default function Pricing() {
     const [yearly, setYearly] = useState(true);
+    const [currency, setCurrency] = useState("USD");
     const [selected, setSelected] = useState(() => ({
         set1: true,
         set2: false,
@@ -192,7 +241,7 @@ export default function Pricing() {
             data-testid="pricing-section"
             className="relative bg-[#0A0A0A] text-white"
         >
-            <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-14 md:py-20">
+            <div className="relative mx-auto max-w-[1600px] px-6 md:px-10 py-14 md:py-20">
                 <div className="zk-reveal text-center max-w-2xl mx-auto">
                     <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-zinc-300">
                         <Sparkles className="size-3 text-zukvo-400" /> Pricing
@@ -204,96 +253,96 @@ export default function Pricing() {
                         Start free. Upgrade when your pipeline does.
                     </p>
 
-                    {/* Toggle */}
+                    {/* Currency Toggle */}
                     <div
                         className="mt-8 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#101014] p-1"
-                        data-testid="pricing-billing-toggle"
+                        data-testid="pricing-currency-toggle"
                     >
                         <button
-                            data-testid="pricing-toggle-monthly"
-                            onClick={() => setYearly(false)}
+                            data-testid="pricing-currency-usd"
+                            onClick={() => setCurrency("USD")}
                             className={`px-4 py-2 text-[12px] rounded-full font-medium transition-all ${
-                                !yearly
+                                currency === "USD"
                                     ? "bg-white text-zukvo-ink"
                                     : "text-zinc-400 hover:text-white"
                             }`}
                         >
-                            Monthly
+                            USD · $
                         </button>
                         <button
-                            data-testid="pricing-toggle-yearly"
-                            onClick={() => setYearly(true)}
-                            className={`px-4 py-2 text-[12px] rounded-full font-medium transition-all flex items-center gap-2 ${
-                                yearly
+                            data-testid="pricing-currency-inr"
+                            onClick={() => setCurrency("INR")}
+                            className={`px-4 py-2 text-[12px] rounded-full font-medium transition-all ${
+                                currency === "INR"
                                     ? "bg-white text-zukvo-ink"
                                     : "text-zinc-400 hover:text-white"
                             }`}
                         >
-                            Yearly
-                            <span
-                                className={`text-[10px] uppercase tracking-[0.18em] rounded-full px-1.5 py-0.5 border ${
-                                    yearly
-                                        ? "bg-zukvo-500/10 text-zukvo-600 border-zukvo-500/30"
-                                        : "bg-emerald-500/10 text-emerald-300 border-emerald-400/30"
-                                }`}
-                            >
-                                -25%
-                            </span>
+                            INR · ₹
                         </button>
                     </div>
                 </div>
 
-                <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                     {TIERS.map((t) => {
-                        const price = yearly ? t.priceYearly : t.priceMonthly;
+                        const isINR = currency === "INR";
+                        const price = isINR ? t.priceINR : t.priceUSD;
+                        const symbol = isINR ? "₹" : "$";
+                        const formatted =
+                            price !== null && price !== undefined
+                                ? price.toLocaleString(isINR ? "en-IN" : "en-US")
+                                : null;
                         return (
                             <div
                                 key={t.id}
                                 data-testid={`pricing-tier-${t.id}`}
-                                className={`relative rounded-2xl p-7 md:p-8 ${
+                                className={`relative flex flex-col rounded-2xl p-5 md:p-6 ${
                                     t.featured
                                         ? "zk-trace-border"
                                         : "border border-white/10 bg-[#0E0E10]"
                                 }`}
                             >
                                 {t.featured && (
-                                    <span className="absolute -top-3 left-7 inline-flex items-center gap-1 rounded-full bg-zukvo-500 text-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em]">
+                                    <span className="absolute -top-3 left-5 inline-flex items-center gap-1 rounded-full bg-zukvo-500 text-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em]">
                                         Most popular
                                     </span>
                                 )}
-                                <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
+                                <div className="text-[10.5px] uppercase tracking-[0.22em] text-zinc-400">
                                     {t.kicker}
                                 </div>
-                                <div className="mt-2 font-heading text-2xl font-medium text-white">
+                                <div className="mt-1.5 font-heading text-2xl font-medium text-white">
                                     {t.name}
                                 </div>
 
-                                <div className="mt-6 flex items-end gap-1.5">
-                                    {price === null ? (
-                                        <span className="font-heading text-5xl font-medium tracking-tighter text-white">
+                                <div className="mt-5 flex items-end gap-1.5">
+                                    {t.custom ? (
+                                        <span className="font-heading text-4xl font-medium tracking-tighter text-white">
                                             Custom
                                         </span>
                                     ) : (
                                         <>
-                                            <span className="font-heading text-5xl font-medium tracking-tighter text-white">
-                                                ${price}
+                                            <span className="font-heading text-4xl font-medium tracking-tighter text-white">
+                                                {symbol}
+                                                {formatted}
                                             </span>
-                                            <span className="pb-2 text-[12px] text-zinc-500">
-                                                {t.priceUnit || ""} / month
+                                            <span className="pb-1.5 text-[11px] text-zinc-500">
+                                                / month
                                             </span>
                                         </>
                                     )}
                                 </div>
-                                {price !== null && yearly && (
-                                    <div className="mt-1 text-[11px] text-zinc-500">
-                                        Billed yearly · ${price * 12}{t.priceUnit ? "/user" : ""}/yr
-                                    </div>
-                                )}
+                                <div className="mt-1 text-[11px] text-zinc-500">
+                                    {t.custom ? "Contact sales for pricing" : `Billed monthly · ${isINR ? "India" : "Global"}`}
+                                </div>
 
                                 <a
-                                    href={t.id === "company" ? "#contact" : "#start"}
+                                    href={
+                                        t.custom
+                                            ? "#contact"
+                                            : `/signup?tier=${t.id}&currency=${currency}`
+                                    }
                                     data-testid={`pricing-cta-${t.id}`}
-                                    className={`mt-6 inline-flex w-full items-center justify-center rounded-full px-4 py-3 text-[13px] font-medium transition-colors ${
+                                    className={`mt-5 inline-flex w-full items-center justify-center rounded-full px-4 py-2.5 text-[13px] font-medium transition-colors ${
                                         t.featured
                                             ? "bg-zukvo-500 hover:bg-zukvo-600 text-white"
                                             : "bg-white text-zukvo-ink hover:bg-zinc-100"
@@ -302,16 +351,35 @@ export default function Pricing() {
                                     {t.cta}
                                 </a>
 
-                                <div className="mt-7 h-px bg-white/10" />
+                                <div className="mt-6 h-px bg-white/10" />
 
-                                <ul className="mt-6 space-y-3">
+                                <div className="mt-4 text-[10.5px] uppercase tracking-[0.18em] text-zinc-400">
+                                    {t.includesLabel}
+                                </div>
+
+                                <ul className="mt-3 space-y-2.5">
                                     {t.features.map((f) => (
                                         <li
-                                            key={f}
-                                            className="flex items-start gap-2.5 text-[13.5px] text-zinc-300"
+                                            key={f.text}
+                                            className="text-[12.5px] text-zinc-300"
                                         >
-                                            <Check className="mt-0.5 size-4 text-zukvo-400 shrink-0" />
-                                            <span>{f}</span>
+                                            <div className="flex items-start gap-2">
+                                                <Check className="mt-0.5 size-3.5 text-zukvo-400 shrink-0" />
+                                                <span>{f.text}</span>
+                                            </div>
+                                            {f.children && (
+                                                <ul className="mt-1.5 ml-5 space-y-1">
+                                                    {f.children.map((c) => (
+                                                        <li
+                                                            key={c}
+                                                            className="flex items-start gap-1.5 text-[11.5px] text-zinc-400"
+                                                        >
+                                                            <span className="mt-1 size-1 rounded-full bg-zinc-500 shrink-0" />
+                                                            <span>{c}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
                                         </li>
                                     ))}
                                 </ul>
@@ -320,7 +388,8 @@ export default function Pricing() {
                     })}
                 </div>
 
-                {/* Build your plan — module SET picker */}
+                {/* Build your plan — module SET picker (disabled) */}
+                {false && (
                 <div
                     id="build-your-plan"
                     data-testid="pricing-module-picker"
@@ -336,6 +405,43 @@ export default function Pricing() {
                         <p className="mt-4 text-zinc-400 text-base md:text-lg leading-relaxed">
                             Six suites. Toggle what fits your team. Connect is always free.
                         </p>
+
+                        <div
+                            className="mt-8 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#101014] p-1"
+                            data-testid="pricing-billing-toggle"
+                        >
+                            <button
+                                data-testid="pricing-toggle-monthly"
+                                onClick={() => setYearly(false)}
+                                className={`px-4 py-2 text-[12px] rounded-full font-medium transition-all ${
+                                    !yearly
+                                        ? "bg-white text-zukvo-ink"
+                                        : "text-zinc-400 hover:text-white"
+                                }`}
+                            >
+                                Monthly
+                            </button>
+                            <button
+                                data-testid="pricing-toggle-yearly"
+                                onClick={() => setYearly(true)}
+                                className={`px-4 py-2 text-[12px] rounded-full font-medium transition-all flex items-center gap-2 ${
+                                    yearly
+                                        ? "bg-white text-zukvo-ink"
+                                        : "text-zinc-400 hover:text-white"
+                                }`}
+                            >
+                                Yearly
+                                <span
+                                    className={`text-[10px] uppercase tracking-[0.18em] rounded-full px-1.5 py-0.5 border ${
+                                        yearly
+                                            ? "bg-zukvo-500/10 text-zukvo-600 border-zukvo-500/30"
+                                            : "bg-emerald-500/10 text-emerald-300 border-emerald-400/30"
+                                    }`}
+                                >
+                                    -25%
+                                </span>
+                            </button>
+                        </div>
                     </div>
 
                     <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -533,7 +639,20 @@ export default function Pricing() {
                                 )}
                             </div>
                             <a
-                                href="#start"
+                                href={(() => {
+                                    const selectedIds = SETS.filter((x) => selected[x.id]).map(
+                                        (x) => x.id,
+                                    );
+                                    const aiIds = SETS.filter(
+                                        (x) => x.hasAi && aiEnabled[x.id],
+                                    ).map((x) => x.id);
+                                    const params = new URLSearchParams({
+                                        sets: selectedIds.join(","),
+                                        billing: yearly ? "yearly" : "monthly",
+                                    });
+                                    if (aiIds.length) params.set("ai", aiIds.join(","));
+                                    return `/signup?${params.toString()}`;
+                                })()}
                                 data-testid="pricing-module-cta"
                                 className="inline-flex items-center justify-center rounded-full px-5 py-3 text-[13px] font-medium bg-zukvo-500 hover:bg-zukvo-600 text-white transition-colors whitespace-nowrap"
                             >
@@ -542,6 +661,7 @@ export default function Pricing() {
                         </div>
                     </div>
                 </div>
+                )}
             </div>
         </section>
     );

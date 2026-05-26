@@ -155,7 +155,7 @@ export default function Nav() {
                             Sign in
                         </a>
                         <a
-                            href="/#start"
+                            href="/signup"
                             data-testid="nav-cta-button"
                             className="group inline-flex items-center gap-1.5 rounded-full bg-zukvo-ink text-white px-4 py-2 text-[13px] font-medium hover:bg-zukvo-600 transition-colors"
                         >
@@ -214,7 +214,7 @@ export default function Nav() {
                             </a>
                         ))}
                         <a
-                            href="/#start"
+                            href="/signup"
                             className="mt-2 block text-center rounded-full bg-zukvo-ink text-white px-4 py-2 text-sm font-medium"
                         >
                             Get Zukvo
