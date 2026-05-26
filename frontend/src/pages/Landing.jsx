@@ -6,6 +6,7 @@ import FeaturesBento from "@/components/landing/FeaturesBento";
 import Workflow from "@/components/landing/Workflow";
 import Audiences from "@/components/landing/Audiences";
 import Pricing from "@/components/landing/Pricing";
+import ComingSoon from "@/components/landing/ComingSoon";
 import FAQ from "@/components/landing/FAQ";
 import FinalCTA from "@/components/landing/FinalCTA";
 import Footer from "@/components/landing/Footer";
@@ -38,6 +39,7 @@ export default function Landing() {
             <Workflow />
             <Audiences />
             <Pricing />
+            <ComingSoon />
             <FAQ />
             <FinalCTA />
             <Footer />
