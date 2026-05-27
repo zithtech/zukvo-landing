@@ -37,14 +37,19 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
-const INV_DASH_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/sn1j4b37_image.png";
-const INV_CREATE_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/8x0pvp7f_image.png";
-const INV_TEMPLATE_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/4nykk9or_image.png";
-const INV_CUSTOMERS_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/zpm1mcdu_image.png";
+import invoiceDashboardImg from "@/assets/invoice-dashboard.png";
+import invoiceCreateImg from "@/assets/invoice-create.png";
+import invoiceTemplateImg from "@/assets/invoice-template.png";
+import invoiceCustomerImg from "@/assets/invoice-customer.png";
+import invoicesListImg from "@/assets/invoices.png";
+import invoiceTrashImg from "@/assets/invoice-trash.png";
+
+const INV_DASH_IMG = invoiceDashboardImg;
+const INV_CREATE_IMG = invoiceCreateImg;
+const INV_TEMPLATE_IMG = invoiceTemplateImg;
+const INV_CUSTOMERS_IMG = invoiceCustomerImg;
+const INV_LIST_IMG = invoicesListImg;
+const INV_TRASH_IMG = invoiceTrashImg;
 
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -251,6 +256,9 @@ function Dashboard() {
                             alt="Invoice Dashboard"
                             label="Invoice — Dashboard"
                             chromeUrl="zukvo.app/finance/invoice"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
                             caption="Live screenshot — Invoice dashboard with KPIs, revenue & calendar."
                         />
                     </div>
@@ -376,10 +384,14 @@ function InvoicesList() {
                 <div className="zk-reveal mt-5">
                     <ImageSlot
                         testid="inv-image-list"
+                        src={INV_LIST_IMG}
+                        alt="Invoices list view"
                         label="Invoices — list view"
                         chromeUrl="zukvo.app/finance/invoice/all"
-                        aspect="16/9"
-                        caption="Replace with your invoices list screenshot."
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
+                        caption="Live screenshot — list of all invoices and their status."
                     />
                 </div>
             </div>
@@ -417,7 +429,9 @@ function CreateInvoice() {
                         alt="Create invoice page"
                         label="Create new invoice"
                         chromeUrl="zukvo.app/finance/invoice/new"
-                        aspect="16/10"
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
                         caption="Live screenshot — full invoice creation experience."
                     />
                 </div>
@@ -539,7 +553,9 @@ function Templates() {
                             alt="Invoice templates"
                             label="Templates · Create new template"
                             chromeUrl="zukvo.app/finance/invoice/templates"
-                            aspect="16/10"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
                             caption="Live screenshot — template builder with custom fields."
                         />
                     </div>
@@ -691,7 +707,9 @@ function Customers() {
                             alt="Import clients as customers"
                             label="Customers · Import from active clients"
                             chromeUrl="zukvo.app/finance/invoice/customers"
-                            aspect="16/10"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[480px] mx-auto"
                             caption="Live screenshot — Import clients as customers modal."
                         />
                     </div>
@@ -1029,10 +1047,14 @@ function TrashSection() {
                         <div className="mt-5">
                             <ImageSlot
                                 testid="inv-image-trash"
+                                src={INV_TRASH_IMG}
+                                alt="Invoice Trash list"
                                 label="Invoice Trash"
                                 chromeUrl="zukvo.app/finance/invoice/trash"
-                                aspect="16/9"
-                                caption="Replace with your Invoice trash screenshot."
+                                aspect="auto"
+                                objectFit="contain"
+                                className="max-w-[800px] mx-auto"
+                                caption="Live screenshot — deleted invoices list with restore option."
                             />
                         </div>
                     </div>

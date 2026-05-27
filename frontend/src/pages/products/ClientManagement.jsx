@@ -42,10 +42,20 @@ import {
     Wallet,
     Workflow,
     Settings2,
+    Home,
+    Receipt,
 } from "lucide-react";
 import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
+
+import clientsImg from "@/assets/clients.png";
+import clientCreateImg from "@/assets/client-create.png";
+import clientViewImg from "@/assets/client-view.png";
+import clientTeamImg from "@/assets/client-team.png";
+import clientInvoiceImg from "@/assets/client-invoice.png";
+import clientMeetingImg from "@/assets/client-meeting.png";
+import clientDocumentImg from "@/assets/client-document.png";
 
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -55,6 +65,9 @@ const SUBMODULES = [
     { id: "projects", label: "Projects & Approvals", icon: FolderKanban },
     { id: "portal", label: "Portal Access", icon: KeyRound },
     { id: "activity", label: "Activity & Ops", icon: Activity },
+    { id: "invoice", label: "Invoice", icon: Receipt },
+    { id: "meeting", label: "Meeting", icon: Calendar },
+    { id: "documents", label: "Documents", icon: FileText },
 ];
 
 export default function ClientManagement() {
@@ -90,6 +103,9 @@ export default function ClientManagement() {
             <ProjectsSection />
             <PortalSection />
             <ActivitySection />
+            <InvoiceSection />
+            <MeetingSection />
+            <DocumentsSection />
             <FinalCTA />
             <Footer />
         </main>
@@ -269,10 +285,14 @@ function Dashboard() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="clients-image-dashboard"
+                            src={clientsImg}
+                            alt="Client Management Dashboard"
                             label="Client Management — Dashboard"
                             chromeUrl="zukvo.app/admin/clients"
-                            aspect="16/10"
-                            caption="Replace with your Client Management dashboard screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — Client Management dashboard."
                         />
                     </div>
                 </div>
@@ -688,10 +708,14 @@ function CreateClient() {
                 <div className="zk-reveal mt-6">
                     <ImageSlot
                         testid="clients-image-create"
+                        src={clientCreateImg}
+                        alt="Create Client wizard"
                         label="Create New Client · Stepper"
                         chromeUrl="zukvo.app/admin/clients/new"
-                        aspect="16/10"
-                        caption="Replace with your Create Client screenshot."
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
+                        caption="Live screenshot — Create New Client stepper."
                     />
                 </div>
             </div>
@@ -966,10 +990,14 @@ function ClientProfile() {
                 <div className="zk-reveal mt-6">
                     <ImageSlot
                         testid="clients-image-profile"
+                        src={clientViewImg}
+                        alt="Client Profile dashboard"
                         label="Client profile · Trademark"
                         chromeUrl="zukvo.app/admin/clients/CL-000003"
-                        aspect="16/9"
-                        caption="Replace with your Client profile screenshot."
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
+                        caption="Live screenshot — Client profile."
                     />
                 </div>
             </div>
@@ -1633,11 +1661,138 @@ function ActivitySection() {
                 <div className="zk-reveal mt-6">
                     <ImageSlot
                         testid="clients-image-activity"
+                        src={clientTeamImg}
+                        alt="Client Activity timeline and operations"
                         label="Client · Activity & operations"
                         chromeUrl="zukvo.app/admin/clients/CL-000003/activity"
-                        aspect="16/9"
-                        caption="Replace with your Client activity screenshot."
+                        aspect="auto"
+                        objectFit="contain"
+                        className="max-w-[800px] mx-auto"
+                        caption="Live screenshot — Client activity and operations."
                     />
+                </div>
+            </div>
+        </section>
+    );
+}
+
+/* ---------------- INVOICE ---------------- */
+
+function InvoiceSection() {
+    return (
+        <section
+            id="invoice"
+            data-testid="clients-invoice"
+            className="relative bg-[#0A0A0A] text-white border-t border-white/5"
+        >
+            <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
+                    <div className="lg:col-span-5">
+                        <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-300">
+                            Invoice
+                        </div>
+                        <h2 className="mt-4 font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
+                            Billing and payment tracking.
+                        </h2>
+                        <p className="mt-5 text-zinc-400 leading-relaxed text-[15px] md:text-base max-w-md">
+                            Generate, review, and send professional PDF invoices automatically based on active projects, contracts, or schedules. Real-time reconciliation logs your payment status instantly.
+                        </p>
+                    </div>
+                    <div className="lg:col-span-7">
+                        <ImageSlot
+                            testid="clients-image-invoice"
+                            src={clientInvoiceImg}
+                            alt="Client Invoices view"
+                            label="Client Invoices"
+                            chromeUrl="zukvo.app/admin/clients/invoices"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — Client Invoices."
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+/* ---------------- MEETING ---------------- */
+
+function MeetingSection() {
+    return (
+        <section
+            id="meeting"
+            data-testid="clients-meeting"
+            className="relative bg-[#0A0A0A] text-white border-t border-white/5"
+        >
+            <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
+                    <div className="lg:col-span-5">
+                        <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-300">
+                            Meeting
+                        </div>
+                        <h2 className="mt-4 font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
+                            Sync schedules and sync outcomes.
+                        </h2>
+                        <p className="mt-5 text-zinc-400 leading-relaxed text-[15px] md:text-base max-w-md">
+                            Log upcoming meetings, recurring touchpoints, and call links directly inside the client workspace. Keep track of calendar events, attendees, and shared agendas.
+                        </p>
+                    </div>
+                    <div className="lg:col-span-7">
+                        <ImageSlot
+                            testid="clients-image-meeting"
+                            src={clientMeetingImg}
+                            alt="Client Meetings schedule"
+                            label="Client Meetings"
+                            chromeUrl="zukvo.app/admin/clients/meetings"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — Client Meetings."
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+/* ---------------- DOCUMENTS ---------------- */
+
+function DocumentsSection() {
+    return (
+        <section
+            id="documents"
+            data-testid="clients-documents"
+            className="relative bg-[#0A0A0A] text-white border-t border-white/5"
+        >
+            <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
+                    <div className="lg:col-span-5">
+                        <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-300">
+                            Documents
+                        </div>
+                        <h2 className="mt-4 font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
+                            Central repository for agreements.
+                        </h2>
+                        <p className="mt-5 text-zinc-400 leading-relaxed text-[15px] md:text-base max-w-md">
+                            Store NDAs, Statements of Work (SOWs), contracts, and compliance papers. Version control keeps your documents organized, auditable, and easily accessible.
+                        </p>
+                    </div>
+                    <div className="lg:col-span-7">
+                        <ImageSlot
+                            testid="clients-image-documents"
+                            src={clientDocumentImg}
+                            alt="Client Documents folder"
+                            label="Client Documents"
+                            chromeUrl="zukvo.app/admin/clients/documents"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — Client Documents."
+                        />
+                    </div>
                 </div>
             </div>
         </section>

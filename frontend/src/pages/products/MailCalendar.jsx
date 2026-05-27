@@ -40,6 +40,24 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
+import integrationImg from "@/assets/integration.png";
+import mailImg from "@/assets/Mail.png";
+import createMailImg from "@/assets/createmail.png";
+import calendarImg from "@/assets/calendar.png";
+import calendarDayImg from "@/assets/calendar-day.png";
+import calendarWeekImg from "@/assets/cal-week.png";
+import createEventImg from "@/assets/createevent.png";
+
+const MAIL_CAL_SCREENSHOTS = [
+    { src: integrationImg, label: "Integrations", url: "zukvo.app/connect/integrations", caption: "Integrations view - Connect Zoho or Office 365" },
+    { src: mailImg, label: "Inbox", url: "zukvo.app/mail/inbox", caption: "Inbox view - Manage threads and convert to tickets" },
+    { src: createMailImg, label: "Compose Mail", url: "zukvo.app/mail/compose", caption: "Compose view - Rich text editor and attachments" },
+    { src: calendarImg, label: "Calendar (Month)", url: "zukvo.app/calendar/month", caption: "Month view - Track personal, team and project timelines" },
+    { src: calendarWeekImg, label: "Calendar (Week)", url: "zukvo.app/calendar/week", caption: "Week view - Detailed weekly view of events" },
+    { src: calendarDayImg, label: "Calendar (Day)", url: "zukvo.app/calendar/day", caption: "Day view - Hour-by-hour daily schedule" },
+    { src: createEventImg, label: "Create Event", url: "zukvo.app/calendar/new-event", caption: "Create Event view - Set title, date and layer attribution" },
+];
+
 const SUBMODULES = [
     { id: "integrations", label: "Integrations", icon: Plug },
     { id: "mail", label: "Mail", icon: Mail },
@@ -199,6 +217,15 @@ function SubmoduleNav() {
 
 function Integrations() {
     const [tab, setTab] = useState("all");
+    const [activeImageIdx, setActiveImageIdx] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setActiveImageIdx((prev) => (prev + 1) % MAIL_CAL_SCREENSHOTS.length);
+        }, 4000); // Change image every 4 seconds
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <section
             id="integrations"
@@ -220,7 +247,7 @@ function Integrations() {
                 </div>
 
                 {/* Integrations panel mock */}
-                <div className="zk-reveal mt-12 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+                {/* <div className="zk-reveal mt-12 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                     <div className="px-5 py-4 flex items-center justify-between flex-wrap gap-3 border-b border-white/5">
                         <div className="flex items-center gap-3">
                             <span className="inline-flex size-10 items-center justify-center rounded-xl bg-violet-500/15 text-violet-200 border border-violet-400/30">
@@ -241,7 +268,7 @@ function Integrations() {
                         </div>
                     </div>
 
-                    {/* Tabs */}
+                  
                     <div className="px-5 py-3 border-b border-white/5">
                         <div className="inline-flex gap-1 text-[12px]">
                             {[
@@ -265,7 +292,7 @@ function Integrations() {
                         </div>
                     </div>
 
-                    {/* Cards */}
+                    
                     <div className="p-5">
                         <div className="text-[12px] text-white font-medium mb-4">
                             Mail & Calendar Integrations
@@ -296,15 +323,31 @@ function Integrations() {
                             />
                         </div>
                     </div>
-                </div>
+                </div> */}
 
-                <div className="zk-reveal mt-6">
+                <div className="zk-reveal mt-8">
+                    <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-2">
+                        {MAIL_CAL_SCREENSHOTS.map((s, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setActiveImageIdx(idx)}
+                                className={`shrink-0 px-3 py-1.5 text-xs rounded-full border transition-all font-medium ${activeImageIdx === idx
+                                        ? "bg-zukvo-500 text-white border-zukvo-500 shadow-sm"
+                                        : "bg-white/5 text-zinc-400 border-white/10 hover:text-white hover:bg-white/10"
+                                    }`}
+                            >
+                                {s.label}
+                            </button>
+                        ))}
+                    </div>
                     <ImageSlot
                         testid="mc-image-integrations"
-                        label="Integrations · Mail & Calendar"
-                        chromeUrl="zukvo.app/connect/integrations"
-                        aspect="16/9"
-                        caption="Replace with your Integrations screenshot."
+                        src={MAIL_CAL_SCREENSHOTS[activeImageIdx].src}
+                        label={MAIL_CAL_SCREENSHOTS[activeImageIdx].label}
+                        chromeUrl={MAIL_CAL_SCREENSHOTS[activeImageIdx].url}
+                        aspect="21/9"
+                        objectFit="contain"
+                        caption={MAIL_CAL_SCREENSHOTS[activeImageIdx].caption}
                     />
                 </div>
             </div>
@@ -352,69 +395,73 @@ function IntegrationCard({ logo, name, desc, state, accounts }) {
 function MailSection() {
     const threads = [
         {
-            from: "<ithyazeasha@gmail.com>",
-            subj: "Customer Onboarding",
-            preview: "Hello, Welcome aboard! We are thrilled to partner with you and are fully committed to ensuring your transition is seamless, efficient, and successful fro…",
-            date: "May 24",
-            a: "IT",
-            tone: "rose",
+            from: "subhalakshmi.vinayagam@zithmi.com",
+            subj: "Verify your Invoice Mail Setting",
+            preview: "Verify Your Invoice Mail Hi, You have selected subhalakshmi.vinayagam@zithmi.com as your default invoice sender on Zithspace. Pleas…",
+            date: "May 22",
+            a: "SV",
+            tone: "indigo",
         },
         {
-            from: '"pa_square_enterprise"<pa_square_enterprise@zohomail.in>',
-            subj: "Proposal for Finance Management System Development - Phase 1",
-            preview: "Hi Krishnan, Thank you for sharing the requirements. Based on our discussion, please find the proposed s…",
-            date: "Apr 4",
-            a: "PS",
-            tone: "emerald",
+            from: "subhalakshmi.vinayagam@zithmi.com",
+            subj: "Verify your Invoice Mail Setting",
+            preview: "Verify Your Invoice Mail Hi, You have selected subhalakshmi.vinayagam@zithmi.com as your default invoice sender on Zithspace. Pleas…",
+            date: "May 21",
+            a: "SV",
+            tone: "indigo",
         },
         {
-            from: '"pa_square_enterprise"<pa_square_enterprise@zohomail.in>',
-            subj: "Minutes of Meeting (MOM) – 28th March",
-            preview: "Hi Krishnan, Please find below the Minutes of Meeting (MOM) held on 28th March. This captures the discussion on module scope, i…",
-            date: "Mar 30",
-            a: "PS",
-            tone: "emerald",
+            from: "mailer-daemon@mail.zoho.in",
+            subj: "Mail Delivery Status Notification (Delay)",
+            preview: "This message was created automatically by mail delivery system. THIS IS A WARNING MESSAGE ONLY. YOU DO NOT NEED …",
+            date: "May 17",
+            a: "MD",
+            tone: "amber",
+            unread: true,
         },
         {
-            from: '"pa_square_enterprise"<pa_square_enterprise@zohomail.in>',
-            subj: "Proposal for Billing & Business Management Web Application for PA Square Enterprise",
-            preview: "Dear Krishnan, Greetings from Zithtech. Thank you for the opportunity to work with PA…",
-            date: "Mar 9",
-            a: "PS",
-            tone: "emerald",
-        },
-        {
-            from: '"rajkumar"<rajkumar@j2bglobal.com>',
-            subj: "Invoice Submission – VDrive",
-            preview: "Dear Raj, Please find attached the invoice for VDrive for the period February 1st 2026 to February 28th 2026. Kindly review the invoice and arra…",
-            date: "Mar 3",
-            a: "RA",
+            from: "noreply@sender.zohocalendar.in",
+            subj: "Invitation: Bug List Review - 15 May 2026 @ Fri May 15, 2026 03:30 pm - 04:30 pm (Asia/Kolkata)",
+            preview: "— mithun.ravichandran@zithmi.com invites you to be a part of Bug Lis…",
+            date: "May 15",
+            a: "NO",
             tone: "violet",
             attach: true,
         },
         {
-            from: '"bharathi"<bharathi@zithmi.com>',
-            subj: "Fwd: Timesheet Testing Update",
-            preview: 'ithyaz Forwarded message From: Divya Dhamodharan To: "ithyaz" Cc: "Saroja Paramasivam" Date: Mon, 16 Feb 2026 23:54:42 +0530 Subje…',
-            date: "Feb 18",
-            a: "BH",
-            tone: "rose",
+            from: "noreply@sender.zohocalendar.in",
+            subj: "Invitation: Stand-UP-15 May @ Fri May 15, 2026 11:30 am - 12:30 pm (Asia/Kolkata)",
+            preview: "— mithun.ravichandran@zithmi.com invites you to be a part of Stand-Up-15 May St…",
+            date: "May 15",
+            a: "NO",
+            tone: "violet",
+            unread: true,
             attach: true,
         },
         {
-            from: '"josh"<josh@j2bglobal.com>',
-            subj: "Statement of Work (SOW)",
-            preview: "Dear Josh, Please find attached the Statement of Work (SOW) for your review and confirmation. Kindly go through the document and let us know i…",
-            date: "Jan 14",
-            a: "JO",
-            tone: "rose",
-            attach: true,
+            from: "bharathi.murugan@zithmi.com",
+            subj: "zithtech",
+            preview: "— Bharathi bharathi.murugan@zithmi.com bharathi2004m@gmail.com 9361050733 Zithtech",
+            date: "May 11",
+            a: "BM",
+            tone: "violet",
+            unread: true,
+        },
+        {
+            from: "subhalakshmi.vinayagam@zithmi.com",
+            subj: "Verify your Invoice Mail Setting",
+            preview: "Verify Your Invoice Mail Hi, You have selected subhalakshmi.vinayagam@zithmi.com as your default invoice sender on Zithspace. Pleas…",
+            date: "May 11",
+            a: "SV",
+            tone: "indigo",
         },
     ];
     const avatarTone = {
         rose: "bg-rose-500/30 text-rose-100 border-rose-400/40",
         emerald: "bg-emerald-500/30 text-emerald-100 border-emerald-400/40",
         violet: "bg-violet-500/30 text-violet-100 border-violet-400/40",
+        indigo: "bg-zukvo-500/30 text-zukvo-100 border-zukvo-500/40",
+        amber: "bg-amber-500/30 text-amber-100 border-amber-400/40",
     };
 
     return (
@@ -468,7 +515,7 @@ function MailSection() {
                                                 Mail
                                             </div>
                                             <div className="text-[10.5px] text-zinc-500">
-                                                ithyaz@zithmi.com
+                                                subhalakshmi.vinayagam@zithmi.com
                                             </div>
                                         </div>
                                     </div>
@@ -481,8 +528,8 @@ function MailSection() {
                                         </div>
                                         <ul className="space-y-0.5 text-[12.5px]">
                                             {[
-                                                { i: Inbox, t: "Inbox" },
-                                                { i: Send, t: "Sent", c: 8, active: true },
+                                                { i: Inbox, t: "Inbox", c: 50, active: true },
+                                                { i: Send, t: "Sent" },
                                                 { i: FileText, t: "Drafts" },
                                                 { i: AlertCircle, t: "Spam" },
                                                 { i: Trash2, t: "Trash" },
@@ -490,11 +537,10 @@ function MailSection() {
                                             ].map((f, i) => (
                                                 <li key={i}>
                                                     <div
-                                                        className={`flex items-center gap-2 rounded px-2 py-1.5 ${
-                                                            f.active
+                                                        className={`flex items-center gap-2 rounded px-2 py-1.5 ${f.active
                                                                 ? "bg-zukvo-500/15 text-zukvo-200"
                                                                 : "text-zinc-400"
-                                                        }`}
+                                                            }`}
                                                     >
                                                         <f.i className="size-3.5" />
                                                         <span className="flex-1">{f.t}</span>
@@ -522,10 +568,10 @@ function MailSection() {
                                     <div className="px-4 py-2 border-b border-white/5 flex items-center justify-between">
                                         <div>
                                             <span className="font-medium text-white text-[13px]">
-                                                Sent
+                                                Inbox
                                             </span>
                                             <span className="text-zinc-500 text-[11.5px] ml-2">
-                                                8 threads
+                                                50 threads
                                             </span>
                                         </div>
                                     </div>
@@ -534,11 +580,10 @@ function MailSection() {
                                             (t, i) => (
                                                 <span
                                                     key={i}
-                                                    className={`inline-flex items-center rounded-md px-2 py-0.5 ${
-                                                        i === 0
+                                                    className={`inline-flex items-center rounded-md px-2 py-0.5 ${i === 0
                                                             ? "bg-zukvo-500/15 text-zukvo-200 border border-zukvo-500/30"
                                                             : "text-zinc-400"
-                                                    }`}
+                                                        }`}
                                                 >
                                                     {t}
                                                 </span>
@@ -546,11 +591,21 @@ function MailSection() {
                                         )}
                                     </div>
                                     <div className="max-h-[420px] overflow-hidden">
-                                        {threads.slice(0, 6).map((t, i) => (
+                                        {threads.slice(0, 7).map((t, i) => (
                                             <div
                                                 key={i}
-                                                className="flex items-start gap-3 px-4 py-3 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
+                                                className="flex items-center gap-3 px-4 py-3 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
                                             >
+                                                {/* Checkbox placeholder */}
+                                                <span className="size-3.5 rounded border border-white/20 shrink-0 cursor-pointer" />
+                                                
+                                                {/* Unread indicator */}
+                                                {t.unread ? (
+                                                    <span className="size-2 rounded-full bg-blue-500 shrink-0" />
+                                                ) : (
+                                                    <span className="size-2 shrink-0" />
+                                                )}
+
                                                 <span
                                                     className={`inline-flex size-8 items-center justify-center rounded border text-[11px] font-bold shrink-0 ${avatarTone[t.tone]}`}
                                                 >
@@ -695,13 +750,12 @@ function CalendarSection() {
                                                 return (
                                                     <div
                                                         key={i}
-                                                        className={`aspect-square inline-flex items-center justify-center rounded ${
-                                                            today
+                                                        className={`aspect-square inline-flex items-center justify-center rounded ${today
                                                                 ? "bg-zukvo-500 text-white font-bold"
                                                                 : inMonth
-                                                                  ? "text-zinc-300"
-                                                                  : "text-zinc-700"
-                                                        }`}
+                                                                    ? "text-zinc-300"
+                                                                    : "text-zinc-700"
+                                                            }`}
                                                     >
                                                         {inMonth ? d : d <= 0 ? 30 + d : d - 31}
                                                     </div>
@@ -771,19 +825,18 @@ function CalendarSection() {
                                                     className="bg-[#0E0E10] aspect-[5/4] p-1.5 text-[11px]"
                                                 >
                                                     <div
-                                                        className={`inline-flex size-6 items-center justify-center rounded-full ${
-                                                            today
+                                                        className={`inline-flex size-6 items-center justify-center rounded-full ${today
                                                                 ? "bg-zukvo-500 text-white font-bold"
                                                                 : inMonth
-                                                                  ? "text-zinc-300"
-                                                                  : "text-zinc-700"
-                                                        }`}
+                                                                    ? "text-zinc-300"
+                                                                    : "text-zinc-700"
+                                                            }`}
                                                     >
                                                         {inMonth
                                                             ? d
                                                             : d <= 0
-                                                              ? 30 + d
-                                                              : d - 31}
+                                                                ? 30 + d
+                                                                : d - 31}
                                                     </div>
                                                 </div>
                                             );
@@ -1045,17 +1098,16 @@ function FoldersFilters() {
                             className="rounded-xl border border-white/10 bg-[#0E0E10] p-4 flex items-center gap-3"
                         >
                             <span
-                                className={`inline-flex size-8 items-center justify-center rounded-md ${
-                                    tone === "indigo"
+                                className={`inline-flex size-8 items-center justify-center rounded-md ${tone === "indigo"
                                         ? "bg-zukvo-500/15 text-zukvo-300 border border-zukvo-500/30"
                                         : tone === "violet"
-                                          ? "bg-violet-500/15 text-violet-300 border border-violet-400/30"
-                                          : tone === "rose"
-                                            ? "bg-rose-500/15 text-rose-300 border border-rose-400/30"
-                                            : tone === "emerald"
-                                              ? "bg-emerald-500/15 text-emerald-300 border border-emerald-400/30"
-                                              : "bg-cyan-500/15 text-cyan-300 border border-cyan-400/30"
-                                }`}
+                                            ? "bg-violet-500/15 text-violet-300 border border-violet-400/30"
+                                            : tone === "rose"
+                                                ? "bg-rose-500/15 text-rose-300 border border-rose-400/30"
+                                                : tone === "emerald"
+                                                    ? "bg-emerald-500/15 text-emerald-300 border border-emerald-400/30"
+                                                    : "bg-cyan-500/15 text-cyan-300 border border-cyan-400/30"
+                                    }`}
                             >
                                 <Ic className="size-4" />
                             </span>

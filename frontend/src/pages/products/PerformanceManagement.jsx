@@ -37,6 +37,9 @@ import {
 import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
+import performanceImg from "@/assets/performance.png";
+import ticketPerformanceImg from "@/assets/ticket-performance.png";
+
 
 const SUBMODULES = [
     { id: "overview", label: "Overview", icon: LayoutDashboard },
@@ -238,10 +241,13 @@ function Overview() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="perf-image-overview"
+                            src={performanceImg}
+                            alt="Performance Management Overview"
                             label="Performance Management · Overview"
                             chromeUrl="zukvo.app/hrms/performance"
-                            aspect="16/10"
-                            caption="Replace with your Performance overview screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            caption="Performance management overview dashboard."
                         />
                     </div>
                 </div>
@@ -632,10 +638,13 @@ function TicketPerformance() {
                 <div className="zk-reveal mt-6">
                     <ImageSlot
                         testid="perf-image-tickets"
+                        src={ticketPerformanceImg}
+                        alt="Ticket Performance Details"
                         label="Ticket Performance Details"
                         chromeUrl="zukvo.app/hrms/performance/tickets"
-                        aspect="16/9"
-                        caption="Replace with your ticket performance screenshot."
+                        aspect="auto"
+                        objectFit="contain"
+                        caption="Ticket performance analytics dashboard."
                     />
                 </div>
             </div>

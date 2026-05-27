@@ -30,10 +30,12 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
-const PM_MAIN_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/n811wqnt_image.png";
-const PM_DETAILS_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/06eqt8mz_image.png";
+import projectImg from "@/assets/project.png";
+import projectOverviewImg from "@/assets/projectoverview.png";
+import projectTrashImg from "@/assets/project-trash.png";
+
+const PM_MAIN_IMG = projectImg;
+const PM_DETAILS_IMG = projectOverviewImg;
 
 const SUBMODULES = [
     { id: "projects", label: "Projects", icon: KanbanSquare },
@@ -242,6 +244,7 @@ function MainView() {
                             alt="Projects Management home view"
                             label="Projects — main view"
                             chromeUrl="zukvo.app/work/projects"
+                            objectFit="contain"
                             caption="Live screenshot — Projects Management home with KPI bar."
                         />
                     </div>
@@ -685,6 +688,7 @@ function ProjectDetails() {
                             alt="Project details page"
                             label="Project Details — Zukvo #002"
                             chromeUrl="zukvo.app/work/projects/zukvo"
+                            objectFit="contain"
                             caption="Live screenshot — full project details with sprint, ticket and team metrics."
                         />
                     </div>
@@ -1278,10 +1282,13 @@ function TrashSection() {
                         <div className="mt-5">
                             <ImageSlot
                                 testid="pm-image-trash"
+                                src={projectTrashImg}
+                                alt="Project Trash & Restore"
                                 label="Project Trash & Restore"
                                 chromeUrl="zukvo.app/work/projects/trash"
                                 aspect="16/10"
-                                caption="Replace with your Trash & Restore screenshot."
+                                objectFit="contain"
+                                caption="Trash and restore bin for deleted projects."
                             />
                         </div>
                     </div>

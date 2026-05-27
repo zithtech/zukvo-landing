@@ -44,6 +44,9 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
+import escaltionImg from "@/assets/escaltion.png";
+import escaltionDrawerImg from "@/assets/escaltion-drawer.png";
+
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
     { id: "raise", label: "Raise Escalation", icon: Siren },
@@ -243,10 +246,14 @@ function Dashboard() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="esc-image-dashboard"
+                            src={escaltionImg}
+                            alt="Escalations dashboard view"
                             label="Escalations · Dashboard"
                             chromeUrl="zukvo.app/work/escalations"
-                            aspect="16/10"
-                            caption="Replace with your Escalations dashboard screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — Escalations dashboard."
                         />
                     </div>
                 </div>
@@ -727,10 +734,14 @@ function RaiseEscalation() {
                         </div>
                         <ImageSlot
                             testid="esc-image-raise"
+                            src={escaltionDrawerImg}
+                            alt="Raise Manual Escalation drawer"
                             label="Raise Manual Escalation · Drawer"
                             chromeUrl="zukvo.app/work/escalations/new"
-                            aspect="16/10"
-                            caption="Replace with your Raise Escalation screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[480px] mx-auto"
+                            caption="Live screenshot — Raise Manual Escalation drawer."
                         />
                     </div>
                 </div>

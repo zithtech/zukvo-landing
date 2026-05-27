@@ -44,6 +44,7 @@ import {
 import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
+import clientPortalImg from "@/assets/client-portal.png";
 
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -246,10 +247,13 @@ function Dashboard() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="portal-image-dashboard"
+                            src={clientPortalImg}
+                            alt="Client Portal Dashboard"
                             label="Client Portal · Home"
                             chromeUrl="trademark.zukvo.app"
-                            aspect="16/10"
-                            caption="Replace with your Client Portal home screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            caption="Client portal dashboard home page."
                         />
                     </div>
                 </div>

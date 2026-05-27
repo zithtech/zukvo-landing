@@ -34,10 +34,21 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
-const HUB_MAIN_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/y0uupxj6_image.png";
-const HUB_EDITOR_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/k7xgy79a_image.png";
+import documentImg from "@/assets/document.png";
+import docViewImg from "@/assets/doc-view.png";
+import docManualCreationImg from "@/assets/doc-manual-creation.png";
+import docZaiCreationImg from "@/assets/doc-zai-creation.png";
+import docPublicLinkImg from "@/assets/doc-public-link.png";
+import docVersionHistoryImg from "@/assets/doc-version-history.png";
+import docLinkTicketImg from "@/assets/doc-link-ticket.png";
+
+const HUB_MAIN_IMG = documentImg;
+const HUB_EDITOR_IMG = docViewImg;
+const HUB_MANUAL_CREATION_IMG = docManualCreationImg;
+const HUB_ZAI_CREATION_IMG = docZaiCreationImg;
+const HUB_PUBLIC_LINK_IMG = docPublicLinkImg;
+const HUB_VERSION_HISTORY_IMG = docVersionHistoryImg;
+const HUB_LINK_TICKET_IMG = docLinkTicketImg;
 
 const SUBMODULES = [
     { id: "hubs", label: "Hubs", icon: FolderTree },
@@ -244,6 +255,9 @@ function MainView() {
                             alt="Document Hub main view"
                             label="Document Hub — main view"
                             chromeUrl="zukvo.app/work/document-hub"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
                             caption="Live screenshot — Document Hub main listing."
                         />
                     </div>
@@ -500,17 +514,23 @@ function CreationTypes() {
                 <div className="zk-reveal mt-10 grid md:grid-cols-2 gap-5">
                     <ImageSlot
                         testid="dh-image-creation-page"
+                        src={HUB_MANUAL_CREATION_IMG}
+                        alt="Hub manual creation page"
                         label="Hub creation page"
                         chromeUrl="zukvo.app/work/document-hub/new"
-                        aspect="16/10"
-                        caption="Replace with your screenshot of the creation page."
+                        aspect="auto"
+                        objectFit="contain"
+                        caption="Live screenshot — manual hub creation form."
                     />
                     <ImageSlot
                         testid="dh-image-creation-types"
+                        src={HUB_ZAI_CREATION_IMG}
+                        alt="AI creation mode"
                         label="Manual vs Create-with-Zai"
                         chromeUrl="zukvo.app/work/document-hub/new?mode=zai"
-                        aspect="16/10"
-                        caption="Replace with the creation-types screenshot."
+                        aspect="auto"
+                        objectFit="contain"
+                        caption="Live screenshot — AI-powered hub creation prompt."
                     />
                 </div>
             </div>
@@ -567,7 +587,9 @@ function EditorSection() {
                             alt="Document Hub editor"
                             label="Document editor"
                             chromeUrl="zukvo.app/work/document-hub/play-store"
-                            aspect="16/10"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
                             caption="Live screenshot — block-based document editor with sidebar."
                         />
                     </div>
@@ -745,10 +767,14 @@ function SharingSection() {
                     <div className="lg:col-span-7 space-y-5">
                         <ImageSlot
                             testid="dh-image-public-share"
+                            src={HUB_PUBLIC_LINK_IMG}
+                            alt="Public share configuration"
                             label="Public share configuration"
                             chromeUrl="zukvo.app/work/document-hub/share"
-                            aspect="16/10"
-                            caption="Replace with your public-share screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[480px] mx-auto"
+                            caption="Live screenshot — sharing controls and public link generator."
                         />
                     </div>
                 </div>
@@ -879,10 +905,14 @@ function HistorySection() {
                         <HistoryMock />
                         <ImageSlot
                             testid="dh-image-history"
+                            src={HUB_VERSION_HISTORY_IMG}
+                            alt="Version history panel"
                             label="Version history panel"
                             chromeUrl="zukvo.app/work/document-hub/history"
-                            aspect="16/10"
-                            caption="Replace with your version history screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[480px] mx-auto"
+                            caption="Live screenshot — document version history and rollback panel."
                         />
                     </div>
                 </div>
@@ -1063,10 +1093,14 @@ function TicketLinking() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="dh-image-ticket-linking"
+                            src={HUB_LINK_TICKET_IMG}
+                            alt="Ticket linking inside a Hub"
                             label="Ticket linking inside a Hub"
                             chromeUrl="zukvo.app/work/document-hub/release-kit"
-                            aspect="16/10"
-                            caption="Optional — replace with a screenshot of ticket linking."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[480px] mx-auto"
+                            caption="Live screenshot — links panel showing associated project tickets."
                         />
                     </div>
                 </div>

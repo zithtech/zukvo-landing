@@ -29,16 +29,19 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
-const ZP_EMPTY_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/3szv1iq5_image.png";
-const ZP_EXTRACTED_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/0k3jn96u_image%20%284%29.png";
-const ZP_SKILL_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/dg375boj_image%20%283%29.png";
-const ZP_SAVED_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/0s0gwi2b_image%20%282%29.png";
-const ZP_LIST_IMG =
-    "https://customer-assets.emergentagent.com/job_work-nexus-20/artifacts/jtx75szs_image%20%281%29.png";
+import extensionImg from "@/assets/extension.png";
+import extractImg from "@/assets/extract.png";
+import zithSkillsmatchImg from "@/assets/zith -skillsmatch.png";
+import leadsImg from "@/assets/leads.png";
+import zithSavejobsImg from "@/assets/zith-savejobs.png";
+import jobsImg from "@/assets/jobs.png";
+import mainleadImg from "@/assets/mainlead.png";
+
+const ZP_EMPTY_IMG = extensionImg;
+const ZP_EXTRACTED_IMG = extractImg;
+const ZP_SKILL_IMG = zithSkillsmatchImg;
+const ZP_SAVED_IMG = leadsImg;
+const ZP_LIST_IMG = zithSavejobsImg;
 
 const SUBMODULES = [
     { id: "extract", label: "Extract", icon: Search },
@@ -145,69 +148,17 @@ function Hero() {
                         </div>
                     </div>
 
-                    <div className="lg:col-span-5">
-                        {/* Faux browser + extension popover */}
-                        <div className="zk-reveal relative">
-                            <div className="rounded-3xl border border-zinc-200 bg-white shadow-[0_30px_80px_-30px_rgba(15,15,15,0.18)] overflow-hidden">
-                                <div className="flex items-center gap-1.5 px-3 py-2 bg-zinc-50 border-b border-zinc-100">
-                                    <span className="size-2.5 rounded-full bg-[#FF5F57]" />
-                                    <span className="size-2.5 rounded-full bg-[#FEBC2E]" />
-                                    <span className="size-2.5 rounded-full bg-[#28C840]" />
-                                    <span className="ml-2 text-[10px] uppercase tracking-[0.18em] text-zinc-500">
-                                        upwork.com/jobs/Full-Stack-Developer
-                                    </span>
-                                </div>
-                                <div className="p-5 relative">
-                                    <div className="text-[10.5px] uppercase tracking-[0.2em] text-zinc-400">
-                                        Job listing
-                                    </div>
-                                    <div className="mt-1.5 font-heading text-lg text-zukvo-ink leading-tight tracking-tight">
-                                        Full-Stack Developer for IT Outsourcing Agency
-                                    </div>
-                                    <div className="mt-3 flex items-center gap-3 flex-wrap">
-                                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 text-[11px] font-medium">
-                                            <DollarSign className="size-3" /> $3–4 / hr
-                                        </span>
-                                        <span className="inline-flex items-center gap-1 rounded-full bg-zinc-100 text-zinc-700 border border-zinc-200 px-2 py-0.5 text-[11px]">
-                                            <Star className="size-3 text-amber-500" /> 4.9 client
-                                        </span>
-                                        <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 text-violet-700 border border-violet-200 px-2 py-0.5 text-[11px]">
-                                            <Briefcase className="size-3" /> Complex
-                                        </span>
-                                    </div>
-
-                                    {/* Floating extension popover */}
-                                    <div className="absolute -right-4 md:right-4 -bottom-10 w-[260px] rounded-2xl border border-zinc-200 bg-white shadow-[0_30px_60px_-15px_rgba(99,102,241,0.35)] p-3.5">
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center gap-1.5">
-                                                <span className="inline-flex size-6 items-center justify-center rounded-md bg-gradient-to-br from-violet-600 to-zukvo-500 text-white text-[10px] font-bold">
-                                                    Z!
-                                                </span>
-                                                <span className="font-heading text-violet-600 tracking-tight">
-                                                    ZithPort
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center gap-1.5">
-                                                <span className="size-6 rounded-md border border-zinc-200 inline-flex items-center justify-center bg-zukvo-500/10">
-                                                    <Search className="size-3 text-zukvo-600" />
-                                                </span>
-                                                <span className="size-6 rounded-md border border-zinc-200 inline-flex items-center justify-center">
-                                                    <Save className="size-3 text-zinc-600" />
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div className="mt-3 rounded-xl border border-violet-200 bg-violet-50/60 px-3 py-3 text-center">
-                                            <div className="text-[11px] text-zinc-600">
-                                                Ready when you are.
-                                            </div>
-                                            <button className="mt-2 w-full rounded-lg bg-gradient-to-r from-zukvo-500 to-violet-500 text-white text-[12px] font-semibold py-2 shadow-[0_8px_24px_-8px_rgba(99,102,241,0.6)]">
-                                                Extract Job
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="lg:col-span-5">                        <div className="zk-reveal relative">
+                        <ImageSlot
+                            src={extensionImg}
+                            alt="ZithPort Chrome Extension"
+                            label="ZithPort Extension"
+                            chromeUrl="chrome-extension://zithport"
+                            aspect="16/9"
+                            objectFit="contain"
+                            caption="ZithPort Chrome Extension ready to extract jobs."
+                        />
+                    </div>
                     </div>
                 </div>
 
@@ -308,7 +259,7 @@ function ExtractSection() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="zp-image-empty"
-                            src={ZP_EMPTY_IMG}
+                            src={ZP_SAVED_IMG}
                             alt="ZithPort empty / extract state"
                             label="ZithPort · ready to extract"
                             chromeUrl="chrome-extension://zithport"
@@ -349,18 +300,20 @@ function LeadScoreSection() {
                 </div>
 
                 <div className="zk-reveal mt-12 grid lg:grid-cols-12 gap-8 items-center">
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-5">
                         <ImageSlot
                             testid="zp-image-extracted"
-                            src={ZP_EXTRACTED_IMG}
+                            src={jobsImg}
                             alt="Extracted lead with score breakdown"
                             label="Lead value · 70/100 Medium"
                             chromeUrl="chrome-extension://zithport"
                             caption="Live screenshot — extraction success with itemized lead value rubric."
                             aspect="1/1"
+                            objectFit="contain"
+                            className="max-w-[360px] mx-auto"
                         />
                     </div>
-                    <div className="lg:col-span-5 space-y-3">
+                    <div className="lg:col-span-7 space-y-3">
                         <RubricRow tier="High" range="80–100" color="emerald" desc="Strong budget, established client, detailed brief." />
                         <RubricRow tier="Medium" range="50–79" color="amber" desc="Worth a custom proposal — some gaps to clarify." active />
                         <RubricRow tier="Low" range="0–49" color="rose" desc="Vague brief or thin client history — skip or template." />
@@ -446,7 +399,7 @@ function SkillSection() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-5 lg:order-2">
+                    <div className="lg:col-span-7 lg:order-2">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-rose-300">
                             Step 03 · Skill alignment
                         </div>
@@ -469,20 +422,19 @@ function SkillSection() {
                                     className="flex items-center gap-2.5 text-[14px] text-zinc-300"
                                 >
                                     <b.i
-                                        className={`size-4 ${
-                                            b.c === "emerald"
-                                                ? "text-emerald-300"
-                                                : b.c === "rose"
-                                                  ? "text-rose-300"
-                                                  : "text-violet-300"
-                                        }`}
+                                        className={`size-4 ${b.c === "emerald"
+                                            ? "text-emerald-300"
+                                            : b.c === "rose"
+                                                ? "text-rose-300"
+                                                : "text-violet-300"
+                                            }`}
                                     />{" "}
                                     {b.t}
                                 </li>
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7 lg:order-1">
+                    <div className="lg:col-span-5 lg:order-1">
                         <ImageSlot
                             testid="zp-image-skill"
                             src={ZP_SKILL_IMG}
@@ -491,6 +443,7 @@ function SkillSection() {
                             chromeUrl="chrome-extension://zithport"
                             caption="Live screenshot — expertise match vs. growth opportunities."
                             aspect="1/1"
+                            className="max-w-[360px] mx-auto"
                         />
                     </div>
                 </div>
@@ -526,18 +479,19 @@ function SyncSection() {
                 </div>
 
                 <div className="zk-reveal mt-12 grid lg:grid-cols-12 gap-8 items-center">
-                    <div className="lg:col-span-6">
+                    <div className="lg:col-span-5">
                         <ImageSlot
                             testid="zp-image-saved"
-                            src={ZP_SAVED_IMG}
+                            src={ZP_LIST_IMG}
                             alt="Lead saved successfully"
                             label="Lead saved · synced to Zithspace"
                             chromeUrl="chrome-extension://zithport"
                             caption="Live screenshot — confirmation with Open Dashboard CTA."
                             aspect="1/1"
+                            className="max-w-[360px] mx-auto"
                         />
                     </div>
-                    <div className="lg:col-span-6">
+                    <div className="lg:col-span-7">
                         {/* Pipeline flow */}
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-6">
                             <div className="text-[10.5px] uppercase tracking-[0.2em] text-zinc-500">
@@ -554,17 +508,16 @@ function SyncSection() {
                                     <div key={i} className="flex items-start gap-3">
                                         <div className="flex flex-col items-center">
                                             <span
-                                                className={`inline-flex size-9 items-center justify-center rounded-lg border ${
-                                                    s.c === "violet"
-                                                        ? "bg-violet-500/10 text-violet-300 border-violet-400/30"
-                                                        : s.c === "amber"
-                                                          ? "bg-amber-500/10 text-amber-300 border-amber-400/30"
-                                                          : s.c === "rose"
+                                                className={`inline-flex size-9 items-center justify-center rounded-lg border ${s.c === "violet"
+                                                    ? "bg-violet-500/10 text-violet-300 border-violet-400/30"
+                                                    : s.c === "amber"
+                                                        ? "bg-amber-500/10 text-amber-300 border-amber-400/30"
+                                                        : s.c === "rose"
                                                             ? "bg-rose-500/10 text-rose-300 border-rose-400/30"
                                                             : s.c === "emerald"
-                                                              ? "bg-emerald-500/10 text-emerald-300 border-emerald-400/30"
-                                                              : "bg-white/5 text-zinc-300 border-white/10"
-                                                }`}
+                                                                ? "bg-emerald-500/10 text-emerald-300 border-emerald-400/30"
+                                                                : "bg-white/5 text-zinc-300 border-white/10"
+                                                    }`}
                                             >
                                                 <s.i className="size-4" />
                                             </span>
@@ -635,13 +588,12 @@ function SavedSection() {
                                         {s[0]}
                                     </div>
                                     <div
-                                        className={`mt-1 font-heading text-2xl tracking-tight ${
-                                            s[2] === "indigo"
-                                                ? "text-zukvo-300"
-                                                : s[2] === "emerald"
-                                                  ? "text-emerald-300"
-                                                  : "text-amber-300"
-                                        }`}
+                                        className={`mt-1 font-heading text-2xl tracking-tight ${s[2] === "indigo"
+                                            ? "text-zukvo-300"
+                                            : s[2] === "emerald"
+                                                ? "text-emerald-300"
+                                                : "text-amber-300"
+                                            }`}
                                     >
                                         {s[1]}
                                     </div>
@@ -654,12 +606,13 @@ function SavedSection() {
                 <div className="zk-reveal mt-12">
                     <ImageSlot
                         testid="zp-image-list"
-                        src={ZP_LIST_IMG}
+                        src={mainleadImg}
                         alt="Saved jobs list"
                         label="Your Saved Jobs — Synced to Zukvo"
                         chromeUrl="chrome-extension://zithport/saved"
                         caption="Live screenshot — saved queue with sync status, score & skill match."
-                        aspect="1/1"
+                        aspect="21/9"
+                        objectFit="contain"
                     />
                 </div>
 

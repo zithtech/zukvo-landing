@@ -13,10 +13,11 @@ import {
     Bug,
 } from "lucide-react";
 
-const ZAI_IMG =
-    "https://customer-assets.emergentagent.com/job_39f817a0-5131-43e1-a744-33b263e6d84a/artifacts/rap6qk77_image.png";
-const SPRINT_IMG =
-    "https://customer-assets.emergentagent.com/job_39f817a0-5131-43e1-a744-33b263e6d84a/artifacts/meqjpr4p_image.png";
+import proposalPageImg from "@/assets/proposal-page.png";
+import ticketSprintImg from "@/assets/ticket-sprint.png";
+
+const ZAI_IMG = proposalPageImg;
+const SPRINT_IMG = ticketSprintImg;
 
 export default function FeaturesBento() {
     return (

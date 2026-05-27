@@ -40,6 +40,8 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import ImageSlot from "@/components/ImageSlot";
 
+import accountsImg from "@/assets/accounts.png";
+
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
     { id: "ledger", label: "Transactions Ledger", icon: Landmark },
@@ -240,10 +242,14 @@ function Dashboard() {
                     <div className="lg:col-span-7">
                         <ImageSlot
                             testid="accounts-image-dashboard"
+                            src={accountsImg}
+                            alt="Accounts Management Dashboard"
                             label="Accounts Management · Dashboard"
                             chromeUrl="zukvo.app/finance/accounts"
-                            aspect="16/10"
-                            caption="Replace with your Accounts dashboard screenshot."
+                            aspect="auto"
+                            objectFit="contain"
+                            className="max-w-[800px] mx-auto"
+                            caption="Live screenshot — company accounts management ledger and KPIs."
                         />
                     </div>
                 </div>
