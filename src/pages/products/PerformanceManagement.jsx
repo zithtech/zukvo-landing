@@ -36,6 +36,7 @@ import {
 } from "lucide-react";
 import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
+import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 import performanceImg from "@/assets/performance.png";
 import ticketPerformanceImg from "@/assets/ticket-performance.png";
@@ -73,6 +74,7 @@ export default function PerformanceManagement() {
             data-testid="perf-page"
             className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
+            <SEO />
             <Nav />
             <Hero />
             <SubmoduleNav />

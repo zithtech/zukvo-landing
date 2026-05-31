@@ -18,7 +18,7 @@ export default function FinalCTA() {
                     }}
                 >
                     <div className="flex justify-center">
-                        <ZMark size={56} />
+                        <ZMark size={56} variant="dark" />
                     </div>
                     <h2 className="mt-7 font-heading font-medium text-4xl md:text-6xl tracking-[-0.03em] text-white">
                         Stop juggling tabs.

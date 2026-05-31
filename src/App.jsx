@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Landing from "@/pages/Landing";
 import Signup from "@/pages/Signup";
+import About from "@/pages/About";
+import ContactSales from "@/pages/ContactSales";
 import ProductsIndex from "@/pages/products/ProductsIndex";
 import TicketManagement from "@/pages/products/TicketManagement";
 import DocumentHub from "@/pages/products/DocumentHub";
@@ -46,6 +48,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Landing />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact-sales" element={<ContactSales />} />
                     <Route path="/products" element={<ProductsIndex />} />
                     <Route
                         path="/products/ticket-management"

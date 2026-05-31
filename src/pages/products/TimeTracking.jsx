@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
+import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
 import timeTrackingImg from "@/assets/time-tracking.png";
@@ -78,6 +79,7 @@ export default function TimeTracking() {
             data-testid="time-tracking-page"
             className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
+            <SEO />
             <Nav />
             <Hero />
             <SubmoduleNav />

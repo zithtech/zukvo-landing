@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
+import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
 import invoiceDashboardImg from "@/assets/invoice-dashboard.png";
@@ -84,6 +85,7 @@ export default function Invoice() {
             data-testid="invoice-page"
             className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
+            <SEO />
             <Nav />
             <Hero />
             <SubmoduleNav />

@@ -3,7 +3,6 @@ import Nav from "@/components/landing/Nav";
 import Hero from "@/components/landing/Hero";
 import SocialProof from "@/components/landing/SocialProof";
 import FeaturesBento from "@/components/landing/FeaturesBento";
-import Workflow from "@/components/landing/Workflow";
 import Audiences from "@/components/landing/Audiences";
 import Pricing from "@/components/landing/Pricing";
 import ComingSoon from "@/components/landing/ComingSoon";
@@ -11,6 +10,7 @@ import FAQ from "@/components/landing/FAQ";
 import FinalCTA from "@/components/landing/FinalCTA";
 import Footer from "@/components/landing/Footer";
 
+import SEO from "@/components/SEO";
 export default function Landing() {
     useEffect(() => {
         // Global reveal observer for all .zk-reveal items on the page
@@ -32,11 +32,11 @@ export default function Landing() {
 
     return (
         <main data-testid="landing-page" className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip">
+            <SEO />
             <Nav />
             <Hero />
             <SocialProof />
             <FeaturesBento />
-            <Workflow />
             <Audiences />
             <Pricing />
             <ComingSoon />

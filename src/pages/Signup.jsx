@@ -16,6 +16,7 @@ import {
     Wand2,
 } from "lucide-react";
 import ZukvoLogo from "@/components/ZukvoLogo";
+import SEO from "@/components/SEO";
 
 /* ---------------- DATA (mirrors Pricing.jsx) ---------------- */
 
@@ -207,6 +208,7 @@ export default function Signup() {
             {/* Soft dot grid */}
             <div className="absolute inset-0 zk-dot-grid-light opacity-50 [mask-image:linear-gradient(to_bottom,white,transparent_70%)] pointer-events-none" />
 
+            <SEO />
             <MinimalNav />
 
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 pt-28 md:pt-32 pb-16 md:pb-20">

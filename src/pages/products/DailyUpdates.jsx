@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
+import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
 import dailyUpdatesImg from "@/assets/daily-updates.png";
@@ -75,6 +76,7 @@ export default function DailyUpdates() {
             data-testid="daily-updates-page"
             className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
+            <SEO />
             <Nav />
             <Hero />
             <SubmoduleNav />

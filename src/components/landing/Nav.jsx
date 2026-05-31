@@ -2,16 +2,21 @@ import React, { useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import mainLogo from "@/assets/mainLogo.png";
+import whiteLogo from "@/assets/zukvowhitelogo.png";
 import ZukvoWordmark from "@/components/ZukvoWordmark";
 import { PRODUCTS } from "@/data/products";
 
+const DARK_BG_ROUTES = new Set(["/contact-sales"]);
+
 const LINKS = [
     { label: "Features", href: "/#features" },
-    { label: "Workflow", href: "/#workflow" },
     { label: "For", href: "/#audiences" },
     { label: "Pricing", href: "/#pricing" },
     { label: "FAQ", href: "/#faq" },
+    { label: "About", href: "/about" },
 ];
+
+const isPageRoute = (href) => href.startsWith("/") && !href.includes("#");
 
 const READY_SLUGS = new Set([
     "ticket-management",
@@ -32,11 +37,44 @@ const READY_SLUGS = new Set([
     "escalation-management",
 ]);
 
+const INTRO_STORAGE_KEY = "zk_logo_intro_played";
+
 export default function Nav() {
     const [scrolled, setScrolled] = useState(false);
     const [open, setOpen] = useState(false);
     const [productsOpen, setProductsOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(() => {
+        if (typeof window === "undefined") return false;
+        return window.matchMedia("(max-width: 767px)").matches;
+    });
+    const [playIntro] = useState(() => {
+        if (typeof window === "undefined") return false;
+        try {
+            return !window.sessionStorage.getItem(INTRO_STORAGE_KEY);
+        } catch {
+            return true;
+        }
+    });
     const location = useLocation();
+
+    useEffect(() => {
+        const mq = window.matchMedia("(max-width: 767px)");
+        const onChange = (e) => setIsMobile(e.matches);
+        mq.addEventListener("change", onChange);
+        return () => mq.removeEventListener("change", onChange);
+    }, []);
+    const onDarkBg = DARK_BG_ROUTES.has(location.pathname) && !scrolled;
+    const logoSrc = onDarkBg ? whiteLogo : mainLogo;
+
+    const isLinkActive = (href) => {
+        if (isPageRoute(href)) return location.pathname === href;
+        if (href.startsWith("/#"))
+            return location.pathname === "/" && location.hash === href.substring(1);
+        return false;
+    };
+    const productsActive =
+        location.pathname === "/products" || location.pathname.startsWith("/products/");
+    const contactSalesActive = location.pathname === "/contact-sales";
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 12);
@@ -44,6 +82,15 @@ export default function Nav() {
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
+
+    useEffect(() => {
+        if (!playIntro) return;
+        try {
+            window.sessionStorage.setItem(INTRO_STORAGE_KEY, "1");
+        } catch {
+            /* sessionStorage unavailable — intro will replay; acceptable */
+        }
+    }, [playIntro]);
 
     useEffect(() => {
         setProductsOpen(false);
@@ -63,28 +110,39 @@ export default function Nav() {
                             : "border-transparent bg-transparent px-3 pl-5 py-2"
                     }`}
                 >
-                    <Link to="/" className="flex items-center gap-2.5 shrink-0" data-testid="nav-logo-link">
-                        <span className="zk-logo-runner inline-flex">
-                            <span className="zk-logo-wind" aria-hidden="true">
-                                <span className="zk-logo-wisp" style={{ "--zk-wisp-top": "22%", "--zk-wisp-width": "44px", "--zk-wisp-delay": "0.05s" }} />
-                                <span className="zk-logo-wisp" style={{ "--zk-wisp-top": "38%", "--zk-wisp-width": "78px", "--zk-wisp-delay": "0.35s" }} />
-                                <span className="zk-logo-wisp zk-logo-wisp--alt" style={{ "--zk-wisp-top": "52%", "--zk-wisp-width": "92px", "--zk-wisp-delay": "0.18s" }} />
-                                <span className="zk-logo-wisp" style={{ "--zk-wisp-top": "68%", "--zk-wisp-width": "60px", "--zk-wisp-delay": "0.48s" }} />
-                                <span className="zk-logo-wisp zk-logo-wisp--alt" style={{ "--zk-wisp-top": "84%", "--zk-wisp-width": "50px", "--zk-wisp-delay": "0.22s" }} />
-                            </span>
-                            <span className="zk-logo-stride inline-flex">
+                    <Link to="/" className="flex items-center gap-2 md:gap-2.5 min-w-0 shrink" data-testid="nav-logo-link">
+                        <span className={`inline-flex ${playIntro ? "zk-logo-runner" : ""}`}>
+                            {playIntro && (
+                                <span className="zk-logo-wind" aria-hidden="true">
+                                    <span className="zk-logo-wisp" style={{ "--zk-wisp-top": "22%", "--zk-wisp-width": "44px", "--zk-wisp-delay": "0.05s" }} />
+                                    <span className="zk-logo-wisp" style={{ "--zk-wisp-top": "38%", "--zk-wisp-width": "78px", "--zk-wisp-delay": "0.35s" }} />
+                                    <span className="zk-logo-wisp zk-logo-wisp--alt" style={{ "--zk-wisp-top": "52%", "--zk-wisp-width": "92px", "--zk-wisp-delay": "0.18s" }} />
+                                    <span className="zk-logo-wisp" style={{ "--zk-wisp-top": "68%", "--zk-wisp-width": "60px", "--zk-wisp-delay": "0.48s" }} />
+                                    <span className="zk-logo-wisp zk-logo-wisp--alt" style={{ "--zk-wisp-top": "84%", "--zk-wisp-width": "50px", "--zk-wisp-delay": "0.22s" }} />
+                                </span>
+                            )}
+                            <span className={`inline-flex ${playIntro ? "zk-logo-stride" : ""}`}>
                                 <img
-                                    src={mainLogo}
+                                    src={logoSrc}
                                     alt="Zukvo"
-                                    width={36}
-                                    height={36}
-                                    style={{ width: 36, height: 36, objectFit: "contain" }}
+                                    width={isMobile ? 26 : 36}
+                                    height={isMobile ? 26 : 36}
+                                    style={{
+                                        width: isMobile ? 26 : 36,
+                                        height: isMobile ? 26 : 36,
+                                        objectFit: "contain",
+                                    }}
                                     className="inline-block select-none"
                                     draggable="false"
                                 />
                             </span>
                         </span>
-                        <ZukvoWordmark size={22} variant="light" autoShowDelay={2650} autoShowDuration={2000} />
+                        <ZukvoWordmark
+                            size={isMobile ? 13 : 22}
+                            variant={onDarkBg ? "dark" : "light"}
+                            autoShowDelay={playIntro ? 2650 : 0}
+                            autoShowDuration={2000}
+                        />
                     </Link>
 
                     <nav className="hidden md:flex items-center gap-1">
@@ -97,12 +155,22 @@ export default function Nav() {
                             <button
                                 data-testid="nav-products-trigger"
                                 onClick={() => setProductsOpen((s) => !s)}
-                                className="inline-flex items-center gap-1 px-3 py-2 text-[13px] font-medium text-zinc-700 hover:text-zukvo-600 transition-colors"
+                                className={`relative inline-flex items-center gap-1 px-3 py-2 text-[13px] font-medium transition-colors ${
+                                    productsActive
+                                        ? "text-zukvo-600"
+                                        : "text-zinc-700 hover:text-zukvo-600"
+                                }`}
                             >
                                 Products
                                 <ChevronDown
                                     className={`size-3.5 transition-transform ${productsOpen ? "rotate-180" : ""}`}
                                 />
+                                {productsActive && (
+                                    <span
+                                        aria-hidden="true"
+                                        className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full bg-zukvo-500"
+                                    />
+                                )}
                             </button>
 
                             {productsOpen && (
@@ -155,16 +223,41 @@ export default function Nav() {
                             )}
                         </div>
 
-                        {LINKS.map((l) => (
-                            <a
-                                key={l.label}
-                                href={l.href}
-                                data-testid={`nav-link-${l.label.toLowerCase()}`}
-                                className="px-3 py-2 text-[13px] font-medium text-zinc-700 hover:text-zukvo-600 transition-colors"
-                            >
-                                {l.label}
-                            </a>
-                        ))}
+                        {LINKS.map((l) => {
+                            const active = isLinkActive(l.href);
+                            const cls = `relative px-3 py-2 text-[13px] font-medium transition-colors ${
+                                active
+                                    ? "text-zukvo-600"
+                                    : "text-zinc-700 hover:text-zukvo-600"
+                            }`;
+                            const indicator = active && (
+                                <span
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full bg-zukvo-500"
+                                />
+                            );
+                            return isPageRoute(l.href) ? (
+                                <Link
+                                    key={l.label}
+                                    to={l.href}
+                                    data-testid={`nav-link-${l.label.toLowerCase()}`}
+                                    className={cls}
+                                >
+                                    {l.label}
+                                    {indicator}
+                                </Link>
+                            ) : (
+                                <a
+                                    key={l.label}
+                                    href={l.href}
+                                    data-testid={`nav-link-${l.label.toLowerCase()}`}
+                                    className={cls}
+                                >
+                                    {l.label}
+                                    {indicator}
+                                </a>
+                            );
+                        })}
                     </nav>
 
                     <div className="hidden md:flex items-center gap-2">
@@ -183,12 +276,25 @@ export default function Nav() {
                             Get Zukvo
                             <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </a>
+                        <Link
+                            to="/contact-sales"
+                            data-testid="nav-contact-sales"
+                            aria-current={contactSalesActive ? "page" : undefined}
+                            className={`group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-medium transition-colors ${
+                                contactSalesActive
+                                    ? "bg-zukvo-500 text-white border border-zukvo-500 hover:bg-zukvo-600"
+                                    : "border border-zinc-300 bg-white/70 backdrop-blur text-zukvo-ink hover:border-zukvo-500/40 hover:bg-white"
+                            }`}
+                        >
+                            Contact Sales
+                            <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </Link>
                     </div>
 
                     <button
                         data-testid="nav-mobile-toggle"
                         onClick={() => setOpen((s) => !s)}
-                        className="md:hidden inline-flex items-center justify-center size-9 rounded-full border border-zinc-200 bg-white"
+                        className="md:hidden shrink-0 inline-flex items-center justify-center size-9 rounded-full border border-zinc-200 bg-white"
                         aria-label="Toggle menu"
                     >
                         {open ? <X className="size-4" /> : <Menu className="size-4" />}
@@ -203,7 +309,11 @@ export default function Nav() {
                         <Link
                             to="/products"
                             onClick={() => setOpen(false)}
-                            className="block px-3 py-2 text-sm font-medium text-zukvo-ink"
+                            className={`block px-3 py-2 text-sm font-medium rounded-md ${
+                                productsActive
+                                    ? "text-zukvo-600 bg-zukvo-500/10"
+                                    : "text-zukvo-ink"
+                            }`}
                         >
                             Products
                         </Link>
@@ -224,22 +334,50 @@ export default function Nav() {
                                 </Link>
                             ))}
                         </div>
-                        {LINKS.map((l) => (
-                            <a
-                                key={l.label}
-                                href={l.href}
-                                onClick={() => setOpen(false)}
-                                className="block px-3 py-2 text-sm text-zinc-700 hover:text-zukvo-600"
-                            >
-                                {l.label}
-                            </a>
-                        ))}
+                        {LINKS.map((l) => {
+                            const active = isLinkActive(l.href);
+                            const cls = `block px-3 py-2 text-sm rounded-md ${
+                                active
+                                    ? "text-zukvo-600 bg-zukvo-500/10 font-medium"
+                                    : "text-zinc-700 hover:text-zukvo-600"
+                            }`;
+                            return isPageRoute(l.href) ? (
+                                <Link
+                                    key={l.label}
+                                    to={l.href}
+                                    onClick={() => setOpen(false)}
+                                    className={cls}
+                                >
+                                    {l.label}
+                                </Link>
+                            ) : (
+                                <a
+                                    key={l.label}
+                                    href={l.href}
+                                    onClick={() => setOpen(false)}
+                                    className={cls}
+                                >
+                                    {l.label}
+                                </a>
+                            );
+                        })}
                         <a
                             href="/signup"
                             className="mt-2 block text-center rounded-full bg-zukvo-ink text-white px-4 py-2 text-sm font-medium"
                         >
                             Get Zukvo
                         </a>
+                        <Link
+                            to="/contact-sales"
+                            onClick={() => setOpen(false)}
+                            className={`mt-2 block text-center rounded-full px-4 py-2 text-sm font-medium ${
+                                contactSalesActive
+                                    ? "bg-zukvo-500 text-white border border-zukvo-500"
+                                    : "border border-zinc-300 bg-white text-zukvo-ink"
+                            }`}
+                        >
+                            Contact Sales
+                        </Link>
                     </div>
                 )}
             </div>

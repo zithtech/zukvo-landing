@@ -43,6 +43,7 @@ import {
 } from "lucide-react";
 import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
+import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 import clientPortalImg from "@/assets/client-portal.png";
 
@@ -79,6 +80,7 @@ export default function ClientPortal() {
             data-testid="portal-page"
             className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
         >
+            <SEO />
             <Nav />
             <Hero />
             <SubmoduleNav />
@@ -779,8 +781,8 @@ function TeamSection() {
             n: "Mithun Ravichandran",
             r: "Project Manager",
             disc: "PM",
-            e: "mithun.ravichandran@zithmi.com",
-            p: "9524715360",
+            e: "mithun.rav*********@zithmi.com",
+            p: "95247*****",
             proj: "Pathematic",
             note: "Project Manager - Gathering client requirement & Delivery",
             avail: "Available · Monday to Friday (11AM - 8PM)",
@@ -791,8 +793,8 @@ function TeamSection() {
             n: "Divya D",
             r: "Project Manager & Business Team",
             disc: "PM",
-            e: "divya.dhamodharan@zithmi.com",
-            p: "8072255742",
+            e: "divya.dha********@zithmi.com",
+            p: "80722*****",
             proj: "Pathematic",
             note: "Project Manager and Managing Business",
             avail: "Available · Mon–Fri (7PM - 10:30PM) & Sat–Sun (11AM - 6PM)",
@@ -805,8 +807,8 @@ function TeamSection() {
             n: "Priyadharshini",
             r: "Software Engineer",
             disc: "ENGINEERING",
-            e: "priyadharshini@zithmi.com",
-            p: "6382123757",
+            e: "priyadh*******@zithmi.com",
+            p: "63821*****",
             proj: "Pathematic",
             note: "Specialised in FullStack Development",
             avatar: "P",
