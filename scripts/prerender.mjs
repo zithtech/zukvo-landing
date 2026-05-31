@@ -12,7 +12,6 @@ import { fileURLToPath } from "node:url";
 import { dirname, join, resolve } from "node:path";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createServer } from "node:http";
-import puppeteer from "puppeteer";
 import { ROUTES } from "./routes.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -50,6 +49,34 @@ const MIME = {
   ".xml": "application/xml; charset=utf-8",
 };
 
+/**
+ * Launch a browser appropriate for the current environment.
+ *
+ * On Vercel (and other serverless/CI build images) the system is missing the
+ * shared libraries that Puppeteer's bundled Chrome needs (e.g. libnspr4.so), so
+ * we use @sparticuz/chromium, which ships a self-contained Chromium binary,
+ * driven through puppeteer-core. Locally we use full puppeteer with its own
+ * downloaded Chrome.
+ */
+async function launchBrowser() {
+  if (process.env.VERCEL || process.env.CI) {
+    const [{ default: chromium }, { default: puppeteerCore }] = await Promise.all([
+      import("@sparticuz/chromium"),
+      import("puppeteer-core"),
+    ]);
+    return puppeteerCore.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: true,
+    });
+  }
+  const { default: puppeteer } = await import("puppeteer");
+  return puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+}
+
 function serveStatic(req, res) {
   let urlPath = decodeURIComponent(req.url.split("?")[0]);
   if (urlPath.endsWith("/")) urlPath += "index.html";
@@ -80,10 +107,7 @@ async function main() {
   await new Promise((r) => server.listen(PORT, "127.0.0.1", r));
   console.log(`[prerender] serving ${BUILD_DIR} on ${HOST}`);
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  const browser = await launchBrowser();
 
   let ok = 0;
   let failed = [];
