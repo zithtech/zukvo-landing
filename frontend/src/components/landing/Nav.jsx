@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import ZukvoLogo from "@/components/ZukvoLogo";
+import mainLogo from "@/assets/mainLogo.png";
+import ZukvoWordmark from "@/components/ZukvoWordmark";
 import { PRODUCTS } from "@/data/products";
 
 const LINKS = [
@@ -62,8 +63,28 @@ export default function Nav() {
                             : "border-transparent bg-transparent px-3 pl-5 py-2"
                     }`}
                 >
-                    <Link to="/" className="shrink-0" data-testid="nav-logo-link">
-                        <ZukvoLogo variant="light" size={28} />
+                    <Link to="/" className="flex items-center gap-2.5 shrink-0" data-testid="nav-logo-link">
+                        <span className="zk-logo-runner inline-flex">
+                            <span className="zk-logo-wind" aria-hidden="true">
+                                <span className="zk-logo-wisp" style={{ "--zk-wisp-top": "22%", "--zk-wisp-width": "44px", "--zk-wisp-delay": "0.05s" }} />
+                                <span className="zk-logo-wisp" style={{ "--zk-wisp-top": "38%", "--zk-wisp-width": "78px", "--zk-wisp-delay": "0.35s" }} />
+                                <span className="zk-logo-wisp zk-logo-wisp--alt" style={{ "--zk-wisp-top": "52%", "--zk-wisp-width": "92px", "--zk-wisp-delay": "0.18s" }} />
+                                <span className="zk-logo-wisp" style={{ "--zk-wisp-top": "68%", "--zk-wisp-width": "60px", "--zk-wisp-delay": "0.48s" }} />
+                                <span className="zk-logo-wisp zk-logo-wisp--alt" style={{ "--zk-wisp-top": "84%", "--zk-wisp-width": "50px", "--zk-wisp-delay": "0.22s" }} />
+                            </span>
+                            <span className="zk-logo-stride inline-flex">
+                                <img
+                                    src={mainLogo}
+                                    alt="Zukvo"
+                                    width={36}
+                                    height={36}
+                                    style={{ width: 36, height: 36, objectFit: "contain" }}
+                                    className="inline-block select-none"
+                                    draggable="false"
+                                />
+                            </span>
+                        </span>
+                        <ZukvoWordmark size={22} variant="light" autoShowDelay={2650} autoShowDuration={2000} />
                     </Link>
 
                     <nav className="hidden md:flex items-center gap-1">

@@ -5,9 +5,10 @@ const PERSONAS = [
     {
         icon: User,
         kicker: "Solo freelancer",
+        plan: "Solo · Solo Pro",
         title: "Run a one-person agency.",
-        body: "Bid smarter, send proposals in minutes, ship work, get paid — without 7 disconnected apps.",
-        items: ["Zithport extension", "BidIQ + Zai proposals", "Invoices + time tracking"],
+        body: "Capture leads, score bids with BidIQ, send Zai proposals, deliver work, and invoice — all solo, no app-hopping.",
+        items: ["Zithport + Leads pipeline", "BidIQ + Zai proposals", "Invoices + Accounts"],
         accent: "from-amber-500/10 to-amber-500/0",
         ring: "ring-amber-400/20",
         testid: "audience-solo",
@@ -15,9 +16,10 @@ const PERSONAS = [
     {
         icon: Users,
         kicker: "Freelance team",
+        plan: "Team",
         title: "Coordinate without chaos.",
-        body: "Shared pipeline, sprint workspace, client docs, and roles. The full studio stack at solo prices.",
-        items: ["Sprints + buckets + bugs", "Document hub w/ ticket linking", "Daily updates"],
+        body: "Up to 15 members on a shared pipeline — squads, time tracking, daily updates, and roles & permissions.",
+        items: ["SQuads + roles & permissions", "Time tracking + daily updates", "Sprints + buckets + bugs"],
         accent: "from-zukvo-500/15 to-zukvo-500/0",
         ring: "ring-zukvo-500/30",
         featured: true,
@@ -26,9 +28,10 @@ const PERSONAS = [
     {
         icon: Building2,
         kicker: "Companies",
+        plan: "Growth · Scale",
         title: "Standardize how work flows.",
-        body: "RBAC, client management, audit trails, and a finance suite your accountant will thank you for.",
-        items: ["Granular RBAC", "Client + project mgmt", "Accounts & ledgers"],
+        body: "Scale to 200 members with performance reviews, escalation management, advanced workforce ops, and unlimited clients.",
+        items: ["Performance + escalation mgmt", "Advanced workforce ops", "Unlimited clients & leads"],
         accent: "from-emerald-500/10 to-emerald-500/0",
         ring: "ring-emerald-400/20",
         testid: "audience-company",
@@ -70,9 +73,17 @@ export default function Audiences() {
                                 className={`pointer-events-none absolute inset-0 bg-gradient-to-b ${p.accent}`}
                             />
                             <div className="relative">
-                                <span className="inline-flex size-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-white">
-                                    <p.icon className="size-5" />
-                                </span>
+                                <div className="flex items-center justify-between">
+                                    <span className="inline-flex size-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-white">
+                                        <p.icon className="size-5" />
+                                    </span>
+                                    <a
+                                        href="#pricing"
+                                        className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-400 hover:text-white hover:border-white/20 transition-colors"
+                                    >
+                                        {p.plan}
+                                    </a>
+                                </div>
                                 <div className="mt-5 text-[11px] uppercase tracking-[0.22em] text-zukvo-300">
                                     {p.kicker}
                                 </div>

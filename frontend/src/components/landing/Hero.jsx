@@ -92,6 +92,11 @@ const FLOWS = {
                 sub: "Closed",
             },
         ],
+        closer: {
+            kicker: "All in one flow",
+            title: "Miss nothing. Win more work.",
+            body: "Run every job end-to-end in Zukvo — capture to cash, zero tabs, zero leaks.",
+        },
     },
     company: {
         id: "company",
@@ -163,6 +168,11 @@ const FLOWS = {
                 sub: "Invoice + Accounts",
             },
         ],
+        closer: {
+            kicker: "One system of record",
+            title: "Nothing slips. Clients win.",
+            body: "Scale delivery on one centralized workspace — intake to accounts, fully tracked.",
+        },
     },
 };
 const ACCENT_MAP = {
@@ -317,7 +327,9 @@ export default function Hero() {
                     <span className="hidden sm:inline">·</span>
                     <span>Built for solo, teams & companies</span>
                     <span className="hidden sm:inline">·</span>
-                    <span>RBAC ready</span>
+                    <span className="inline-flex items-center gap-2">
+                        <Sparkles className="size-3.5 text-zukvo-500" /> Powered by Zai (AI)
+                    </span>
                 </div>
 
                 {/* Animated workflow pipeline */}
@@ -415,6 +427,34 @@ export default function Hero() {
                                     />
                                 );
                             })}
+
+                            {/* Confidence closer — fills the open 8th slot */}
+                            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-zukvo-500/30 bg-gradient-to-br from-zukvo-500/[0.18] via-violet-600/[0.10] to-transparent p-4">
+                                <div
+                                    aria-hidden
+                                    className="pointer-events-none absolute -top-10 -right-10 size-32 rounded-full bg-zukvo-500/25 blur-2xl"
+                                />
+                                <div className="relative">
+                                    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white">
+                                        <Sparkles className="size-3 text-zukvo-400" />
+                                        {flow.closer.kicker}
+                                    </span>
+                                    <div className="mt-3 font-heading text-[17px] font-medium leading-tight text-white">
+                                        {flow.closer.title}
+                                    </div>
+                                    <div className="mt-1.5 text-[12px] leading-snug text-zinc-300">
+                                        {flow.closer.body}
+                                    </div>
+                                </div>
+                                <a
+                                    href="/signup"
+                                    data-testid="hero-pipeline-closer-cta"
+                                    className="group relative mt-3 inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-zukvo-400 transition-colors hover:text-white"
+                                >
+                                    Start free
+                                    <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                                </a>
+                            </div>
                         </div>
 
                         {/* Footer caption */}

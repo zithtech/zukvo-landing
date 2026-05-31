@@ -22,39 +22,99 @@ import ZukvoLogo from "@/components/ZukvoLogo";
 const TIERS = {
     solo: {
         id: "solo",
-        name: "Solo Freelancer",
+        name: "Solo",
         kicker: "For independents",
-        priceMonthly: 12,
-        priceYearly: 9,
-        unit: "",
+        priceINR: 499,
+        priceUSD: 9,
         features: [
-            "Zithport extension",
-            "BidIQ AI · 50 verdicts / mo",
-            "Zai proposals · 30 / mo",
-            "Up to 3 active clients",
-            "Invoices + time tracking",
-            "Document Hub · 5GB",
+            "1 Member",
+            "Ticket Management (Tickets, Sprints, Buckets)",
+            "Project Management",
+            "Document Hub (5GB)",
+            "ZithPort Extension",
+            "Leads Management (Up to 30 Leads)",
+            "Proposals",
+            "Client Management (Up to 10 Clients)",
+            "Calendar & Mail Integration",
+            "Dashboard Access",
         ],
         trial: "Start free — no card required",
+    },
+    "solo-pro": {
+        id: "solo-pro",
+        name: "Solo Pro",
+        kicker: "For power solos",
+        priceINR: 1499,
+        priceUSD: 24,
+        featured: true,
+        features: [
+            "Everything in Solo +",
+            "BugList",
+            "Document Hub (15GB)",
+            "BidiQ AI",
+            "Leads Management (Up to 100 Leads)",
+            "Client Management (Up to 30 Clients)",
+            "Advanced Client Portal (30 Portal Access)",
+            "Invoice Management",
+            "Accounts Management",
+        ],
+        trial: "14-day free trial — no card required",
     },
     team: {
         id: "team",
         name: "Team",
-        kicker: "For freelance studios",
-        priceMonthly: 29,
-        priceYearly: 24,
-        unit: "/ user",
-        featured: true,
+        kicker: "For growing teams",
+        priceINR: 4999,
+        priceUSD: 79,
         features: [
-            "Everything in Solo",
-            "Unlimited clients & projects",
-            "Sprints, Buckets, Bug list",
-            "RBAC for up to 25 users",
-            "Daily updates + standups",
-            "Document Hub · 100GB",
-            "BidIQ · unlimited",
+            "Everything in Solo Pro +",
+            "Up to 15 Members",
+            "SQuads",
+            "Time Tracking (My & Team)",
+            "Daily Updates",
+            "Ticket Reports & Advanced Sprint Reports",
+            "Roles & Permissions",
+            "Members Management",
+            "Leads Management (Up to 150 Leads)",
+            "Document Hub (25GB)",
         ],
         trial: "14-day free trial — no card required",
+    },
+    growth: {
+        id: "growth",
+        name: "Growth",
+        kicker: "For scaling orgs",
+        priceINR: 9999,
+        priceUSD: 149,
+        features: [
+            "Everything in Team +",
+            "Up to 30 Members",
+            "Performance Management",
+            "Escalation Management",
+            "Advanced Workforce Operations",
+            "Document Hub (50GB)",
+        ],
+        trial: "14-day free trial — no card required",
+    },
+    scale: {
+        id: "scale",
+        name: "Scale",
+        kicker: "For enterprises",
+        priceINR: null,
+        priceUSD: null,
+        custom: true,
+        features: [
+            "Everything in Growth +",
+            "Up to 200 Members",
+            "Unlimited Clients",
+            "Unlimited Leads",
+            "Document Hub (100GB)",
+            "Priority Support",
+            "Dedicated Onboarding",
+            "Custom Workspace Setup",
+            "Enterprise Support",
+        ],
+        trial: "Contact sales for a tailored plan",
     },
 };
 
@@ -130,6 +190,7 @@ function useSignupContext() {
             sets: (p.get("sets") || "").split(",").filter(Boolean),
             ai: (p.get("ai") || "").split(",").filter(Boolean),
             billing: p.get("billing") === "monthly" ? "monthly" : "yearly",
+            currency: p.get("currency") === "INR" ? "INR" : "USD",
         };
     }, [search]);
 }
@@ -196,7 +257,7 @@ function MinimalNav() {
 
 function PlanSummary({ ctx }) {
     if (ctx.tier && TIERS[ctx.tier]) {
-        return <TierSummary tier={TIERS[ctx.tier]} billing={ctx.billing} />;
+        return <TierSummary tier={TIERS[ctx.tier]} currency={ctx.currency} />;
     }
     if (ctx.sets && ctx.sets.length > 0) {
         return <ModulesSummary selected={ctx.sets} ai={ctx.ai} billing={ctx.billing} />;
@@ -213,8 +274,14 @@ function PriceUnit({ billing }) {
     );
 }
 
-function TierSummary({ tier, billing }) {
-    const price = billing === "yearly" ? tier.priceYearly : tier.priceMonthly;
+function TierSummary({ tier, currency }) {
+    const isINR = currency === "INR";
+    const symbol = isINR ? "₹" : "$";
+    const price = isINR ? tier.priceINR : tier.priceUSD;
+    const formatted =
+        price !== null && price !== undefined
+            ? price.toLocaleString(isINR ? "en-IN" : "en-US")
+            : null;
     return (
         <div
             data-testid="signup-summary-tier"
@@ -238,27 +305,24 @@ function TierSummary({ tier, billing }) {
             </div>
 
             <div className="mt-6 flex items-end gap-2">
-                <span className="font-heading text-5xl font-medium tracking-tighter text-zukvo-ink">
-                    ${price}
-                </span>
-                <div className="pb-2">
-                    <div className="text-[12px] text-zinc-500">
-                        {tier.unit && (
-                            <span className="text-zukvo-ink font-medium">
-                                {tier.unit}{" "}
-                            </span>
-                        )}
-                        / month
-                    </div>
-                    <div className="text-[11px] text-zinc-400">
-                        Billed {billing}
-                        {billing === "yearly" && (
-                            <span className="ml-1.5 inline-flex items-center rounded-full bg-emerald-500/10 text-emerald-700 border border-emerald-500/30 px-1.5 py-0.5 text-[9.5px] font-bold uppercase tracking-[0.18em]">
-                                -25%
-                            </span>
-                        )}
-                    </div>
-                </div>
+                {tier.custom ? (
+                    <span className="font-heading text-5xl font-medium tracking-tighter text-zukvo-ink">
+                        Custom
+                    </span>
+                ) : (
+                    <>
+                        <span className="font-heading text-5xl font-medium tracking-tighter text-zukvo-ink">
+                            {symbol}
+                            {formatted}
+                        </span>
+                        <div className="pb-2">
+                            <div className="text-[12px] text-zinc-500">/ month</div>
+                            <div className="text-[11px] text-zinc-400">
+                                Billed monthly · {isINR ? "India" : "Global"}
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
 
             <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 text-[12px] text-emerald-700 font-medium">

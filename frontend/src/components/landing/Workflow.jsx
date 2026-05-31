@@ -1,8 +1,8 @@
 import React from "react";
-import {
-    FolderTree, FileLock2, Link2, Trash2, Receipt, Calculator,
-    Timer, Megaphone, KanbanSquare, ListChecks,
-} from "lucide-react";
+import { FolderTree, FileLock2, Link2, Trash2 } from "lucide-react";
+
+import docHubMainImg from "@/assets/docHubmain.png";
+import docTicketsImg from "@/assets/docTicketsattach.png";
 
 const ROWS = [
     {
@@ -17,32 +17,6 @@ const ROWS = [
         ],
         align: "left",
         mock: <DocMock />,
-    },
-    {
-        eyebrow: "Finance Suite",
-        title: "Invoices, accounts, time — handled.",
-        body: "Run the money side of your business without spreadsheets. Generate invoices from tracked time, reconcile accounts, and ship reports clients love.",
-        bullets: [
-            { icon: Receipt, text: "Polished invoices" },
-            { icon: Calculator, text: "Accounts & ledgers" },
-            { icon: Timer, text: "Time tracking" },
-            { icon: ListChecks, text: "Daily updates" },
-        ],
-        align: "right",
-        mock: <FinanceMock />,
-    },
-    {
-        eyebrow: "Project Management · RBAC",
-        title: "Built for solo, shaped for teams.",
-        body: "Granular roles, client portals, sprints with backlog grooming, kanban buckets, and a bug list module that actually gets bugs closed.",
-        bullets: [
-            { icon: KanbanSquare, text: "Sprints + Buckets" },
-            { icon: Megaphone, text: "Daily standups" },
-            { icon: ListChecks, text: "Bug list module" },
-            { icon: FileLock2, text: "RBAC — fine-grained" },
-        ],
-        align: "left",
-        mock: <PMMock />,
     },
 ];
 
@@ -94,158 +68,46 @@ export default function Workflow() {
     );
 }
 
-function CardShell({ children }) {
-    return (
-        <div className="relative rounded-2xl border border-white/10 bg-[#101014] p-5 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
-            {children}
-        </div>
-    );
-}
-
 function DocMock() {
-    const docs = [
-        { name: "Northwind — SOW Q2.pdf", tag: "Client", date: "Apr 12" },
-        { name: "Sprint Cycle 3 — Scope brief", tag: "Internal", date: "Apr 10" },
-        { name: "Brand voice guide v2", tag: "Public", date: "Apr 08" },
-        { name: "API design — auth flow", tag: "Linked · TKT-002-0731", date: "Apr 06" },
-        { name: "Loom recap — onboarding call", tag: "Private", date: "Apr 03" },
-    ];
     return (
-        <CardShell>
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-zinc-500">
-                    <FolderTree className="size-3.5 text-zukvo-400" /> Document Hub
-                </div>
-                <div className="text-[11px] text-zinc-500 font-mono">5 / 124</div>
-            </div>
-            <div className="mt-4 divide-y divide-white/5 rounded-xl border border-white/10 overflow-hidden">
-                {docs.map((d, i) => (
-                    <div
-                        key={i}
-                        className="flex items-center justify-between px-4 py-3 hover:bg-white/[0.03] transition-colors"
-                    >
-                        <div className="flex items-center gap-3 min-w-0">
-                            <span className="inline-flex size-7 items-center justify-center rounded-md bg-zukvo-500/10 text-zukvo-300 border border-zukvo-500/20 shrink-0">
-                                <FileLock2 className="size-3.5" />
-                            </span>
-                            <span className="text-[13px] text-zinc-200 truncate">{d.name}</span>
-                        </div>
-                        <div className="flex items-center gap-3 shrink-0">
-                            <span className="text-[10px] uppercase tracking-[0.2em] text-zukvo-300/80 border border-zukvo-500/20 rounded-full px-2 py-0.5">
-                                {d.tag}
-                            </span>
-                            <span className="text-[11px] text-zinc-500 font-mono">{d.date}</span>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </CardShell>
-    );
-}
+        <div className="relative pb-10 pr-4 md:pb-12 md:pr-6">
+            {/* Ambient glow */}
+            <div
+                aria-hidden
+                className="pointer-events-none absolute -top-12 left-1/4 size-72 rounded-full bg-zukvo-500/15 blur-[90px]"
+            />
+            <div
+                aria-hidden
+                className="pointer-events-none absolute bottom-0 right-1/4 size-56 rounded-full bg-violet-500/12 blur-[80px]"
+            />
 
-function FinanceMock() {
-    return (
-        <CardShell>
-            <div className="grid grid-cols-3 gap-3">
-                <Stat label="Outstanding" value="$12,480" tone="amber" />
-                <Stat label="Paid · 30d" value="$31,200" tone="emerald" />
-                <Stat label="Tracked" value="142h" tone="indigo" />
+            {/* Main image — full */}
+            <div className="relative overflow-hidden rounded-2xl ring-1 ring-white/[0.12] shadow-[0_40px_90px_-24px_rgba(0,0,0,0.7),0_8px_30px_-12px_rgba(99,102,241,0.3)]">
+                <img
+                    src={docHubMainImg}
+                    alt="Zukvo Document Hub"
+                    className="block w-full h-auto"
+                />
+                <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                />
             </div>
-            <div className="mt-5 rounded-xl border border-white/10 overflow-hidden">
-                <div className="grid grid-cols-12 px-4 py-2 text-[10px] uppercase tracking-[0.2em] text-zinc-500 bg-white/[0.02]">
-                    <div className="col-span-5">Invoice</div>
-                    <div className="col-span-3">Client</div>
-                    <div className="col-span-2">Status</div>
-                    <div className="col-span-2 text-right">Amount</div>
-                </div>
-                {[
-                    ["INV-0241", "Northwind", "Paid", "$4,200", "emerald"],
-                    ["INV-0240", "Pixelhaus", "Sent", "$2,800", "indigo"],
-                    ["INV-0239", "Helix Labs", "Overdue", "$5,480", "rose"],
-                    ["INV-0238", "Loop & Co", "Draft", "$1,950", "zinc"],
-                ].map((r, i) => (
-                    <div
-                        key={i}
-                        className="grid grid-cols-12 px-4 py-3 text-[13px] border-t border-white/5 items-center"
-                    >
-                        <div className="col-span-5 font-mono text-zinc-300">{r[0]}</div>
-                        <div className="col-span-3 text-zinc-400">{r[1]}</div>
-                        <div className="col-span-2">
-                            <span
-                                className={`text-[10px] uppercase tracking-[0.2em] rounded-full px-2 py-0.5 border ${
-                                    {
-                                        emerald: "text-emerald-300 border-emerald-400/30 bg-emerald-500/10",
-                                        indigo: "text-zukvo-300 border-zukvo-500/30 bg-zukvo-500/10",
-                                        rose: "text-rose-300 border-rose-400/30 bg-rose-500/10",
-                                        zinc: "text-zinc-400 border-white/10 bg-white/5",
-                                    }[r[4]]
-                                }`}
-                            >
-                                {r[2]}
-                            </span>
-                        </div>
-                        <div className="col-span-2 text-right text-white font-medium">{r[3]}</div>
-                    </div>
-                ))}
-            </div>
-        </CardShell>
-    );
-}
 
-function Stat({ label, value, tone = "indigo" }) {
-    const tones = {
-        indigo: "text-zukvo-300",
-        emerald: "text-emerald-300",
-        amber: "text-amber-300",
-    };
-    return (
-        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
-            <div className="text-[10px] uppercase tracking-[0.22em] text-zinc-500">{label}</div>
-            <div className={`mt-1 font-heading text-2xl font-medium ${tones[tone]}`}>
-                {value}
+            {/* Overlapping image — bottom-right, lifted above */}
+            <div className="absolute -bottom-2 -right-2 md:-bottom-3 md:-right-3 w-[56%] overflow-hidden rounded-xl ring-1 ring-white/[0.16] shadow-[0_36px_70px_-16px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.04)_inset]">
+                <img
+                    src={docTicketsImg}
+                    alt="Document linked to tickets"
+                    className="block w-full h-auto"
+                />
+                {/* Floating link badge */}
+                <span className="absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-zukvo-ink/85 backdrop-blur px-2 py-1 text-white shadow-lg ring-1 ring-white/10">
+                    <Link2 className="size-3 text-zukvo-300" />
+                    <span className="text-[9.5px] font-semibold tracking-tight">Linked to ticket</span>
+                </span>
             </div>
         </div>
     );
 }
 
-function PMMock() {
-    const cols = [
-        { title: "Backlog", count: 12, items: ["Auth refactor", "Editor toolbar", "Empty states"] },
-        { title: "In progress", count: 5, items: ["BidIQ scoring v2", "Doc share links"] },
-        { title: "Review", count: 3, items: ["RBAC matrix", "Client portal nav"] },
-        { title: "Done", count: 28, items: ["Sprint complete modal", "Time tracker chip"] },
-    ];
-    return (
-        <CardShell>
-            <div className="flex items-center justify-between mb-4">
-                <div className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">
-                    Sprint · Cycle 3
-                </div>
-                <div className="text-[11px] text-zinc-500">5 days left</div>
-            </div>
-            <div className="grid grid-cols-4 gap-3">
-                {cols.map((c, i) => (
-                    <div
-                        key={i}
-                        className="rounded-xl border border-white/10 bg-white/[0.02] p-3"
-                    >
-                        <div className="flex items-center justify-between text-[11px]">
-                            <span className="text-zinc-300 font-medium">{c.title}</span>
-                            <span className="text-zinc-500">{c.count}</span>
-                        </div>
-                        <div className="mt-3 space-y-2">
-                            {c.items.map((it, j) => (
-                                <div
-                                    key={j}
-                                    className="rounded-md border border-white/10 bg-[#0E0E10] px-2.5 py-2 text-[12px] text-zinc-300"
-                                >
-                                    {it}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </CardShell>
-    );
-}
