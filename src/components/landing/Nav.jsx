@@ -45,7 +45,7 @@ export default function Nav() {
     const [productsOpen, setProductsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(() => {
         if (typeof window === "undefined") return false;
-        return window.matchMedia("(max-width: 767px)").matches;
+        return window.matchMedia("(max-width: 1023px)").matches;
     });
     const [playIntro] = useState(() => {
         if (typeof window === "undefined") return false;
@@ -58,7 +58,7 @@ export default function Nav() {
     const location = useLocation();
 
     useEffect(() => {
-        const mq = window.matchMedia("(max-width: 767px)");
+        const mq = window.matchMedia("(max-width: 1023px)");
         const onChange = (e) => setIsMobile(e.matches);
         mq.addEventListener("change", onChange);
         return () => mq.removeEventListener("change", onChange);
@@ -125,11 +125,11 @@ export default function Nav() {
                                 <img
                                     src={logoSrc}
                                     alt="Zukvo"
-                                    width={isMobile ? 26 : 36}
-                                    height={isMobile ? 26 : 36}
+                                    width={isMobile ? 32 : 36}
+                                    height={isMobile ? 32 : 36}
                                     style={{
-                                        width: isMobile ? 26 : 36,
-                                        height: isMobile ? 26 : 36,
+                                        width: isMobile ? 32 : 36,
+                                        height: isMobile ? 32 : 36,
                                         objectFit: "contain",
                                     }}
                                     className="inline-block select-none"
@@ -138,14 +138,14 @@ export default function Nav() {
                             </span>
                         </span>
                         <ZukvoWordmark
-                            size={isMobile ? 13 : 22}
+                            size={isMobile ? 17 : 22}
                             variant={onDarkBg ? "dark" : "light"}
                             autoShowDelay={playIntro ? 2650 : 0}
                             autoShowDuration={2000}
                         />
                     </Link>
 
-                    <nav className="hidden md:flex items-center gap-1">
+                    <nav className="hidden lg:flex items-center gap-1">
                         {/* Products mega dropdown */}
                         <div
                             className="relative"
@@ -260,7 +260,7 @@ export default function Nav() {
                         })}
                     </nav>
 
-                    <div className="hidden md:flex items-center gap-2">
+                    <div className="hidden lg:flex items-center gap-2">
                         <a
                             href="#login"
                             data-testid="nav-signin-link"
@@ -294,7 +294,7 @@ export default function Nav() {
                     <button
                         data-testid="nav-mobile-toggle"
                         onClick={() => setOpen((s) => !s)}
-                        className="md:hidden shrink-0 inline-flex items-center justify-center size-9 rounded-full border border-zinc-200 bg-white"
+                        className="lg:hidden shrink-0 inline-flex items-center justify-center size-9 rounded-full border border-zinc-200 bg-white"
                         aria-label="Toggle menu"
                     >
                         {open ? <X className="size-4" /> : <Menu className="size-4" />}
@@ -304,7 +304,7 @@ export default function Nav() {
                 {open && (
                     <div
                         data-testid="nav-mobile-panel"
-                        className="md:hidden mt-2 rounded-2xl bg-white border border-zinc-200 p-3 shadow-lg max-h-[80vh] overflow-y-auto"
+                        className="lg:hidden mt-2 rounded-2xl bg-white border border-zinc-200 p-3 shadow-lg max-h-[80vh] overflow-y-auto"
                     >
                         <Link
                             to="/products"
