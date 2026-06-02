@@ -88,7 +88,7 @@ export default function MailCalendar() {
     return (
         <main
             data-testid="mc-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -194,7 +194,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -328,7 +328,7 @@ function Integrations() {
                 </div> */}
 
                 <div className="zk-reveal mt-8">
-                    <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-2">
+                    <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-2">
                         {MAIL_CAL_SCREENSHOTS.map((s, idx) => (
                             <button
                                 key={idx}
@@ -397,17 +397,17 @@ function IntegrationCard({ logo, name, desc, state, accounts }) {
 function MailSection() {
     const threads = [
         {
-            from: "subhalakshmi.vinayagam@zithmi.com",
+            from: "subhalakshmi.vin*********@zithmi.com",
             subj: "Verify your Invoice Mail Setting",
-            preview: "Verify Your Invoice Mail Hi, You have selected subhalakshmi.vinayagam@zithmi.com as your default invoice sender on Zithspace. Pleas…",
+            preview: "Verify Your Invoice Mail Hi, You have selected subhalakshmi.vin*********@zithmi.com as your default invoice sender on Zithspace. Pleas…",
             date: "May 22",
             a: "SV",
             tone: "indigo",
         },
         {
-            from: "subhalakshmi.vinayagam@zithmi.com",
+            from: "subhalakshmi.vin*********@zithmi.com",
             subj: "Verify your Invoice Mail Setting",
-            preview: "Verify Your Invoice Mail Hi, You have selected subhalakshmi.vinayagam@zithmi.com as your default invoice sender on Zithspace. Pleas…",
+            preview: "Verify Your Invoice Mail Hi, You have selected subhalakshmi.vin*********@zithmi.com as your default invoice sender on Zithspace. Pleas…",
             date: "May 21",
             a: "SV",
             tone: "indigo",
@@ -424,7 +424,7 @@ function MailSection() {
         {
             from: "noreply@sender.zohocalendar.in",
             subj: "Invitation: Bug List Review - 15 May 2026 @ Fri May 15, 2026 03:30 pm - 04:30 pm (Asia/Kolkata)",
-            preview: "— mithun.ravichandran@zithmi.com invites you to be a part of Bug Lis…",
+            preview: "— mithun.rav*********@zithmi.com invites you to be a part of Bug Lis…",
             date: "May 15",
             a: "NO",
             tone: "violet",
@@ -433,7 +433,7 @@ function MailSection() {
         {
             from: "noreply@sender.zohocalendar.in",
             subj: "Invitation: Stand-UP-15 May @ Fri May 15, 2026 11:30 am - 12:30 pm (Asia/Kolkata)",
-            preview: "— mithun.ravichandran@zithmi.com invites you to be a part of Stand-Up-15 May St…",
+            preview: "— mithun.rav*********@zithmi.com invites you to be a part of Stand-Up-15 May St…",
             date: "May 15",
             a: "NO",
             tone: "violet",
@@ -441,18 +441,18 @@ function MailSection() {
             attach: true,
         },
         {
-            from: "bharathi.murugan@zithmi.com",
+            from: "bharathi.mur*********@zithmi.com",
             subj: "zithtech",
-            preview: "— Bharathi bharathi.murugan@zithmi.com bharathi2004m@gmail.com 9361050733 Zithtech",
+            preview: "— Bharathi bharathi.mur*********@zithmi.com bharathi20*********@gmail.com 93610***** Zithtech",
             date: "May 11",
             a: "BM",
             tone: "violet",
             unread: true,
         },
         {
-            from: "subhalakshmi.vinayagam@zithmi.com",
+            from: "subhalakshmi.vin*********@zithmi.com",
             subj: "Verify your Invoice Mail Setting",
-            preview: "Verify Your Invoice Mail Hi, You have selected subhalakshmi.vinayagam@zithmi.com as your default invoice sender on Zithspace. Pleas…",
+            preview: "Verify Your Invoice Mail Hi, You have selected subhalakshmi.vin*********@zithmi.com as your default invoice sender on Zithspace. Pleas…",
             date: "May 11",
             a: "SV",
             tone: "indigo",
@@ -505,9 +505,9 @@ function MailSection() {
 
                     <div className="lg:col-span-7">
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
-                            <div className="grid grid-cols-12">
+                            <div className="grid grid-cols-1 md:grid-cols-12">
                                 {/* Folder sidebar */}
-                                <div className="col-span-4 border-r border-white/5 p-4 space-y-3">
+                                <div className="col-span-1 md:col-span-4 border-b md:border-b-0 md:border-r border-white/5 p-4 space-y-3">
                                     <div className="flex items-center gap-2">
                                         <span className="inline-flex size-8 items-center justify-center rounded-md bg-violet-500/15 text-violet-200 border border-violet-400/30">
                                             <Mail className="size-4" />
@@ -517,7 +517,7 @@ function MailSection() {
                                                 Mail
                                             </div>
                                             <div className="text-[10.5px] text-zinc-500">
-                                                subhalakshmi.vinayagam@zithmi.com
+                                                subhalakshmi.vin*********@zithmi.com
                                             </div>
                                         </div>
                                     </div>
@@ -559,7 +559,7 @@ function MailSection() {
                                 </div>
 
                                 {/* Thread list */}
-                                <div className="col-span-8">
+                                <div className="col-span-1 md:col-span-8">
                                     <div className="px-4 py-3 border-b border-white/5 flex items-center gap-2 text-[12px] text-zinc-400">
                                         <Search className="size-3.5" />
                                         <span className="text-zinc-500 flex-1">
@@ -577,7 +577,7 @@ function MailSection() {
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="px-4 py-2 border-b border-white/5 flex items-center gap-2 text-[11px]">
+                                    <div className="px-4 py-2 border-b border-white/5 flex items-center flex-wrap gap-2 text-[11px]">
                                         {["All", "Unread", "Read", "Has Attachment", "No Attachment"].map(
                                             (t, i) => (
                                                 <span
@@ -695,7 +695,7 @@ function CalendarSection() {
                                         <BadgeCheck className="size-2.5" /> Zoho Calendar
                                     </span>
                                 </div>
-                                <div className="flex items-center gap-2 text-[11.5px]">
+                                <div className="flex items-center flex-wrap gap-2 text-[11.5px]">
                                     <button className="inline-flex items-center rounded-md border border-white/10 bg-white/[0.02] text-zinc-300 px-2.5 py-1">
                                         Today
                                     </button>
@@ -729,9 +729,9 @@ function CalendarSection() {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-12">
+                            <div className="grid grid-cols-1 md:grid-cols-12">
                                 {/* Mini sidebar */}
-                                <div className="col-span-5 lg:col-span-4 border-r border-white/5 p-4">
+                                <div className="col-span-1 md:col-span-5 lg:col-span-4 border-b md:border-b-0 md:border-r border-white/5 p-4">
                                     {/* Mini month */}
                                     <div className="rounded-lg border border-white/10 bg-white/[0.02] p-3">
                                         <div className="flex items-center justify-between mb-2 text-[12px]">
@@ -804,7 +804,7 @@ function CalendarSection() {
                                 </div>
 
                                 {/* Month grid */}
-                                <div className="col-span-7 lg:col-span-8 p-3">
+                                <div className="col-span-1 md:col-span-7 lg:col-span-8 p-3">
                                     <div className="grid grid-cols-7 text-[9.5px] uppercase tracking-[0.22em] text-zinc-500 border-b border-white/5 pb-2 mb-1">
                                         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
                                             (d, i) => (
@@ -896,7 +896,7 @@ function TwoWaySync() {
                                     Customer Onboarding
                                 </div>
                                 <div className="text-[11px] text-zinc-500 truncate">
-                                    ithyazeasha@gmail.com · May 24
+                                    sebastianeasha@gmail.com · May 24
                                 </div>
                             </div>
                             <div className="col-span-2 text-center text-zinc-500">
@@ -911,7 +911,7 @@ function TwoWaySync() {
                                     Customer Onboarding · Phase 1
                                 </div>
                                 <div className="text-[11px] text-zinc-500 truncate">
-                                    Assigned · ithyaz · Onboarding sprint
+                                    Assigned · Sebastian · Onboarding sprint
                                 </div>
                             </div>
                         </div>

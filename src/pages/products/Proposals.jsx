@@ -86,7 +86,7 @@ export default function Proposals() {
     return (
         <main
             data-testid="proposals-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -193,7 +193,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -218,7 +218,7 @@ function SubmoduleNav() {
 
 function Dashboard() {
     const rows = [
-        ["On-Demand Driver Booking App Development", "Operations Director", "OD", "May 7, 2026", "May 7 · 1:13 PM", "ithyaz", "indigo"],
+        ["On-Demand Driver Booking App Development", "Rahul Sharma", "RS", "May 7, 2026", "May 7 · 1:13 PM", "Sebastian", "indigo"],
         ["Taxax", "Divya", "D", "May 5, 2026", "May 6 · 8:33 PM", "Divya D", "violet"],
         ["Professional Website Development and Integrated Payment Systems", "Alex Rivera", "AR", "May 3, 2026", "May 3 · 2:44 PM", "Divya D", "amber"],
     ];
@@ -305,47 +305,51 @@ function Dashboard() {
                             <span className="hidden sm:inline text-zinc-500">3 results</span>
                         </div>
                     </div>
-                    <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
-                        <div className="col-span-5">Proposal</div>
-                        <div className="col-span-2">Client</div>
-                        <div className="col-span-1">Status</div>
-                        <div className="col-span-1">Created by</div>
-                        <div className="col-span-2">Last updated</div>
-                        <div className="col-span-1 text-right">Mail</div>
-                    </div>
-                    {rows.map((r, i) => (
-                        <div
-                            key={i}
-                            className="grid grid-cols-12 items-center px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
-                        >
-                            <div className="col-span-5 flex items-center gap-3 min-w-0">
-                                <span className="inline-flex size-8 items-center justify-center rounded-lg bg-zukvo-500/10 text-zukvo-300 border border-zukvo-500/20 shrink-0">
-                                    <FileSignature className="size-4" />
-                                </span>
-                                <span className="text-[13px] text-zinc-100 truncate">{r[0]}</span>
+                    <div className="overflow-x-auto w-full no-scrollbar">
+                        <div className="min-w-[950px]">
+                            <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
+                                <div className="col-span-4">Proposal</div>
+                                <div className="col-span-2">Client</div>
+                                <div className="col-span-2">Status</div>
+                                <div className="col-span-2">Created by</div>
+                                <div className="col-span-1">Last updated</div>
+                                <div className="col-span-1 text-right">Mail</div>
                             </div>
-                            <div className="col-span-2 flex items-center gap-2 min-w-0">
-                                <span
-                                    className={`inline-flex size-6 items-center justify-center rounded-full border text-[10px] font-bold ${avatarTone[r[6]]}`}
+                            {rows.map((r, i) => (
+                                <div
+                                    key={i}
+                                    className="grid grid-cols-12 items-center px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
                                 >
-                                    {r[2]}
-                                </span>
-                                <span className="text-[12.5px] text-zinc-300 truncate">{r[1]}</span>
-                            </div>
-                            <div className="col-span-1">
-                                <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] rounded-full border border-amber-400/30 bg-amber-500/10 text-amber-300 px-2 py-0.5">
-                                    <span className="size-1.5 rounded-full bg-amber-400" /> Draft
-                                </span>
-                            </div>
-                            <div className="col-span-1 text-[12px] text-zinc-400 truncate">{r[5]}</div>
-                            <div className="col-span-2 text-[11.5px] text-zinc-500">{r[4]}</div>
-                            <div className="col-span-1 text-right">
-                                <span className="inline-flex items-center gap-1 text-[11.5px] text-zukvo-300 hover:text-zukvo-200">
-                                    <Mail className="size-3.5" /> Send
-                                </span>
-                            </div>
+                                    <div className="col-span-4 flex items-center gap-3 min-w-0">
+                                        <span className="inline-flex size-8 items-center justify-center rounded-lg bg-zukvo-500/10 text-zukvo-300 border border-zukvo-500/20 shrink-0">
+                                            <FileSignature className="size-4" />
+                                        </span>
+                                        <span className="text-[13px] text-zinc-100 whitespace-normal leading-snug">{r[0]}</span>
+                                    </div>
+                                    <div className="col-span-2 flex items-center gap-2 min-w-0">
+                                        <span
+                                            className={`inline-flex size-6 shrink-0 items-center justify-center rounded-full border text-[10px] font-bold ${avatarTone[r[6]]}`}
+                                        >
+                                            {r[2]}
+                                        </span>
+                                        <span className="text-[12.5px] text-zinc-300 truncate">{r[1]}</span>
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] rounded-full border border-amber-400/30 bg-amber-500/10 text-amber-300 px-2 py-0.5">
+                                            <span className="size-1.5 rounded-full bg-amber-400" /> Draft
+                                        </span>
+                                    </div>
+                                    <div className="col-span-2 text-[12px] text-zinc-400 truncate">{r[5]}</div>
+                                    <div className="col-span-1 text-[11.5px] text-zinc-500 truncate">{r[4]}</div>
+                                    <div className="col-span-1 text-right">
+                                        <span className="inline-flex items-center gap-1 text-[11.5px] text-zukvo-300 hover:text-zukvo-200">
+                                            <Mail className="size-3.5" /> Send
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </div>
             </div>
         </section>
@@ -388,6 +392,11 @@ function Kpi({ icon: Icon, kicker, value, sub, tone = "indigo" }) {
 /* ---------------- BUILDER ---------------- */
 
 function Builder() {
+    const [sectionHeading, setSectionHeading] = useState("Project Background");
+    const [mainContent, setMainContent] = useState(
+        "We propose developing a custom, state-of-the-art on-demand driver booking mobile application designed to streamline user bookings, provide real-time GPS tracking, and handle secure automated payments. The platform will include dedicated iOS and Android apps for riders and drivers, along with a comprehensive web-based admin control panel for operations management."
+    );
+
     const sections = [
         { n: "01", label: "Cover" },
         { n: "02", label: "Summary" },
@@ -420,32 +429,36 @@ function Builder() {
 
                 {/* Top action bar mock */}
                 <div className="zk-reveal mt-12 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 flex-wrap gap-3">
-                        <div className="flex items-center gap-3">
-                            <span className="inline-flex size-9 items-center justify-center rounded-lg bg-zukvo-500/10 text-zukvo-300 border border-zukvo-500/20">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-4 py-3 border-b border-white/5 gap-3">
+                        {/* Left: icon + title + badge */}
+                        <div className="flex items-center gap-3 min-w-0">
+                            <span className="inline-flex shrink-0 size-9 items-center justify-center rounded-lg bg-zukvo-500/10 text-zukvo-300 border border-zukvo-500/20">
                                 <FilePlus2 className="size-4" />
                             </span>
-                            <div>
-                                <div className="text-[13px] text-white font-medium">Proposal Builder</div>
-                                <div className="text-[11px] text-zinc-500">Draft and design your perfect proposal</div>
+                            <div className="min-w-0">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                    <div className="text-[13px] text-white font-medium whitespace-nowrap">Proposal Builder</div>
+                                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300 whitespace-nowrap">
+                                        <span className="size-1.5 rounded-full bg-emerald-400" /> Auto-saved
+                                    </span>
+                                </div>
+                                <div className="text-[11px] text-zinc-500 truncate">Draft and design your perfect proposal</div>
                             </div>
-                            <span className="ml-3 inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300">
-                                <span className="size-1.5 rounded-full bg-emerald-400" /> Auto-saved
-                            </span>
                         </div>
+                        {/* Right: action buttons */}
                         <div className="flex items-center gap-2 flex-wrap">
-                            <span className="inline-flex rounded-full border border-white/10 bg-white/[0.02] text-[11.5px] p-0.5">
+                            <span className="inline-flex rounded-full border border-white/10 bg-white/[0.02] text-[11.5px] p-0.5 shrink-0">
                                 <span className="px-2.5 py-1 rounded-full bg-zukvo-500/15 text-zukvo-300">Top</span>
                                 <span className="px-2.5 py-1 text-zinc-400">Left</span>
                             </span>
-                            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.02] px-3 py-1 text-[11.5px] text-zinc-300">
+                            <span className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.02] px-3 py-1 text-[11.5px] text-zinc-300 shrink-0">
                                 <Search className="size-3" /> Search & commands
                                 <span className="ml-1 inline-flex items-center gap-0.5 text-[9.5px] uppercase tracking-[0.18em] rounded border border-white/10 px-1 py-0.5 text-zinc-500">
                                     ⌘ K
                                 </span>
                             </span>
                             <button
-                                className="inline-flex items-center gap-1.5 rounded-full text-white text-[12px] font-medium px-3 py-1.5"
+                                className="inline-flex items-center gap-1.5 rounded-full text-white text-[12px] font-medium px-3 py-1.5 shrink-0"
                                 style={{
                                     backgroundImage:
                                         "linear-gradient(90deg, #6366F1, #8B5CF6 50%, #A855F7)",
@@ -453,13 +466,13 @@ function Builder() {
                             >
                                 <Sparkles className="size-3.5" /> Create with Zai
                             </button>
-                            <button className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white text-[12px] px-3 py-1.5">
+                            <button className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white text-[12px] px-3 py-1.5 shrink-0">
                                 <Eye className="size-3.5" /> Live Preview
                             </button>
-                            <button className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white text-[12px] px-3 py-1.5">
+                            <button className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white text-[12px] px-3 py-1.5 shrink-0">
                                 <ArrowRight className="size-3.5" /> Export
                             </button>
-                            <button className="inline-flex items-center gap-1.5 rounded-full bg-zukvo-ink hover:bg-black text-white text-[12px] font-medium px-3 py-1.5 border border-white/10">
+                            <button className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-zukvo-ink hover:bg-black text-white text-[12px] font-medium px-3 py-1.5 border border-white/10 shrink-0">
                                 Save
                             </button>
                         </div>
@@ -512,14 +525,13 @@ function Builder() {
                                     </div>
                                 </div>
                                 <div className="mt-7 text-[10px] uppercase tracking-[0.22em] text-zinc-500">
-                                    Proposal for
+                                    Active Section
                                 </div>
                                 <div className="font-heading text-2xl md:text-3xl text-white mt-1 tracking-tight">
-                                    Proposal Title
+                                    {sectionHeading || "Untitled Section"}
                                 </div>
-                                <div className="text-zinc-400 mt-1 max-w-md">
-                                    A short, persuasive summary of what this proposal delivers and why it
-                                    matters.
+                                <div className="text-zinc-400 mt-2 max-w-2xl leading-relaxed text-[13px] whitespace-pre-wrap">
+                                    {mainContent || "Start writing the section content here..."}
                                 </div>
                                 <div className="mt-6 grid grid-cols-2 gap-5 text-[11.5px]">
                                     <div>
@@ -557,8 +569,9 @@ function Builder() {
 
                                 <div className="mt-4">
                                     <div className="flex items-center justify-between">
-                                        <div className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">
+                                        <div className="text-[10px] uppercase tracking-[0.22em] text-zinc-400 flex items-center gap-1">
                                             Section heading
+                                            <span className="text-amber-500 font-bold">*</span>
                                         </div>
                                         <button
                                             className="inline-flex items-center gap-1 rounded-full text-white text-[10.5px] font-medium px-2.5 py-0.5"
@@ -570,15 +583,23 @@ function Builder() {
                                             <Sparkles className="size-3" /> Create with Zai
                                         </button>
                                     </div>
-                                    <div className="mt-2 rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 text-[12px] text-zinc-500 flex items-center gap-2">
-                                        <Pencil className="size-3" /> e.g. Project Background
+                                    <div className="mt-2 rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 text-[12px] text-zinc-500 flex items-center gap-2 focus-within:border-zukvo-500/50 transition-colors">
+                                        <Pencil className="size-3 text-zinc-500 shrink-0" />
+                                        <input
+                                            type="text"
+                                            value={sectionHeading}
+                                            onChange={(e) => setSectionHeading(e.target.value)}
+                                            placeholder="* e.g. Project Background"
+                                            className="bg-transparent border-none outline-none text-[12px] text-zinc-200 placeholder-zinc-500 flex-1 min-w-0 p-0 m-0 focus:ring-0"
+                                        />
                                     </div>
                                 </div>
 
                                 <div className="mt-4">
                                     <div className="flex items-center justify-between">
-                                        <div className="text-[10px] uppercase tracking-[0.22em] text-zinc-400">
+                                        <div className="text-[10px] uppercase tracking-[0.22em] text-zinc-400 flex items-center gap-1">
                                             Main content
+                                            <span className="text-amber-500 font-bold">*</span>
                                         </div>
                                         <button
                                             className="inline-flex items-center gap-1 rounded-full text-white text-[10.5px] font-medium px-2.5 py-0.5"
@@ -610,7 +631,12 @@ function Builder() {
                                             </button>
                                         ))}
                                     </div>
-                                    <div className="mt-2 h-28 rounded-md border border-white/10 bg-white/[0.02]" />
+                                    <textarea
+                                        value={mainContent}
+                                        onChange={(e) => setMainContent(e.target.value)}
+                                        placeholder="* Enter main content here"
+                                        className="mt-2 w-full h-28 rounded-md border border-white/10 bg-white/[0.02] p-3 text-[12px] text-zinc-200 placeholder-zinc-500 outline-none focus:border-zukvo-500/50 transition-colors resize-none focus:ring-0"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -849,7 +875,7 @@ function ZaiEnhance() {
                 </div>
 
                 {/* Modal mock */}
-                <div className="zk-reveal mt-12 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)]">
+                <div className="zk-reveal mt-12 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] w-full max-w-full min-w-0">
                     <div
                         className="px-5 py-4 flex items-start gap-3 border-b border-white/5"
                         style={{
@@ -914,7 +940,7 @@ function ZaiEnhance() {
                         </div>
 
                         {/* Compare */}
-                        <div className="grid lg:grid-cols-2 gap-4">
+                        <div className="grid lg:grid-cols-2 gap-4 w-full min-w-0">
                             <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
                                 <div className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 font-bold flex items-center gap-1.5">
                                     <span className="size-1.5 rounded-full bg-zinc-500" /> Current
@@ -976,13 +1002,13 @@ function ZaiEnhance() {
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-between pt-2 border-t border-white/5 text-[11px] text-zinc-500">
-                            <span>Review the suggestion. Apply replaces the current content.</span>
-                            <div className="flex items-center gap-2">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-white/5 text-[11px] text-zinc-500 w-full min-w-0">
+                            <span className="leading-normal">Review the suggestion. Apply replaces the current content.</span>
+                            <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
                                 <button className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 text-white px-4 py-1.5 text-[12px]">
                                     Cancel
                                 </button>
-                                <button className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 transition-colors text-white px-4 py-1.5 text-[12px] font-medium">
+                                <button className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 transition-colors text-white px-4 py-1.5 text-[12px] font-medium whitespace-nowrap">
                                     <CheckCircle2 className="size-3.5" /> Apply Zai's suggestion
                                 </button>
                             </div>
@@ -1099,6 +1125,10 @@ function PreviewSection() {
 /* ---------------- MAIL ---------------- */
 
 function MailSection() {
+    const [fromEmail, setFromEmail] = useState("mithun.rav*********@zithmi.com");
+    const [toEmail, setToEmail] = useState("operations.pa*********@pathematic.com");
+    const [subject, setSubject] = useState("Proposal for On-Demand Driver Booking App Development");
+
     return (
         <section
             id="mail"
@@ -1119,9 +1149,9 @@ function MailSection() {
                     </p>
                 </div>
 
-                <div className="zk-reveal mt-12 grid lg:grid-cols-12 gap-6 items-start">
-                    <div className="lg:col-span-7">
-                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+                <div className="zk-reveal mt-12 grid lg:grid-cols-12 gap-6 items-start w-full min-w-0">
+                    <div className="lg:col-span-7 w-full min-w-0">
+                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden w-full max-w-full min-w-0">
                             {/* Header */}
                             <div className="px-5 py-4 flex items-start justify-between gap-3 border-b border-white/5">
                                 <div>
@@ -1161,16 +1191,27 @@ function MailSection() {
                                     </span>
                                 </div>
                                 <div className="space-y-2">
-                                    <Field label="From" placeholder="Sender email" icon={User} />
+                                    <Field
+                                        label="From"
+                                        placeholder="* Sender email"
+                                        value={fromEmail}
+                                        onChange={(e) => setFromEmail(e.target.value)}
+                                        icon={User}
+                                        required
+                                    />
                                     <Field
                                         label="To"
-                                        placeholder="client@example.com"
+                                        placeholder="* client@example.com"
+                                        value={toEmail}
+                                        onChange={(e) => setToEmail(e.target.value)}
                                         icon={Hash}
+                                        required
                                     />
                                     <Field
                                         label="Subject"
-                                        placeholder=""
-                                        value="Proposal for On-Demand Driver Booking App Development"
+                                        placeholder="Subject"
+                                        value={subject}
+                                        onChange={(e) => setSubject(e.target.value)}
                                         icon={Pencil}
                                     />
                                 </div>
@@ -1190,36 +1231,40 @@ function MailSection() {
                                     </span>
                                 </div>
 
-                                <div className="rounded-xl border border-violet-400/30 bg-violet-500/5 p-3 flex items-center gap-3">
-                                    <span
-                                        className="inline-flex size-9 items-center justify-center rounded-lg text-white"
-                                        style={{
-                                            backgroundImage:
-                                                "linear-gradient(135deg, #6366F1, #8B5CF6, #A855F7)",
-                                        }}
-                                    >
-                                        <Bot className="size-4" />
-                                    </span>
-                                    <div className="flex-1">
-                                        <div className="text-[12.5px] text-white font-medium">
-                                            AI Writing Assistant
-                                        </div>
-                                        <div className="text-[11px] text-zinc-400">
-                                            Polish tone, expand detail, or fix grammar in one click.
+                                <div className="rounded-xl border border-violet-400/30 bg-violet-500/5 p-3 flex flex-col md:flex-row md:items-center gap-3 w-full max-w-full min-w-0">
+                                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                                        <span
+                                            className="inline-flex size-9 items-center justify-center rounded-lg text-white shrink-0"
+                                            style={{
+                                                backgroundImage:
+                                                    "linear-gradient(135deg, #6366F1, #8B5CF6, #A855F7)",
+                                            }}
+                                        >
+                                            <Bot className="size-4" />
+                                        </span>
+                                        <div className="min-w-0">
+                                            <div className="text-[12.5px] text-white font-medium">
+                                                AI Writing Assistant
+                                            </div>
+                                            <div className="text-[11px] text-zinc-400 truncate">
+                                                Polish tone, expand detail, or fix grammar in one click.
+                                            </div>
                                         </div>
                                     </div>
-                                    <button
-                                        className="inline-flex items-center gap-1.5 rounded-md text-white text-[11.5px] font-medium px-3 py-1.5"
-                                        style={{
-                                            backgroundImage:
-                                                "linear-gradient(135deg, #6366F1, #8B5CF6)",
-                                        }}
-                                    >
-                                        <Wand2 className="size-3.5" /> Enhance content
-                                    </button>
-                                    <button className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/5 text-white text-[11.5px] px-3 py-1.5">
-                                        Correct grammar
-                                    </button>
+                                    <div className="flex flex-wrap items-center gap-2 self-start md:self-auto shrink-0">
+                                        <button
+                                            className="inline-flex items-center gap-1.5 rounded-md text-white text-[11.5px] font-medium px-3 py-1.5 whitespace-nowrap"
+                                            style={{
+                                                backgroundImage:
+                                                    "linear-gradient(135deg, #6366F1, #8B5CF6)",
+                                            }}
+                                        >
+                                            <Wand2 className="size-3.5" /> Enhance content
+                                        </button>
+                                        <button className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/5 text-white text-[11.5px] px-3 py-1.5 whitespace-nowrap">
+                                            Correct grammar
+                                        </button>
+                                    </div>
                                 </div>
 
                                 {/* Toolbar */}
@@ -1239,14 +1284,14 @@ function MailSection() {
                                     )}
                                 </div>
 
-                                <div className="mt-3 rounded-md border border-white/10 bg-white/[0.02] p-4 text-[13px] text-zinc-200 leading-relaxed space-y-2">
+                                <div className="mt-3 rounded-md border border-white/10 bg-white/[0.02] p-4 text-[13px] text-zinc-200 leading-relaxed space-y-2 w-full max-w-full min-w-0">
                                     <div>Hi Operations Director,</div>
                                     <div>
                                         I'm reaching out regarding the On-Demand Driver Booking App
                                         Development project. Please find the proposal attached.
                                     </div>
                                     <div>Best regards,</div>
-                                    <div className="text-zinc-400">ithyaz</div>
+                                    <div className="text-zinc-400">Sebastian</div>
                                 </div>
 
                                 <div className="mt-4 flex items-center justify-between flex-wrap gap-3">
@@ -1272,8 +1317,8 @@ function MailSection() {
                         </div>
                     </div>
 
-                    <div className="lg:col-span-5 space-y-5">
-                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
+                    <div className="lg:col-span-5 space-y-5 w-full min-w-0">
+                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5 w-full max-w-full min-w-0">
                             <div className="text-[11px] uppercase tracking-[0.22em] text-zukvo-300 font-bold">
                                 What's automated
                             </div>
@@ -1310,16 +1355,27 @@ function MailSection() {
     );
 }
 
-function Field({ label, value, placeholder, icon: Icon }) {
+function Field({ label, value, onChange, placeholder, icon: Icon, required }) {
     return (
-        <div className="flex items-center gap-3 rounded-md border border-white/10 bg-white/[0.02] px-3 py-2.5">
-            <span className="inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.2em] text-zinc-500 w-16 shrink-0">
+        <div className="flex items-center gap-3 rounded-md border border-white/10 bg-white/[0.02] px-3 py-2.5 min-w-0 focus-within:border-zukvo-500/50 transition-colors">
+            <span className="inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.2em] text-zinc-500 w-16 shrink-0 select-none">
                 {Icon ? <Icon className="size-3" /> : null}
                 {label}
+                {required && <span className="text-amber-500 font-bold ml-0.5">*</span>}
             </span>
-            <span className={`text-[13px] flex-1 truncate ${value ? "text-zinc-200" : "text-zinc-500"}`}>
-                {value || placeholder}
-            </span>
+            {onChange ? (
+                <input
+                    type="text"
+                    value={value}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    className="bg-transparent border-none outline-none text-[13px] text-zinc-200 placeholder-zinc-500 flex-1 min-w-0 p-0 m-0 focus:ring-0"
+                />
+            ) : (
+                <span className={`text-[13px] flex-1 truncate ${value ? "text-zinc-200" : "text-zinc-500"}`}>
+                    {value || placeholder}
+                </span>
+            )}
         </div>
     );
 }

@@ -77,7 +77,7 @@ export default function TimeTracking() {
     return (
         <main
             data-testid="time-tracking-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -186,7 +186,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -576,74 +576,78 @@ function MyTracking() {
                             <StopCircle className="size-3.5" /> Stop all
                         </button>
                     </div>
-                    {[
-                        {
-                            time: "11:11:52 PM — Running",
-                            badge: "LIVE",
-                            badgeColor: "emerald",
-                            desc: "RTR Management — Recruitment Suite",
-                            est: "EST: 6h",
-                            duration: "00:00:33",
-                        },
-                        {
-                            time: "11:08:10 PM — 11:11:49 PM",
-                            badge: "PAUSED",
-                            badgeColor: "amber",
-                            desc: "RTR Management — Recruitment Suite",
-                            est: "EST: 6h",
-                            duration: "00:03:39",
-                        },
-                        {
-                            time: "Sat, May 9, 2026",
-                            badge: "STOPPED",
-                            badgeColor: "violet",
-                            desc: "ZithSpace · ZithSpace Admin App",
-                            est: "Logged",
-                            duration: "7h 40m",
-                        },
-                    ].map((row, i) => (
-                        <div
-                            key={i}
-                            className="grid grid-cols-12 items-center gap-3 px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
-                        >
-                            <div className="col-span-1">
-                                <span
-                                    className={`inline-block size-2 rounded-full ${
-                                        row.badgeColor === "emerald"
-                                            ? "bg-emerald-400 zk-pulse"
-                                            : row.badgeColor === "amber"
-                                              ? "bg-amber-400"
-                                              : "bg-violet-400"
-                                    }`}
-                                />
-                            </div>
-                            <div className="col-span-5">
-                                <div className="text-[12px] text-zinc-400 font-mono">{row.time}</div>
-                                <div className="mt-1 flex items-center gap-2">
-                                    <span
-                                        className={`text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${
-                                            row.badgeColor === "emerald"
-                                                ? "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
-                                                : row.badgeColor === "amber"
-                                                  ? "border-amber-400/30 bg-amber-500/10 text-amber-300"
-                                                  : "border-violet-400/30 bg-violet-500/10 text-violet-300"
-                                        }`}
-                                    >
-                                        {row.badge}
-                                    </span>
+                    <div className="overflow-x-auto">
+                        <div className="min-w-[800px]">
+                            {[
+                                {
+                                    time: "11:11:52 PM — Running",
+                                    badge: "LIVE",
+                                    badgeColor: "emerald",
+                                    desc: "RTR Management — Recruitment Suite",
+                                    est: "EST: 6h",
+                                    duration: "00:00:33",
+                                },
+                                {
+                                    time: "11:08:10 PM — 11:11:49 PM",
+                                    badge: "PAUSED",
+                                    badgeColor: "amber",
+                                    desc: "RTR Management — Recruitment Suite",
+                                    est: "EST: 6h",
+                                    duration: "00:03:39",
+                                },
+                                {
+                                    time: "Sat, May 9, 2026",
+                                    badge: "STOPPED",
+                                    badgeColor: "violet",
+                                    desc: "ZithSpace · ZithSpace Admin App",
+                                    est: "Logged",
+                                    duration: "7h 40m",
+                                },
+                            ].map((row, i) => (
+                                <div
+                                    key={i}
+                                    className="grid grid-cols-12 items-center gap-3 px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
+                                >
+                                    <div className="col-span-1">
+                                        <span
+                                            className={`inline-block size-2 rounded-full ${
+                                                row.badgeColor === "emerald"
+                                                    ? "bg-emerald-400 zk-pulse"
+                                                    : row.badgeColor === "amber"
+                                                      ? "bg-amber-400"
+                                                      : "bg-violet-400"
+                                            }`}
+                                        />
+                                    </div>
+                                    <div className="col-span-5">
+                                        <div className="text-[12px] text-zinc-400 font-mono">{row.time}</div>
+                                        <div className="mt-1 flex items-center gap-2">
+                                            <span
+                                                className={`text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${
+                                                    row.badgeColor === "emerald"
+                                                        ? "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
+                                                        : row.badgeColor === "amber"
+                                                          ? "border-amber-400/30 bg-amber-500/10 text-amber-300"
+                                                          : "border-violet-400/30 bg-violet-500/10 text-violet-300"
+                                                }`}
+                                            >
+                                                {row.badge}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="col-span-4 min-w-0">
+                                        <div className="text-[13px] text-zinc-200 truncate">{row.desc}</div>
+                                        <div className="text-[11px] text-zinc-500">{row.est}</div>
+                                    </div>
+                                    <div className="col-span-2 text-right">
+                                        <span className="font-mono text-[13.5px] text-white bg-white/5 border border-white/10 rounded-md px-2.5 py-1 whitespace-nowrap">
+                                            {row.duration}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-span-4 min-w-0">
-                                <div className="text-[13px] text-zinc-200 truncate">{row.desc}</div>
-                                <div className="text-[11px] text-zinc-500">{row.est}</div>
-                            </div>
-                            <div className="col-span-2 text-right">
-                                <span className="font-mono text-[13.5px] text-white bg-white/5 border border-white/10 rounded-md px-2.5 py-1">
-                                    {row.duration}
-                                </span>
-                            </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </div>
             </div>
         </section>
@@ -753,62 +757,66 @@ function TeamTracking() {
                         </div>
                         <Filter className="size-4 text-zinc-500" />
                     </div>
-                    <div className="grid grid-cols-12 px-5 py-2.5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5 bg-white/[0.02]">
-                        <div className="col-span-3">Day & date</div>
-                        <div className="col-span-3">Team member</div>
-                        <div className="col-span-1">Tickets</div>
-                        <div className="col-span-2">Activity</div>
-                        <div className="col-span-2">Daily capacity</div>
-                        <div className="col-span-1 text-right">Status</div>
-                    </div>
-                    {[
-                        ["Fri, Apr 10", "Priyadharshini", "2", "6 sessions", "Goal Reached", "8h 32m", "100", "IDLE", "emerald"],
-                        ["Thu, Apr 9", "Priyadharshini", "3", "3 sessions", "67% of 6h", "4h 0m", "67", "IDLE", "indigo"],
-                    ].map((r, i) => (
-                        <div
-                            key={i}
-                            className="grid grid-cols-12 items-center gap-3 px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
-                        >
-                            <div className="col-span-3 text-[13px] text-zinc-200">{r[0]}</div>
-                            <div className="col-span-3 flex items-center gap-2.5">
-                                <span className="size-7 rounded-md bg-gradient-to-br from-zukvo-500/40 to-violet-500/40 text-white text-[10.5px] inline-flex items-center justify-center border border-white/10">
-                                    {r[1].slice(0, 1)}
-                                </span>
-                                <span className="text-[13px] text-zinc-200 truncate">{r[1]}</span>
+                    <div className="overflow-x-auto">
+                        <div className="min-w-[900px]">
+                            <div className="grid grid-cols-12 gap-3 px-5 py-2.5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5 bg-white/[0.02]">
+                                <div className="col-span-3">Day & date</div>
+                                <div className="col-span-3">Team member</div>
+                                <div className="col-span-1">Tickets</div>
+                                <div className="col-span-2">Activity</div>
+                                <div className="col-span-2">Daily capacity</div>
+                                <div className="col-span-1 text-right">Status</div>
                             </div>
-                            <div className="col-span-1 text-[12.5px] text-zinc-300">{r[2]}</div>
-                            <div className="col-span-2">
-                                <span className="text-[10px] uppercase tracking-[0.18em] rounded-full border border-white/10 bg-white/5 text-zinc-300 px-2 py-0.5 inline-flex items-center gap-1.5">
-                                    <Clock className="size-3" /> {r[3]}
-                                </span>
-                            </div>
-                            <div className="col-span-2">
-                                <div className="flex items-center justify-between">
-                                    <span
-                                        className={`text-[11px] ${
-                                            r[8] === "emerald" ? "text-emerald-300" : "text-zinc-500"
-                                        }`}
-                                    >
-                                        {r[4]}
-                                    </span>
-                                    <span className="text-[12px] text-white font-mono">{r[5]}</span>
+                            {[
+                                ["Fri, Apr 10", "Priyadharshini", "2", "6 sessions", "Goal Reached", "8h 32m", "100", "IDLE", "emerald"],
+                                ["Thu, Apr 9", "Priyadharshini", "3", "3 sessions", "67% of 6h", "4h 0m", "67", "IDLE", "indigo"],
+                            ].map((r, i) => (
+                                <div
+                                    key={i}
+                                    className="grid grid-cols-12 items-center gap-3 px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
+                                >
+                                    <div className="col-span-3 text-[13px] text-zinc-200 whitespace-nowrap">{r[0]}</div>
+                                    <div className="col-span-3 flex items-center gap-2.5 min-w-0">
+                                        <span className="size-7 rounded-md bg-gradient-to-br from-zukvo-500/40 to-violet-500/40 text-white text-[10.5px] inline-flex items-center justify-center border border-white/10 shrink-0">
+                                            {r[1].slice(0, 1)}
+                                        </span>
+                                        <span className="text-[13px] text-zinc-200 truncate whitespace-nowrap">{r[1]}</span>
+                                    </div>
+                                    <div className="col-span-1 text-[12.5px] text-zinc-300">{r[2]}</div>
+                                    <div className="col-span-2">
+                                        <span className="text-[10px] uppercase tracking-[0.18em] rounded-full border border-white/10 bg-white/5 text-zinc-300 px-2 py-0.5 inline-flex items-center gap-1.5 whitespace-nowrap">
+                                            <Clock className="size-3" /> {r[3]}
+                                        </span>
+                                    </div>
+                                    <div className="col-span-2">
+                                        <div className="flex items-center justify-between">
+                                            <span
+                                                className={`text-[11px] whitespace-nowrap ${
+                                                    r[8] === "emerald" ? "text-emerald-300" : "text-zinc-500"
+                                                }`}
+                                            >
+                                                {r[4]}
+                                            </span>
+                                            <span className="text-[12px] text-white font-mono whitespace-nowrap">{r[5]}</span>
+                                        </div>
+                                        <div className="mt-1.5 h-1 rounded-full bg-white/5 overflow-hidden">
+                                            <div
+                                                className={`h-full ${
+                                                    r[8] === "emerald" ? "bg-emerald-400" : "bg-zukvo-500"
+                                                }`}
+                                                style={{ width: `${r[6]}%` }}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-span-1 text-right">
+                                        <span className="text-[10px] uppercase tracking-[0.18em] rounded-full border border-white/10 bg-white/5 text-zinc-300 px-2 py-0.5 whitespace-nowrap">
+                                            {r[7]}
+                                        </span>
+                                    </div>
                                 </div>
-                                <div className="mt-1.5 h-1 rounded-full bg-white/5 overflow-hidden">
-                                    <div
-                                        className={`h-full ${
-                                            r[8] === "emerald" ? "bg-emerald-400" : "bg-zukvo-500"
-                                        }`}
-                                        style={{ width: `${r[6]}%` }}
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-span-1 text-right">
-                                <span className="text-[10px] uppercase tracking-[0.18em] rounded-full border border-white/10 bg-white/5 text-zinc-300 px-2 py-0.5">
-                                    {r[7]}
-                                </span>
-                            </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </div>
             </div>
         </section>

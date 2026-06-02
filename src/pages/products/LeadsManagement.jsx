@@ -85,7 +85,7 @@ export default function LeadsManagement() {
     return (
         <main
             data-testid="leads-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -194,7 +194,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -279,13 +279,13 @@ function Dashboard() {
                 {/* List mock */}
                 <div className="zk-reveal mt-10 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                     <div className="px-5 py-3 border-b border-white/5 flex flex-wrap items-center gap-2 justify-between">
-                        <div className="flex items-center gap-2 text-[11.5px] text-zinc-400">
+                        <div className="flex items-center gap-2 flex-wrap text-[11.5px] text-zinc-400">
                             <Filter className="size-3.5 text-zinc-500" /> Filters
                             {["Status", "Platform", "Workflow", "Created by", "Mail Status"].map(
                                 (f) => (
                                     <span
                                         key={f}
-                                        className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.02] px-2.5 py-1 text-zinc-300"
+                                        className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.02] px-2.5 py-1 text-zinc-300 whitespace-nowrap shrink-0"
                                     >
                                         {f} <ChevronDown className="size-3 text-zinc-500" />
                                     </span>
@@ -294,52 +294,56 @@ function Dashboard() {
                         </div>
                         <span className="text-[11.5px] text-zinc-500">1 of 1</span>
                     </div>
-                    <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
-                        <div className="col-span-3">Lead</div>
-                        <div className="col-span-1">Platform</div>
-                        <div className="col-span-1">Status</div>
-                        <div className="col-span-2">BidIQ</div>
-                        <div className="col-span-2">Proposal</div>
-                        <div className="col-span-2">Mail</div>
-                        <div className="col-span-1 text-right">Created</div>
-                    </div>
-                    <div className="grid grid-cols-12 items-center px-5 py-4 border-t border-white/5 hover:bg-white/[0.02] transition-colors">
-                        <div className="col-span-3 flex items-center gap-3 min-w-0">
-                            <span className="inline-flex size-9 items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-200 border border-cyan-400/30 shrink-0 text-[11px] font-bold">
-                                JD
-                            </span>
-                            <div className="min-w-0">
-                                <div className="text-[13px] text-zinc-100 truncate inline-flex items-center gap-1.5">
-                                    E-Commerce Web Application
-                                    <CheckCircle2 className="size-3.5 text-emerald-300" />
-                                </div>
-                                <div className="text-[11px] text-zinc-500">John Doe · 1w ago</div>
+                    <div className="overflow-x-auto w-full no-scrollbar">
+                        <div style={{ minWidth: "1150px" }}>
+                            <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
+                                <div className="col-span-3">Lead</div>
+                                <div className="col-span-1">Platform</div>
+                                <div className="col-span-1">Status</div>
+                                <div className="col-span-2">BidIQ</div>
+                                <div className="col-span-2">Proposal</div>
+                                <div className="col-span-2">Mail</div>
+                                <div className="col-span-1 text-right">Created</div>
                             </div>
-                        </div>
-                        <div className="col-span-1">
-                            <span className="text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 px-2 py-0.5">
-                                Upwork
-                            </span>
-                        </div>
-                        <div className="col-span-1">
-                            <span className="text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-2 py-0.5">
-                                Open
-                            </span>
-                        </div>
-                        <div className="col-span-2 text-[12px] text-emerald-300 inline-flex items-center gap-1.5">
-                            <Eye className="size-3.5" /> View BidIQ
-                        </div>
-                        <div className="col-span-2 text-[12px] text-violet-300 inline-flex items-center gap-1.5">
-                            <Sparkles className="size-3.5" /> Generate
-                        </div>
-                        <div className="col-span-2 text-[12px] text-zukvo-300 inline-flex items-center gap-1.5">
-                            <Mail className="size-3.5" /> Send Mail
-                        </div>
-                        <div className="col-span-1 text-right text-[12px] text-zinc-400 inline-flex items-center justify-end gap-1.5 ml-auto">
-                            <span className="inline-flex size-6 items-center justify-center rounded-full bg-zukvo-500/20 text-zukvo-200 border border-zukvo-500/30 text-[10px] font-bold">
-                                I
-                            </span>
-                            ithyaz
+                            <div className="grid grid-cols-12 items-center px-5 py-4 border-t border-white/5 hover:bg-white/[0.02] transition-colors">
+                                <div className="col-span-3 flex items-center gap-3 min-w-0">
+                                    <span className="inline-flex size-9 items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-200 border border-cyan-400/30 shrink-0 text-[11px] font-bold">
+                                        JD
+                                    </span>
+                                    <div className="min-w-0">
+                                        <div className="text-[13px] text-zinc-100 truncate inline-flex items-center gap-1.5">
+                                            E-Commerce Web Application
+                                            <CheckCircle2 className="size-3.5 text-emerald-300" />
+                                        </div>
+                                        <div className="text-[11px] text-zinc-500">John Doe · 1w ago</div>
+                                    </div>
+                                </div>
+                                <div className="col-span-1">
+                                    <span className="text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 px-2 py-0.5">
+                                        Upwork
+                                    </span>
+                                </div>
+                                <div className="col-span-1">
+                                    <span className="text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-2 py-0.5">
+                                        Open
+                                    </span>
+                                </div>
+                                <div className="col-span-2 text-[12px] text-emerald-300 inline-flex items-center gap-1.5">
+                                    <Eye className="size-3.5" /> View BidIQ
+                                </div>
+                                <div className="col-span-2 text-[12px] text-violet-300 inline-flex items-center gap-1.5">
+                                    <Sparkles className="size-3.5" /> Generate
+                                </div>
+                                <div className="col-span-2 text-[12px] text-zukvo-300 inline-flex items-center gap-1.5">
+                                    <Mail className="size-3.5" /> Send Mail
+                                </div>
+                                <div className="col-span-1 text-right text-[12px] text-zinc-400 inline-flex items-center justify-end gap-1.5 ml-auto">
+                                    <span className="inline-flex size-6 items-center justify-center rounded-full bg-zukvo-500/20 text-zukvo-200 border border-zukvo-500/30 text-[10px] font-bold">
+                                        S
+                                    </span>
+                                    Sebastian
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -438,41 +442,41 @@ function CreateLead() {
                             <div className="p-5 space-y-4">
                                 <DrawerCard n="01" tone="indigo" icon={User} title="Client information" sub="Who you're pitching — contact, location, and trust signals">
                                     <div className="grid grid-cols-2 gap-2.5">
-                                        <FormField label="Client Name" placeholder="e.g. John Doe" />
-                                        <FormField label="Email" placeholder="john@example.com" />
-                                        <FormField label="Phone" placeholder="+1 234…" />
-                                        <FormField label="Location" placeholder="City, Country" />
-                                        <FormField label="Client Rating" placeholder="e.g. 4.9/5" />
-                                        <FormField label="Total Spend" placeholder="e.g. $10k+" />
+                                        <FormField label="Client Name" placeholder="e.g. John Doe" value="Alex Sterling" />
+                                        <FormField label="Email" placeholder="john@example.com" value="al***@nexuscorp.com" />
+                                        <FormField label="Phone" placeholder="+1 234…" value="+91 98*** **210" />
+                                        <FormField label="Location" placeholder="City, Country" value="Chennai, India" />
+                                        <FormField label="Client Rating" placeholder="e.g. 4.9/5" value="5.0/5" />
+                                        <FormField label="Total Spend" placeholder="e.g. $10k+" value="$50k+" />
                                     </div>
                                 </DrawerCard>
 
                                 <DrawerCard n="02" tone="amber" icon={Briefcase} title="Job specification" sub="Scope, skills, and budget — what success looks like">
-                                    <FormField label="Job Title" placeholder="e.g. Senior Frontend Engineer" full />
+                                    <FormField label="Job Title" placeholder="e.g. Senior Frontend Engineer" value="Lead Full Stack Engineer for Zukvo App" full />
                                     <div className="mt-2 rounded-md border border-zukvo-500/30 bg-zukvo-500/5 px-3 py-2.5">
                                         <div className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-zukvo-300 font-bold">
                                             <Sparkles className="size-3" /> AI Intelligence Summary
                                         </div>
-                                        <div className="mt-1.5 text-[11.5px] text-zinc-500">
-                                            Paste the job description or key notes — AI will distill
-                                            this into actionable insights…
+                                        <div className="mt-1.5 text-[11.5px] text-zinc-200">
+                                            The client needs a highly scalable full stack web application built with React and Node.js. 
+                                            Strong emphasis on responsive design, performance optimization, and AWS deployment.
                                         </div>
                                     </div>
                                     <div className="mt-2 grid grid-cols-3 gap-2.5">
-                                        <FormField label="Duration" placeholder="e.g. 3 Months" />
-                                        <FormField label="Hourly ($)" placeholder="" />
-                                        <FormField label="Budget ($)" placeholder="e.g. 5000" />
+                                        <FormField label="Duration" placeholder="e.g. 3 Months" value="6 Months" />
+                                        <FormField label="Hourly ($)" placeholder="" value="45" />
+                                        <FormField label="Budget ($)" placeholder="e.g. 5000" value="12000" />
                                     </div>
                                 </DrawerCard>
 
                                 <DrawerCard n="03" tone="emerald" icon={Globe2} title="Platform & status" sub="Where this came from and where it sits in your pipeline">
                                     <div className="grid grid-cols-2 gap-2.5">
-                                        <FormField label="Platform" value="Upwork" />
-                                        <FormField label="Current Status" placeholder="Select status" />
-                                        <FormField label="Posted On" value="2026-05-23" />
-                                        <FormField label="Next Action" placeholder="Select action" />
+                                        <FormField label="Platform" value="Direct Entry" options={["Upwork", "Direct Entry", "LinkedIn", "Referral", "Website Form"]} />
+                                        <FormField label="Current Status" placeholder="Select status" value="Lead Captured" options={["Lead Captured", "In Review", "Proposal Sent", "Negotiation", "Closed Won", "Closed Lost"]} />
+                                        <FormField label="Posted On" value="2026-06-01" />
+                                        <FormField label="Next Action" placeholder="Select action" value="Generate Proposal" options={["Generate Proposal", "Send Email", "Schedule Call", "Follow Up"]} />
                                     </div>
-                                    <FormField label="Job Link" placeholder="https://…" full />
+                                    <FormField label="Job Link" placeholder="https://…" value="https://zukvo.com/projects/full-stack-app" full />
                                 </DrawerCard>
 
                                 <DrawerCard n="04" tone="rose" icon={Paperclip} title="Supporting documents" sub="Briefs, mockups, or contract drafts shared by the client" optional>
@@ -550,18 +554,21 @@ function DrawerCard({ n, tone, icon: Icon, title, sub, children, optional }) {
         rose: "text-rose-300 bg-rose-500/10 border-rose-400/30",
     };
     return (
-        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 w-full max-w-full min-w-0">
             <div className="flex items-center gap-3">
                 <span
-                    className={`inline-flex size-8 items-center justify-center rounded-md text-[11px] font-bold ${toneMap[tone]}`}
+                    className={`inline-flex size-8 items-center justify-center rounded-md text-[11px] font-bold shrink-0 ${toneMap[tone]}`}
                 >
                     {n}
                 </span>
-                <div className="flex-1">
-                    <div className="inline-flex items-center gap-1.5 text-[12px] uppercase tracking-[0.18em] font-bold text-white">
-                        <Icon className="size-3.5" /> {title}
+                <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center justify-between gap-2 text-[12px] uppercase tracking-[0.18em] font-bold text-white">
+                        <span className="flex items-center gap-1.5 min-w-0">
+                            <Icon className="size-3.5 text-zinc-400 shrink-0" />
+                            <span className="break-words">{title}</span>
+                        </span>
                         {optional && (
-                            <span className="text-[9.5px] tracking-[0.18em] rounded-full border border-white/10 bg-white/5 text-zinc-400 px-2 py-0.5">
+                            <span className="text-[9.5px] tracking-[0.18em] rounded-full border border-white/10 bg-white/5 text-zinc-400 px-2 py-0.5 normal-case font-medium shrink-0">
                                 Optional
                             </span>
                         )}
@@ -571,22 +578,63 @@ function DrawerCard({ n, tone, icon: Icon, title, sub, children, optional }) {
                     </div>
                 </div>
             </div>
-            <div className="mt-3">{children}</div>
+            <div className="mt-3 w-full max-w-full min-w-0">{children}</div>
         </div>
     );
 }
 
-function FormField({ label, placeholder, value, full }) {
+function FormField({ label, placeholder, value, full, options }) {
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState(value);
+
+    useEffect(() => {
+        if (value !== selected) setSelected(value);
+    }, [value]);
+
     return (
-        <div className={full ? "col-span-full mt-2" : ""}>
+        <div className={`relative ${full ? "col-span-full mt-2" : ""}`}>
             <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1">
                 {label}
             </div>
-            <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px]">
-                <span className={value ? "text-zinc-200" : "text-zinc-500"}>
-                    {value || placeholder}
-                </span>
-            </div>
+            {options ? (
+                <>
+                    <div 
+                        className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between cursor-pointer hover:bg-black/40 transition-colors"
+                        onClick={() => setOpen(!open)}
+                    >
+                        <span className={selected ? "text-zinc-200" : "text-zinc-500"}>
+                            {selected || placeholder}
+                        </span>
+                        <ChevronDown className={`size-3.5 text-zinc-500 transition-transform ${open ? 'rotate-180' : ''}`} />
+                    </div>
+                    {open && (
+                        <>
+                            <div className="fixed inset-0 z-10" onClick={() => setOpen(false)}></div>
+                            <div className="absolute z-20 w-full mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl max-h-48 overflow-y-auto">
+                                {options.map(opt => (
+                                    <div 
+                                        key={opt} 
+                                        className="px-3 py-2.5 text-[12.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors"
+                                        onClick={() => { setSelected(opt); setOpen(false); }}
+                                    >
+                                        {opt}
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </>
+            ) : (
+                <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between">
+                    <input 
+                        type="text"
+                        className="bg-transparent border-none outline-none w-full text-zinc-200 placeholder:text-zinc-500"
+                        placeholder={placeholder}
+                        value={selected || ""}
+                        onChange={(e) => setSelected(e.target.value)}
+                    />
+                </div>
+            )}
         </div>
     );
 }
@@ -601,8 +649,8 @@ function BidIQSection() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start">
-                    <div className="lg:col-span-5">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start w-full min-w-0">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.22em] text-amber-300">
                             <Zap className="size-3" /> BidIQ · Intelligence
                         </div>
@@ -631,9 +679,9 @@ function BidIQSection() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7 space-y-4">
+                    <div className="lg:col-span-7 space-y-4 w-full min-w-0">
                         {/* Verdict card */}
-                        <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/[0.04] p-5">
+                        <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/[0.04] p-5 w-full max-w-full min-w-0">
                             <div className="flex items-center gap-5 flex-wrap">
                                 <ScoreRing score={76} />
                                 <div className="flex-1 min-w-0">
@@ -677,61 +725,63 @@ function BidIQSection() {
                         </div>
 
                         {/* Reality gap */}
-                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
-                            <div className="flex items-center justify-between">
+                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5 w-full max-w-full min-w-0">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                 <div>
                                     <div className="text-[11px] uppercase tracking-[0.22em] text-rose-300 font-bold">
                                         Reality gap
                                     </div>
-                                    <div className="text-[11.5px] text-zinc-500">
+                                    <div className="text-[11.5px] text-zinc-500 leading-normal">
                                         What the client posted vs what the work actually needs
                                     </div>
                                 </div>
-                                <span className="text-[9.5px] uppercase tracking-[0.18em] rounded-full border border-rose-400/30 bg-rose-500/10 text-rose-300 px-2 py-0.5">
+                                <span className="self-start sm:self-center text-[9.5px] uppercase tracking-[0.18em] rounded-full border border-rose-400/30 bg-rose-500/10 text-rose-300 px-2.5 py-0.5 whitespace-nowrap">
                                     High Reality Gap
                                 </span>
                             </div>
-                            <div className="mt-4 rounded-xl border border-white/10 overflow-hidden">
-                                <div className="grid grid-cols-12 px-4 py-2.5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 bg-white/[0.02] border-b border-white/5">
-                                    <div className="col-span-4">Metric</div>
-                                    <div className="col-span-3">Client posted</div>
-                                    <div className="col-span-3">Market reality</div>
-                                    <div className="col-span-2 text-right">∆</div>
-                                </div>
-                                {[
-                                    [DollarSign, "Budget", "$500", "$1,540", "+208%", "rose"],
-                                    [Clock3, "Timeline", "3", "2-2 wk", "+85%", "rose"],
-                                    [User, "Team size", "1 dev", "1 devs", "+1", "indigo"],
-                                    [History, "Revisions", "2 rd", "10 rd", "+400%", "rose"],
-                                ].map(([Ic, k, a, b, d, t], i) => (
-                                    <div
-                                        key={i}
-                                        className="grid grid-cols-12 items-center px-4 py-3 border-t border-white/5"
-                                    >
-                                        <div className="col-span-4 inline-flex items-center gap-2 text-[12.5px] text-zinc-200">
-                                            <Ic className="size-3.5 text-zinc-500" /> {k}
-                                        </div>
-                                        <div className="col-span-3 text-[12.5px] text-zinc-300">
-                                            {a}
-                                        </div>
-                                        <div className="col-span-3 text-[12.5px] text-white">
-                                            {b}
-                                        </div>
-                                        <div className="col-span-2 text-right">
-                                            <span
-                                                className={`text-[10.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${
-                                                    t === "rose"
-                                                        ? "border-rose-400/30 bg-rose-500/10 text-rose-300"
-                                                        : "border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300"
-                                                }`}
-                                            >
-                                                {d}
-                                            </span>
-                                        </div>
+                            <div className="mt-4 rounded-xl border border-white/10 overflow-x-auto w-full max-w-full min-w-0 no-scrollbar">
+                                <div className="min-w-[420px]">
+                                    <div className="grid grid-cols-12 px-4 py-2.5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 bg-white/[0.02] border-b border-white/5">
+                                        <div className="col-span-4">Metric</div>
+                                        <div className="col-span-3">Client posted</div>
+                                        <div className="col-span-3">Market reality</div>
+                                        <div className="col-span-2 text-right">∆</div>
                                     </div>
-                                ))}
+                                    {[
+                                        [DollarSign, "Budget", "$500", "$1,540", "+208%", "rose"],
+                                        [Clock3, "Timeline", "3", "2-2 wk", "+85%", "rose"],
+                                        [User, "Team size", "1 dev", "1 devs", "+1", "indigo"],
+                                        [History, "Revisions", "2 rd", "10 rd", "+400%", "rose"],
+                                    ].map(([Ic, k, a, b, d, t], i) => (
+                                        <div
+                                            key={i}
+                                            className="grid grid-cols-12 items-center px-4 py-3 border-t border-white/5"
+                                        >
+                                            <div className="col-span-4 inline-flex items-center gap-2 text-[12.5px] text-zinc-200">
+                                                <Ic className="size-3.5 text-zinc-500" /> {k}
+                                            </div>
+                                            <div className="col-span-3 text-[12.5px] text-zinc-300">
+                                                {a}
+                                            </div>
+                                            <div className="col-span-3 text-[12.5px] text-white">
+                                                {b}
+                                            </div>
+                                            <div className="col-span-2 text-right">
+                                                <span
+                                                    className={`text-[10.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${
+                                                        t === "rose"
+                                                            ? "border-rose-400/30 bg-rose-500/10 text-rose-300"
+                                                            : "border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300"
+                                                    }`}
+                                                >
+                                                    {d}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="mt-4 rounded-xl border border-zukvo-500/30 bg-zukvo-500/5 p-3 flex items-start gap-2.5">
+                            <div className="mt-4 rounded-xl border border-zukvo-500/30 bg-zukvo-500/5 p-3 flex items-start gap-2.5 w-full max-w-full min-w-0">
                                 <TrendingUp className="size-4 text-zukvo-300 mt-0.5 shrink-0" />
                                 <div className="text-[12.5px] text-zinc-300">
                                     <span className="text-[10px] uppercase tracking-[0.22em] text-zukvo-300 font-bold block mb-0.5">
@@ -744,8 +794,8 @@ function BidIQSection() {
                         </div>
 
                         {/* Effort + Risk row */}
-                        <div className="grid md:grid-cols-2 gap-4">
-                            <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
+                        <div className="grid md:grid-cols-2 gap-4 w-full min-w-0">
+                            <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5 w-full max-w-full min-w-0">
                                 <div className="flex items-center justify-between">
                                     <div>
                                         <div className="text-[11px] uppercase tracking-[0.22em] text-amber-300 font-bold">
@@ -793,7 +843,7 @@ function BidIQSection() {
                                 </div>
                             </div>
 
-                            <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
+                            <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5 w-full max-w-full min-w-0">
                                 <div className="flex items-center justify-between">
                                     <div>
                                         <div className="text-[11px] uppercase tracking-[0.22em] text-rose-300 font-bold">
@@ -807,7 +857,7 @@ function BidIQSection() {
                                         1 flagged
                                     </span>
                                 </div>
-                                <div className="mt-4 rounded-xl border border-amber-400/30 bg-amber-500/5 p-3">
+                                <div className="mt-4 rounded-xl border border-amber-400/30 bg-amber-500/5 p-3 w-full max-w-full min-w-0">
                                     <div className="flex items-center justify-between">
                                         <div className="inline-flex items-center gap-2 text-[12.5px] text-zinc-100">
                                             <DollarSign className="size-3.5 text-amber-300" />
@@ -825,8 +875,8 @@ function BidIQSection() {
                         </div>
 
                         {/* Budget + Competition */}
-                        <div className="grid md:grid-cols-2 gap-4">
-                            <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
+                        <div className="grid md:grid-cols-2 gap-4 w-full min-w-0">
+                            <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5 w-full max-w-full min-w-0">
                                 <div className="text-[11px] uppercase tracking-[0.22em] text-emerald-300 font-bold">
                                     Budget reality check
                                 </div>
@@ -855,7 +905,7 @@ function BidIQSection() {
                                 </div>
                             </div>
 
-                            <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
+                            <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5 w-full max-w-full min-w-0">
                                 <div className="text-[11px] uppercase tracking-[0.22em] text-amber-300 font-bold">
                                     Competition
                                 </div>
@@ -1011,9 +1061,9 @@ function LeadDetail() {
                         </div>
                     </div>
 
-                    <div className="grid lg:grid-cols-12">
+                    <div className="grid lg:grid-cols-12 w-full min-w-0">
                         {/* Main */}
-                        <div className="lg:col-span-8 p-5 lg:p-7 lg:border-r border-white/5 space-y-5">
+                        <div className="lg:col-span-8 p-5 lg:p-7 lg:border-r border-white/5 space-y-5 w-full min-w-0">
                             <div>
                                 <div className="flex items-center gap-2 flex-wrap text-[11px] text-zinc-500">
                                     <span className="text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 px-2 py-0.5">
@@ -1124,7 +1174,7 @@ function LeadDetail() {
                         </div>
 
                         {/* Right rail */}
-                        <div className="lg:col-span-4 p-5 lg:p-6 space-y-4">
+                        <div className="lg:col-span-4 p-5 lg:p-6 space-y-4 w-full min-w-0">
                             <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
                                 <div className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 font-bold">
                                     About the client
@@ -1148,10 +1198,10 @@ function LeadDetail() {
                                 <div className="mt-3 space-y-1.5 text-[12px]">
                                     <div className="inline-flex items-center gap-2 text-zinc-300">
                                         <Mail className="size-3.5 text-zinc-500" />{" "}
-                                        johndoe@acme.com
+                                        john.doe*********@acme.com
                                     </div>
                                     <div className="inline-flex items-center gap-2 text-zinc-300">
-                                        <Phone className="size-3.5 text-zinc-500" /> (555) 987-6543
+                                        <Phone className="size-3.5 text-zinc-500" /> +1 (555) ***-****
                                     </div>
                                 </div>
                                 <div className="mt-3 flex gap-2">
@@ -1306,7 +1356,7 @@ function ProposalLink() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center w-full min-w-0">
                     <div className="lg:col-span-5">
                         <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-400/30 bg-violet-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.22em] text-violet-300">
                             <FileSignature className="size-3" /> Lead → Proposal
@@ -1339,9 +1389,9 @@ function ProposalLink() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 w-full min-w-0">
                         {/* Flow mock */}
-                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
+                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5 w-full max-w-full min-w-0">
                             <div className="flex flex-col md:flex-row items-stretch gap-3">
                                 <FlowStage
                                     icon={Layers}
@@ -1369,11 +1419,11 @@ function ProposalLink() {
                                 />
                             </div>
 
-                            <div className="mt-5 rounded-xl border border-white/10 bg-white/[0.02] p-4">
-                                <div className="flex items-center justify-between flex-wrap gap-2">
-                                    <div className="inline-flex items-center gap-2 text-[12px] text-zinc-200">
-                                        <FileSignature className="size-3.5 text-violet-300" />
-                                        On-Demand Driver Booking App Development
+                            <div className="mt-5 rounded-xl border border-white/10 bg-white/[0.02] p-4 w-full max-w-full min-w-0">
+                                <div className="flex items-center justify-between flex-wrap gap-2 min-w-0">
+                                    <div className="flex items-center gap-2 text-[12px] text-zinc-200 min-w-0">
+                                        <FileSignature className="size-3.5 text-violet-300 shrink-0" />
+                                        <span className="truncate">On-Demand Driver Booking App Development</span>
                                     </div>
                                     <span className="text-[10px] uppercase tracking-[0.18em] rounded-full border border-amber-400/30 bg-amber-500/10 text-amber-300 px-2 py-0.5">
                                         Draft
@@ -1422,7 +1472,7 @@ function FlowStage({ icon: Icon, chip, title, sub, tone, glow }) {
     };
     return (
         <div
-            className={`flex-1 rounded-xl border bg-[#0E0E12] p-4 ${
+            className={`flex-1 min-w-0 rounded-xl border bg-[#0E0E12] p-4 ${
                 glow
                     ? "border-violet-400/30 shadow-[0_0_0_4px_rgba(139,92,246,0.08)]"
                     : "border-white/10"
@@ -1464,8 +1514,8 @@ function MailSection() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-5">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center w-full min-w-0">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="inline-flex items-center gap-1.5 rounded-full border border-zukvo-500/30 bg-zukvo-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.22em] text-zukvo-300">
                             <Mail className="size-3" /> Send Mail
                         </div>
@@ -1494,8 +1544,8 @@ function MailSection() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7">
-                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+                    <div className="lg:col-span-7 w-full min-w-0">
+                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden w-full max-w-full min-w-0">
                             <div className="px-5 py-4 border-b border-white/5 flex items-center justify-between">
                                 <div>
                                     <div className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.22em] text-zukvo-300 font-bold">
@@ -1508,7 +1558,7 @@ function MailSection() {
                                     <div className="text-[11.5px] text-zinc-500">
                                         Sending to{" "}
                                         <span className="text-zinc-300">John Doe</span> ·
-                                        johndoe@acme.com
+                                        john.doe*********@acme.com
                                     </div>
                                 </div>
                                 <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.18em] rounded-full border border-violet-400/30 bg-violet-500/10 text-violet-300 px-2 py-0.5">
@@ -1518,7 +1568,7 @@ function MailSection() {
                             <div className="p-5 space-y-3 text-[12.5px]">
                                 <FormField
                                     label="To"
-                                    value="johndoe@acme.com"
+                                    value="john.doe*********@acme.com"
                                     full
                                 />
                                 <FormField
@@ -1554,7 +1604,7 @@ function MailSection() {
                                         <Sparkles className="size-3.5" /> Enhance
                                     </button>
                                 </div>
-                                <div className="rounded-md border border-white/10 bg-white/[0.02] p-4 text-[13px] text-zinc-200 leading-relaxed space-y-2">
+                                <div className="rounded-md border border-white/10 bg-white/[0.02] p-4 text-[13px] text-zinc-200 leading-relaxed space-y-2 w-full max-w-full min-w-0">
                                     <div>Hi John,</div>
                                     <div>
                                         Thanks for posting the E-Commerce Web Application — I'd love
@@ -1562,7 +1612,7 @@ function MailSection() {
                                         delivery for a project like this.
                                     </div>
                                     <div>Best regards,</div>
-                                    <div className="text-zinc-400">ithyaz</div>
+                                    <div className="text-zinc-400">Sebastian</div>
                                 </div>
                                 <div className="flex items-center justify-between flex-wrap gap-2">
                                     <span className="inline-flex items-center gap-1.5 text-[11.5px] rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 px-2.5 py-1">
@@ -1598,7 +1648,7 @@ function TimelineSection() {
     const events = [
         {
             t: "Lead created",
-            sub: "ithyaz · just now",
+            sub: "Sebastian · just now",
             i: Plus,
             tone: "indigo",
         },
@@ -1659,21 +1709,21 @@ function TimelineSection() {
                     </p>
                 </div>
 
-                <div className="zk-reveal mt-12 grid lg:grid-cols-12 gap-6 items-start">
-                    <div className="lg:col-span-7">
-                        <div className="relative rounded-2xl border border-white/10 bg-[#0E0E10] p-5 md:p-7">
+                <div className="zk-reveal mt-12 grid lg:grid-cols-12 gap-6 items-start w-full min-w-0">
+                    <div className="lg:col-span-7 w-full min-w-0">
+                        <div className="relative rounded-2xl border border-white/10 bg-[#0E0E10] p-5 md:p-7 w-full max-w-full min-w-0">
                             <div className="absolute left-9 md:left-10 top-7 bottom-7 w-px bg-white/10" />
                             <ul className="space-y-4">
                                 {events.map((e, i) => (
-                                    <li key={i} className="relative pl-12 md:pl-14">
+                                    <li key={i} className="relative pl-12 md:pl-14 min-w-0">
                                         <span
                                             className={`absolute left-0 top-0 inline-flex size-9 items-center justify-center rounded-full border bg-[#0E0E12] ${toneMap[e.tone]}`}
                                         >
                                             <e.i className="size-4" />
                                         </span>
-                                        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3.5">
-                                            <div className="text-[13px] text-white">{e.t}</div>
-                                            <div className="text-[11.5px] text-zinc-500 mt-0.5">
+                                        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3.5 w-full max-w-full min-w-0">
+                                            <div className="text-[13px] text-white break-words">{e.t}</div>
+                                            <div className="text-[11.5px] text-zinc-500 mt-0.5 break-words">
                                                 {e.sub}
                                             </div>
                                         </div>
@@ -1683,8 +1733,8 @@ function TimelineSection() {
                         </div>
                     </div>
 
-                    <div className="lg:col-span-5 space-y-5">
-                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
+                    <div className="lg:col-span-5 space-y-5 w-full min-w-0">
+                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5 w-full max-w-full min-w-0">
                             <div className="text-[11px] uppercase tracking-[0.22em] text-zukvo-300 font-bold">
                                 What's logged
                             </div>

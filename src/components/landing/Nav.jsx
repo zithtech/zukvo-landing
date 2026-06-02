@@ -43,6 +43,7 @@ export default function Nav() {
     const [scrolled, setScrolled] = useState(false);
     const [open, setOpen] = useState(false);
     const [productsOpen, setProductsOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState("");
     const [isMobile, setIsMobile] = useState(() => {
         if (typeof window === "undefined") return false;
         return window.matchMedia("(max-width: 1023px)").matches;
@@ -68,8 +69,14 @@ export default function Nav() {
 
     const isLinkActive = (href) => {
         if (isPageRoute(href)) return location.pathname === href;
-        if (href.startsWith("/#"))
-            return location.pathname === "/" && location.hash === href.substring(1);
+        if (href.startsWith("/#")) {
+            if (location.pathname !== "/") return false;
+            const hash = href.split("#")[1]; // e.g. "features"
+            if (activeSection) {
+                return activeSection === hash;
+            }
+            return location.hash === "#" + hash;
+        }
         return false;
     };
     const productsActive =
@@ -77,11 +84,75 @@ export default function Nav() {
     const contactSalesActive = location.pathname === "/contact-sales";
 
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 12);
-        onScroll();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
-    }, []);
+        const sectionIds = ["features", "audiences", "pricing", "faq"];
+
+        const handleScroll = () => {
+            // Update scrolled header state
+            setScrolled(window.scrollY > 12);
+
+            if (location.pathname !== "/") {
+                setActiveSection("");
+                return;
+            }
+
+            // Top-of-page reset
+            if (window.scrollY < 100) {
+                setActiveSection("");
+                return;
+            }
+
+            const scrollPosition = window.scrollY + window.innerHeight / 3;
+            let currentSection = "";
+
+            for (const id of sectionIds) {
+                const el = document.getElementById(id);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    const top = rect.top + window.scrollY;
+                    const height = rect.height;
+                    if (scrollPosition >= top && scrollPosition < top + height) {
+                        currentSection = id;
+                        break;
+                    }
+                }
+            }
+
+            // Fallback: if not in any specific range but scrolled down, find the closest one
+            if (!currentSection) {
+                let minDistance = Infinity;
+                let closestId = "";
+                for (const id of sectionIds) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        const rect = el.getBoundingClientRect();
+                        const top = rect.top + window.scrollY;
+                        const distance = Math.abs(scrollPosition - top);
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestId = id;
+                        }
+                    }
+                }
+                currentSection = closestId;
+            }
+
+            setActiveSection(currentSection);
+        };
+
+        // Attach scroll listener
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        
+        // Run immediately on path/scroll change
+        handleScroll();
+
+        // Defer another check to ensure DOM has rendered
+        const timeoutId = setTimeout(handleScroll, 100);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            clearTimeout(timeoutId);
+        };
+    }, [location.pathname]);
 
     useEffect(() => {
         if (!playIntro) return;
@@ -230,12 +301,6 @@ export default function Nav() {
                                     ? "text-zukvo-600"
                                     : "text-zinc-700 hover:text-zukvo-600"
                             }`;
-                            const indicator = active && (
-                                <span
-                                    aria-hidden="true"
-                                    className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full bg-zukvo-500"
-                                />
-                            );
                             return isPageRoute(l.href) ? (
                                 <Link
                                     key={l.label}
@@ -244,7 +309,6 @@ export default function Nav() {
                                     className={cls}
                                 >
                                     {l.label}
-                                    {indicator}
                                 </Link>
                             ) : (
                                 <a
@@ -254,7 +318,6 @@ export default function Nav() {
                                     className={cls}
                                 >
                                     {l.label}
-                                    {indicator}
                                 </a>
                             );
                         })}

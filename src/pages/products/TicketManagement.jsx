@@ -96,7 +96,7 @@ export default function TicketManagement() {
     return (
         <main
             data-testid="ticket-management-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -209,7 +209,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -869,8 +869,8 @@ function SprintBacklog() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-12 items-start">
-                    <div className="lg:col-span-5 lg:sticky lg:top-28">
+                <div className="zk-reveal grid grid-cols-1 lg:grid-cols-12 gap-12 items-start w-full">
+                    <div className="w-full lg:col-span-5 lg:sticky lg:top-28">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-400">
                             Sprint plans · Backlog
                         </div>
@@ -897,7 +897,7 @@ function SprintBacklog() {
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7">
+                    <div className="w-full lg:col-span-7">
                         <div className="flex items-center justify-between mb-3">
                             <div className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">
                                 Live preview
@@ -972,35 +972,39 @@ function ListPreview() {
     };
     return (
         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
-            <div className="grid grid-cols-12 px-4 py-2.5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
-                <div className="col-span-2">ID</div>
-                <div className="col-span-6">Title</div>
-                <div className="col-span-2">Status</div>
-                <div className="col-span-1">Pri</div>
-                <div className="col-span-1 text-right">·</div>
-            </div>
-            {rows.map((r, i) => (
-                <div
-                    key={i}
-                    className="grid grid-cols-12 items-center px-4 py-3 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
-                >
-                    <div className="col-span-2 font-mono text-[12px] text-zinc-400">{r[0]}</div>
-                    <div className="col-span-6 text-[13px] text-zinc-200 truncate">{r[1]}</div>
-                    <div className="col-span-2">
-                        <span
-                            className={`inline-flex items-center text-[10px] uppercase tracking-[0.2em] rounded-full border px-2 py-0.5 ${tone[r[4]]}`}
+            <div className="overflow-x-auto">
+                <div className="min-w-[800px]">
+                    <div className="grid grid-cols-12 gap-3 px-4 py-2.5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5 bg-white/[0.02]">
+                        <div className="col-span-2">ID</div>
+                        <div className="col-span-5">Title</div>
+                        <div className="col-span-3">Status</div>
+                        <div className="col-span-1">Pri</div>
+                        <div className="col-span-1 text-right">·</div>
+                    </div>
+                    {rows.map((r, i) => (
+                        <div
+                            key={i}
+                            className="grid grid-cols-12 gap-3 items-center px-4 py-3 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
                         >
-                            {r[2]}
-                        </span>
-                    </div>
-                    <div className="col-span-1">
-                        <span className="rounded bg-amber-500/10 text-amber-300 border border-amber-400/30 px-1.5 py-0.5 text-[10px]">
-                            {r[3]}
-                        </span>
-                    </div>
-                    <div className="col-span-1 text-right text-zinc-500 text-[11px]">⋯</div>
+                            <div className="col-span-2 font-mono text-[12px] text-zinc-400 whitespace-nowrap">{r[0]}</div>
+                            <div className="col-span-5 text-[13px] text-zinc-200 truncate whitespace-nowrap">{r[1]}</div>
+                            <div className="col-span-3">
+                                <span
+                                    className={`inline-flex items-center text-[10px] uppercase tracking-[0.2em] rounded-full border px-2 py-0.5 whitespace-nowrap ${tone[r[4]]}`}
+                                >
+                                    {r[2]}
+                                </span>
+                            </div>
+                            <div className="col-span-1">
+                                <span className="rounded bg-amber-500/10 text-amber-300 border border-amber-400/30 px-1.5 py-0.5 text-[10px] whitespace-nowrap">
+                                    {r[3]}
+                                </span>
+                            </div>
+                            <div className="col-span-1 text-right text-zinc-500 text-[11px] whitespace-nowrap">⋯</div>
+                        </div>
+                    ))}
                 </div>
-            ))}
+            </div>
         </div>
     );
 }

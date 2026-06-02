@@ -83,7 +83,7 @@ export default function DocumentHub() {
     return (
         <main
             data-testid="document-hub-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -194,7 +194,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -446,7 +446,7 @@ function CreationTypes() {
                                 ["Hub name", "Release Kit"],
                                 ["Project", "VDrive · 001"],
                                 ["Visibility", "Private"],
-                                ["Owner", "ithyaz"],
+                                ["Owner", "Sebastian"],
                             ].map((r, i) => (
                                 <div
                                     key={i}
@@ -513,27 +513,31 @@ function CreationTypes() {
                 </div>
 
                 {/* Image slots — creation page + creation types */}
-                <div className="zk-reveal mt-10 grid md:grid-cols-2 gap-5">
-                    <ImageSlot
-                        testid="dh-image-creation-page"
-                        src={HUB_MANUAL_CREATION_IMG}
-                        alt="Hub manual creation page"
-                        label="Hub creation page"
-                        chromeUrl="zukvo.app/work/document-hub/new"
-                        aspect="auto"
-                        objectFit="contain"
-                        caption="Live screenshot — manual hub creation form."
-                    />
-                    <ImageSlot
-                        testid="dh-image-creation-types"
-                        src={HUB_ZAI_CREATION_IMG}
-                        alt="AI creation mode"
-                        label="Manual vs Create-with-Zai"
-                        chromeUrl="zukvo.app/work/document-hub/new?mode=zai"
-                        aspect="auto"
-                        objectFit="contain"
-                        caption="Live screenshot — AI-powered hub creation prompt."
-                    />
+                <div className="zk-reveal mt-10 grid md:grid-cols-2 gap-5 w-full min-w-0">
+                    <div className="w-full min-w-0">
+                        <ImageSlot
+                            testid="dh-image-creation-page"
+                            src={HUB_MANUAL_CREATION_IMG}
+                            alt="Hub manual creation page"
+                            label="Hub creation page"
+                            chromeUrl="zukvo.app/work/document-hub/new"
+                            aspect="auto"
+                            objectFit="contain"
+                            caption="Live screenshot — manual hub creation form."
+                        />
+                    </div>
+                    <div className="w-full min-w-0">
+                        <ImageSlot
+                            testid="dh-image-creation-types"
+                            src={HUB_ZAI_CREATION_IMG}
+                            alt="AI creation mode"
+                            label="Manual vs Create-with-Zai"
+                            chromeUrl="zukvo.app/work/document-hub/new?mode=zai"
+                            aspect="auto"
+                            objectFit="contain"
+                            caption="Live screenshot — AI-powered hub creation prompt."
+                        />
+                    </div>
                 </div>
             </div>
         </section>
@@ -550,8 +554,8 @@ function EditorSection() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-5 lg:order-2">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center w-full min-w-0">
+                    <div className="lg:col-span-5 lg:order-2 min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-400">
                             The editor
                         </div>
@@ -574,15 +578,15 @@ function EditorSection() {
                             ].map((b, i) => (
                                 <div
                                     key={i}
-                                    className="rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-[12.5px] text-zinc-300 inline-flex items-center gap-2"
+                                    className="rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2 text-[12.5px] text-zinc-300 flex items-center gap-2"
                                 >
-                                    <b.i className="size-3.5 text-zukvo-400" />
+                                    <b.i className="size-3.5 text-zukvo-400 shrink-0" />
                                     {b.t}
                                 </div>
                             ))}
                         </div>
                     </div>
-                    <div className="lg:col-span-7 lg:order-1">
+                    <div className="lg:col-span-7 lg:order-1 min-w-0 w-full">
                         <ImageSlot
                             testid="dh-image-editor"
                             src={HUB_EDITOR_IMG}
@@ -611,8 +615,8 @@ function ZaiEnhance() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-12 items-center">
-                    <div className="lg:col-span-5">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-12 items-center w-full min-w-0">
+                    <div className="lg:col-span-5 min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-400">
                             Inline Zai enhance
                         </div>
@@ -635,12 +639,12 @@ function ZaiEnhance() {
                                     key={b}
                                     className="flex items-center gap-2 text-[14px] text-zinc-300"
                                 >
-                                    <CheckCircle2 className="size-4 text-zukvo-400" /> {b}
+                                    <CheckCircle2 className="size-4 text-zukvo-400 shrink-0" /> {b}
                                 </li>
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 min-w-0 w-full">
                         <EnhanceMock />
                     </div>
                 </div>
@@ -659,25 +663,27 @@ function EnhanceMock() {
                 Create a Google Play Console account with a business domain email — not a personal
                 Gmail. Costs $25 one-time. Identity verification takes about 48 hours.
             </div>
-            <div className="mt-3 inline-flex items-center gap-1 rounded-full border border-zukvo-500/30 bg-[#0B0B12] p-1 shadow-[0_10px_30px_-10px_rgba(99,102,241,0.55)]">
-                {[
-                    { i: Sparkles, t: "Improve" },
-                    { i: List, t: "Bullet" },
-                    { i: Quote, t: "Summarize" },
-                    { i: Code2, t: "Translate" },
-                ].map((b, i) => (
-                    <button
-                        key={i}
-                        className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11.5px] transition-colors ${
-                            i === 0
-                                ? "bg-zukvo-500 text-white"
-                                : "text-zinc-400 hover:text-white"
-                        }`}
-                    >
-                        <b.i className="size-3.5" />
-                        {b.t}
-                    </button>
-                ))}
+            <div className="mt-3 overflow-x-auto no-scrollbar">
+                <div className="inline-flex items-center gap-1 rounded-full border border-zukvo-500/30 bg-[#0B0B12] p-1 shadow-[0_10px_30px_-10px_rgba(99,102,241,0.55)] whitespace-nowrap">
+                    {[
+                        { i: Sparkles, t: "Improve" },
+                        { i: List, t: "Bullet" },
+                        { i: Quote, t: "Summarize" },
+                        { i: Code2, t: "Translate" },
+                    ].map((b, i) => (
+                        <button
+                            key={i}
+                            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11.5px] transition-colors ${
+                                i === 0
+                                    ? "bg-zukvo-500 text-white"
+                                    : "text-zinc-400 hover:text-white"
+                            }`}
+                        >
+                            <b.i className="size-3.5" />
+                            {b.t}
+                        </button>
+                    ))}
+                </div>
             </div>
             <div className="mt-5 rounded-lg border border-emerald-400/30 bg-emerald-500/5 p-4 text-[13.5px] leading-relaxed text-zinc-200">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-300 mb-1.5">
@@ -824,7 +830,7 @@ function PrivateCard() {
             </div>
             <div className="mt-4 space-y-2">
                 {[
-                    ["ithyaz", "Owner", "violet"],
+                    ["Sebastian", "Owner", "violet"],
                     ["Bharathi", "Editor", "indigo"],
                     ["Subhalakshmi", "Editor", "indigo"],
                     ["Divya D", "Viewer", "zinc"],
@@ -874,8 +880,8 @@ function HistorySection() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-12 items-start">
-                    <div className="lg:col-span-5 lg:sticky lg:top-28">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-12 items-start w-full min-w-0">
+                    <div className="lg:col-span-5 lg:sticky lg:top-28 min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-400">
                             Auto-save · History
                         </div>
@@ -898,12 +904,12 @@ function HistorySection() {
                                     key={i}
                                     className="flex items-center gap-2.5 text-[14px] text-zinc-300"
                                 >
-                                    <b.i className="size-4 text-zukvo-400" /> {b.t}
+                                    <b.i className="size-4 text-zukvo-400 shrink-0" /> {b.t}
                                 </li>
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7 space-y-5">
+                    <div className="lg:col-span-7 space-y-5 min-w-0 w-full">
                         <HistoryMock />
                         <ImageSlot
                             testid="dh-image-history"
@@ -925,10 +931,10 @@ function HistorySection() {
 
 function HistoryMock() {
     const versions = [
-        { v: "v18", t: "2m ago", a: "ithyaz", c: "Improved Account Setup wording (Zai)", current: true },
+        { v: "v18", t: "2m ago", a: "Sebastian", c: "Improved Account Setup wording (Zai)", current: true },
         { v: "v17", t: "12m ago", a: "Bharathi", c: "Added DUNS warning callout" },
         { v: "v16", t: "3h ago", a: "Subhalakshmi", c: "Restructured Legal section" },
-        { v: "v15", t: "Yesterday", a: "ithyaz", c: "Initial Play Store outline" },
+        { v: "v15", t: "Yesterday", a: "Sebastian", c: "Initial Play Store outline" },
     ];
     return (
         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
@@ -1058,8 +1064,8 @@ function TicketLinking() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-12 items-center">
-                    <div className="lg:col-span-5">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-12 items-center w-full min-w-0">
+                    <div className="lg:col-span-5 min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-400">
                             Ticket linking
                         </div>
@@ -1078,21 +1084,21 @@ function TicketLinking() {
                             ].map((r, i) => (
                                 <div
                                     key={i}
-                                    className="flex items-center gap-3 rounded-md border border-white/10 bg-white/[0.02] px-3 py-2"
+                                    className="flex items-center gap-3 rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 min-w-0"
                                 >
                                     <Link2 className="size-3.5 text-zukvo-400 shrink-0" />
-                                    <span className="font-mono text-[11.5px] text-zukvo-300">
+                                    <span className="font-mono text-[11.5px] text-zukvo-300 shrink-0">
                                         {r[0]}
                                     </span>
-                                    <span className="text-[12.5px] text-zinc-300 truncate">
+                                    <span className="text-[12.5px] text-zinc-300 truncate min-w-0">
                                         {r[1]}
                                     </span>
-                                    <ChevronRight className="size-3.5 text-zinc-500 ml-auto" />
+                                    <ChevronRight className="size-3.5 text-zinc-500 ml-auto shrink-0" />
                                 </div>
                             ))}
                         </div>
                     </div>
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 min-w-0 w-full">
                         <ImageSlot
                             testid="dh-image-ticket-linking"
                             src={HUB_LINK_TICKET_IMG}

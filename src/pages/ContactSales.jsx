@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
     ArrowRight,
     CalendarCheck,
@@ -62,8 +63,12 @@ export default function ContactSales() {
         company: "",
         size: "",
         useCase: "",
+        phoneNumber: "",
+        description: "",
     });
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const targets = document.querySelectorAll(".zk-reveal");
@@ -83,9 +88,27 @@ export default function ContactSales() {
     }, []);
 
     const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        setSubmitted(true);
+        setLoading(true);
+        setError("");
+        try {
+            const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+            const response = await axios.post(`${apiUrl}/api/contact-sales`, form);
+            if (response.data && response.data.success) {
+                setSubmitted(true);
+            } else {
+                setError(response.data?.message || "Something went wrong. Please try again.");
+            }
+        } catch (err) {
+            console.error("Form submission error:", err);
+            setError(
+                err.response?.data?.message || 
+                "Unable to reach the server. Please check your connection and try again."
+            );
+        } finally {
+            setLoading(false);
+        }
     };
 
     const isValid =
@@ -306,14 +329,24 @@ export default function ContactSales() {
                                                 onChange={update("email")}
                                                 required
                                             />
-                                            <Field
-                                                id="company"
-                                                label="Company"
-                                                placeholder="Acme Studio"
-                                                value={form.company}
-                                                onChange={update("company")}
-                                                required
-                                            />
+                                            <div className="grid sm:grid-cols-2 gap-4">
+                                                <Field
+                                                    id="company"
+                                                    label="Company"
+                                                    placeholder="Acme Studio"
+                                                    value={form.company}
+                                                    onChange={update("company")}
+                                                    required
+                                                />
+                                                <Field
+                                                    id="phoneNumber"
+                                                    type="tel"
+                                                    label="Phone number"
+                                                    placeholder="+1 (555) 000-0000"
+                                                    value={form.phoneNumber}
+                                                    onChange={update("phoneNumber")}
+                                                />
+                                            </div>
                                             <div className="grid sm:grid-cols-2 gap-4">
                                                 <Select
                                                     id="size"
@@ -331,16 +364,31 @@ export default function ContactSales() {
                                                     options={USE_CASES}
                                                 />
                                             </div>
+                                            <Field
+                                                id="description"
+                                                type="textarea"
+                                                label="How can we help?"
+                                                placeholder="Tell us about your project, timeline, or any specific requirements..."
+                                                value={form.description}
+                                                onChange={update("description")}
+                                            />
+
+                                            {error && (
+                                                <div className="rounded-xl border border-rose-200 bg-rose-50/50 p-4 text-[13px] text-rose-600 flex items-start gap-2.5">
+                                                    <span className="font-semibold shrink-0">Error:</span>
+                                                    <span>{error}</span>
+                                                </div>
+                                            )}
 
                                             <div className="pt-2">
                                                 <button
                                                     type="submit"
-                                                    disabled={!isValid}
+                                                    disabled={!isValid || loading}
                                                     data-testid="cs-submit"
                                                     className="group inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-zukvo-ink text-white px-6 py-3.5 text-[14px] font-medium transition-all hover:bg-zukvo-600 disabled:opacity-40 disabled:cursor-not-allowed"
                                                 >
-                                                    Continue
-                                                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                                                    {loading ? "Sending..." : "Continue"}
+                                                    {!loading && <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />}
                                                 </button>
                                                 <p className="mt-4 text-[11.5px] text-zinc-500 inline-flex items-center gap-1.5">
                                                     <Lock className="size-3" />
@@ -411,16 +459,29 @@ function Field({ id, label, type = "text", placeholder, value, onChange, require
                 {label}
                 {required && <span className="text-rose-500 ml-0.5">*</span>}
             </span>
-            <input
-                id={id}
-                name={id}
-                type={type}
-                value={value}
-                onChange={onChange}
-                placeholder={placeholder}
-                required={required}
-                className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-[14px] text-zukvo-ink placeholder:text-zinc-400 outline-none transition-all focus:border-zukvo-500/60 focus:ring-4 focus:ring-zukvo-500/15 hover:border-zinc-300"
-            />
+            {type === "textarea" ? (
+                <textarea
+                    id={id}
+                    name={id}
+                    value={value}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    required={required}
+                    rows={4}
+                    className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-[14px] text-zukvo-ink placeholder:text-zinc-400 outline-none transition-all focus:border-zukvo-500/60 focus:ring-4 focus:ring-zukvo-500/15 hover:border-zinc-300 resize-y"
+                />
+            ) : (
+                <input
+                    id={id}
+                    name={id}
+                    type={type}
+                    value={value}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    required={required}
+                    className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-[14px] text-zukvo-ink placeholder:text-zinc-400 outline-none transition-all focus:border-zukvo-500/60 focus:ring-4 focus:ring-zukvo-500/15 hover:border-zinc-300"
+                />
+            )}
         </label>
     );
 }

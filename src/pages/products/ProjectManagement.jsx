@@ -69,7 +69,7 @@ export default function ProjectManagement() {
     return (
         <main
             data-testid="project-management-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -179,7 +179,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -246,6 +246,7 @@ function MainView() {
                             alt="Projects Management home view"
                             label="Projects — main view"
                             chromeUrl="zukvo.app/work/projects"
+                            aspect="auto"
                             objectFit="contain"
                             caption="Live screenshot — Projects Management home with KPI bar."
                         />
@@ -281,9 +282,9 @@ function CreateAndViews() {
                     </p>
                 </div>
 
-                <div className="zk-reveal mt-12 grid lg:grid-cols-12 gap-8 items-start">
+                <div className="zk-reveal mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full">
                     {/* Create panel */}
-                    <div className="lg:col-span-5">
+                    <div className="w-full lg:col-span-5">
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-6">
                             <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-zukvo-300">
                                 <Plus className="size-3.5" /> Add Project
@@ -293,7 +294,7 @@ function CreateAndViews() {
                                     ["Name", "Zukvo"],
                                     ["Code", "#002"],
                                     ["Description", "Manage Projects, Tickets, Clients…"],
-                                    ["Project Lead", "ithyaz"],
+                                    ["Project Lead", "Sebastian"],
                                     ["Members", "15 people"],
                                     ["Priority", "Medium"],
                                     ["Status", "Active"],
@@ -319,7 +320,7 @@ function CreateAndViews() {
                     </div>
 
                     {/* Live view switcher */}
-                    <div className="lg:col-span-7">
+                    <div className="w-full lg:col-span-7">
                         <div className="flex items-center justify-between mb-3">
                             <div className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">
                                 Live preview
@@ -379,7 +380,7 @@ const PROJECTS = [
         priority: "High",
         date: "Mar 30",
         timeline: 0,
-        lead: "ithyaz",
+        lead: "Sebastian",
         members: 5,
     },
     {
@@ -403,7 +404,7 @@ const PROJECTS = [
         priority: "Medium",
         date: "Aug 1 → Ongoing",
         timeline: 52,
-        lead: "ithyaz",
+        lead: "Sebastian",
         members: 15,
     },
 ];
@@ -463,43 +464,47 @@ function CardGrid() {
 function ListPreview() {
     return (
         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
-            <div className="grid grid-cols-12 px-4 py-2.5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
-                <div className="col-span-1">Code</div>
-                <div className="col-span-3">Project</div>
-                <div className="col-span-2">Lead</div>
-                <div className="col-span-2">Members</div>
-                <div className="col-span-2">Status</div>
-                <div className="col-span-2 text-right">Progress</div>
-            </div>
-            {PROJECTS.map((p, i) => (
-                <div
-                    key={i}
-                    className="grid grid-cols-12 items-center px-4 py-3 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
-                >
-                    <div className="col-span-1 font-mono text-[11px] text-zinc-400">{p.code}</div>
-                    <div className="col-span-3 text-[13px] text-zinc-200 truncate">{p.name}</div>
-                    <div className="col-span-2 text-[12.5px] text-zinc-300">{p.lead}</div>
-                    <div className="col-span-2 text-[12.5px] text-zinc-400">{p.members}</div>
-                    <div className="col-span-2">
-                        <StatusPill status={p.status} />
+            <div className="overflow-x-auto">
+                <div className="min-w-[700px]">
+                    <div className="grid grid-cols-12 gap-3 px-4 py-2.5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5 bg-white/[0.02]">
+                        <div className="col-span-1">Code</div>
+                        <div className="col-span-3">Project</div>
+                        <div className="col-span-2">Lead</div>
+                        <div className="col-span-2">Members</div>
+                        <div className="col-span-2">Status</div>
+                        <div className="col-span-2 text-right">Progress</div>
                     </div>
-                    <div className="col-span-2">
-                        <div className="flex items-center gap-2">
-                            <div className="flex-1 h-1 rounded-full bg-white/5 overflow-hidden">
-                                <div
-                                    className={`h-full ${
-                                        p.timeline === 100 ? "bg-emerald-400" : "bg-zukvo-500"
-                                    }`}
-                                    style={{ width: `${Math.max(p.timeline, 2)}%` }}
-                                />
+                    {PROJECTS.map((p, i) => (
+                        <div
+                            key={i}
+                            className="grid grid-cols-12 gap-3 items-center px-4 py-3 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
+                        >
+                            <div className="col-span-1 font-mono text-[11px] text-zinc-400 whitespace-nowrap">{p.code}</div>
+                            <div className="col-span-3 text-[13px] text-zinc-200 truncate whitespace-nowrap">{p.name}</div>
+                            <div className="col-span-2 text-[12.5px] text-zinc-300 whitespace-nowrap">{p.lead}</div>
+                            <div className="col-span-2 text-[12.5px] text-zinc-400 whitespace-nowrap">{p.members}</div>
+                            <div className="col-span-2">
+                                <StatusPill status={p.status} />
                             </div>
-                            <span className="text-[11px] text-zinc-400 w-9 text-right">
-                                {p.timeline}%
-                            </span>
+                            <div className="col-span-2">
+                                <div className="flex items-center gap-2">
+                                    <div className="flex-1 h-1 rounded-full bg-white/5 overflow-hidden">
+                                        <div
+                                            className={`h-full ${
+                                                p.timeline === 100 ? "bg-emerald-400" : "bg-zukvo-500"
+                                            }`}
+                                            style={{ width: `${Math.max(p.timeline, 2)}%` }}
+                                        />
+                                    </div>
+                                    <span className="text-[11px] text-zinc-400 w-9 text-right whitespace-nowrap">
+                                        {p.timeline}%
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    ))}
                 </div>
-            ))}
+            </div>
         </div>
     );
 }
@@ -560,7 +565,7 @@ function TeamSection() {
                             <div className="flex items-start gap-4">
                                 <div className="relative">
                                     <span className="size-14 rounded-2xl bg-gradient-to-br from-zukvo-500 to-violet-500 inline-flex items-center justify-center text-white font-heading text-xl">
-                                        i
+                                        S
                                     </span>
                                     <span className="absolute -bottom-1 -right-1 size-6 rounded-full bg-amber-400 text-[#0A0A0A] inline-flex items-center justify-center border-2 border-[#0E0E10]">
                                         <Crown className="size-3" />
@@ -571,7 +576,7 @@ function TeamSection() {
                                         Project Lead
                                     </div>
                                     <div className="font-heading text-xl text-white tracking-tight">
-                                        ithyaz
+                                        Sebastian
                                     </div>
                                     <div className="text-[12px] text-zinc-500">
                                         Owns scope, sprint cadence and delivery.
@@ -690,6 +695,7 @@ function ProjectDetails() {
                             alt="Project details page"
                             label="Project Details — Zukvo #002"
                             chromeUrl="zukvo.app/work/projects/zukvo"
+                            aspect="auto"
                             objectFit="contain"
                             caption="Live screenshot — full project details with sprint, ticket and team metrics."
                         />
@@ -753,10 +759,10 @@ function MetricsSection() {
                         </div>
                         <div className="mt-4 flex items-center gap-3">
                             <span className="size-12 rounded-2xl bg-gradient-to-br from-zukvo-500 to-violet-500 inline-flex items-center justify-center text-white font-heading text-lg">
-                                i
+                                S
                             </span>
                             <div>
-                                <div className="font-heading text-lg text-white">ithyaz</div>
+                                <div className="font-heading text-lg text-white">Sebastian</div>
                                 <div className="text-[12px] text-zinc-500">Owner · 15 members</div>
                             </div>
                         </div>
@@ -1288,7 +1294,7 @@ function TrashSection() {
                                 alt="Project Trash & Restore"
                                 label="Project Trash & Restore"
                                 chromeUrl="zukvo.app/work/projects/trash"
-                                aspect="16/10"
+                                aspect="auto"
                                 objectFit="contain"
                                 caption="Trash and restore bin for deleted projects."
                             />

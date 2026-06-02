@@ -74,7 +74,7 @@ export default function DailyUpdates() {
     return (
         <main
             data-testid="daily-updates-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -184,7 +184,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -215,8 +215,8 @@ function Overview() {
             className="relative bg-[#0A0A0A] text-white"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-5">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center w-full min-w-0">
+                    <div className="lg:col-span-5 min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-400">
                             Team overview
                         </div>
@@ -239,12 +239,12 @@ function Overview() {
                                     key={i}
                                     className="flex items-center gap-2.5 text-[14px] text-zinc-300"
                                 >
-                                    <b.i className="size-4 text-zukvo-400" /> {b.t}
+                                    <b.i className="size-4 text-zukvo-400 shrink-0" /> {b.t}
                                 </li>
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 min-w-0 w-full">
                         <ImageSlot
                             testid="du-image-overview"
                             src={DU_OVERVIEW_IMG}
@@ -338,8 +338,8 @@ function BodEod() {
                     ))}
                 </div>
 
-                <div className="zk-reveal mt-6 grid lg:grid-cols-12 gap-8 items-stretch">
-                    <div className="lg:col-span-5">
+                <div className="zk-reveal mt-6 grid lg:grid-cols-12 gap-8 items-stretch w-full min-w-0">
+                    <div className="lg:col-span-5 min-w-0">
                         <div
                             className={`rounded-2xl border p-6 h-full ${
                                 d.color === "emerald"
@@ -373,7 +373,7 @@ function BodEod() {
                                         className="flex items-center gap-2 text-[14px] text-zinc-200"
                                     >
                                         <CheckCircle2
-                                            className={`size-4 ${
+                                            className={`size-4 shrink-0 ${
                                                 d.color === "emerald"
                                                     ? "text-emerald-300"
                                                     : "text-zukvo-300"
@@ -385,7 +385,7 @@ function BodEod() {
                             </ul>
                         </div>
                     </div>
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 min-w-0 w-full">
                         <BodEodMock type={type} />
                     </div>
                 </div>
@@ -583,8 +583,8 @@ function MultiProject() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start">
-                    <div className="lg:col-span-5 lg:sticky lg:top-28">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start w-full min-w-0">
+                    <div className="lg:col-span-5 lg:sticky lg:top-28 min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-violet-300">
                             Multiple projects
                         </div>
@@ -607,12 +607,12 @@ function MultiProject() {
                                     key={i}
                                     className="flex items-center gap-2.5 text-[14px] text-zinc-300"
                                 >
-                                    <b.i className="size-4 text-violet-300" /> {b.t}
+                                    <b.i className="size-4 text-violet-300 shrink-0" /> {b.t}
                                 </li>
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 min-w-0 w-full">
                         <MultiProjectMock />
                     </div>
                 </div>
@@ -746,8 +746,8 @@ function UpdateDetail() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-5 lg:order-2">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center w-full min-w-0">
+                    <div className="lg:col-span-5 lg:order-2 min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-400">
                             Update detail panel
                         </div>
@@ -770,12 +770,12 @@ function UpdateDetail() {
                                     key={b}
                                     className="flex items-center gap-2 text-[14px] text-zinc-300"
                                 >
-                                    <CheckCircle2 className="size-4 text-zukvo-400" /> {b}
+                                    <CheckCircle2 className="size-4 text-zukvo-400 shrink-0" /> {b}
                                 </li>
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7 lg:order-1">
+                    <div className="lg:col-span-7 lg:order-1 min-w-0 w-full">
                         <ImageSlot
                             testid="du-image-detail"
                             src={DU_DETAIL_IMG}
@@ -824,8 +824,8 @@ function FeelingTracker() {
                     </p>
                 </div>
 
-                <div className="zk-reveal mt-10 grid lg:grid-cols-12 gap-8 items-center">
-                    <div className="lg:col-span-7">
+                <div className="zk-reveal mt-10 grid lg:grid-cols-12 gap-8 items-center w-full min-w-0">
+                    <div className="lg:col-span-7 min-w-0 w-full">
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
                             <div className="text-[10.5px] uppercase tracking-[0.2em] text-zinc-500 mb-3">
                                 Pick how you feel
@@ -885,7 +885,7 @@ function FeelingTracker() {
                             </div>
                         </div>
                     </div>
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 min-w-0">
                         <div className="space-y-3">
                             {moods.map((m) => (
                                 <div

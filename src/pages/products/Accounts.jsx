@@ -112,7 +112,7 @@ function Hero() {
                     </Link>
                 </div>
                 <div className="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 w-full min-w-0">
                         <div className="zk-reveal inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/80 backdrop-blur px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-emerald-600">
                             <Calculator className="size-3.5" />
                             Accounts
@@ -146,8 +146,8 @@ function Hero() {
                             </a>
                         </div>
                     </div>
-                    <div className="lg:col-span-5">
-                        <div className="zk-reveal grid grid-cols-2 gap-3">
+                    <div className="lg:col-span-5 w-full min-w-0">
+                        <div className="zk-reveal grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {[
                                 { k: "Credits", v: "Inflow tracked live" },
                                 { k: "Debits", v: "Categorised + member-attributed" },
@@ -181,7 +181,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -213,7 +213,7 @@ function Dashboard() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-emerald-300">
                             Dashboard
                         </div>
@@ -241,7 +241,7 @@ function Dashboard() {
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 w-full min-w-0">
                         <ImageSlot
                             testid="accounts-image-dashboard"
                             src={accountsImg}
@@ -271,21 +271,28 @@ function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2 text-[11.5px]">
-                        <button className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/5 text-white px-3 py-1.5">
+                    <div className="flex items-center gap-2 text-[11.5px] flex-wrap">
+                        <a
+                            href="#activity"
+                            className="shrink-0 inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/5 text-white px-3 py-1.5 whitespace-nowrap hover:bg-white/10 transition-colors"
+                        >
                             <FileText className="size-3.5" /> Recent Activity
-                        </button>
-                        <button className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/5 text-white px-3 py-1.5">
+                        </a>
+                        <a
+                            href="#breakdown"
+                            className="shrink-0 inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/5 text-white px-3 py-1.5 whitespace-nowrap hover:bg-white/10 transition-colors"
+                        >
                             <PieChart className="size-3.5" /> Breakdown
-                        </button>
-                        <button
-                            className="inline-flex items-center gap-1.5 rounded-md text-white text-[12px] font-medium px-3 py-1.5"
+                        </a>
+                        <a
+                            href="#add"
+                            className="shrink-0 inline-flex items-center gap-1.5 rounded-md text-white text-[12px] font-medium px-3 py-1.5 whitespace-nowrap hover:opacity-90 transition-opacity"
                             style={{
                                 backgroundImage: "linear-gradient(135deg, #6366F1, #3B82F6)",
                             }}
                         >
                             <Plus className="size-3.5" /> Add Transaction
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -390,9 +397,9 @@ function BigKpi({ kicker, value, sub, pill, tone, icon: Icon }) {
 
 function Ledger() {
     const rows = [
-        ["May 02, 2026", "12:00 AM", "DEBIT", "-₹2,100.00", "ithyaz", "N/A", "HOSTINGER-SERVER", "Hostinger Server cost for Zukvo", "rose", "ithyaz"],
-        ["May 01, 2026", "03:49 PM", "DEBIT", "-₹3,044.40", "ithyaz", "N/A", "ZOHO-SUBSCRIPTION", "Zoho Workplace Subscription - 20 Users", "rose", "ithyaz"],
-        ["Apr 14, 2026", "12:00 AM", "DEBIT", "-₹4,067.46", "ithyaz", "N/A", "ACT-FIBERNET", "Office Wifif Bill", "rose", "ithyaz"],
+        ["May 02, 2026", "12:00 AM", "DEBIT", "-₹2,100.00", "sebastian", "N/A", "HOSTINGER-SERVER", "Hostinger Server cost for Zukvo", "rose", "sebastian"],
+        ["May 01, 2026", "03:49 PM", "DEBIT", "-₹3,044.40", "sebastian", "N/A", "ZOHO-SUBSCRIPTION", "Zoho Workplace Subscription - 20 Users", "rose", "sebastian"],
+        ["Apr 14, 2026", "12:00 AM", "DEBIT", "-₹4,067.46", "sebastian", "N/A", "ACT-FIBERNET", "Office Wifif Bill", "rose", "sebastian"],
         ["Dec 28, 2025", "12:00 AM", "DEBIT", "-₹642.00", "Admin User", "N/A", "OFFICE EXPENSE", "Godrej Aer Room Refiller - 3", "amber", "A"],
         ["Dec 02, 2025", "04:52 PM", "DEBIT", "-₹3,245.00", "Admin User", "N/A", "EXPENSE", "Assets & Parcel Charges for Priyadharshini", "rose", "A"],
         ["Dec 02, 2025", "04:33 PM", "DEBIT", "-₹3,653.00", "Admin User", "N/A", "OFFICE EXPENSE", "Zoho Workplace Subscription", "amber", "A"],
@@ -407,7 +414,7 @@ function Ledger() {
         zinc: "bg-white/5 text-zinc-300 border-white/10",
     };
     const avatarTone = (a) =>
-        a === "ithyaz"
+        a === "sebastian"
             ? "bg-zukvo-500/30 text-zukvo-100 border-zukvo-500/40"
             : "bg-amber-500/30 text-amber-100 border-amber-400/40";
     return (
@@ -475,78 +482,82 @@ function Ledger() {
                             29 entries
                         </span>
                     </div>
-                    <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
-                        <div className="col-span-2">Date</div>
-                        <div className="col-span-1">Type</div>
-                        <div className="col-span-2">Amount</div>
-                        <div className="col-span-2">Member</div>
-                        <div className="col-span-2">Category</div>
-                        <div className="col-span-2">Description</div>
-                        <div className="col-span-1 text-right">Actions</div>
-                    </div>
-                    {rows.map((r, i) => (
-                        <div
-                            key={i}
-                            className="grid grid-cols-12 items-center px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
-                        >
-                            <div className="col-span-2">
-                                <div className="text-[12.5px] text-zinc-100">{r[0]}</div>
-                                <div className="text-[10.5px] text-zinc-500">{r[1]}</div>
+                    <div className="overflow-x-auto w-full">
+                        <div style={{ minWidth: "1000px" }}>
+                            <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
+                                <div className="col-span-2">Date</div>
+                                <div className="col-span-1">Type</div>
+                                <div className="col-span-2">Amount</div>
+                                <div className="col-span-2">Member</div>
+                                <div className="col-span-2">Category</div>
+                                <div className="col-span-2">Description</div>
+                                <div className="col-span-1 text-right">Actions</div>
                             </div>
-                            <div className="col-span-1">
-                                <span
-                                    className={`inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.18em] rounded-md border px-2 py-0.5 ${
-                                        r[2] === "DEBIT"
-                                            ? "border-rose-400/30 bg-rose-500/10 text-rose-300"
-                                            : "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
-                                    }`}
+                            {rows.map((r, i) => (
+                                <div
+                                    key={i}
+                                    className="grid grid-cols-12 items-center px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
                                 >
-                                    {r[2] === "DEBIT" ? (
-                                        <ArrowDown className="size-2.5" />
-                                    ) : (
-                                        <ArrowUp className="size-2.5" />
-                                    )}
-                                    {r[2]}
-                                </span>
-                            </div>
-                            <div
-                                className={`col-span-2 text-[13px] font-medium font-mono ${
-                                    r[2] === "DEBIT" ? "text-rose-300" : "text-emerald-300"
-                                }`}
-                            >
-                                {r[3]}
-                            </div>
-                            <div className="col-span-2 flex items-center gap-2 min-w-0">
-                                <span
-                                    className={`inline-flex size-7 items-center justify-center rounded-full border text-[10px] font-bold shrink-0 ${avatarTone(r[9])}`}
-                                >
-                                    {r[9] === "ithyaz" ? "i" : "A"}
-                                </span>
-                                <div className="min-w-0">
-                                    <div className="text-[12.5px] text-zinc-100 truncate">
-                                        {r[4]}
+                                    <div className="col-span-2">
+                                        <div className="text-[12.5px] text-zinc-100">{r[0]}</div>
+                                        <div className="text-[10.5px] text-zinc-500">{r[1]}</div>
                                     </div>
-                                    <div className="text-[10.5px] text-zinc-500">{r[5]}</div>
+                                    <div className="col-span-1">
+                                        <span
+                                            className={`inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.18em] rounded-md border px-2 py-0.5 ${
+                                                r[2] === "DEBIT"
+                                                    ? "border-rose-400/30 bg-rose-500/10 text-rose-300"
+                                                    : "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
+                                            }`}
+                                        >
+                                            {r[2] === "DEBIT" ? (
+                                                <ArrowDown className="size-2.5" />
+                                            ) : (
+                                                <ArrowUp className="size-2.5" />
+                                            )}
+                                            {r[2]}
+                                        </span>
+                                    </div>
+                                    <div
+                                        className={`col-span-2 text-[13px] font-medium font-mono ${
+                                            r[2] === "DEBIT" ? "text-rose-300" : "text-emerald-300"
+                                        }`}
+                                    >
+                                        {r[3]}
+                                    </div>
+                                    <div className="col-span-2 flex items-center gap-2 min-w-0">
+                                        <span
+                                            className={`inline-flex size-7 items-center justify-center rounded-full border text-[10px] font-bold shrink-0 ${avatarTone(r[9])}`}
+                                        >
+                                            {r[9] === "sebastian" ? "s" : "A"}
+                                        </span>
+                                        <div className="min-w-0">
+                                            <div className="text-[12.5px] text-zinc-100 truncate">
+                                                {r[4]}
+                                            </div>
+                                            <div className="text-[10.5px] text-zinc-500">{r[5]}</div>
+                                        </div>
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span
+                                            className={`inline-flex items-center text-[10px] uppercase tracking-[0.18em] rounded-md border px-2 py-0.5 ${catTone[r[8]]}`}
+                                        >
+                                            {r[6]}
+                                        </span>
+                                    </div>
+                                    <div className="col-span-2 text-[12.5px] text-zinc-300 truncate">
+                                        {r[7]}
+                                    </div>
+                                    <div className="col-span-1 text-right">
+                                        <span className="inline-flex items-center gap-1.5 text-zinc-500">
+                                            <Pencil className="size-3.5 hover:text-white cursor-pointer" />
+                                            <Trash2 className="size-3.5 hover:text-rose-300 cursor-pointer" />
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-span-2">
-                                <span
-                                    className={`inline-flex items-center text-[10px] uppercase tracking-[0.18em] rounded-md border px-2 py-0.5 ${catTone[r[8]]}`}
-                                >
-                                    {r[6]}
-                                </span>
-                            </div>
-                            <div className="col-span-2 text-[12.5px] text-zinc-300 truncate">
-                                {r[7]}
-                            </div>
-                            <div className="col-span-1 text-right">
-                                <span className="inline-flex items-center gap-1.5 text-zinc-500">
-                                    <Pencil className="size-3.5 hover:text-white cursor-pointer" />
-                                    <Trash2 className="size-3.5 hover:text-rose-300 cursor-pointer" />
-                                </span>
-                            </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                     <div className="px-5 py-3 border-t border-white/5 flex items-center justify-between text-[11.5px] text-zinc-500 flex-wrap gap-2">
                         <span>1–10 of 29 transactions</span>
                         <div className="inline-flex items-center gap-1.5">
@@ -580,7 +591,7 @@ function AddTransaction() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start">
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="inline-flex items-center gap-1.5 rounded-full border border-zukvo-500/30 bg-zukvo-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.22em] text-zukvo-300">
                             <Plus className="size-3" /> Add Transaction
                         </div>
@@ -609,7 +620,7 @@ function AddTransaction() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 w-full min-w-0">
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                             <div className="px-5 py-4 flex items-center gap-3 border-b border-white/5">
                                 <span className="inline-flex size-10 items-center justify-center rounded-xl bg-zukvo-500/15 text-zukvo-200 border border-zukvo-500/30">
@@ -632,10 +643,11 @@ function AddTransaction() {
                                 >
                                     <FormField
                                         label="Transaction Type"
-                                        placeholder="Select type"
+                                        value="DEBIT"
+                                        options={["CREDIT", "DEBIT"]}
                                         required
                                     />
-                                    <FormField label="Amount" placeholder="₹" required />
+                                    <FormField label="Amount" value="₹12,450.00" required />
                                 </DrawerStep>
 
                                 <DrawerStep
@@ -645,17 +657,19 @@ function AddTransaction() {
                                 >
                                     <FormField
                                         label="Member"
-                                        placeholder="Select member"
+                                        value="Sebastian"
+                                        options={["Sebastian", "Michael", "Sarah", "Emily", "David"]}
                                         required
                                     />
                                     <FormField
                                         label="Category"
-                                        placeholder="Select category"
+                                        value="Cloud Infrastructure"
+                                        options={["Client Payment", "Office Expense", "Salary", "Cloud Infrastructure", "Subscription", "Miscellaneous"]}
                                         required
                                     />
                                     <FormField
                                         label="Transaction Date"
-                                        value="2026-05-24"
+                                        value="2026-06-01"
                                         required
                                     />
                                 </DrawerStep>
@@ -667,7 +681,7 @@ function AddTransaction() {
                                 >
                                     <FormField
                                         label="Description"
-                                        placeholder="e.g. Server cost for May…"
+                                        value="AWS Server and Database Hosting for Zukvo Production"
                                         full
                                     />
                                 </DrawerStep>
@@ -711,19 +725,59 @@ function DrawerStep({ n, title, sub, children }) {
     );
 }
 
-function FormField({ label, placeholder, value, full, required }) {
+function FormField({ label, placeholder, value, full, required, options }) {
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState(value);
+
+    useEffect(() => {
+        if (value !== selected) setSelected(value);
+    }, [value]);
+
     return (
-        <div className={full ? "col-span-full" : ""}>
+        <div className={`relative ${full ? "col-span-full" : ""}`}>
             <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1 inline-flex items-center gap-1">
                 {required && <span className="text-rose-300">*</span>}
                 {label}
             </div>
-            <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between">
-                <span className={value ? "text-zinc-200" : "text-zinc-500"}>
-                    {value || placeholder}
-                </span>
-                {!value && <ChevronDown className="size-3.5 text-zinc-500" />}
-            </div>
+            {options ? (
+                <>
+                    <div 
+                        className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between cursor-pointer hover:bg-black/40 transition-colors"
+                        onClick={() => setOpen(!open)}
+                    >
+                        <span className={selected ? "text-zinc-200" : "text-zinc-500"}>
+                            {selected || placeholder}
+                        </span>
+                        <ChevronDown className={`size-3.5 text-zinc-500 transition-transform ${open ? 'rotate-180' : ''}`} />
+                    </div>
+                    {open && (
+                        <>
+                            <div className="fixed inset-0 z-10" onClick={() => setOpen(false)}></div>
+                            <div className="absolute z-20 w-full mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl max-h-48 overflow-y-auto">
+                                {options.map(opt => (
+                                    <div 
+                                        key={opt} 
+                                        className="px-3 py-2.5 text-[12.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors"
+                                        onClick={() => { setSelected(opt); setOpen(false); }}
+                                    >
+                                        {opt}
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </>
+            ) : (
+                <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between">
+                    <input 
+                        type="text"
+                        className="bg-transparent border-none outline-none w-full text-zinc-200 placeholder:text-zinc-500"
+                        placeholder={placeholder}
+                        value={selected || ""}
+                        onChange={(e) => setSelected(e.target.value)}
+                    />
+                </div>
+            )}
         </div>
     );
 }
@@ -755,7 +809,7 @@ function Breakdown() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start">
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-400/30 bg-violet-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.22em] text-violet-300">
                             <PieChart className="size-3" /> Category Breakdown
                         </div>
@@ -784,7 +838,7 @@ function Breakdown() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 w-full min-w-0">
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                             <div className="px-5 py-4 flex items-center gap-3 border-b border-white/5">
                                 <span className="inline-flex size-10 items-center justify-center rounded-xl bg-violet-500/15 text-violet-200 border border-violet-400/30">
@@ -961,8 +1015,8 @@ function RecentActivity() {
         },
         {
             t: "Office Wifif Bill",
-            who: "ithyaz",
-            avatar: "i",
+            who: "sebastian",
+            avatar: "s",
             color: "zukvo",
             d: "Apr 14, 2026",
             amt: "-₹4,067.46",
@@ -971,8 +1025,8 @@ function RecentActivity() {
         },
         {
             t: "Hostinger Server cost for Zukvo",
-            who: "ithyaz",
-            avatar: "i",
+            who: "sebastian",
+            avatar: "s",
             color: "zukvo",
             d: "May 02, 2026",
             amt: "-₹2,100.00",
@@ -993,7 +1047,7 @@ function RecentActivity() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start">
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-300">
                             <Activity className="size-3" /> Recent Activity
                         </div>
@@ -1022,7 +1076,7 @@ function RecentActivity() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 w-full min-w-0">
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                             <div className="px-5 py-4 flex items-center gap-3 border-b border-white/5">
                                 <span className="inline-flex size-10 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-200 border border-emerald-400/30">
@@ -1072,12 +1126,12 @@ function RecentActivity() {
                                                     )}
                                                 </span>
                                                 <div className="flex-1 min-w-0">
-                                                    <div className="flex items-center justify-between flex-wrap gap-2">
-                                                        <div className="text-[13px] text-white truncate">
+                                                    <div className="flex items-center justify-between gap-2 min-w-0">
+                                                        <div className="text-[13px] text-white truncate flex-1 min-w-0">
                                                             {e.t}
                                                         </div>
                                                         <span
-                                                            className={`font-mono text-[13px] font-medium ${
+                                                            className={`shrink-0 font-mono text-[13px] font-medium ${
                                                                 e.sign === "credit"
                                                                     ? "text-emerald-300"
                                                                     : "text-rose-300"
@@ -1087,20 +1141,20 @@ function RecentActivity() {
                                                         </span>
                                                     </div>
                                                     <div className="mt-1 flex items-center gap-2 flex-wrap text-[11px] text-zinc-500">
-                                                        <span className="inline-flex items-center gap-1.5">
+                                                        <span className="inline-flex items-center gap-1.5 min-w-0">
                                                             <span
-                                                                className={`inline-flex size-5 items-center justify-center rounded-full border text-[9px] font-bold ${avatarTone[e.color]}`}
+                                                                className={`inline-flex size-5 items-center justify-center rounded-full border text-[9px] font-bold shrink-0 ${avatarTone[e.color]}`}
                                                             >
                                                                 {e.avatar}
                                                             </span>
-                                                            {e.who}
+                                                            <span className="truncate">{e.who}</span>
                                                         </span>
                                                         <span>·</span>
-                                                        <span>{e.d}</span>
+                                                        <span className="shrink-0">{e.d}</span>
                                                         {e.tags.map((tg, k) => (
                                                             <span
                                                                 key={k}
-                                                                className={`inline-flex items-center text-[9.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${
+                                                                className={`shrink-0 inline-flex items-center text-[9.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${
                                                                     tg === "Invoice"
                                                                         ? "border-violet-400/30 bg-violet-500/10 text-violet-300"
                                                                         : tg.includes("CLIENT")
@@ -1203,15 +1257,15 @@ function Reports() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                        <button className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white px-3 py-1.5 text-[12px]">
+                    <div className="flex items-center gap-2 flex-wrap">
+                        <button className="shrink-0 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white px-3 py-1.5 text-[12px] whitespace-nowrap hover:bg-white/10 transition-colors">
                             <Hash className="size-3.5" /> CSV
                         </button>
-                        <button className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white px-3 py-1.5 text-[12px]">
+                        <button className="shrink-0 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white px-3 py-1.5 text-[12px] whitespace-nowrap hover:bg-white/10 transition-colors">
                             <FileText className="size-3.5" /> PDF
                         </button>
                         <button
-                            className="inline-flex items-center gap-1.5 rounded-full text-white text-[12px] font-medium px-4 py-1.5"
+                            className="shrink-0 inline-flex items-center gap-1.5 rounded-full text-white text-[12px] font-medium px-4 py-1.5 whitespace-nowrap hover:opacity-90 transition-opacity"
                             style={{
                                 backgroundImage: "linear-gradient(135deg, #6366F1, #3B82F6)",
                             }}

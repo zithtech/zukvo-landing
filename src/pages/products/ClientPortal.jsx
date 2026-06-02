@@ -78,7 +78,7 @@ export default function ClientPortal() {
     return (
         <main
             data-testid="portal-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -186,7 +186,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -972,7 +972,7 @@ function InvoicesDocsSection() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-emerald-300">
                             Invoices & Documents
                         </div>
@@ -1000,7 +1000,7 @@ function InvoicesDocsSection() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7 space-y-4">
+                    <div className="lg:col-span-7 space-y-4 w-full min-w-0">
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                             <div className="px-5 py-3 border-b border-white/5 flex items-center justify-between">
                                 <div className="inline-flex items-center gap-2 text-[12px] text-zinc-100">
@@ -1017,44 +1017,49 @@ function InvoicesDocsSection() {
                             ].map(([id, t, amt, st, tone], i) => (
                                 <div
                                     key={i}
-                                    className="grid grid-cols-12 items-center px-5 py-3 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
+                                    className="flex flex-col gap-3 sm:grid sm:grid-cols-12 sm:items-center px-5 py-3 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
                                 >
-                                    <div className="col-span-5 inline-flex items-center gap-2 min-w-0">
-                                        <span className="inline-flex size-7 items-center justify-center rounded-md bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 shrink-0">
-                                            <Receipt className="size-3.5" />
-                                        </span>
-                                        <div className="min-w-0">
-                                            <div className="font-mono text-[12px] text-zukvo-300">
-                                                {id}
-                                            </div>
-                                            <div className="text-[11px] text-zinc-500 truncate">
-                                                {t}
+                                    <div className="col-span-5 flex items-center justify-between sm:justify-start gap-2 min-w-0">
+                                        <div className="flex items-center gap-2 min-w-0">
+                                            <span className="inline-flex size-7 items-center justify-center rounded-md bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 shrink-0">
+                                                <Receipt className="size-3.5" />
+                                            </span>
+                                            <div className="min-w-0">
+                                                <div className="font-mono text-[12px] text-zukvo-300">
+                                                    {id}
+                                                </div>
+                                                <div className="text-[11px] text-zinc-500 truncate">
+                                                    {t}
+                                                </div>
                                             </div>
                                         </div>
+                                        <div className="sm:hidden text-[13px] text-white font-medium">{amt}</div>
                                     </div>
-                                    <div className="col-span-3 text-[13px] text-white">{amt}</div>
-                                    <div className="col-span-2">
-                                        <span
-                                            className={`text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 inline-flex items-center gap-1 ${
-                                                tone === "emerald"
-                                                    ? "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
-                                                    : "border-amber-400/30 bg-amber-500/10 text-amber-300"
-                                            }`}
-                                        >
-                                            <span className="size-1 rounded-full bg-current opacity-80" />
-                                            {st}
-                                        </span>
-                                    </div>
-                                    <div className="col-span-2 text-right text-[11.5px]">
-                                        {st === "Pending" ? (
-                                            <button className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1">
-                                                <DollarSign className="size-3" /> Pay
-                                            </button>
-                                        ) : (
-                                            <span className="text-zinc-500 inline-flex items-center gap-1">
-                                                <ArrowRight className="size-3" /> Download
+                                    <div className="hidden sm:block sm:col-span-3 text-[13px] text-white">{amt}</div>
+                                    <div className="flex items-center justify-between sm:contents">
+                                        <div className="sm:col-span-2">
+                                            <span
+                                                className={`text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 inline-flex items-center gap-1 whitespace-nowrap shrink-0 ${
+                                                    tone === "emerald"
+                                                        ? "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
+                                                        : "border-amber-400/30 bg-amber-500/10 text-amber-300"
+                                                }`}
+                                            >
+                                                <span className="size-1 rounded-full bg-current opacity-80" />
+                                                {st}
                                             </span>
-                                        )}
+                                        </div>
+                                        <div className="sm:col-span-2 sm:text-right text-[11.5px]">
+                                            {st === "Pending" ? (
+                                                <button className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 whitespace-nowrap shrink-0">
+                                                    <DollarSign className="size-3" /> Pay
+                                                </button>
+                                            ) : (
+                                                <span className="text-zinc-500 inline-flex items-center gap-1 whitespace-nowrap shrink-0">
+                                                    <ArrowRight className="size-3" /> Download
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -1089,7 +1094,7 @@ function InvoicesDocsSection() {
                                         </div>
                                     </div>
                                     <span
-                                        className={`text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${
+                                        className={`text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 whitespace-nowrap shrink-0 ${
                                             tone === "emerald"
                                                 ? "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
                                                 : tone === "amber"
@@ -1120,7 +1125,7 @@ function MeetingsSection() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-300">
                             Meetings
                         </div>
@@ -1148,7 +1153,7 @@ function MeetingsSection() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7 space-y-4">
+                    <div className="lg:col-span-7 space-y-4 w-full min-w-0">
                         <div className="rounded-2xl border border-zukvo-500/30 bg-zukvo-500/[0.04] p-5">
                             <div className="flex items-center justify-between flex-wrap gap-2">
                                 <div className="inline-flex items-center gap-2 text-[12px] text-zinc-100">
@@ -1263,7 +1268,7 @@ function RequestsSection() {
 
                 <div className="zk-reveal mt-12 grid lg:grid-cols-12 gap-5">
                     {/* Change Requests */}
-                    <div className="lg:col-span-6 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+                    <div className="lg:col-span-6 w-full min-w-0 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                         <div className="px-5 py-3 border-b border-white/5 flex items-center justify-between">
                             <div className="inline-flex items-center gap-2 text-[12px] text-zinc-100">
                                 <GitPullRequest className="size-3.5 text-amber-300" /> Change
@@ -1300,7 +1305,7 @@ function RequestsSection() {
                     </div>
 
                     {/* Approvals */}
-                    <div className="lg:col-span-6 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+                    <div className="lg:col-span-6 w-full min-w-0 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                         <div className="px-5 py-3 border-b border-white/5 flex items-center justify-between">
                             <div className="inline-flex items-center gap-2 text-[12px] text-zinc-100">
                                 <CheckCircle2 className="size-3.5 text-emerald-300" /> Approvals
@@ -1343,7 +1348,7 @@ function RequestsSection() {
                     </div>
 
                     {/* Support */}
-                    <div className="lg:col-span-7 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+                    <div className="lg:col-span-7 w-full min-w-0 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                         <div className="px-5 py-3 border-b border-white/5 flex items-center justify-between">
                             <div className="inline-flex items-center gap-2 text-[12px] text-zinc-100">
                                 <LifeBuoy className="size-3.5 text-rose-300" /> Support tickets
@@ -1395,7 +1400,7 @@ function RequestsSection() {
                     </div>
 
                     {/* Releases */}
-                    <div className="lg:col-span-5 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+                    <div className="lg:col-span-5 w-full min-w-0 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                         <div className="px-5 py-3 border-b border-white/5 flex items-center justify-between">
                             <div className="inline-flex items-center gap-2 text-[12px] text-zinc-100">
                                 <Rocket className="size-3.5 text-violet-300" /> Releases
@@ -1429,7 +1434,7 @@ function RequestsSection() {
                     </div>
 
                     {/* Environments */}
-                    <div className="lg:col-span-12 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+                    <div className="lg:col-span-12 w-full min-w-0 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                         <div className="px-5 py-3 border-b border-white/5 flex items-center justify-between">
                             <div className="inline-flex items-center gap-2 text-[12px] text-zinc-100">
                                 <Server className="size-3.5 text-amber-300" /> Environments

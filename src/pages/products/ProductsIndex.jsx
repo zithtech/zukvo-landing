@@ -50,7 +50,7 @@ export default function ProductsIndex() {
     return (
         <main
             data-testid="products-index-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
