@@ -39,7 +39,7 @@ function ScrollToTop() {
     }, [pathname, hash]);
     return null;
 }
-
+console.log('Building Zukvo Landing Page FE...');
 function App() {
     return (
         <div className="App">
