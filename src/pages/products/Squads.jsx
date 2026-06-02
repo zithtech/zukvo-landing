@@ -47,6 +47,16 @@ const SUBMODULES = [
     { id: "roles", label: "Roles & Hierarchy", icon: Crown },
 ];
 
+const ALL_USERS = [
+    { name: "Bharathi Murugan", email: "bharathi.mu*******@zithmi.com", role: "Frontend Lead", avatar: "BM" },
+    { name: "Sebastian Vance", email: "sebastian.vance@zithmi.com", role: "Backend Lead", avatar: "SV" },
+    { name: "Charlotte Dupont", email: "charlotte.du*******@zithmi.com", role: "Product Manager", avatar: "CD" },
+    { name: "Liam Gallagher", email: "liam.ga*******@zithmi.com", role: "UI/UX Designer", avatar: "LG" },
+    { name: "Hans Müller", email: "hans.mueller@zithmi.com", role: "QA Engineer", avatar: "HM" },
+    { name: "Yuki Tanaka", email: "yuki.tanaka@zithmi.com", role: "DevOps Engineer", avatar: "YT" },
+    { name: "Sofia Rodriguez", email: "sofia.rodriguez@zithmi.com", role: "Full Stack Engineer", avatar: "SR" },
+];
+
 export default function Squads() {
     useEffect(() => {
         const targets = document.querySelectorAll(".zk-reveal");
@@ -68,7 +78,7 @@ export default function Squads() {
     return (
         <main
             data-testid="squads-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -175,7 +185,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -199,6 +209,16 @@ function SubmoduleNav() {
 /* ---------------- DASHBOARD ---------------- */
 
 function Dashboard() {
+    const [searchQuery, setSearchQuery] = useState("");
+    const [statusFilter, setStatusFilter] = useState("All");
+    const [squadFilter, setSquadFilter] = useState("All Squads");
+    const [squadOpen, setSquadOpen] = useState(false);
+    const [memberFilter, setMemberFilter] = useState("All Members");
+    const [memberOpen, setMemberOpen] = useState(false);
+
+    const squadOptions = ["All Squads", "Zithtech Core Squad", "Zithtech Frontend Squad", "Mobile App Squad"];
+    const memberOptions = ["All Members", "Bharathi Murugan", "Sebastian Vance", "Charlotte Dupont", "Liam Gallagher", "Hans Müller", "Yuki Tanaka"];
+
     return (
         <section
             id="dashboard"
@@ -295,31 +315,88 @@ function Dashboard() {
                 {/* Filter row */}
                 <div className="zk-reveal mt-5 rounded-2xl border border-white/10 bg-[#0E0E10] p-4 flex items-center justify-between flex-wrap gap-3">
                     <div className="flex items-center gap-3 flex-wrap text-[11.5px]">
-                        <span className="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1.5 text-zinc-400">
-                            <Search className="size-3" /> Search by name or code…
+                        <span className="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1.5 text-zinc-400 max-w-[200px]">
+                            <Search className="size-3 shrink-0" />
+                            <input
+                                type="text"
+                                className="bg-transparent border-none outline-none text-zinc-200 placeholder:text-zinc-500 text-[11px] w-full"
+                                placeholder="Search by name or code…"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
                         </span>
                         <span className="inline-flex rounded-md border border-white/10 bg-white/[0.02] p-0.5 text-[11.5px]">
-                            <span className="px-2.5 py-1 rounded-md bg-violet-500/15 text-violet-200">
-                                All
-                            </span>
-                            <span className="inline-flex items-center gap-1 px-2.5 py-1 text-zinc-400">
-                                <span className="size-1.5 rounded-full bg-emerald-400" /> Active
-                            </span>
-                            <span className="inline-flex items-center gap-1 px-2.5 py-1 text-zinc-400">
-                                <span className="size-1.5 rounded-full bg-rose-400" /> Inactive
-                            </span>
-                            <span className="inline-flex items-center gap-1 px-2.5 py-1 text-zinc-400">
-                                <span className="size-1.5 rounded-full bg-amber-400" /> Archived
-                            </span>
+                            {["All", "Active", "Inactive", "Archived"].map((st) => (
+                                <button
+                                    key={st}
+                                    type="button"
+                                    onClick={() => setStatusFilter(st)}
+                                    className={`px-2.5 py-1 rounded-md transition-colors ${
+                                        statusFilter === st
+                                            ? "bg-violet-500/15 text-violet-200"
+                                            : "text-zinc-400 hover:text-white"
+                                    }`}
+                                >
+                                    {st === "All" ? "All" : (
+                                        <span className="inline-flex items-center gap-1">
+                                            <span className={`size-1.5 rounded-full ${
+                                                st === "Active" ? "bg-emerald-400" : st === "Inactive" ? "bg-rose-400" : "bg-amber-400"
+                                            }`} /> {st}
+                                        </span>
+                                    )}
+                                </button>
+                            ))}
                         </span>
-                        <span className="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1.5 text-zinc-300">
-                            <UsersRound className="size-3" /> Squads
-                            <ChevronDown className="size-3 text-zinc-500" />
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1.5 text-zinc-300">
-                            <Users className="size-3" /> Members
-                            <ChevronDown className="size-3 text-zinc-500" />
-                        </span>
+                        <div className="relative">
+                            <span 
+                                onClick={() => { setSquadOpen(!squadOpen); setMemberOpen(false); }}
+                                className="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1.5 text-zinc-300 cursor-pointer hover:bg-white/5 transition-colors"
+                            >
+                                <UsersRound className="size-3" /> {squadFilter}
+                                <ChevronDown className={`size-3 text-zinc-500 transition-transform ${squadOpen ? 'rotate-180' : ''}`} />
+                            </span>
+                            {squadOpen && (
+                                <>
+                                    <div className="fixed inset-0 z-10" onClick={() => setSquadOpen(false)} />
+                                    <div className="absolute z-20 w-44 mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl">
+                                        {squadOptions.map(opt => (
+                                            <div 
+                                                key={opt} 
+                                                className="px-3 py-2 text-[11.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors"
+                                                onClick={() => { setSquadFilter(opt); setSquadOpen(false); }}
+                                            >
+                                                {opt}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                        <div className="relative">
+                            <span 
+                                onClick={() => { setMemberOpen(!memberOpen); setSquadOpen(false); }}
+                                className="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1.5 text-zinc-300 cursor-pointer hover:bg-white/5 transition-colors"
+                            >
+                                <Users className="size-3" /> {memberFilter}
+                                <ChevronDown className={`size-3 text-zinc-500 transition-transform ${memberOpen ? 'rotate-180' : ''}`} />
+                            </span>
+                            {memberOpen && (
+                                <>
+                                    <div className="fixed inset-0 z-10" onClick={() => setMemberOpen(false)} />
+                                    <div className="absolute z-20 w-48 mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl max-h-48 overflow-y-auto">
+                                        {memberOptions.map(opt => (
+                                            <div 
+                                                key={opt} 
+                                                className="px-3 py-2 text-[11.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors"
+                                                onClick={() => { setMemberFilter(opt); setMemberOpen(false); }}
+                                            >
+                                                {opt}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+                        </div>
                     </div>
                     <div className="flex items-center gap-2">
                         <span className="text-[11px] text-zinc-500">1 of 1</span>
@@ -337,7 +414,7 @@ function Dashboard() {
                 {/* Squad card mock */}
                 <div className="zk-reveal mt-5 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <SquadCard />
-                    <SquadCardPlaceholder text="Frontend Team" code="FRONTEND_TEAM" />
+                    <SquadCardPlaceholder text="Zithtech Frontend Squad" code="ZITHTECH_FRONTEND" />
                     <SquadCardPlaceholder text="Mobile App Squad" code="MOBILE_APP" />
                 </div>
             </div>
@@ -425,15 +502,15 @@ function SquadCard() {
                             backgroundImage: "linear-gradient(135deg, #6366F1, #8B5CF6)",
                         }}
                     >
-                        V
+                        Z
                     </span>
                     <div>
                         <div className="font-heading text-lg text-white tracking-tight">
-                            VDrive
+                            Zithtech Core Squad
                         </div>
                         <div className="text-[11px] text-zinc-500 inline-flex items-center gap-2">
                             <span className="font-mono rounded border border-white/10 bg-white/5 px-1 py-0.5">
-                                VDRIVE
+                                ZITHTECH_CORE
                             </span>
                             <span>·</span>
                             <span className="inline-flex items-center gap-1">
@@ -453,7 +530,7 @@ function SquadCard() {
                 <div className="h-full bg-zukvo-400 w-2/4" />
             </div>
 
-            <div className="mt-3 grid grid-cols-3 gap-2 text-[10.5px]">
+            <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2 text-[10.5px]">
                 <Counter icon={Crown} v="1" k="Heads" tone="emerald" />
                 <Counter icon={Star} v="1" k="Sub-Heads" tone="amber" />
                 <Counter icon={Users} v="2" k="Members" tone="indigo" />
@@ -461,10 +538,10 @@ function SquadCard() {
 
             <div className="mt-4 inline-flex -space-x-2">
                 {[
-                    ["AB", "bg-emerald-500/30 text-emerald-100 border-emerald-400/40"],
-                    ["PR", "bg-amber-500/30 text-amber-100 border-amber-400/40"],
-                    ["PR", "bg-zukvo-500/30 text-zukvo-100 border-zukvo-500/40"],
-                    ["KA", "bg-cyan-500/30 text-cyan-100 border-cyan-400/40"],
+                    ["BM", "bg-emerald-500/30 text-emerald-100 border-emerald-400/40"],
+                    ["CD", "bg-amber-500/30 text-amber-100 border-amber-400/40"],
+                    ["LG", "bg-zukvo-500/30 text-zukvo-100 border-zukvo-500/40"],
+                    ["HM", "bg-cyan-500/30 text-cyan-100 border-cyan-400/40"],
                 ].map((a, i) => (
                     <span
                         key={i}
@@ -515,7 +592,7 @@ function Counter({ icon: Icon, v, k, tone }) {
     }[tone];
     return (
         <div className="rounded-md border border-white/10 bg-white/[0.02] py-1.5 px-2 text-center">
-            <div className={`inline-flex items-center gap-1 ${text} text-[10px] uppercase tracking-[0.18em] font-bold`}>
+            <div className={`inline-flex items-center gap-1 ${text} text-[10px] uppercase tracking-[0.08em] sm:tracking-[0.18em] font-bold`}>
                 <Icon className="size-2.5" /> {v} {k}
             </div>
         </div>
@@ -525,6 +602,46 @@ function Counter({ icon: Icon, v, k, tone }) {
 /* ---------------- CREATE SQUAD ---------------- */
 
 function CreateSquad() {
+    const [squadName, setSquadName] = useState("Zithtech Frontend Squad");
+    const [squadCode, setSquadCode] = useState("ZITHTECH_FRONTEND");
+    const [selectedHeads, setSelectedHeads] = useState([
+        { name: "Bharathi Murugan", email: "bharathi.mu*******@zithmi.com", role: "Frontend Lead", avatar: "BM" }
+    ]);
+    const [selectedSubHeads, setSelectedSubHeads] = useState([
+        { name: "Charlotte Dupont", email: "charlotte.du*******@zithmi.com", role: "Product Manager", avatar: "CD" }
+    ]);
+    const [selectedMembers, setSelectedMembers] = useState([
+        { name: "Liam Gallagher", email: "liam.ga*******@zithmi.com", role: "UI/UX Designer", avatar: "LG" },
+        { name: "Hans Müller", email: "hans.mueller@zithmi.com", role: "QA Engineer", avatar: "HM" }
+    ]);
+
+    const isSelected = (u) => {
+        return (
+            selectedHeads.some((x) => x.email === u.email) ||
+            selectedSubHeads.some((x) => x.email === u.email) ||
+            selectedMembers.some((x) => x.email === u.email)
+        );
+    };
+
+    const availableUsers = ALL_USERS.filter((u) => !isSelected(u));
+
+    const handleSelectHead = (u) => setSelectedHeads([...selectedHeads, u]);
+    const handleRemoveHead = (u) => setSelectedHeads(selectedHeads.filter((x) => x.email !== u.email));
+
+    const handleSelectSubHead = (u) => setSelectedSubHeads([...selectedSubHeads, u]);
+    const handleRemoveSubHead = (u) => setSelectedSubHeads(selectedSubHeads.filter((x) => x.email !== u.email));
+
+    const handleSelectMember = (u) => setSelectedMembers([...selectedMembers, u]);
+    const handleRemoveMember = (u) => setSelectedMembers(selectedMembers.filter((x) => x.email !== u.email));
+
+    const handleReset = () => {
+        setSquadName("");
+        setSquadCode("");
+        setSelectedHeads([]);
+        setSelectedSubHeads([]);
+        setSelectedMembers([]);
+    };
+
     return (
         <section
             id="create"
@@ -545,13 +662,13 @@ function CreateSquad() {
                     </p>
                 </div>
 
-                <div className="zk-reveal mt-12 grid lg:grid-cols-12 gap-6 items-start">
-                    <div className="lg:col-span-7">
-                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+                <div className="zk-reveal mt-12 grid lg:grid-cols-12 gap-6 items-start w-full min-w-0">
+                    <div className="lg:col-span-7 w-full min-w-0">
+                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden w-full max-w-full min-w-0">
                             {/* Header */}
                             <div className="px-5 py-4 flex items-center gap-3 border-b border-white/5">
                                 <span
-                                    className="inline-flex size-10 items-center justify-center rounded-xl text-white"
+                                    className="inline-flex size-10 items-center justify-center rounded-xl text-white shrink-0"
                                     style={{
                                         backgroundImage:
                                             "linear-gradient(135deg, #6366F1, #8B5CF6, #A855F7)",
@@ -559,11 +676,11 @@ function CreateSquad() {
                                 >
                                     <UsersRound className="size-5" />
                                 </span>
-                                <div>
-                                    <div className="font-heading text-lg text-white tracking-tight">
+                                <div className="min-w-0">
+                                    <div className="font-heading text-lg text-white tracking-tight truncate">
                                         Create Squad
                                     </div>
-                                    <div className="text-[11.5px] text-zinc-500">
+                                    <div className="text-[11.5px] text-zinc-500 truncate">
                                         Define a new project team and assign leadership.
                                     </div>
                                 </div>
@@ -581,42 +698,42 @@ function CreateSquad() {
                                 >
                                     <div className="flex items-center gap-3">
                                         <span className="inline-flex size-10 items-center justify-center rounded-lg bg-white/5 text-zinc-500 border border-white/10">
-                                            <UsersRound className="size-5" />
+                                            <UsersRound className="size-5 text-zukvo-300" />
                                         </span>
                                         <div className="flex-1 min-w-0">
-                                            <div className="font-heading text-lg text-zinc-500 tracking-tight">
-                                                New squad name
+                                            <div className={`font-heading text-lg tracking-tight truncate ${squadName ? 'text-white' : 'text-zinc-500'}`}>
+                                                {squadName || "New squad name"}
                                             </div>
                                             <div className="mt-1 flex items-center gap-2 text-[11px]">
                                                 <span className="font-mono rounded border border-white/10 bg-white/5 px-1.5 py-0.5 text-zinc-400">
-                                                    SQUAD_CODE
+                                                    {squadCode || "SQUAD_CODE"}
                                                 </span>
                                                 <span className="inline-flex items-center gap-1.5 rounded-full border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-2 py-0.5">
                                                     <span className="size-1.5 rounded-full bg-zukvo-400" />{" "}
                                                     Draft
                                                 </span>
                                                 <span className="inline-flex items-center gap-1 text-zinc-400">
-                                                    <Users className="size-3" /> 0 members
+                                                    <Users className="size-3" /> {selectedHeads.length + selectedSubHeads.length + selectedMembers.length} members
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="mt-4 grid grid-cols-3 gap-3 text-center text-[10px] uppercase tracking-[0.22em] text-zinc-400">
+                                    <div className="mt-4 grid grid-cols-3 gap-3 text-center text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.22em] text-zinc-400">
                                         <div>
                                             <div className="font-heading text-2xl text-emerald-300">
-                                                0
+                                                {selectedHeads.length}
                                             </div>
                                             <div>Heads</div>
                                         </div>
                                         <div>
                                             <div className="font-heading text-2xl text-amber-300">
-                                                0
+                                                {selectedSubHeads.length}
                                             </div>
                                             <div>Sub-Heads</div>
                                         </div>
                                         <div>
                                             <div className="font-heading text-2xl text-zukvo-300">
-                                                0
+                                                {selectedMembers.length}
                                             </div>
                                             <div>Members</div>
                                         </div>
@@ -624,10 +741,10 @@ function CreateSquad() {
                                 </div>
 
                                 {/* 3-step stepper */}
-                                <div className="grid grid-cols-3 gap-3">
-                                    <Step n="1" t="Identity" sub="Name & Code" active />
-                                    <Step n="2" t="Leadership" sub="Heads (REQ.)" />
-                                    <Step n="3" t="Members" sub="Optional" />
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    <Step n="1" t="Identity" sub="Name & Code" active={!squadName || !squadCode} />
+                                    <Step n="2" t="Leadership" sub="Heads (REQ.)" active={(squadName && squadCode) && selectedHeads.length === 0} />
+                                    <Step n="3" t="Members" sub="Optional" active={(squadName && squadCode) && selectedHeads.length > 0} />
                                 </div>
 
                                 {/* How squads are structured */}
@@ -657,16 +774,23 @@ function CreateSquad() {
                                         A clear name and unique code so this squad is easy to find
                                         and reference.
                                     </div>
-                                    <div className="mt-3 grid grid-cols-2 gap-2.5">
+                                    <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                                         <FormField
                                             label="Squad Name"
                                             placeholder="e.g. Frontend Team"
                                             required
+                                            value={squadName}
+                                            onChange={(e) => {
+                                                setSquadName(e.target.value);
+                                                setSquadCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "_").replace(/_+/g, "_"));
+                                            }}
                                         />
                                         <FormField
                                             label="Squad Code"
                                             placeholder="FRONTEND_TEAM"
                                             required
+                                            value={squadCode}
+                                            onChange={(e) => setSquadCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "_").replace(/_+/g, "_"))}
                                         />
                                     </div>
                                 </div>
@@ -679,6 +803,10 @@ function CreateSquad() {
                                     sub="Select one or more leads who own this squad."
                                     placeholder="Search and assign heads…"
                                     required
+                                    selectedUsers={selectedHeads}
+                                    onSelect={handleSelectHead}
+                                    onRemove={handleRemoveHead}
+                                    availableUsers={availableUsers}
                                 />
                                 <RoleSection
                                     icon={Star}
@@ -686,6 +814,10 @@ function CreateSquad() {
                                     title="Sub-Heads"
                                     sub="Deputies who assist the heads. Optional but recommended for larger squads."
                                     placeholder="Search and assign sub-heads…"
+                                    selectedUsers={selectedSubHeads}
+                                    onSelect={handleSelectSubHead}
+                                    onRemove={handleRemoveSubHead}
+                                    availableUsers={availableUsers}
                                 />
                                 <RoleSection
                                     icon={Users}
@@ -693,14 +825,25 @@ function CreateSquad() {
                                     title="Members"
                                     sub="Contributors who are part of this squad. You can add more later."
                                     placeholder="Search and add members…"
+                                    selectedUsers={selectedMembers}
+                                    onSelect={handleSelectMember}
+                                    onRemove={handleRemoveMember}
+                                    availableUsers={availableUsers}
                                 />
                             </div>
 
                             <div className="px-5 py-3 border-t border-white/5 flex items-center justify-end gap-2">
-                                <button className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white text-[12px] px-4 py-1.5">
+                                <button 
+                                    onClick={handleReset}
+                                    className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white text-[12px] px-4 py-1.5"
+                                >
                                     Cancel
                                 </button>
                                 <button
+                                    onClick={() => {
+                                        alert(`Squad "${squadName || 'Draft Squad'}" successfully created!`);
+                                        handleReset();
+                                    }}
                                     className="inline-flex items-center gap-1.5 rounded-full text-white text-[12px] font-medium px-4 py-1.5"
                                     style={{
                                         backgroundImage:
@@ -791,16 +934,25 @@ function RoleChip({ dot, t }) {
     );
 }
 
-function RoleSection({ icon: Icon, tone, title, sub, placeholder, required }) {
+function RoleSection({ icon: Icon, tone, title, sub, placeholder, required, selectedUsers = [], onSelect, onRemove, availableUsers = [] }) {
+    const [open, setOpen] = useState(false);
+    const [search, setSearch] = useState("");
     const toneMap = {
         emerald: "text-emerald-300 bg-emerald-500/10 border-emerald-400/30",
         amber: "text-amber-300 bg-amber-500/10 border-amber-400/30",
         indigo: "text-zukvo-300 bg-zukvo-500/10 border-zukvo-500/30",
     };
+
+    const filteredUsers = availableUsers.filter((u) =>
+        u.name.toLowerCase().includes(search.toLowerCase()) ||
+        u.role.toLowerCase().includes(search.toLowerCase()) ||
+        u.email.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
-        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
-            <div className="flex items-center justify-between">
-                <div className="inline-flex items-center gap-2.5">
+        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 relative">
+            <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5 min-w-0">
                     <span
                         className={`inline-flex size-8 items-center justify-center rounded-md border ${toneMap[tone]}`}
                     >
@@ -818,28 +970,116 @@ function RoleSection({ icon: Icon, tone, title, sub, placeholder, required }) {
                         <div className="text-[11.5px] text-zinc-500">{sub}</div>
                     </div>
                 </div>
-                <span className="font-heading text-base text-zinc-500">0</span>
+                <span className="font-heading text-base text-zinc-500">{selectedUsers.length}</span>
             </div>
-            <div className="mt-3 rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] text-zinc-500 flex items-center justify-between">
-                <span>{placeholder}</span>
-                <ChevronDown className="size-3.5 text-zinc-500" />
+            
+            <div className="relative mt-3">
+                <div 
+                    onClick={() => setOpen(true)}
+                    className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex flex-wrap items-center gap-1.5 min-w-0 hover:bg-black/40 transition-colors cursor-text"
+                >
+                    {selectedUsers.map((u) => (
+                        <span
+                            key={u.email}
+                            className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 pl-1.5 pr-2 py-0.5 text-[11.5px] text-zinc-200"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <span className="size-5 rounded-full bg-white/10 text-white text-[9px] font-bold inline-flex items-center justify-center">
+                                {u.avatar}
+                            </span>
+                            <span>{u.name}</span>
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    onRemove(u);
+                                }}
+                                className="text-zinc-500 hover:text-white transition-colors ml-0.5"
+                            >
+                                <XCircle className="size-3.5" />
+                            </button>
+                        </span>
+                    ))}
+                    <input
+                        type="text"
+                        className="bg-transparent border-none outline-none text-zinc-200 placeholder:text-zinc-500 text-[12.5px] flex-1 min-w-[120px]"
+                        placeholder={selectedUsers.length > 0 ? "" : placeholder}
+                        value={search}
+                        onChange={(e) => {
+                            setSearch(e.target.value);
+                            setOpen(true);
+                        }}
+                        onFocus={() => setOpen(true)}
+                    />
+                    <ChevronDown 
+                        className={`size-3.5 text-zinc-500 shrink-0 transition-transform cursor-pointer ${open ? 'rotate-180' : ''}`} 
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setOpen(!open);
+                        }}
+                    />
+                </div>
+
+                {open && (
+                    <>
+                        <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
+                        <div className="absolute z-20 w-full mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl max-h-48 overflow-y-auto">
+                            {filteredUsers.length === 0 ? (
+                                <div className="px-3 py-2 text-[12.5px] text-zinc-500 italic text-left">
+                                    No users found
+                                </div>
+                            ) : (
+                                filteredUsers.map((u) => (
+                                    <div 
+                                        key={u.email} 
+                                        className="px-3 py-2 text-[12.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors flex items-center gap-2"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            onSelect(u);
+                                            setSearch("");
+                                            setOpen(false);
+                                        }}
+                                    >
+                                        <span className="size-5 rounded-full bg-white/10 text-white text-[9px] font-bold inline-flex items-center justify-center">
+                                            {u.avatar}
+                                        </span>
+                                        <div className="flex-1 min-w-0 text-left">
+                                            <div className="text-[12px] text-zinc-200 font-medium truncate">{u.name}</div>
+                                            <div className="text-[10px] text-zinc-500 truncate">{u.email} · {u.role}</div>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );
 }
 
-function FormField({ label, placeholder, value, full, required }) {
+function FormField({ label, placeholder, value, full, required, onChange }) {
     return (
-        <div className={full ? "col-span-full" : ""}>
+        <div className={full ? "col-span-full" : "min-w-0"}>
             <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1 inline-flex items-center gap-1">
                 {required && <span className="text-rose-300">*</span>}
                 {label}
             </div>
-            <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px]">
-                <span className={value ? "text-zinc-200" : "text-zinc-500"}>
-                    {value || placeholder}
-                </span>
-            </div>
+            {onChange ? (
+                <input
+                    type="text"
+                    className="w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] text-zinc-200 outline-none focus:border-violet-500/50 bg-black/40 transition-colors"
+                    placeholder={placeholder}
+                    value={value || ""}
+                    onChange={onChange}
+                />
+            ) : (
+                <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] truncate">
+                    <span className={`${value ? "text-zinc-200" : "text-zinc-500"} truncate block`}>
+                        {value || placeholder}
+                    </span>
+                </div>
+            )}
         </div>
     );
 }
@@ -848,6 +1088,32 @@ function FormField({ label, placeholder, value, full, required }) {
 
 function SquadOverview() {
     const [tab, setTab] = useState("all");
+    const [overviewSearch, setOverviewSearch] = useState("");
+
+    const overviewMembers = [
+        { name: "Bharathi Murugan", email: "bharathi.mu*******@zithmi.com", role: "Frontend Lead", avatar: "BM", type: "heads", tone: "emerald", pinned: "head" },
+        { name: "Charlotte Dupont", email: "charlotte.du*******@zithmi.com", role: "Product Manager", avatar: "CD", type: "subs", tone: "amber", pinned: "sub" },
+        { name: "Liam Gallagher", email: "liam.ga*******@zithmi.com", role: "UI/UX Designer", avatar: "LG", type: "members", tone: "indigo" },
+        { name: "Hans Müller", email: "hans.mueller@zithmi.com", role: "QA Engineer", avatar: "HM", type: "members", tone: "cyan" },
+    ];
+
+    const filteredOverviewMembers = overviewMembers.filter(m => {
+        if (tab !== "all" && m.type !== tab) return false;
+        if (overviewSearch) {
+            const query = overviewSearch.toLowerCase();
+            return (
+                m.name.toLowerCase().includes(query) ||
+                m.role.toLowerCase().includes(query) ||
+                m.email.toLowerCase().includes(query)
+            );
+        }
+        return true;
+    });
+
+    const headsList = filteredOverviewMembers.filter(m => m.type === "heads");
+    const subsList = filteredOverviewMembers.filter(m => m.type === "subs");
+    const membersList = filteredOverviewMembers.filter(m => m.type === "members");
+
     return (
         <section
             id="overview"
@@ -855,7 +1121,7 @@ function SquadOverview() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start w-full min-w-0">
                     <div className="lg:col-span-5">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-300">
                             Squad Overview
@@ -886,17 +1152,17 @@ function SquadOverview() {
                     </div>
 
                     {/* Overview drawer mock */}
-                    <div className="lg:col-span-7">
-                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+                    <div className="lg:col-span-7 w-full min-w-0">
+                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden w-full max-w-full min-w-0">
                             <div className="px-5 py-4 flex items-center gap-3 border-b border-white/5">
-                                <span className="inline-flex size-10 items-center justify-center rounded-xl bg-zukvo-500/15 text-zukvo-200 border border-zukvo-500/30">
+                                <span className="inline-flex size-10 items-center justify-center rounded-xl bg-zukvo-500/15 text-zukvo-200 border border-zukvo-500/30 shrink-0">
                                     <Eye className="size-5" />
                                 </span>
-                                <div>
-                                    <div className="font-heading text-lg text-white tracking-tight">
+                                <div className="min-w-0">
+                                    <div className="font-heading text-lg text-white tracking-tight truncate">
                                         Squad Overview
                                     </div>
-                                    <div className="text-[11.5px] text-zinc-500">
+                                    <div className="text-[11.5px] text-zinc-500 truncate">
                                         Read-only details and members
                                     </div>
                                 </div>
@@ -912,7 +1178,7 @@ function SquadOverview() {
                                         backgroundColor: "#0E0E14",
                                     }}
                                 >
-                                    <div className="flex items-center justify-between flex-wrap gap-3">
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                         <div className="flex items-center gap-3">
                                             <span
                                                 className="inline-flex size-12 items-center justify-center rounded-xl text-white font-heading text-lg"
@@ -921,22 +1187,22 @@ function SquadOverview() {
                                                         "linear-gradient(135deg, #6366F1, #8B5CF6)",
                                                 }}
                                             >
-                                                V
+                                                Z
                                             </span>
                                             <div>
                                                 <div className="font-heading text-xl text-white tracking-tight">
-                                                    VDrive
+                                                    Zithtech Core Squad
                                                 </div>
-                                                <div className="mt-1 flex items-center gap-2 text-[11px]">
+                                                <div className="mt-1 flex items-center gap-2 flex-wrap text-[11px]">
                                                     <span className="font-mono rounded border border-white/10 bg-white/5 px-1.5 py-0.5 text-zinc-300">
-                                                        VDRIVE
+                                                        ZITHTECH_CORE
                                                     </span>
-                                                    <span className="inline-flex items-center gap-1 rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 px-2 py-0.5">
+                                                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 px-2 py-0.5">
                                                         <span className="size-1.5 rounded-full bg-emerald-400" />{" "}
                                                         Active
                                                     </span>
                                                     <span className="inline-flex items-center gap-1 text-zinc-400">
-                                                        <Users className="size-3" /> 4 members
+                                                        <Users className="size-3" /> {overviewMembers.length} members
                                                     </span>
                                                 </div>
                                             </div>
@@ -944,14 +1210,14 @@ function SquadOverview() {
                                         <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-zinc-400">
                                             Led by
                                             <span className="inline-flex size-7 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-100 border border-emerald-400/30 text-[10px] font-bold">
-                                                AB
+                                                BM
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="mt-4 grid grid-cols-4 gap-3 text-center text-[10px] uppercase tracking-[0.22em] text-zinc-500">
+                                    <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-[9px] sm:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.22em] text-zinc-500">
                                         <div>
                                             <div className="font-heading text-2xl text-zukvo-300">
-                                                4
+                                                {overviewMembers.length}
                                             </div>
                                             <div>Total</div>
                                         </div>
@@ -977,67 +1243,97 @@ function SquadOverview() {
                                 </div>
 
                                 {/* Search */}
-                                <div className="rounded-md border border-white/10 bg-white/[0.02] px-3 py-2.5 inline-flex items-center gap-2 w-full text-[12px] text-zinc-500">
-                                    <Search className="size-3.5" /> Search by name, designation, or
-                                    email…
+                                <div className="rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 flex items-center gap-2 w-full text-[12px]">
+                                    <Search className="size-3.5 text-zinc-500 shrink-0" />
+                                    <input
+                                        type="text"
+                                        className="bg-transparent border-none outline-none w-full text-zinc-200 placeholder:text-zinc-500 text-[12px]"
+                                        placeholder="Search by name, designation, or email…"
+                                        value={overviewSearch}
+                                        onChange={(e) => setOverviewSearch(e.target.value)}
+                                    />
                                 </div>
 
                                 {/* Tabs */}
-                                <div className="inline-flex rounded-full border border-white/10 bg-white/[0.02] p-1 text-[11.5px]">
-                                    {[
-                                        { id: "all", t: "All", c: 4 },
-                                        { id: "heads", t: "Heads", c: 1, icon: Crown },
-                                        { id: "subs", t: "Sub-Heads", c: 1, icon: Star },
-                                        { id: "members", t: "Members", c: 2, icon: Users },
-                                    ].map((x) => (
-                                        <button
-                                            key={x.id}
-                                            type="button"
-                                            onClick={() => setTab(x.id)}
-                                            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 transition-colors ${
-                                                tab === x.id
-                                                    ? "bg-white text-zukvo-ink"
-                                                    : "text-zinc-400 hover:text-white"
-                                            }`}
-                                        >
-                                            {x.icon && <x.icon className="size-3" />}
-                                            {x.t}
-                                            <span
-                                                className={`text-[10px] rounded-full px-1.5 ${
+                                <div className="overflow-x-auto w-full no-scrollbar">
+                                    <div className="inline-flex rounded-full border border-white/10 bg-white/[0.02] p-1 text-[11.5px] min-w-max">
+                                        {[
+                                            { id: "all", t: "All", c: 4 },
+                                            { id: "heads", t: "Heads", c: 1, icon: Crown },
+                                            { id: "subs", t: "Sub-Heads", c: 1, icon: Star },
+                                            { id: "members", t: "Members", c: 2, icon: Users },
+                                        ].map((x) => (
+                                            <button
+                                                key={x.id}
+                                                type="button"
+                                                onClick={() => setTab(x.id)}
+                                                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 transition-colors ${
                                                     tab === x.id
-                                                        ? "bg-zukvo-500/15 text-zukvo-700"
-                                                        : "bg-white/10 text-zinc-400"
+                                                        ? "bg-white text-zukvo-ink"
+                                                        : "text-zinc-400 hover:text-white"
                                                 }`}
                                             >
-                                                {x.c}
-                                            </span>
-                                        </button>
-                                    ))}
+                                                {x.icon && <x.icon className="size-3" />}
+                                                {x.t}
+                                                <span
+                                                    className={`text-[10px] rounded-full px-1.5 ${
+                                                        tab === x.id
+                                                            ? "bg-zukvo-500/15 text-zukvo-700"
+                                                            : "bg-white/10 text-zinc-400"
+                                                    }`}
+                                                >
+                                                    {x.c}
+                                                </span>
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
 
                                 {/* Member groups */}
-                                <div>
-                                    <GroupHeader icon={Crown} tone="emerald" t="Heads" n={1} />
-                                    <MemberRow tone="emerald" a="A" n="Abiraham Immanvel" d="No designation" pinned="head" />
-                                </div>
-                                <div>
-                                    <GroupHeader icon={Star} tone="amber" t="Sub-Heads" n={1} />
-                                    <MemberRow tone="amber" a="P" n="Priyadharshini" d="Software Engineer" pinned="sub" />
-                                </div>
-                                <div>
-                                    <GroupHeader icon={Users} tone="indigo" t="Members" n={2} />
-                                    <div className="grid md:grid-cols-2 gap-2.5">
-                                        <MemberRow tone="indigo" a="P" n="Priyadharshini" d="Software Engineer" />
-                                        <MemberRow tone="cyan" a="K" n="Karthikeyan" d="Associate Software Engineer" />
-                                    </div>
+                                <div className="space-y-4">
+                                    {headsList.length > 0 && (
+                                        <div>
+                                            <GroupHeader icon={Crown} tone="emerald" t="Heads" n={headsList.length} />
+                                            <div className="space-y-2">
+                                                {headsList.map(m => (
+                                                    <MemberRow key={m.email} tone={m.tone} a={m.avatar} n={m.name} d={m.role} pinned={m.pinned} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {subsList.length > 0 && (
+                                        <div>
+                                            <GroupHeader icon={Star} tone="amber" t="Sub-Heads" n={subsList.length} />
+                                            <div className="space-y-2">
+                                                {subsList.map(m => (
+                                                    <MemberRow key={m.email} tone={m.tone} a={m.avatar} n={m.name} d={m.role} pinned={m.pinned} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {membersList.length > 0 && (
+                                        <div>
+                                            <GroupHeader icon={Users} tone="indigo" t="Members" n={membersList.length} />
+                                            <div className="grid md:grid-cols-2 gap-2.5">
+                                                {membersList.map(m => (
+                                                    <MemberRow key={m.email} tone={m.tone} a={m.avatar} n={m.name} d={m.role} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {filteredOverviewMembers.length === 0 && (
+                                        <div className="text-center py-6 text-zinc-500 text-[13px] italic">
+                                            No squad members found matching filters.
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
-                            <div className="px-5 py-3 border-t border-white/5 flex items-center justify-between text-[11.5px] text-zinc-500">
+                            <div className="px-5 py-3 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[11.5px] text-zinc-500">
                                 <span className="inline-flex items-center gap-1.5">
-                                    <Users className="size-3.5" /> 4 members
+                                    <Users className="size-3.5" /> {overviewMembers.length} members
                                 </span>
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center justify-end gap-2 w-full sm:w-auto">
                                     <button className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white px-3 py-1.5 text-[12px]">
                                         Close
                                     </button>
@@ -1067,7 +1363,7 @@ function GroupHeader({ icon: Icon, tone, t, n }) {
         indigo: "text-zukvo-300",
     }[tone];
     return (
-        <div className="mb-2 inline-flex items-center gap-2">
+        <div className="mb-2 flex items-center gap-2 w-full">
             <Icon className={`size-3.5 ${text}`} />
             <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-300 font-bold">
                 {t}
@@ -1114,7 +1410,7 @@ function MemberRow({ tone, a, n, d, pinned }) {
                     </span>
                 )}
             </span>
-            <div className="min-w-0">
+            <div className="min-w-0 text-left">
                 <div className="text-[13px] text-zinc-100 truncate">{n}</div>
                 <div className="text-[11px] text-zinc-500 truncate">{d}</div>
             </div>
@@ -1125,6 +1421,33 @@ function MemberRow({ tone, a, n, d, pinned }) {
 /* ---------------- MANAGE SQUAD ---------------- */
 
 function ManageSquad() {
+    const [name, setName] = useState("Zithtech Core Squad");
+    const [code, setCode] = useState("ZITHTECH_CORE");
+    const [status, setStatus] = useState("Active");
+    const [statusOpen, setStatusOpen] = useState(false);
+    const [addMemberOpen, setAddMemberOpen] = useState(false);
+
+    const [members, setMembers] = useState([
+        { name: "Bharathi Murugan", email: "bharathi.mu*******@zithmi.com", role: "Frontend Lead", avatar: "BM", tone: "emerald", badge: "Head", badgeTone: "emerald" },
+        { name: "Charlotte Dupont", email: "charlotte.du*******@zithmi.com", role: "Product Manager", avatar: "CD", tone: "amber", badge: "Sub-Head", badgeTone: "amber" },
+        { name: "Liam Gallagher", email: "liam.ga*******@zithmi.com", role: "UI/UX Designer", avatar: "LG", tone: "indigo", badge: "Member", badgeTone: "indigo" },
+    ]);
+
+    const handleRemove = (email) => {
+        setMembers(members.filter(m => m.email !== email));
+    };
+
+    const isMemberSelected = (u) => {
+        return members.some(m => m.email === u.email);
+    };
+
+    const availableToManage = ALL_USERS.filter(u => !isMemberSelected(u));
+    const statusOptions = ["Active", "Inactive", "Archived"];
+
+    const countHeads = members.filter(m => m.badge === "Head").length;
+    const countSubHeads = members.filter(m => m.badge === "Sub-Head").length;
+    const countMembersOnly = members.filter(m => m.badge === "Member").length;
+
     return (
         <section
             id="manage"
@@ -1132,7 +1455,7 @@ function ManageSquad() {
             className="relative bg-[#0A0A0A] text-white border-t border-white/5"
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
-                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start">
+                <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start w-full min-w-0">
                     <div className="lg:col-span-5">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-violet-300">
                             Manage Squad
@@ -1162,18 +1485,18 @@ function ManageSquad() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7">
-                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+                    <div className="lg:col-span-7 w-full min-w-0">
+                        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden w-full max-w-full min-w-0">
                             <div className="px-5 py-4 flex items-center gap-3 border-b border-white/5">
-                                <span className="inline-flex size-10 items-center justify-center rounded-xl bg-violet-500/15 text-violet-200 border border-violet-400/30">
+                                <span className="inline-flex size-10 items-center justify-center rounded-xl bg-violet-500/15 text-violet-200 border border-violet-400/30 shrink-0">
                                     <Settings2 className="size-5" />
                                 </span>
-                                <div>
-                                    <div className="font-heading text-lg text-white tracking-tight">
+                                <div className="min-w-0">
+                                    <div className="font-heading text-lg text-white tracking-tight truncate">
                                         Manage Squad
                                     </div>
-                                    <div className="text-[11.5px] text-zinc-500">
-                                        Configuring VDrive
+                                    <div className="text-[11.5px] text-zinc-500 truncate">
+                                        Configuring {name}
                                     </div>
                                 </div>
                             </div>
@@ -1195,18 +1518,24 @@ function ManageSquad() {
                                                 "linear-gradient(135deg, #6366F1, #8B5CF6)",
                                         }}
                                     >
-                                        V
+                                        {name ? name.charAt(0).toUpperCase() : "V"}
                                     </span>
                                     <div className="flex items-center gap-2 flex-wrap">
                                         <span className="font-heading text-lg text-white">
-                                            VDrive
+                                            {name || "Draft Squad"}
                                         </span>
                                         <span className="font-mono rounded border border-white/10 bg-white/5 px-1.5 py-0.5 text-[11px] text-zinc-300">
-                                            VDRIVE
+                                            {code || "CODE"}
                                         </span>
-                                        <span className="inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 px-2 py-0.5">
-                                            <span className="size-1.5 rounded-full bg-emerald-400" />{" "}
-                                            Active
+                                        <span className={`inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${
+                                            status === "Active" ? "border-emerald-400/30 bg-emerald-500/10 text-emerald-300" :
+                                            status === "Inactive" ? "border-rose-400/30 bg-rose-500/10 text-rose-300" :
+                                            "border-amber-400/30 bg-amber-500/10 text-amber-300"
+                                        }`}>
+                                            <span className={`size-1.5 rounded-full ${
+                                                status === "Active" ? "bg-emerald-400" : status === "Inactive" ? "bg-rose-400" : "bg-amber-400"
+                                            }`} />{" "}
+                                            {status}
                                         </span>
                                     </div>
                                 </div>
@@ -1216,9 +1545,22 @@ function ManageSquad() {
                                     <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-zinc-500 font-bold">
                                         <UsersRound className="size-3" /> Squad Identity
                                     </div>
-                                    <div className="mt-2 grid grid-cols-2 gap-3">
-                                        <FormField label="Squad Name" value="VDrive" required />
-                                        <FormField label="Squad Code" value="VDRIVE" required />
+                                    <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <FormField 
+                                            label="Squad Name" 
+                                            value={name} 
+                                            required 
+                                            onChange={(e) => {
+                                                setName(e.target.value);
+                                                setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "_").replace(/_+/g, "_"));
+                                            }}
+                                        />
+                                        <FormField 
+                                            label="Squad Code" 
+                                            value={code} 
+                                            required 
+                                            onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "_").replace(/_+/g, "_"))}
+                                        />
                                     </div>
                                 </div>
 
@@ -1227,12 +1569,12 @@ function ManageSquad() {
                                     <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-zinc-500 font-bold">
                                         <User className="size-3" /> Composition
                                     </div>
-                                    <div className="mt-2 grid grid-cols-4 gap-3 text-center text-[10px] uppercase tracking-[0.22em] text-zinc-400">
+                                    <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-[9px] sm:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.22em] text-zinc-400">
                                         {[
-                                            ["3", "Total", "text-white"],
-                                            ["1", "Heads", "text-emerald-300"],
-                                            ["1", "Sub-Heads", "text-amber-300"],
-                                            ["1", "Members", "text-zukvo-300"],
+                                            [members.length.toString(), "Total", "text-white"],
+                                            [countHeads.toString(), "Heads", "text-emerald-300"],
+                                            [countSubHeads.toString(), "Sub-Heads", "text-amber-300"],
+                                            [countMembersOnly.toString(), "Members", "text-zukvo-300"],
                                         ].map((s, i) => (
                                             <div
                                                 key={i}
@@ -1249,41 +1591,77 @@ function ManageSquad() {
 
                                 {/* Members */}
                                 <div>
-                                    <div className="flex items-center justify-between mb-2">
+                                    <div className="flex items-center justify-between mb-2 relative">
                                         <div className="text-[12px] text-white font-medium">
                                             Members
                                         </div>
-                                        <button className="inline-flex items-center gap-1.5 rounded-md bg-zukvo-500 hover:bg-zukvo-600 text-white text-[11.5px] px-3 py-1.5 font-medium">
-                                            <UserPlus className="size-3.5" /> Add Member
-                                        </button>
+                                        <div className="relative">
+                                            <button 
+                                                onClick={() => setAddMemberOpen(!addMemberOpen)}
+                                                className="inline-flex items-center gap-1.5 rounded-md bg-zukvo-500 hover:bg-zukvo-600 text-white text-[11.5px] px-3 py-1.5 font-medium"
+                                            >
+                                                <UserPlus className="size-3.5" /> Add Member
+                                            </button>
+                                            {addMemberOpen && (
+                                                <>
+                                                    <div className="fixed inset-0 z-10" onClick={() => setAddMemberOpen(false)} />
+                                                    <div className="absolute right-0 z-20 w-56 mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl max-h-48 overflow-y-auto">
+                                                        {availableToManage.length === 0 ? (
+                                                            <div className="px-3 py-2 text-[12.5px] text-zinc-500 italic text-left">
+                                                                No users available
+                                                            </div>
+                                                        ) : (
+                                                            availableToManage.map((u) => (
+                                                                <div 
+                                                                    key={u.email} 
+                                                                    className="px-3 py-2 text-[12.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors flex items-center gap-2 text-left"
+                                                                    onClick={() => {
+                                                                        setMembers([...members, {
+                                                                            name: u.name,
+                                                                            email: u.email,
+                                                                            role: u.role,
+                                                                            avatar: u.avatar,
+                                                                            tone: "indigo",
+                                                                            badge: "Member",
+                                                                            badgeTone: "indigo"
+                                                                        }]);
+                                                                        setAddMemberOpen(false);
+                                                                    }}
+                                                                >
+                                                                    <span className="size-5 rounded-full bg-white/10 text-white text-[9px] font-bold inline-flex items-center justify-center">
+                                                                        {u.avatar}
+                                                                    </span>
+                                                                    <div className="flex-1 min-w-0">
+                                                                        <div className="text-[12px] text-zinc-200 font-medium truncate">{u.name}</div>
+                                                                        <div className="text-[10px] text-zinc-500 truncate">{u.role}</div>
+                                                                    </div>
+                                                                </div>
+                                                            ))
+                                                        )}
+                                                    </div>
+                                                </>
+                                            )}
+                                        </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <MemberEditRow
-                                            tone="emerald"
-                                            a="A"
-                                            n="Abiraham Immanvel"
-                                            e="abraham@zithmi.com"
-                                            badge="Head"
-                                            badgeTone="emerald"
-                                        />
-                                        <MemberEditRow
-                                            tone="amber"
-                                            a="P"
-                                            n="Priyadharshini"
-                                            d="Software Engineer"
-                                            e="priyadharshini@zithmi.com"
-                                            badge="Sub-Head"
-                                            badgeTone="amber"
-                                        />
-                                        <MemberEditRow
-                                            tone="indigo"
-                                            a="K"
-                                            n="Karthikeyan"
-                                            d="Associate Software Engineer"
-                                            e="karthikeyan@zithmi.com"
-                                            badge="Member"
-                                            badgeTone="indigo"
-                                        />
+                                        {members.map(m => (
+                                            <MemberEditRow
+                                                key={m.email}
+                                                tone={m.tone}
+                                                a={m.avatar}
+                                                n={m.name}
+                                                d={m.role}
+                                                e={m.email}
+                                                badge={m.badge}
+                                                badgeTone={m.badgeTone}
+                                                onDelete={() => handleRemove(m.email)}
+                                            />
+                                        ))}
+                                        {members.length === 0 && (
+                                            <div className="text-center py-6 text-zinc-500 text-[13px] italic border border-dashed border-white/10 rounded-xl">
+                                                No squad members left. Add members to composition.
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
@@ -1292,12 +1670,38 @@ function ManageSquad() {
                                     <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-zinc-500 font-bold">
                                         <Star className="size-3" /> Status
                                     </div>
-                                    <div className="mt-2 rounded-md border border-white/10 bg-black/30 px-3 py-2.5 inline-flex items-center justify-between w-full text-[12.5px]">
-                                        <span className="inline-flex items-center gap-2 text-zinc-200">
-                                            <span className="size-1.5 rounded-full bg-emerald-400" />{" "}
-                                            Active
-                                        </span>
-                                        <ChevronDown className="size-3.5 text-zinc-500" />
+                                    <div className="relative mt-2">
+                                        <div 
+                                            onClick={() => setStatusOpen(!statusOpen)}
+                                            className="rounded-md border border-white/10 bg-black/30 px-3 py-2.5 inline-flex items-center justify-between w-full text-[12.5px] cursor-pointer hover:bg-black/40 transition-colors"
+                                        >
+                                            <span className="inline-flex items-center gap-2 text-zinc-200">
+                                                <span className={`size-1.5 rounded-full ${
+                                                    status === "Active" ? "bg-emerald-400" : status === "Inactive" ? "bg-rose-400" : "bg-amber-400"
+                                                }`} />{" "}
+                                                {status}
+                                            </span>
+                                            <ChevronDown className={`size-3.5 text-zinc-500 transition-transform ${statusOpen ? 'rotate-180' : ''}`} />
+                                        </div>
+                                        {statusOpen && (
+                                            <>
+                                                <div className="fixed inset-0 z-10" onClick={() => setStatusOpen(false)} />
+                                                <div className="absolute z-20 w-full mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl">
+                                                    {statusOptions.map(opt => (
+                                                        <div 
+                                                            key={opt} 
+                                                            className="px-3 py-2 text-[12.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors flex items-center gap-2"
+                                                            onClick={() => { setStatus(opt); setStatusOpen(false); }}
+                                                        >
+                                                            <span className={`size-1.5 rounded-full ${
+                                                                opt === "Active" ? "bg-emerald-400" : opt === "Inactive" ? "bg-rose-400" : "bg-amber-400"
+                                                            }`} />
+                                                            {opt}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -1307,6 +1711,7 @@ function ManageSquad() {
                                     Cancel
                                 </button>
                                 <button
+                                    onClick={() => alert(`Changes to squad "${name}" successfully saved!`)}
                                     className="inline-flex items-center gap-1.5 rounded-full text-white text-[12px] font-medium px-4 py-1.5"
                                     style={{
                                         backgroundImage:
@@ -1324,7 +1729,7 @@ function ManageSquad() {
     );
 }
 
-function MemberEditRow({ tone, a, n, d, e, badge, badgeTone }) {
+function MemberEditRow({ tone, a, n, d, e, badge, badgeTone, onDelete }) {
     const avatarTone = {
         emerald: "bg-emerald-500/30 text-emerald-100 border-emerald-400/40",
         amber: "bg-amber-500/30 text-amber-100 border-amber-400/40",
@@ -1336,35 +1741,39 @@ function MemberEditRow({ tone, a, n, d, e, badge, badgeTone }) {
         indigo: "border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300",
     }[badgeTone];
     return (
-        <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5">
             <div className="flex items-center gap-3 min-w-0">
                 <span
-                    className={`inline-flex size-9 items-center justify-center rounded-full border text-[12px] font-bold ${avatarTone}`}
+                    className={`inline-flex size-9 items-center justify-center rounded-full border text-[12px] font-bold ${avatarTone} shrink-0`}
                 >
                     {a}
                 </span>
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1 text-left">
                     <div className="text-[13px] text-zinc-100 truncate">{n}</div>
-                    <div className="text-[11px] text-zinc-500 truncate">
-                        {d && <>{d} · </>}
-                        <span className="inline-flex items-center gap-1">
-                            <Mail className="size-2.5" /> {e}
-                        </span>
+                    {d && <div className="text-[11px] text-zinc-500 truncate">{d}</div>}
+                    <div className="text-[11px] text-zinc-500 flex items-center gap-1 min-w-0">
+                        <Mail className="size-2.5 shrink-0" />
+                        <span className="truncate">{e}</span>
                     </div>
                 </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto border-t border-white/5 pt-2.5 sm:border-t-0 sm:pt-0">
                 <span
                     className={`text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${badgeToneMap}`}
                 >
                     {badge}
                 </span>
-                <button className="text-zinc-500 hover:text-white">
-                    <Pencil className="size-3.5" />
-                </button>
-                <button className="text-rose-400 hover:text-rose-300">
-                    <Trash2 className="size-3.5" />
-                </button>
+                <div className="flex items-center gap-2">
+                    <button className="text-zinc-500 hover:text-white p-1">
+                        <Pencil className="size-3.5" />
+                    </button>
+                    <button 
+                        onClick={onDelete}
+                        className="text-rose-400 hover:text-rose-300 p-1"
+                    >
+                        <Trash2 className="size-3.5" />
+                    </button>
+                </div>
             </div>
         </div>
     );
@@ -1489,7 +1898,7 @@ function RolesHierarchy() {
                             <span>Sub-Head — assists leadership</span>
                         </div>
                         <div className="w-px h-6 bg-white/10" />
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 w-full">
                             {[
                                 "Member · Engineer",
                                 "Member · Designer",

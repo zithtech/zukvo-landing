@@ -275,7 +275,7 @@ export default function Footer() {
                     aria-hidden="true"
                 >
                     <div
-                        className="font-heading font-semibold tracking-[-0.06em] leading-none text-transparent"
+                        className="font-heading font-semibold tracking-[-0.06em] leading-none text-transparent text-center md:text-left"
                         style={{
                             fontSize: "clamp(80px, 18vw, 320px)",
                             WebkitTextStroke: "1px rgba(255,255,255,0.18)",

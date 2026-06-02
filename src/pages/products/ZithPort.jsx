@@ -73,7 +73,7 @@ export default function ZithPort() {
     return (
         <main
             data-testid="zithport-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -197,7 +197,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>

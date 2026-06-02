@@ -184,7 +184,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -217,7 +217,7 @@ function Dashboard() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-zukvo-300">
                             Dashboard
                         </div>
@@ -245,7 +245,7 @@ function Dashboard() {
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 w-full min-w-0">
                         <ImageSlot
                             testid="esc-image-dashboard"
                             src={escaltionImg}
@@ -393,60 +393,64 @@ function Dashboard() {
 
                 {/* Table */}
                 <div className="zk-reveal mt-3 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
-                    <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
-                        <div className="col-span-3">Subject & category</div>
-                        <div className="col-span-2">Target team</div>
-                        <div className="col-span-1">Tickets</div>
-                        <div className="col-span-1">Priority</div>
-                        <div className="col-span-1">Status</div>
-                        <div className="col-span-2">Raised by</div>
-                        <div className="col-span-1">Raised date</div>
-                        <div className="col-span-1 text-right">Action</div>
-                    </div>
-                    <div className="grid grid-cols-12 items-center px-5 py-4 border-t border-white/5 hover:bg-white/[0.02] transition-colors">
-                        <div className="col-span-3 min-w-0">
-                            <div className="text-[13px] text-zinc-100 truncate">
-                                dfghjkjhgfdsdfgh
+                    <div className="overflow-x-auto w-full">
+                        <div style={{ minWidth: "1100px" }}>
+                            <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
+                                <div className="col-span-3">Subject & category</div>
+                                <div className="col-span-2">Target team</div>
+                                <div className="col-span-1">Tickets</div>
+                                <div className="col-span-1">Priority</div>
+                                <div className="col-span-1">Status</div>
+                                <div className="col-span-2">Raised by</div>
+                                <div className="col-span-1">Raised date</div>
+                                <div className="col-span-1 text-right">Action</div>
                             </div>
-                            <div className="mt-1 inline-flex items-center text-[9.5px] uppercase tracking-[0.18em] rounded-md border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-1.5 py-0.5 font-mono">
-                                SKYFALL
+                            <div className="grid grid-cols-12 items-center px-5 py-4 border-t border-white/5 hover:bg-white/[0.02] transition-colors">
+                                <div className="col-span-3 min-w-0">
+                                    <div className="text-[13px] text-zinc-100 truncate">
+                                        dfghjkjhgfdsdfgh
+                                    </div>
+                                    <div className="mt-1 inline-flex items-center text-[9.5px] uppercase tracking-[0.18em] rounded-md border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-1.5 py-0.5 font-mono">
+                                        SKYFALL
+                                    </div>
+                                </div>
+                                <div className="col-span-2 inline-flex items-center gap-2">
+                                    <span className="inline-flex size-7 items-center justify-center rounded-full bg-zukvo-500/30 text-zukvo-100 border border-zukvo-500/40 text-[10px] font-bold">
+                                        D
+                                    </span>
+                                    <span className="text-[12px] text-zinc-300 truncate">
+                                        DevTestUser1
+                                    </span>
+                                </div>
+                                <div className="col-span-1">
+                                    <span className="inline-flex items-center text-[10.5px] rounded-md border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-2 py-0.5 font-mono">
+                                        002-0578
+                                    </span>
+                                </div>
+                                <div className="col-span-1">
+                                    <span className="inline-flex items-center text-[10.5px] uppercase tracking-[0.18em] rounded-md border border-amber-400/30 bg-amber-500/10 text-amber-300 px-2 py-0.5">
+                                        TEST2
+                                    </span>
+                                </div>
+                                <div className="col-span-1">
+                                    <span className="inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.18em] text-violet-300">
+                                        <span className="size-1.5 rounded-full bg-violet-400" /> test8
+                                    </span>
+                                </div>
+                                <div className="col-span-2 inline-flex items-center gap-2">
+                                    <span className="inline-flex size-7 items-center justify-center rounded-full bg-violet-500/30 text-violet-100 border border-violet-400/40 text-[10px] font-bold">
+                                        A
+                                    </span>
+                                    <span className="text-[12px] text-zinc-300 truncate">Abinash</span>
+                                </div>
+                                <div className="col-span-1 text-[11.5px] text-zinc-500">Apr 14, 2026</div>
+                                <div className="col-span-1 text-right">
+                                    <span className="inline-flex items-center gap-1.5 text-zinc-500">
+                                        <Pencil className="size-3.5 hover:text-white cursor-pointer" />
+                                        <Trash2 className="size-3.5 hover:text-rose-300 cursor-pointer" />
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div className="col-span-2 inline-flex items-center gap-2">
-                            <span className="inline-flex size-7 items-center justify-center rounded-full bg-zukvo-500/30 text-zukvo-100 border border-zukvo-500/40 text-[10px] font-bold">
-                                D
-                            </span>
-                            <span className="text-[12px] text-zinc-300 truncate">
-                                DevTestUser1
-                            </span>
-                        </div>
-                        <div className="col-span-1">
-                            <span className="inline-flex items-center text-[10.5px] rounded-md border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-2 py-0.5 font-mono">
-                                002-0578
-                            </span>
-                        </div>
-                        <div className="col-span-1">
-                            <span className="inline-flex items-center text-[10.5px] uppercase tracking-[0.18em] rounded-md border border-amber-400/30 bg-amber-500/10 text-amber-300 px-2 py-0.5">
-                                TEST2
-                            </span>
-                        </div>
-                        <div className="col-span-1">
-                            <span className="inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.18em] text-violet-300">
-                                <span className="size-1.5 rounded-full bg-violet-400" /> test8
-                            </span>
-                        </div>
-                        <div className="col-span-2 inline-flex items-center gap-2">
-                            <span className="inline-flex size-7 items-center justify-center rounded-full bg-violet-500/30 text-violet-100 border border-violet-400/40 text-[10px] font-bold">
-                                A
-                            </span>
-                            <span className="text-[12px] text-zinc-300 truncate">Abinash</span>
-                        </div>
-                        <div className="col-span-1 text-[11.5px] text-zinc-500">Apr 14, 2026</div>
-                        <div className="col-span-1 text-right">
-                            <span className="inline-flex items-center gap-1.5 text-zinc-500">
-                                <Pencil className="size-3.5 hover:text-white cursor-pointer" />
-                                <Trash2 className="size-3.5 hover:text-rose-300 cursor-pointer" />
-                            </span>
                         </div>
                     </div>
                     <div className="px-5 py-3 border-t border-white/5 flex items-center justify-between text-[11.5px] text-zinc-500 flex-wrap gap-2">
@@ -559,7 +563,7 @@ function RaiseEscalation() {
                 </div>
 
                 <div className="zk-reveal mt-12 grid lg:grid-cols-12 gap-6 items-start">
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 w-full min-w-0">
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                             {/* Header */}
                             <div
@@ -608,9 +612,14 @@ function RaiseEscalation() {
                                 >
                                     <FormField
                                         label="Target team members"
-                                        placeholder="Search by name or role…"
+                                        value="Sebastian"
+                                        options={["Bharathi", "Sebastian", "Admin User", "Abiraham Immanvel", "Priyadharshini"]}
                                     />
-                                    <FormField label="Category" placeholder="Issue type" />
+                                    <FormField 
+                                        label="Category" 
+                                        value="Production Deployment" 
+                                        options={["Production Deployment", "Security Vulnerability", "Performance Degradation", "UI Regression", "Data Inconsistency"]}
+                                    />
                                 </DrawerStep>
 
                                 <DrawerStep
@@ -624,12 +633,11 @@ function RaiseEscalation() {
                                             Subject
                                         </div>
                                         <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 flex items-center justify-between text-[12.5px]">
-                                            <span className="text-zinc-500">
-                                                e.g. Repeated regressions on Employee Profile
-                                                deploy
+                                            <span className="text-zinc-200">
+                                                Production build failing on Zukvo FE deployment
                                             </span>
                                             <span className="text-[10px] text-zinc-500 shrink-0 ml-3">
-                                                0 / 140
+                                                47 / 140
                                             </span>
                                         </div>
                                     </div>
@@ -637,40 +645,40 @@ function RaiseEscalation() {
                                         <FormFieldInline
                                             label="Priority"
                                             icon={Flame}
-                                            placeholder="Severity"
+                                            value="Critical"
+                                            options={["Low", "Medium", "High", "Critical"]}
                                         />
                                         <FormFieldInline
                                             label="Initial status"
                                             icon={Flag}
-                                            placeholder="Status"
+                                            value="Open"
+                                            options={["Open", "In Progress", "In Review", "Resolved", "Closed"]}
                                         />
                                         <FormFieldInline
                                             label="Project"
                                             icon={Briefcase}
-                                            placeholder="Related project"
+                                            value="Zukvo Frontend"
+                                            options={["Zukvo Frontend", "Zukvo Backend", "Zukvo Mobile App", "Landing Page", "Internal Dashboard"]}
                                         />
                                     </div>
                                     <div className="col-span-full">
                                         <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1 inline-flex items-center gap-1.5">
                                             <Ticket className="size-3" /> Related tickets
-                                            <span className="normal-case tracking-normal text-[10.5px] text-zinc-500">
-                                                select a project to load tickets
-                                            </span>
                                         </div>
-                                        <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] text-zinc-500">
-                                            No project selected
+                                        <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] text-zinc-200 flex items-center justify-between">
+                                            <span>ZUK-105: UI Breakage on Dashboard</span>
+                                            <ChevronDown className="size-3.5 text-zinc-500" />
                                         </div>
                                     </div>
                                     <div className="col-span-full">
                                         <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1 inline-flex items-center gap-1.5">
                                             <FileText className="size-3" /> Detailed description
                                         </div>
-                                        <div className="rounded-md border border-white/10 bg-black/30 px-3 py-3 text-[12px] text-zinc-500 h-24">
-                                            Provide clear evidence of the issues. Mention
-                                            specific instances and reproduction steps.
+                                        <div className="rounded-md border border-white/10 bg-black/30 px-3 py-3 text-[12px] text-zinc-200 h-24">
+                                            The latest commit on main branch is causing the Vercel production build to fail during the webpack compilation step. Attached logs indicate a missing module.
                                         </div>
                                         <div className="mt-1 text-right text-[10px] text-zinc-500">
-                                            0 / 2000
+                                            158 / 2000
                                         </div>
                                     </div>
                                 </DrawerStep>
@@ -715,7 +723,7 @@ function RaiseEscalation() {
                         </div>
                     </div>
 
-                    <div className="lg:col-span-5 space-y-5">
+                    <div className="lg:col-span-5 space-y-5 w-full min-w-0">
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
                             <div className="text-[11px] uppercase tracking-[0.22em] text-zukvo-300 font-bold">
                                 Built into the form
@@ -771,32 +779,114 @@ function DrawerStep({ n, title, sub, icon: Icon, children }) {
     );
 }
 
-function FormField({ label, placeholder, value }) {
+function FormField({ label, placeholder, value, options }) {
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState(value);
+
+    useEffect(() => {
+        if (value !== selected) setSelected(value);
+    }, [value]);
+
     return (
-        <div>
+        <div className="relative">
             <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1">
                 {label}
             </div>
-            <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between">
-                <span className={value ? "text-zinc-200" : "text-zinc-500"}>
-                    {value || placeholder}
-                </span>
-                <ChevronDown className="size-3.5 text-zinc-500" />
-            </div>
+            {options ? (
+                <>
+                    <div 
+                        className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between cursor-pointer hover:bg-black/40 transition-colors"
+                        onClick={() => setOpen(!open)}
+                    >
+                        <span className={selected ? "text-zinc-200" : "text-zinc-500"}>
+                            {selected || placeholder}
+                        </span>
+                        <ChevronDown className={`size-3.5 text-zinc-500 transition-transform ${open ? 'rotate-180' : ''}`} />
+                    </div>
+                    {open && (
+                        <>
+                            <div className="fixed inset-0 z-10" onClick={() => setOpen(false)}></div>
+                            <div className="absolute z-20 w-full mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl max-h-48 overflow-y-auto">
+                                {options.map(opt => (
+                                    <div 
+                                        key={opt} 
+                                        className="px-3 py-2.5 text-[12.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors"
+                                        onClick={() => { setSelected(opt); setOpen(false); }}
+                                    >
+                                        {opt}
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </>
+            ) : (
+                <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between">
+                    <input 
+                        type="text"
+                        className="bg-transparent border-none outline-none w-full text-zinc-200 placeholder:text-zinc-500"
+                        placeholder={placeholder}
+                        value={selected || ""}
+                        onChange={(e) => setSelected(e.target.value)}
+                    />
+                </div>
+            )}
         </div>
     );
 }
 
-function FormFieldInline({ label, icon: Icon, placeholder }) {
+function FormFieldInline({ label, icon: Icon, placeholder, value, options }) {
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState(value);
+
+    useEffect(() => {
+        if (value !== selected) setSelected(value);
+    }, [value]);
+
     return (
-        <div>
+        <div className="relative">
             <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1 inline-flex items-center gap-1.5">
                 {Icon && <Icon className="size-3" />} {label}
             </div>
-            <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] text-zinc-500 flex items-center justify-between">
-                <span>{placeholder}</span>
-                <ChevronDown className="size-3.5 text-zinc-500" />
-            </div>
+            {options ? (
+                <>
+                    <div 
+                        className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between cursor-pointer hover:bg-black/40 transition-colors"
+                        onClick={() => setOpen(!open)}
+                    >
+                        <span className={selected ? "text-zinc-200" : "text-zinc-500"}>
+                            {selected || placeholder}
+                        </span>
+                        <ChevronDown className={`size-3.5 text-zinc-500 transition-transform ${open ? 'rotate-180' : ''}`} />
+                    </div>
+                    {open && (
+                        <>
+                            <div className="fixed inset-0 z-10" onClick={() => setOpen(false)}></div>
+                            <div className="absolute z-20 w-full mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl max-h-48 overflow-y-auto">
+                                {options.map(opt => (
+                                    <div 
+                                        key={opt} 
+                                        className="px-3 py-2.5 text-[12.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors"
+                                        onClick={() => { setSelected(opt); setOpen(false); }}
+                                    >
+                                        {opt}
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </>
+            ) : (
+                <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between">
+                    <input 
+                        type="text"
+                        className="bg-transparent border-none outline-none w-full text-zinc-200 placeholder:text-zinc-500"
+                        placeholder={placeholder}
+                        value={selected || ""}
+                        onChange={(e) => setSelected(e.target.value)}
+                    />
+                </div>
+            )}
         </div>
     );
 }
@@ -805,6 +895,36 @@ function FormFieldInline({ label, icon: Icon, placeholder }) {
 
 function MasterData() {
     const [tab, setTab] = useState("cats");
+    const tabData = {
+        cats: {
+            label: "Category",
+            countText: "2 categories",
+            rows: [
+                ["High Production Issue", "High Production Issue", "zukvo"],
+                ["Major Blocker", "Major Blocker", "zukvo"],
+            ]
+        },
+        prio: {
+            label: "Priority",
+            countText: "3 priorities",
+            rows: [
+                ["Critical", "Immediate attention", "rose"],
+                ["High", "Within 4 hours", "amber"],
+                ["Medium", "Within 24 hours", "indigo"],
+            ]
+        },
+        stat: {
+            label: "Status",
+            countText: "3 statuses",
+            rows: [
+                ["Open", "New escalation raised", "indigo"],
+                ["In Progress", "Work underway", "amber"],
+                ["Resolved", "SLA completed", "emerald"],
+            ]
+        }
+    };
+    const activeTab = tabData[tab] || tabData.cats;
+
     return (
         <section
             id="settings"
@@ -813,7 +933,7 @@ function MasterData() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="inline-flex items-center gap-1.5 rounded-full border border-zukvo-500/30 bg-zukvo-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.22em] text-zukvo-300">
                             <Settings2 className="size-3" /> Master Data
                         </div>
@@ -842,7 +962,7 @@ function MasterData() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7 space-y-4">
+                    <div className="lg:col-span-7 space-y-4 w-full min-w-0">
                         {/* Header bar */}
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] p-4 flex items-center justify-between flex-wrap gap-3">
                             <div className="flex items-center gap-3">
@@ -871,7 +991,7 @@ function MasterData() {
                         </div>
 
                         {/* 3 KPI cards */}
-                        <div className="grid grid-cols-3 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             <MasterKpi
                                 icon={Tag}
                                 k="Categories"
@@ -900,8 +1020,8 @@ function MasterData() {
 
                         {/* Tabs + table */}
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
-                            <div className="px-5 py-3 border-b border-white/5 flex items-center justify-between">
-                                <div className="inline-flex rounded-md border border-white/10 bg-white/[0.02] p-0.5 text-[11.5px]">
+                            <div className="px-5 py-3 border-b border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <div className="inline-flex rounded-md border border-white/10 bg-white/[0.02] p-0.5 text-[11.5px] overflow-x-auto no-scrollbar max-w-full whitespace-nowrap">
                                     {[
                                         { id: "cats", t: "Categories", c: 2, i: Tag },
                                         { id: "prio", t: "Priorities", c: 3, i: Flame },
@@ -931,16 +1051,13 @@ function MasterData() {
                                         </button>
                                     ))}
                                 </div>
-                                <span className="text-[11px] text-zinc-500">2 categorys</span>
+                                <span className="text-[11px] text-zinc-500 sm:text-right shrink-0">{activeTab.countText}</span>
                             </div>
                             <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
-                                <div className="col-span-9">Category</div>
+                                <div className="col-span-9">{activeTab.label}</div>
                                 <div className="col-span-3 text-right">Status</div>
                             </div>
-                            {[
-                                ["High Production Issue", "High Production Issue", "zukvo"],
-                                ["Major Blocker", "Major Blocker", "zukvo"],
-                            ].map(([t, s, tone], i) => (
+                            {activeTab.rows.map(([t, s, tone], i) => (
                                 <div
                                     key={i}
                                     className="grid grid-cols-12 items-center px-5 py-3 border-t border-white/5"
@@ -950,7 +1067,15 @@ function MasterData() {
                                             className={`inline-flex size-2.5 rounded-full ${
                                                 tone === "zukvo"
                                                     ? "bg-zukvo-400"
-                                                    : "bg-violet-400"
+                                                    : tone === "violet"
+                                                      ? "bg-violet-400"
+                                                      : tone === "rose"
+                                                        ? "bg-rose-400"
+                                                        : tone === "amber"
+                                                          ? "bg-amber-400"
+                                                          : tone === "emerald"
+                                                            ? "bg-emerald-400"
+                                                            : "bg-zukvo-400"
                                             }`}
                                         />
                                         <div>
@@ -959,7 +1084,7 @@ function MasterData() {
                                         </div>
                                     </div>
                                     <div className="col-span-3 flex items-center justify-end gap-2">
-                                        <span className="inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 px-2 py-0.5">
+                                        <span className="inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 px-2 py-0.5 whitespace-nowrap shrink-0">
                                             <span className="size-1.5 rounded-full bg-emerald-400" />
                                             Active
                                         </span>
@@ -1035,7 +1160,7 @@ function NewCategory() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-start">
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-400/30 bg-violet-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.22em] text-violet-300">
                             <Tag className="size-3" /> Add Category
                         </div>
@@ -1064,7 +1189,7 @@ function NewCategory() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 w-full min-w-0">
                         <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
                             <div
                                 className="px-5 py-4 flex items-center gap-3 border-b border-white/5"
@@ -1110,11 +1235,11 @@ function NewCategory() {
                                             Display name
                                         </div>
                                         <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 flex items-center justify-between text-[12.5px]">
-                                            <span className="text-zinc-500">
-                                                e.g. Deployment Failure
+                                            <span className="text-zinc-200">
+                                                Zukvo Landing Page Deployment Failure
                                             </span>
                                             <span className="text-[10px] text-zinc-500 shrink-0 ml-3">
-                                                0 / 64
+                                                37 / 64
                                             </span>
                                         </div>
                                     </div>
@@ -1122,11 +1247,11 @@ function NewCategory() {
                                         <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1">
                                             Description (optional)
                                         </div>
-                                        <div className="rounded-md border border-white/10 bg-black/30 px-3 py-3 text-[12px] text-zinc-500 h-16">
-                                            Briefly describe when this category should be used
+                                        <div className="rounded-md border border-white/10 bg-black/30 px-3 py-3 text-[12px] text-zinc-200 h-16">
+                                            Used when the Zukvo landing page fails to deploy to production on AWS.
                                         </div>
                                         <div className="mt-1 text-right text-[10px] text-zinc-500">
-                                            0 / 240
+                                            70 / 240
                                         </div>
                                     </div>
                                 </DrawerStep>
@@ -1276,7 +1401,7 @@ function WorkflowSection() {
 
                 {/* SLA + signals row */}
                 <div className="zk-reveal mt-10 grid lg:grid-cols-12 gap-5">
-                    <div className="lg:col-span-6 rounded-2xl border border-amber-400/30 bg-amber-500/[0.05] p-5">
+                    <div className="lg:col-span-6 w-full min-w-0 rounded-2xl border border-amber-400/30 bg-amber-500/[0.05] p-5">
                         <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-amber-300 font-bold">
                             <Bell className="size-3" /> 24-hour review SLA
                         </div>
@@ -1304,7 +1429,7 @@ function WorkflowSection() {
                         </div>
                     </div>
 
-                    <div className="lg:col-span-6 rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
+                    <div className="lg:col-span-6 w-full min-w-0 rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
                         <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-zukvo-300 font-bold">
                             <Activity className="size-3" /> Ties into the OS
                         </div>

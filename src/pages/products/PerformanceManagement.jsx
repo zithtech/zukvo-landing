@@ -72,7 +72,7 @@ export default function PerformanceManagement() {
     return (
         <main
             data-testid="perf-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -180,7 +180,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -561,68 +561,72 @@ function TicketPerformance() {
                 </div>
 
                 <div className="zk-reveal mt-12 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
-                    <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
-                        <div className="col-span-1">Ticket</div>
-                        <div className="col-span-5">Title</div>
-                        <div className="col-span-1 text-right">Estimate</div>
-                        <div className="col-span-2 text-right">Tracked</div>
-                        <div className="col-span-1">Status</div>
-                        <div className="col-span-2 text-right">Completion</div>
-                    </div>
-                    {rows.map((r, i) => (
-                        <div
-                            key={i}
-                            className="grid grid-cols-12 items-center px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
-                        >
-                            <div className="col-span-1">
-                                <span className="inline-flex items-center text-[11px] font-mono rounded-md border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-2 py-0.5">
-                                    {r[0]}
-                                </span>
+                    <div className="overflow-x-auto w-full">
+                        <div style={{ minWidth: "1000px" }}>
+                            <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
+                                <div className="col-span-1">Ticket</div>
+                                <div className="col-span-4">Title</div>
+                                <div className="col-span-1 text-right">Estimate</div>
+                                <div className="col-span-2 text-right">Tracked</div>
+                                <div className="col-span-2">Status</div>
+                                <div className="col-span-2 text-right">Completion</div>
                             </div>
-                            <div className="col-span-5 text-[13px] text-zinc-100 truncate">
-                                {r[1]}
-                            </div>
-                            <div className="col-span-1 text-right text-[12px] text-zinc-300">
-                                {r[2]}
-                            </div>
-                            <div
-                                className={`col-span-2 text-right text-[13px] font-medium ${
-                                    r[3] === "57m" || r[5] === "complete" ? "text-emerald-300" : r[7] === "amber" ? "text-rose-300" : "text-emerald-300"
-                                }`}
-                            >
-                                {r[3]}
-                            </div>
-                            <div className="col-span-1">
-                                <span
-                                    className={`inline-flex items-center gap-1 text-[10.5px] rounded-md border px-2 py-0.5 ${
-                                        r[5] === "complete"
-                                            ? "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
-                                            : "border-white/10 bg-white/[0.04] text-zinc-300"
-                                    }`}
+                            {rows.map((r, i) => (
+                                <div
+                                    key={i}
+                                    className="grid grid-cols-12 items-center px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
                                 >
-                                    {r[5] === "complete" ? (
-                                        <CheckCircle2 className="size-3" />
-                                    ) : (
-                                        <Pause className="size-3" />
-                                    )}
-                                    {r[4]}
-                                </span>
-                            </div>
-                            <div className="col-span-2 text-right">
-                                <span
-                                    className={`text-[10.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${
-                                        r[7] === "rose"
-                                            ? "border-rose-400/30 bg-rose-500/10 text-rose-300"
-                                            : r[7] === "amber"
-                                              ? "border-amber-400/30 bg-amber-500/10 text-amber-300"
-                                              : "border-white/10 bg-white/[0.04] text-zinc-400"
-                                    }`}
-                                >
-                                    {r[6]}
-                                </span>
-                            </div>
+                                    <div className="col-span-1">
+                                        <span className="inline-flex items-center text-[11px] font-mono rounded-md border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-2 py-0.5">
+                                            {r[0]}
+                                        </span>
+                                    </div>
+                                    <div className="col-span-4 text-[13px] text-zinc-100 truncate">
+                                        {r[1]}
+                                    </div>
+                                    <div className="col-span-1 text-right text-[12px] text-zinc-300">
+                                        {r[2]}
+                                    </div>
+                                    <div
+                                        className={`col-span-2 text-right text-[13px] font-medium ${
+                                            r[3] === "57m" || r[5] === "complete" ? "text-emerald-300" : r[7] === "amber" ? "text-rose-300" : "text-emerald-300"
+                                        }`}
+                                    >
+                                        {r[3]}
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span
+                                            className={`inline-flex items-center gap-1 text-[10.5px] rounded-md border px-2 py-0.5 ${
+                                                r[5] === "complete"
+                                                    ? "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
+                                                    : "border-white/10 bg-white/[0.04] text-zinc-300"
+                                            }`}
+                                        >
+                                            {r[5] === "complete" ? (
+                                                <CheckCircle2 className="size-3" />
+                                            ) : (
+                                                <Pause className="size-3" />
+                                            )}
+                                            {r[4]}
+                                        </span>
+                                    </div>
+                                    <div className="col-span-2 text-right">
+                                        <span
+                                            className={`text-[10.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${
+                                                r[7] === "rose"
+                                                    ? "border-rose-400/30 bg-rose-500/10 text-rose-300"
+                                                    : r[7] === "amber"
+                                                      ? "border-amber-400/30 bg-amber-500/10 text-amber-300"
+                                                      : "border-white/10 bg-white/[0.04] text-zinc-400"
+                                            }`}
+                                        >
+                                            {r[6]}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
 
                     <div className="px-5 py-3 border-t border-white/5 flex items-center justify-between text-[11.5px] text-zinc-500">
                         <span>Showing 5 of 8 tickets</span>

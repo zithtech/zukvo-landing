@@ -83,7 +83,7 @@ export default function Invoice() {
     return (
         <main
             data-testid="invoice-page"
-            className="relative bg-[#FAFAFA] text-zukvo-ink overflow-x-clip"
+            className="relative bg-[#FAFAFA] text-zukvo-ink"
         >
             <SEO />
             <Nav />
@@ -192,7 +192,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -348,39 +348,43 @@ function InvoicesList() {
                 </div>
 
                 <div className="zk-reveal mt-12 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
-                    <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
-                        <div className="col-span-3">Invoice</div>
-                        <div className="col-span-3">Customer</div>
-                        <div className="col-span-2">Date</div>
-                        <div className="col-span-2">Due</div>
-                        <div className="col-span-1 text-right">Amount</div>
-                        <div className="col-span-1 text-right">Status</div>
-                    </div>
-                    {rows.map((r, i) => (
-                        <div
-                            key={i}
-                            className="grid grid-cols-12 items-center px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
-                        >
-                            <div className="col-span-3 font-mono text-[12.5px] text-zukvo-300">
-                                {r[0]}
+                    <div className="overflow-x-auto w-full">
+                        <div style={{ minWidth: "1000px" }}>
+                            <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
+                                <div className="col-span-2">Invoice</div>
+                                <div className="col-span-3">Customer</div>
+                                <div className="col-span-2">Date</div>
+                                <div className="col-span-2">Due</div>
+                                <div className="col-span-1 text-right">Amount</div>
+                                <div className="col-span-2 text-right">Status</div>
                             </div>
-                            <div className="col-span-3 text-[13px] text-zinc-200 truncate">
-                                {r[1]}
-                            </div>
-                            <div className="col-span-2 text-[12.5px] text-zinc-400">{r[2]}</div>
-                            <div className="col-span-2 text-[12.5px] text-zinc-400">{r[3]}</div>
-                            <div className="col-span-1 text-right text-[13px] text-white font-medium">
-                                {r[4]}
-                            </div>
-                            <div className="col-span-1 text-right">
-                                <span
-                                    className={`inline-flex items-center text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${tone[r[6]]}`}
+                            {rows.map((r, i) => (
+                                <div
+                                    key={i}
+                                    className="grid grid-cols-12 items-center px-5 py-3.5 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
                                 >
-                                    {r[5]}
-                                </span>
-                            </div>
+                                    <div className="col-span-2 font-mono text-[12.5px] text-zukvo-300">
+                                        {r[0]}
+                                    </div>
+                                    <div className="col-span-3 text-[13px] text-zinc-200 truncate">
+                                        {r[1]}
+                                    </div>
+                                    <div className="col-span-2 text-[12.5px] text-zinc-400">{r[2]}</div>
+                                    <div className="col-span-2 text-[12.5px] text-zinc-400">{r[3]}</div>
+                                    <div className="col-span-1 text-right text-[13px] text-white font-medium">
+                                        {r[4]}
+                                    </div>
+                                    <div className="col-span-2 text-right">
+                                        <span
+                                            className={`inline-flex items-center text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${tone[r[6]]}`}
+                                        >
+                                            {r[5]}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </div>
 
                 <div className="zk-reveal mt-5">
@@ -469,7 +473,7 @@ function CreateInvoice() {
                         </span>
                         <span className="text-[12px] text-zinc-500">Template · Standard</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                         {[
                             { i: Eye, t: "Preview" },
                             { i: Pencil, t: "Save draft" },
@@ -477,7 +481,7 @@ function CreateInvoice() {
                         ].map((b, i) => (
                             <button
                                 key={i}
-                                className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px] font-medium transition-colors ${
+                                className={`shrink-0 inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px] font-medium whitespace-nowrap transition-colors ${
                                     b.primary
                                         ? "bg-zukvo-500 hover:bg-zukvo-600 text-white"
                                         : "border border-white/15 bg-white/5 hover:bg-white/10 text-white"
@@ -565,72 +569,74 @@ function Templates() {
 
                 {/* Template field builder mock */}
                 <div className="zk-reveal mt-12 rounded-2xl border border-white/10 bg-[#0E0E10] p-5">
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                         <div className="text-[11px] uppercase tracking-[0.2em] text-violet-300 font-bold">
                             Invoice structure · columns of the line items table
                         </div>
-                        <button className="inline-flex items-center gap-1.5 rounded-full bg-zukvo-500 hover:bg-zukvo-600 transition-colors text-white px-3 py-1.5 text-[12px] font-medium">
+                        <button className="inline-flex items-center gap-1.5 rounded-full bg-zukvo-500 hover:bg-zukvo-600 transition-colors text-white px-3 py-1.5 text-[12px] font-medium w-fit">
                             <Plus className="size-3.5" /> Add field
                         </button>
                     </div>
 
-                    <div className="rounded-xl border border-white/10 overflow-hidden">
-                        <div className="grid grid-cols-12 px-4 py-2.5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 bg-white/[0.02] border-b border-white/5">
-                            <div className="col-span-1"></div>
-                            <div className="col-span-3">Label</div>
-                            <div className="col-span-3">Key</div>
-                            <div className="col-span-3">Type</div>
-                            <div className="col-span-2 text-right">Required</div>
-                        </div>
-                        {[
-                            ["Item Name", "item_name", "Text", true, "sys"],
-                            ["Description", "description", "Text", false, ""],
-                            ["Quantity", "quantity", "Number", true, "sys"],
-                            ["Price", "price", "Currency", true, "sys"],
-                            ["Amount", "amount", "Computed", false, "sys"],
-                            ["Hours (custom)", "hours", "Number", false, ""],
-                        ].map((r, i) => (
-                            <div
-                                key={i}
-                                className="grid grid-cols-12 items-center px-4 py-2.5 border-t border-white/5"
-                            >
-                                <div className="col-span-1">
-                                    <GripVertical className="size-4 text-zinc-600" />
-                                </div>
-                                <div className="col-span-3">
-                                    <div className="text-[12.5px] text-zinc-100">{r[0]}</div>
-                                </div>
-                                <div className="col-span-3">
-                                    <div className="text-[12px] font-mono text-zinc-400">{r[1]}</div>
-                                </div>
-                                <div className="col-span-3">
-                                    <span className="text-[10.5px] uppercase tracking-[0.2em] rounded-full border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-2 py-0.5">
-                                        {r[2]}
-                                    </span>
-                                </div>
-                                <div className="col-span-2 text-right">
-                                    <div className="inline-flex items-center gap-2">
-                                        <span
-                                            className={`inline-flex items-center w-9 h-5 rounded-full border ${
-                                                r[3]
-                                                    ? "bg-zukvo-500/30 border-zukvo-500/50 justify-end pr-0.5"
-                                                    : "bg-white/5 border-white/10 justify-start pl-0.5"
-                                            }`}
-                                        >
-                                            <span className="size-3.5 rounded-full bg-white" />
+                    <div className="overflow-x-auto w-full rounded-xl border border-white/10">
+                        <div style={{ minWidth: "800px" }} className="overflow-hidden">
+                            <div className="grid grid-cols-12 px-4 py-2.5 text-[10px] uppercase tracking-[0.2em] text-zinc-500 bg-white/[0.02] border-b border-white/5">
+                                <div className="col-span-1"></div>
+                                <div className="col-span-3">Label</div>
+                                <div className="col-span-3">Key</div>
+                                <div className="col-span-3">Type</div>
+                                <div className="col-span-2 text-right">Required</div>
+                            </div>
+                            {[
+                                ["Item Name", "item_name", "Text", true, "sys"],
+                                ["Description", "description", "Text", false, ""],
+                                ["Quantity", "quantity", "Number", true, "sys"],
+                                ["Price", "price", "Currency", true, "sys"],
+                                ["Amount", "amount", "Computed", false, "sys"],
+                                ["Hours (custom)", "hours", "Number", false, ""],
+                            ].map((r, i) => (
+                                <div
+                                    key={i}
+                                    className="grid grid-cols-12 items-center px-4 py-2.5 border-t border-white/5"
+                                >
+                                    <div className="col-span-1">
+                                        <GripVertical className="size-4 text-zinc-600" />
+                                    </div>
+                                    <div className="col-span-3">
+                                        <div className="text-[12.5px] text-zinc-100">{r[0]}</div>
+                                    </div>
+                                    <div className="col-span-3">
+                                        <div className="text-[12px] font-mono text-zinc-400">{r[1]}</div>
+                                    </div>
+                                    <div className="col-span-3">
+                                        <span className="text-[10.5px] uppercase tracking-[0.2em] rounded-full border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-2 py-0.5">
+                                            {r[2]}
                                         </span>
-                                        {r[4] && (
-                                            <span className="text-[9.5px] uppercase tracking-[0.2em] rounded-md border border-white/10 bg-white/5 text-zinc-400 px-1.5 py-0.5">
-                                                {r[4]}
+                                    </div>
+                                    <div className="col-span-2 text-right">
+                                        <div className="inline-flex items-center gap-2">
+                                            <span
+                                                className={`inline-flex items-center w-9 h-5 rounded-full border ${
+                                                    r[3]
+                                                        ? "bg-zukvo-500/30 border-zukvo-500/50 justify-end pr-0.5"
+                                                        : "bg-white/5 border-white/10 justify-start pl-0.5"
+                                                }`}
+                                            >
+                                                <span className="size-3.5 rounded-full bg-white" />
                                             </span>
-                                        )}
+                                            {r[4] && (
+                                                <span className="text-[9.5px] uppercase tracking-[0.2em] rounded-md border border-white/10 bg-white/5 text-zinc-400 px-1.5 py-0.5">
+                                                    {r[4]}
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
 
-                    <div className="mt-4 flex items-center justify-between">
+                    <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div className="flex items-center gap-3 text-[12px] text-zinc-500">
                             <span className="inline-flex items-center gap-1.5">
                                 <span className="size-1.5 rounded-full bg-emerald-400" /> Active
@@ -639,7 +645,7 @@ function Templates() {
                                 <Sparkles className="size-3 text-violet-300" /> Set as default
                             </span>
                         </div>
-                        <button className="inline-flex items-center gap-1.5 rounded-full bg-violet-500 hover:bg-violet-600 transition-colors text-white px-4 py-1.5 text-[12.5px] font-medium">
+                        <button className="inline-flex items-center gap-1.5 rounded-full bg-violet-500 hover:bg-violet-600 transition-colors text-white px-4 py-1.5 text-[12.5px] font-medium w-fit">
                             Save template
                         </button>
                     </div>
@@ -673,29 +679,31 @@ function Customers() {
                     </p>
                 </div>
 
-                <div className="zk-reveal mt-10 inline-flex rounded-full border border-white/10 bg-[#101014] p-1 text-[11.5px]">
-                    <button
-                        data-testid="inv-customers-tab-import"
-                        onClick={() => setTab("import")}
-                        className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-colors ${
-                            tab === "import"
-                                ? "bg-zukvo-500 text-white"
-                                : "text-zinc-400 hover:text-white"
-                        }`}
-                    >
-                        <Download className="size-3.5" /> Import from clients
-                    </button>
-                    <button
-                        data-testid="inv-customers-tab-new"
-                        onClick={() => setTab("new")}
-                        className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-colors ${
-                            tab === "new"
-                                ? "bg-emerald-500 text-white"
-                                : "text-zinc-400 hover:text-white"
-                        }`}
-                    >
-                        <Plus className="size-3.5" /> Add new customer
-                    </button>
+                <div className="zk-reveal mt-10 w-full overflow-x-auto no-scrollbar">
+                    <div className="inline-flex rounded-full border border-white/10 bg-[#101014] p-1 text-[11.5px]">
+                        <button
+                            data-testid="inv-customers-tab-import"
+                            onClick={() => setTab("import")}
+                            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-colors whitespace-nowrap ${
+                                tab === "import"
+                                    ? "bg-zukvo-500 text-white"
+                                    : "text-zinc-400 hover:text-white"
+                            }`}
+                        >
+                            <Download className="size-3.5" /> Import from clients
+                        </button>
+                        <button
+                            data-testid="inv-customers-tab-new"
+                            onClick={() => setTab("new")}
+                            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-colors whitespace-nowrap ${
+                                tab === "new"
+                                    ? "bg-emerald-500 text-white"
+                                    : "text-zinc-400 hover:text-white"
+                            }`}
+                        >
+                            <Plus className="size-3.5" /> Add new customer
+                        </button>
+                    </div>
                 </div>
 
                 <div className="zk-reveal mt-6 grid lg:grid-cols-12 gap-8 items-start">
@@ -727,7 +735,7 @@ function ImportPanel() {
             <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-zukvo-300 font-bold">
                 <Upload className="size-3.5" /> Import clients as customers
             </div>
-            <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[12px]">
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2 text-center text-[12px]">
                 {[
                     ["Total clients", "2", "indigo"],
                     ["Available", "1", "emerald"],
@@ -757,25 +765,29 @@ function ImportPanel() {
 
             <div className="mt-4 rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 flex items-center gap-2 text-[12px] text-zinc-400">
                 <span className="text-zinc-500">Search</span>
-                <span className="font-mono text-zinc-500">company, code, email, tax ID…</span>
+                <span className="font-mono text-zinc-500 truncate">company, code, email, tax ID…</span>
             </div>
 
-            <div className="mt-3 rounded-xl border border-zukvo-500/30 bg-zukvo-500/5 px-4 py-3 flex items-center gap-3">
-                <span className="size-9 rounded-lg bg-blue-500/15 text-blue-300 inline-flex items-center justify-center font-heading">
-                    K
-                </span>
-                <div className="flex-1 min-w-0">
-                    <div className="text-[13px] text-zinc-100 truncate">
-                        Kaynes Technology India Limited
-                    </div>
-                    <div className="text-[11.5px] text-zinc-500 truncate">
-                        dhamodharandivya528@gmail.com
+            <div className="mt-3 rounded-xl border border-zukvo-500/30 bg-zukvo-500/5 px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-3">
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <span className="size-9 rounded-lg bg-blue-500/15 text-blue-300 inline-flex items-center justify-center font-heading shrink-0">
+                        K
+                    </span>
+                    <div className="min-w-0">
+                        <div className="text-[13px] text-zinc-100 truncate">
+                            Kaynes Technology India Limited
+                        </div>
+                        <div className="text-[11.5px] text-zinc-500 truncate">
+                            dhamodharandivya528@gmail.com
+                        </div>
                     </div>
                 </div>
-                <span className="font-mono text-[11px] text-zinc-400">CL-000002</span>
-                <span className="text-[10px] uppercase tracking-[0.18em] rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 px-2 py-0.5">
-                    Active
-                </span>
+                <div className="flex items-center gap-2 sm:ml-auto shrink-0 pl-12 sm:pl-0">
+                    <span className="font-mono text-[11px] text-zinc-400">CL-000002</span>
+                    <span className="text-[10px] uppercase tracking-[0.18em] rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 px-2 py-0.5">
+                        Active
+                    </span>
+                </div>
             </div>
 
             <button className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-zukvo-500 hover:bg-zukvo-600 transition-colors text-white px-4 py-1.5 text-[12.5px] font-medium">

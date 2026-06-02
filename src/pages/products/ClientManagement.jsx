@@ -29,6 +29,7 @@ import {
     Plus,
     Download,
     ChevronRight,
+    ChevronDown,
     AlertTriangle,
     Activity,
     Briefcase,
@@ -204,7 +205,7 @@ function SubmoduleNav() {
             className="relative bg-[#FAFAFA] border-y border-zinc-200/70"
         >
             <div className="mx-auto max-w-7xl px-6 md:px-10 py-5">
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="w-full flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <span className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 mr-2 shrink-0">
                         In this module
                     </span>
@@ -341,19 +342,21 @@ function Dashboard() {
                         Filters & quick navigation
                     </div>
                     <div className="mt-4 flex flex-wrap items-center gap-3 justify-between">
-                        <div className="inline-flex rounded-full border border-white/10 bg-white/[0.02] p-1 text-[11.5px]">
-                            <span className="inline-flex items-center gap-1.5 rounded-full bg-zukvo-500 text-white px-3 py-1">
-                                <ShieldCheck className="size-3" /> All
-                                <span className="text-[10px] rounded-full bg-white/15 px-1.5">3</span>
-                            </span>
-                            <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-zinc-400">
-                                <CheckCircle2 className="size-3" /> Active
-                                <span className="text-[10px] text-zinc-500">2</span>
-                            </span>
-                            <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-zinc-400">
-                                <AlertTriangle className="size-3" /> High risk
-                                <span className="text-[10px] text-zinc-500">1</span>
-                            </span>
+                        <div className="max-w-full overflow-x-auto no-scrollbar">
+                            <div className="inline-flex rounded-full border border-white/10 bg-white/[0.02] p-1 text-[11.5px] whitespace-nowrap shrink-0">
+                                <span className="inline-flex items-center gap-1.5 rounded-full bg-zukvo-500 text-white px-3 py-1">
+                                    <ShieldCheck className="size-3" /> All
+                                    <span className="text-[10px] rounded-full bg-white/15 px-1.5">3</span>
+                                </span>
+                                <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-zinc-400">
+                                    <CheckCircle2 className="size-3" /> Active
+                                    <span className="text-[10px] text-zinc-500">2</span>
+                                </span>
+                                <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-zinc-400">
+                                    <AlertTriangle className="size-3" /> High risk
+                                    <span className="text-[10px] text-zinc-500">1</span>
+                                </span>
+                            </div>
                         </div>
                         <div className="flex items-center gap-2 flex-wrap text-[11.5px]">
                             <span className="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1 text-zinc-400">
@@ -372,73 +375,77 @@ function Dashboard() {
 
                 {/* Table */}
                 <div className="zk-reveal mt-5 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
-                    <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
-                        <div className="col-span-4">Client</div>
-                        <div className="col-span-1">Type</div>
-                        <div className="col-span-2">Account manager</div>
-                        <div className="col-span-2">Projects</div>
-                        <div className="col-span-1">Risk</div>
-                        <div className="col-span-2">Status</div>
-                    </div>
-                    {rows.map((r, i) => (
-                        <div
-                            key={i}
-                            className="grid grid-cols-12 items-center px-5 py-4 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
-                        >
-                            <div className="col-span-4 flex items-center gap-3 min-w-0">
-                                <span
-                                    className={`inline-flex size-9 items-center justify-center rounded-lg border text-[11px] font-bold shrink-0 ${avatarTone[r[10]]}`}
+                    <div className="overflow-x-auto w-full">
+                        <div style={{ minWidth: "1200px" }}>
+                            <div className="grid grid-cols-12 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-zinc-500 border-b border-white/5">
+                                <div className="col-span-4">Client</div>
+                                <div className="col-span-1">Type</div>
+                                <div className="col-span-2">Account manager</div>
+                                <div className="col-span-1">Projects</div>
+                                <div className="col-span-2">Risk</div>
+                                <div className="col-span-2">Status</div>
+                            </div>
+                            {rows.map((r, i) => (
+                                <div
+                                    key={i}
+                                    className="grid grid-cols-12 items-center px-5 py-4 border-t border-white/5 hover:bg-white/[0.02] transition-colors"
                                 >
-                                    {r[0]}
-                                </span>
-                                <div className="min-w-0">
-                                    <div className="text-[13px] text-zinc-100 truncate inline-flex items-center gap-1.5">
-                                        {r[1]}
-                                        <ExternalLink className="size-3 text-zinc-600" />
+                                    <div className="col-span-4 flex items-center gap-3 min-w-0">
+                                        <span
+                                            className={`inline-flex size-9 items-center justify-center rounded-lg border text-[11px] font-bold shrink-0 ${avatarTone[r[10]]}`}
+                                        >
+                                            {r[0]}
+                                        </span>
+                                        <div className="min-w-0">
+                                            <div className="text-[13px] text-zinc-100 truncate inline-flex items-center gap-1.5">
+                                                {r[1]}
+                                                <ExternalLink className="size-3 text-zinc-600" />
+                                            </div>
+                                            <div className="text-[11px] text-zinc-500 inline-flex items-center gap-2">
+                                                <span className="font-mono">{r[2]}</span>
+                                                <span>·</span>
+                                                <span>{r[3]}</span>
+                                                <span>·</span>
+                                                <span className="inline-flex items-center gap-1">
+                                                    <Globe2 className="size-3" /> {r[4]}
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="text-[11px] text-zinc-500 inline-flex items-center gap-2">
-                                        <span className="font-mono">{r[2]}</span>
-                                        <span>·</span>
-                                        <span>{r[3]}</span>
-                                        <span>·</span>
-                                        <span className="inline-flex items-center gap-1">
-                                            <Globe2 className="size-3" /> {r[4]}
+                                    <div className="col-span-1">
+                                        <span className="text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-violet-400/30 bg-violet-500/10 text-violet-300 px-2 py-0.5">
+                                            {r[5]}
                                         </span>
                                     </div>
+                                    <div className="col-span-2 text-[12px] text-zinc-400">{r[6]}</div>
+                                    <div className="col-span-1 text-[12px] text-zinc-300 inline-flex items-center gap-1.5">
+                                        <span className="inline-flex size-5 items-center justify-center rounded bg-violet-500/15 text-violet-300 border border-violet-400/30">
+                                            <FolderKanban className="size-3" />
+                                        </span>
+                                        {r[7]} project
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span
+                                            className={`text-[10.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 inline-flex items-center gap-1 ${riskTone[r[8]]}`}
+                                        >
+                                            <span className="size-1.5 rounded-full bg-current opacity-80" />
+                                            {r[8]}
+                                        </span>
+                                    </div>
+                                    <div className="col-span-2 inline-flex items-center gap-3">
+                                        <span
+                                            className={`text-[10.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 inline-flex items-center gap-1 ${statusTone[r[9]]}`}
+                                        >
+                                            <span className="size-1.5 rounded-full bg-current opacity-80" />
+                                            {r[9]}
+                                        </span>
+                                        <Eye className="size-3.5 text-zinc-500 hover:text-zinc-300 cursor-pointer" />
+                                        <Settings2 className="size-3.5 text-zinc-500 hover:text-zinc-300 cursor-pointer" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-span-1">
-                                <span className="text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-violet-400/30 bg-violet-500/10 text-violet-300 px-2 py-0.5">
-                                    {r[5]}
-                                </span>
-                            </div>
-                            <div className="col-span-2 text-[12px] text-zinc-400">{r[6]}</div>
-                            <div className="col-span-2 text-[12px] text-zinc-300 inline-flex items-center gap-1.5">
-                                <span className="inline-flex size-5 items-center justify-center rounded bg-violet-500/15 text-violet-300 border border-violet-400/30">
-                                    <FolderKanban className="size-3" />
-                                </span>
-                                {r[7]} project
-                            </div>
-                            <div className="col-span-1">
-                                <span
-                                    className={`text-[10.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 inline-flex items-center gap-1 ${riskTone[r[8]]}`}
-                                >
-                                    <span className="size-1.5 rounded-full bg-current opacity-80" />
-                                    {r[8]}
-                                </span>
-                            </div>
-                            <div className="col-span-2 inline-flex items-center gap-2">
-                                <span
-                                    className={`text-[10.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 inline-flex items-center gap-1 ${statusTone[r[9]]}`}
-                                >
-                                    <span className="size-1.5 rounded-full bg-current opacity-80" />
-                                    {r[9]}
-                                </span>
-                                <Eye className="size-3.5 text-zinc-500 hover:text-zinc-300" />
-                                <Settings2 className="size-3.5 text-zinc-500 hover:text-zinc-300" />
-                            </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </div>
             </div>
         </section>
@@ -519,9 +526,9 @@ function CreateClient() {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-3 flex-wrap">
                             <div className="flex items-center gap-2">
-                                <div className="w-32 h-1.5 rounded-full bg-white/10 overflow-hidden">
+                                <div className="w-24 sm:w-32 h-1.5 rounded-full bg-white/10 overflow-hidden">
                                     <div
                                         className="h-full"
                                         style={{
@@ -533,18 +540,20 @@ function CreateClient() {
                                 </div>
                                 <span className="text-[11px] text-zinc-400">8%</span>
                             </div>
-                            <button className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white text-[11.5px] px-3 py-1.5">
-                                Cancel
-                            </button>
-                            <button
-                                className="inline-flex items-center gap-1.5 rounded-full text-white text-[11.5px] font-medium px-3 py-1.5"
-                                style={{
-                                    backgroundImage:
-                                        "linear-gradient(135deg, #6366F1, #8B5CF6, #A855F7)",
-                                }}
-                            >
-                                <Plus className="size-3.5" /> Create Client
-                            </button>
+                            <div className="flex items-center gap-2">
+                                <button className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 text-white text-[11.5px] px-3 py-1.5">
+                                    Cancel
+                                </button>
+                                <button
+                                    className="inline-flex items-center gap-1.5 rounded-full text-white text-[11.5px] font-medium px-3 py-1.5"
+                                    style={{
+                                        backgroundImage:
+                                            "linear-gradient(135deg, #6366F1, #8B5CF6, #A855F7)",
+                                    }}
+                                >
+                                    <Plus className="size-3.5" /> Create Client
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -651,15 +660,26 @@ function CreateClient() {
                                 title="Company Overview"
                                 sub="Identity and where they operate. The company name and client type are required."
                             >
-                                <div className="grid grid-cols-2 gap-3">
-                                    <FormField label="Company Name" placeholder="Acme Corporation" required />
-                                    <FormField label="Legal Name" placeholder="Acme Corporation Ltd." />
-                                    <FormField label="Client Type" placeholder="Select type" required />
-                                    <FormField label="Industry" placeholder="Technology, Healthcare…" />
-                                    <FormField label="Company Size" placeholder="Select size" />
-                                    <FormField label="Year of Incorporation" placeholder="YYYY" />
-                                    <FormField label="Country" placeholder="United States" />
-                                    <FormField label="Website" placeholder="https://acme.com" />
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <FormField label="Company Name" placeholder="Acme Corporation" value="Zukvo" required />
+                                    <FormField label="Legal Name" placeholder="Acme Corporation Ltd." value="Zithtech Ltd." />
+                                    <FormField 
+                                        label="Client Type" 
+                                        placeholder="Select type" 
+                                        value="Direct" 
+                                        options={["Direct", "Partner", "Reseller"]} 
+                                        required 
+                                    />
+                                    <FormField label="Industry" placeholder="Technology, Healthcare…" value="Technology" />
+                                    <FormField 
+                                        label="Company Size" 
+                                        placeholder="Select size" 
+                                        value="11-50" 
+                                        options={["1-10", "11-50", "51-200", "201-500", "501+"]} 
+                                    />
+                                    <FormField label="Year of Incorporation" placeholder="YYYY" value="2023" />
+                                    <FormField label="Country" placeholder="United States" value="India" />
+                                    <FormField label="Website" placeholder="https://acme.com" value="https://zukvo.com" />
                                 </div>
                             </StepCard>
 
@@ -670,7 +690,7 @@ function CreateClient() {
                                 title="Compliance & Finance"
                                 sub="Billing contact, tax registration details, and contract economics"
                             >
-                                <FormField label="Billing Contact Email" placeholder="finance@acme.com" full />
+                                <FormField label="Billing Contact Email" placeholder="finance@acme.com" value="billing.zu*********@zukvo.com" full />
                             </StepCard>
 
                             <StepCard
@@ -680,19 +700,19 @@ function CreateClient() {
                                 title="Banking Information"
                                 sub="Where and how invoice payments will be settled."
                             >
-                                <div className="grid grid-cols-2 gap-3">
-                                    <FormField label="Bank Name" placeholder="HSBC Bank" />
-                                    <FormField label="Account Number" placeholder="•••••••1234" />
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <FormField label="Bank Name" placeholder="HSBC Bank" value="HDFC Bank" />
+                                    <FormField label="Account Number" placeholder="•••••••1234" value="•••••••8912" />
                                 </div>
                             </StepCard>
 
-                            <div className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 flex items-center justify-between text-[11.5px]">
+                            <div className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 flex items-center justify-between flex-wrap gap-3 text-[11.5px]">
                                 <span className="inline-flex items-center gap-2 text-emerald-300">
                                     <CheckCircle2 className="size-3.5" /> 2 of 26 fields filled · new client
                                 </span>
-                                <div className="flex items-center gap-2">
-                                    <span className="text-zinc-500">Cancel</span>
-                                    <span
+                                <div className="flex items-center gap-3">
+                                    <span className="text-zinc-500 hover:text-white cursor-pointer transition-colors">Cancel</span>
+                                    <button
                                         className="inline-flex items-center gap-1 rounded-md text-white font-medium px-3 py-1"
                                         style={{
                                             backgroundImage:
@@ -700,7 +720,7 @@ function CreateClient() {
                                         }}
                                     >
                                         <Plus className="size-3" /> Create Client
-                                    </span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -756,18 +776,59 @@ function StepCard({ n, tone, icon: Icon, title, sub, children }) {
     );
 }
 
-function FormField({ label, placeholder, value, full, required }) {
+function FormField({ label, placeholder, value, full, required, options }) {
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState(value);
+
+    useEffect(() => {
+        if (value !== selected) setSelected(value);
+    }, [value]);
+
     return (
-        <div className={full ? "col-span-full" : ""}>
+        <div className={`relative ${full ? "col-span-full" : ""}`}>
             <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1 inline-flex items-center gap-1">
                 {label}
                 {required && <span className="size-1 rounded-full bg-violet-400" />}
             </div>
-            <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px]">
-                <span className={value ? "text-zinc-200" : "text-zinc-500"}>
-                    {value || placeholder}
-                </span>
-            </div>
+            {options ? (
+                <>
+                    <div 
+                        className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between cursor-pointer hover:bg-black/40 transition-colors"
+                        onClick={() => setOpen(!open)}
+                    >
+                        <span className={selected ? "text-zinc-200" : "text-zinc-500"}>
+                            {selected || placeholder}
+                        </span>
+                        <ChevronDown className={`size-3.5 text-zinc-500 transition-transform ${open ? 'rotate-180' : ''}`} />
+                    </div>
+                    {open && (
+                        <>
+                            <div className="fixed inset-0 z-10" onClick={() => setOpen(false)}></div>
+                            <div className="absolute z-20 w-full mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl max-h-48 overflow-y-auto">
+                                {options.map(opt => (
+                                    <div 
+                                        key={opt} 
+                                        className="px-3 py-2.5 text-[12.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors"
+                                        onClick={() => { setSelected(opt); setOpen(false); }}
+                                    >
+                                        {opt}
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </>
+            ) : (
+                <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between">
+                    <input 
+                        type="text"
+                        className="bg-transparent border-none outline-none w-full text-zinc-200 placeholder:text-zinc-500"
+                        placeholder={placeholder}
+                        value={selected || ""}
+                        onChange={(e) => setSelected(e.target.value)}
+                    />
+                </div>
+            )}
         </div>
     );
 }
@@ -875,36 +936,38 @@ function ClientProfile() {
                                     backgroundColor: "#0E0E12",
                                 }}
                             >
-                                <div className="flex items-center gap-4 flex-wrap">
-                                    <span className="inline-flex size-14 items-center justify-center rounded-xl bg-violet-500/20 text-violet-200 border border-violet-400/30 font-heading text-lg">
-                                        TR
-                                    </span>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="font-heading text-2xl md:text-3xl text-white tracking-tight">
-                                            Trademark
-                                        </div>
-                                        <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[11.5px] text-zinc-300">
-                                            <span className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-mono">
-                                                <Hash className="size-3 text-zinc-500" />
-                                                CL-000003
-                                                <Copy className="size-3 text-zinc-500" />
-                                            </span>
-                                            <span className="inline-flex items-center gap-1">
-                                                <Briefcase className="size-3" /> technology
-                                            </span>
-                                            <span className="inline-flex items-center gap-1">
-                                                <Globe2 className="size-3" /> India
-                                            </span>
-                                            <span className="inline-flex items-center gap-1 text-zukvo-300 hover:text-zukvo-200">
-                                                <ExternalLink className="size-3" />{" "}
-                                                zithmi.zithspace.com/dashboard
-                                            </span>
-                                            <span className="inline-flex items-center gap-1">
-                                                <Calendar className="size-3" /> Onboarded 23 May 2026
-                                            </span>
+                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                    <div className="flex items-center gap-4 flex-wrap md:flex-nowrap">
+                                        <span className="inline-flex size-14 items-center justify-center rounded-xl bg-violet-500/20 text-violet-200 border border-violet-400/30 font-heading text-lg shrink-0">
+                                            TR
+                                        </span>
+                                        <div className="min-w-0">
+                                            <div className="font-heading text-2xl md:text-3xl text-white tracking-tight">
+                                                Trademark
+                                            </div>
+                                            <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[11.5px] text-zinc-300">
+                                                <span className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-mono">
+                                                    <Hash className="size-3 text-zinc-500" />
+                                                    CL-000003
+                                                    <Copy className="size-3 text-zinc-500" />
+                                                </span>
+                                                <span className="inline-flex items-center gap-1">
+                                                    <Briefcase className="size-3" /> technology
+                                                </span>
+                                                <span className="inline-flex items-center gap-1">
+                                                    <Globe2 className="size-3" /> India
+                                                </span>
+                                                <span className="inline-flex items-center gap-1 text-zukvo-300 hover:text-zukvo-200">
+                                                    <ExternalLink className="size-3" />{" "}
+                                                    zithmi.zithspace.com/dashboard
+                                                </span>
+                                                <span className="inline-flex items-center gap-1">
+                                                    <Calendar className="size-3" /> Onboarded 23 May 2026
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-wrap gap-2">
+                                    <div className="flex flex-wrap gap-2 shrink-0">
                                         <span className="inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300 px-2.5 py-0.5">
                                             <span className="size-1.5 rounded-full bg-zukvo-400" />
                                             Prospect
@@ -954,7 +1017,7 @@ function ClientProfile() {
                                     <ProfileRow icon={AlertTriangle} k="Risk exposure" v={<Pill tone="emerald">Low</Pill>} />
                                     <ProfileRow icon={Sparkles} k="Client segment" v="—" />
                                     <ProfileRow icon={Hash} k="Client code" v={<span className="font-mono">CL-000003</span>} />
-                                    <ProfileRow icon={Mail} k="Billing contact" v="dhamodharandivya528@gmail.com" />
+                                    <ProfileRow icon={Mail} k="Billing contact" v="dhamodharan.di*********@gmail.com" />
                                     <ProfileRow icon={MapPin} k="Billing address" v="H.O.A. Regd. Office 23-25 Belagola Food Industrial Area, Metagalli P.O." />
                                 </DetailCard>
 
@@ -1070,9 +1133,9 @@ function DetailCard({ icon: Icon, title, sub, tone, children, empty }) {
                     </span>
                 </span>
             </div>
-            <div className={`mt-4 grid grid-cols-2 gap-3 ${empty ? "opacity-60" : ""}`}>
-                {children}
-            </div>
+            <div className={`mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 ${empty ? "opacity-60" : ""}`}>
+                                {children}
+                            </div>
         </div>
     );
 }
@@ -1097,7 +1160,7 @@ function Pill({ children, tone }) {
     };
     return (
         <span
-            className={`inline-flex items-center text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${toneMap[tone]}`}
+            className={`inline-flex items-center text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 whitespace-nowrap shrink-0 ${toneMap[tone]}`}
         >
             {children}
         </span>
@@ -1110,28 +1173,28 @@ function ContactsSection() {
     const contacts = [
         {
             n: "Divya Dhamodharan",
-            e: "dhamodharandivya528@gmail.com",
+            e: "dhamodharan.di*********@gmail.com",
             r: "Primary Contact",
             tone: "violet",
             avatar: "D",
         },
         {
-            n: "John Operations",
-            e: "ops@trademark.in",
+            n: "Arjun Mehta",
+            e: "arjun.me*********@gmail.com",
             r: "Operations Lead",
-            tone: "indigo",
-            avatar: "JO",
+            tone: "violet",
+            avatar: "AM",
         },
         {
-            n: "Priya Finance",
-            e: "billing@trademark.in",
+            n: "Sneha Kapoor",
+            e: "sneha.ka*********@gmail.com ",
             r: "Finance",
-            tone: "emerald",
-            avatar: "PF",
+            tone: "violet",
+            avatar: "SK",
         },
     ];
     const team = [
-        { n: "ithyaz", r: "Super Admin", tone: "violet", avatar: "I" },
+        { n: "Sebastian", r: "Super Admin", tone: "violet", avatar: "S" },
         { n: "Divya D", r: "Project Manager", tone: "amber", avatar: "D" },
         { n: "Raj K", r: "Engineering Lead", tone: "emerald", avatar: "R" },
     ];
@@ -1143,7 +1206,7 @@ function ContactsSection() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 w-full min-w-0">
                         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-violet-300">
                             Contacts & Team
                         </div>
@@ -1172,7 +1235,7 @@ function ContactsSection() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-7 space-y-4">
+                    <div className="lg:col-span-7 space-y-4 w-full min-w-0">
                         <PeopleCard title="Client contacts" badge="1 active" rows={contacts} count={1} />
                         <PeopleCard title="Internal team" badge="3 members" rows={team} count={3} />
                     </div>
@@ -1190,7 +1253,7 @@ function PeopleCard({ title, badge, rows }) {
         amber: "bg-amber-500/20 text-amber-200 border-amber-400/30",
     };
     return (
-        <div className="rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
+        <div className="w-full min-w-0 rounded-2xl border border-white/10 bg-[#0E0E10] overflow-hidden">
             <div className="px-5 py-3 flex items-center justify-between border-b border-white/5">
                 <div className="font-heading text-base text-white tracking-tight">{title}</div>
                 <span className="text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-white/10 bg-white/5 text-zinc-400 px-2 py-0.5">
@@ -1200,7 +1263,7 @@ function PeopleCard({ title, badge, rows }) {
             {rows.map((p, i) => (
                 <div
                     key={i}
-                    className="flex items-center justify-between px-5 py-3 border-t border-white/5 first:border-t-0 hover:bg-white/[0.02] transition-colors"
+                    className="flex items-center justify-between w-full min-w-0 px-5 py-3 border-t border-white/5 first:border-t-0 hover:bg-white/[0.02] transition-colors"
                 >
                     <div className="flex items-center gap-3 min-w-0">
                         <span
@@ -1213,7 +1276,7 @@ function PeopleCard({ title, badge, rows }) {
                             <div className="text-[11px] text-zinc-500 truncate">{p.e || p.r}</div>
                         </div>
                     </div>
-                    <span className="text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-white/10 bg-white/[0.02] text-zinc-300 px-2 py-0.5">
+                    <span className="text-[10.5px] uppercase tracking-[0.18em] rounded-full border border-white/10 bg-white/[0.02] text-zinc-300 px-2 py-0.5 whitespace-nowrap shrink-0">
                         {p.r}
                     </span>
                 </div>
@@ -1262,8 +1325,8 @@ function ProjectsSection() {
                                     1 active
                                 </span>
                             </div>
-                            <div className="px-5 py-4 grid grid-cols-12 items-center gap-3">
-                                <div className="col-span-6 flex items-center gap-3">
+                            <div className="px-5 py-4 flex flex-col gap-3 sm:grid sm:grid-cols-12 sm:items-center sm:gap-3">
+                                <div className="sm:col-span-6 flex items-center gap-3">
                                     <span className="inline-flex size-9 items-center justify-center rounded-lg bg-violet-500/15 text-violet-300 border border-violet-400/30">
                                         <Briefcase className="size-4" />
                                     </span>
@@ -1276,13 +1339,13 @@ function ProjectsSection() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-span-3 text-[12px] text-zinc-300">
+                                <div className="sm:col-span-3 text-[12px] text-zinc-300">
                                     <div className="inline-flex items-center gap-1.5">
                                         <span className="size-1.5 rounded-full bg-emerald-400" />
                                         On track
                                     </div>
                                 </div>
-                                <div className="col-span-3 text-right text-[12px]">
+                                <div className="sm:col-span-3 sm:text-right text-[12px]">
                                     <div className="text-zinc-100">$6 budget</div>
                                     <div className="text-zinc-500 text-[11px]">May → Aug 2026</div>
                                 </div>
@@ -1451,7 +1514,7 @@ function PortalSection() {
                                     <div className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 font-bold">
                                         What the client can see
                                     </div>
-                                    <div className="mt-3 grid grid-cols-2 gap-2">
+                                    <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
                                         {[
                                             ["Projects & milestones", true],
                                             ["Invoices & payments", true],
@@ -1493,7 +1556,7 @@ function PortalSection() {
                                     </div>
                                     {[
                                         ["Divya Dhamodharan", "Primary · all access", "violet"],
-                                        ["John Operations", "Projects & meetings", "indigo"],
+                                        ["Arjun Mehta", "Projects & meetings", "indigo"],
                                     ].map(([n, r, tone], i) => (
                                         <div
                                             key={i}
@@ -1639,9 +1702,9 @@ function ActivitySection() {
                         <div className="absolute left-2.5 top-1 bottom-1 w-px bg-white/10" />
                         <ul className="space-y-3.5">
                             {[
-                                ["Onboarded", "ithyaz · 23 May 2026", Plus, "indigo"],
+                                ["Onboarded", "Sebastian · 23 May 2026", Plus, "indigo"],
                                 ["Project created · Zithmi Dashboard Build", "Divya D · 23 May", Briefcase, "violet"],
-                                ["Portal enabled · magic-link", "ithyaz · 24 May", KeyRound, "emerald"],
+                                ["Portal enabled · magic-link", "Sebastian · 24 May", KeyRound, "emerald"],
                                 ["MSA signed · trademark", "Divya Dhamodharan · 25 May", CheckCircle2, "emerald"],
                                 ["Change request opened · scope", "Raj K · 27 May", GitPullRequest, "amber"],
                                 ["Invoice INV-2026-005 sent", "Finance · 28 May", Mail, "indigo"],

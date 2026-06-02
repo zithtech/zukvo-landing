@@ -122,7 +122,7 @@ export default function FeaturesBento() {
                                 <img
                                     src={ZAI_IMG}
                                     alt="Zai proposal builder draft view"
-                                    className="block w-full h-[240px] object-cover object-top"
+                                    className="block w-full h-auto object-cover object-top"
                                 />
                                 <div
                                     aria-hidden
@@ -379,7 +379,7 @@ function ZithportVisual() {
             </div>
 
             {/* Leads Management — premium SaaS showcase */}
-            <div className="relative mt-6 h-[340px] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0A0A12]">
+            <div className="relative mt-3 h-[270px] sm:h-[300px] md:h-[340px] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0A0A12]">
                 {/* Multi-layer ambient lighting */}
                 <div
                     aria-hidden
@@ -396,7 +396,7 @@ function ZithportVisual() {
                     aria-hidden
                     className="pointer-events-none absolute inset-0 opacity-[0.18]"
                     style={{
-                        backgroundImage:
+                         backgroundImage:
                             "radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)",
                         backgroundSize: "22px 22px",
                         maskImage:
@@ -406,12 +406,12 @@ function ZithportVisual() {
 
                 {/* Main screenshot — lifted with 3D-feel multi-shadow */}
                 <div
-                    className="absolute left-1/2 top-10 w-[86%] -translate-x-1/2 rounded-xl overflow-hidden ring-1 ring-white/[0.12] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.65),0_8px_30px_-10px_rgba(99,102,241,0.35),inset_0_1px_0_0_rgba(255,255,255,0.06)]"
+                    className="absolute left-1/2 top-6 w-[86%] -translate-x-1/2 rounded-xl overflow-hidden ring-1 ring-white/[0.12] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.65),0_8px_30px_-10px_rgba(99,102,241,0.35),inset_0_1px_0_0_rgba(255,255,255,0.06)]"
                 >
                     <img
                         src={LEADS_IMG}
                         alt="Zukvo leads management pipeline view"
-                        className="block w-full h-[260px] object-cover object-top"
+                        className="block w-full h-auto object-cover object-top"
                     />
                     {/* Top edge highlight */}
                     <div
@@ -421,7 +421,7 @@ function ZithportVisual() {
                 </div>
 
                 {/* Floating: Source pill — dark glass (top-right) */}
-                <div className="absolute top-5 right-4 inline-flex items-center gap-1.5 rounded-full bg-zinc-900/80 backdrop-blur-xl pl-2 pr-3 py-1.5 text-white shadow-[0_20px_40px_-12px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.08]">
+                <div className="absolute top-6 right-4 inline-flex items-center gap-1.5 rounded-full bg-zinc-900/80 backdrop-blur-xl pl-2 pr-3 py-1.5 text-white shadow-[0_20px_40px_-12px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.08]">
                     <span className="inline-flex size-5 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/10">
                         <Chrome className="size-3" />
                     </span>
