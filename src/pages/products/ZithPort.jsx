@@ -310,8 +310,7 @@ function LeadScoreSection() {
                             label="Lead value · 70/100 Medium"
                             chromeUrl="chrome-extension://zithport"
                             caption="Live screenshot — extraction success with itemized lead value rubric."
-                            aspect="1/1"
-                            objectFit="contain"
+                            aspect="auto"
                             className="max-w-[360px] mx-auto"
                         />
                     </div>
