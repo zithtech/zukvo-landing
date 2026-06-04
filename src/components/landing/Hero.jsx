@@ -255,7 +255,9 @@ export default function Hero() {
                         className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/70 backdrop-blur px-3.5 py-1.5 text-[12px] font-medium text-zinc-700"
                     >
                         <Sparkles className="size-3.5 text-zukvo-500" />
-                        Now with <span className="text-zukvo-600">BidIQ AI</span> & Zai assistants
+                        <span>
+                            Now with <span className="text-zukvo-600">BidIQ AI</span> &amp; Zai assistants
+                        </span>
                     </span>
                 </div>
 
@@ -368,11 +370,10 @@ export default function Hero() {
                                         aria-selected={isActive}
                                         onClick={() => setActiveFlow(f.id)}
                                         data-testid={`hero-flow-tab-${f.id}`}
-                                        className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[12.5px] font-medium transition-colors ${
-                                            isActive
-                                                ? "bg-white text-zukvo-ink"
-                                                : "text-zinc-400 hover:text-white"
-                                        }`}
+                                        className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[12.5px] font-medium transition-colors ${isActive
+                                            ? "bg-white text-zukvo-ink"
+                                            : "text-zinc-400 hover:text-white"
+                                            }`}
                                     >
                                         <FIcon className="size-3.5" />
                                         {f.label}
@@ -548,13 +549,12 @@ function PipelineCard({ stage, icon: Icon, accent, isActive, isPast, isLast, flo
             onClick={onSelect}
             data-testid={`pipeline-card-${stage.id}`}
             aria-pressed={isActive}
-            className={`group relative min-w-0 text-left rounded-2xl border bg-[#0E0E12] p-5 md:p-6 min-h-[180px] flex flex-col transition-all duration-500 ${
-                isActive
-                    ? `ring-1 ${accent.ring} ${accent.glow} border-white/10 -translate-y-1 z-10`
-                    : isPast
+            className={`group relative min-w-0 text-left rounded-2xl border bg-[#0E0E12] p-5 md:p-6 min-h-[180px] flex flex-col transition-all duration-500 ${isActive
+                ? `ring-1 ${accent.ring} ${accent.glow} border-white/10 -translate-y-1 z-10`
+                : isPast
                     ? "border-white/5 opacity-85 hover:opacity-100"
                     : "border-white/10 opacity-75 hover:opacity-100"
-            }`}
+                }`}
         >
             {/* Stage chip + step number */}
             <div className="flex items-center justify-between">
@@ -586,9 +586,8 @@ function PipelineCard({ stage, icon: Icon, accent, isActive, isPast, isLast, flo
 
             {/* Active pulse dot */}
             <span
-                className={`absolute top-3 right-3 size-1.5 rounded-full transition-opacity ${
-                    isActive ? `${accent.dot} zk-pulse opacity-100` : "opacity-0"
-                }`}
+                className={`absolute top-3 right-3 size-1.5 rounded-full transition-opacity ${isActive ? `${accent.dot} zk-pulse opacity-100` : "opacity-0"
+                    }`}
             />
 
             {/* Past = check overlay (top-right when not active) */}
@@ -606,11 +605,10 @@ function PipelineCard({ stage, icon: Icon, accent, isActive, isPast, isLast, flo
                     {/* Horizontal arrow — desktop grid */}
                     <span
                         aria-hidden
-                        className={`hidden lg:inline-flex absolute -right-3.5 top-1/2 -translate-y-1/2 z-20 size-6 items-center justify-center rounded-full border bg-[#0E0E12] transition-all ${
-                            isActive
-                                ? `${accent.chipBorder} ${accent.chipText}`
-                                : "border-white/15 text-zinc-500"
-                        }`}
+                        className={`hidden lg:inline-flex absolute -right-3.5 top-1/2 -translate-y-1/2 z-20 size-6 items-center justify-center rounded-full border bg-[#0E0E12] transition-all ${isActive
+                            ? `${accent.chipBorder} ${accent.chipText}`
+                            : "border-white/15 text-zinc-500"
+                            }`}
                         style={
                             isActive && flowAnimate
                                 ? { animation: "zk-pulse 1.8s ease-in-out infinite" }
@@ -622,11 +620,10 @@ function PipelineCard({ stage, icon: Icon, accent, isActive, isPast, isLast, flo
                     {/* Vertical arrow — mobile / stacked */}
                     <span
                         aria-hidden
-                        className={`lg:hidden absolute -bottom-3.5 left-1/2 -translate-x-1/2 z-20 inline-flex size-6 items-center justify-center rounded-full border bg-[#0E0E12] transition-all ${
-                            isActive
-                                ? `${accent.chipBorder} ${accent.chipText}`
-                                : "border-white/15 text-zinc-500"
-                        }`}
+                        className={`lg:hidden absolute -bottom-3.5 left-1/2 -translate-x-1/2 z-20 inline-flex size-6 items-center justify-center rounded-full border bg-[#0E0E12] transition-all ${isActive
+                            ? `${accent.chipBorder} ${accent.chipText}`
+                            : "border-white/15 text-zinc-500"
+                            }`}
                         style={
                             isActive && flowAnimate
                                 ? { animation: "zk-pulse 1.8s ease-in-out infinite" }
