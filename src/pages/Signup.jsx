@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
+import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import {
     ArrowLeft,
@@ -14,6 +15,7 @@ import {
     Zap,
     Pencil,
     Wand2,
+    Building2,
 } from "lucide-react";
 import ZukvoLogo from "@/components/ZukvoLogo";
 import SEO from "@/components/SEO";
@@ -220,7 +222,7 @@ export default function Signup() {
 
                     {/* RIGHT — Signup form */}
                     <section className="lg:col-span-7">
-                        <SignupCard />
+                        <SignupCard ctx={ctx} />
                     </section>
                 </div>
             </div>
@@ -519,11 +521,17 @@ function ChangePlanLink({ label = "Change plan" }) {
 
 /* ---------------- SIGNUP FORM ---------------- */
 
-function SignupCard() {
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
+
+function SignupCard({ ctx }) {
     const [showPwd, setShowPwd] = useState(false);
     const [pwd, setPwd] = useState("");
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
+    const [type, setType] = useState("freelancer"); // freelancer | team
+    const [companyName, setCompanyName] = useState("");
+    const [status, setStatus] = useState("idle"); // idle | loading | success | error
+    const [errorMsg, setErrorMsg] = useState("");
 
     const pwdStrength = useMemo(() => {
         let s = 0;
@@ -534,10 +542,62 @@ function SignupCard() {
         return s; // 0-4
     }, [pwd]);
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        // Wire to backend later
+        setStatus("loading");
+        setErrorMsg("");
+        try {
+            await axios.post(`${API_URL}/api/landing/signup`, {
+                email,
+                name,
+                password: pwd,
+                type,
+                companyName: type === "team" ? companyName : undefined,
+                planConfig: {
+                    tier: ctx.tier ?? null,
+                    sets: ctx.sets,
+                    ai: ctx.ai,
+                    billing: ctx.billing,
+                    currency: ctx.currency,
+                },
+            });
+            setStatus("success");
+        } catch (err) {
+            const msg = err?.response?.data?.error || "Something went wrong. Please try again.";
+            setErrorMsg(msg);
+            setStatus("error");
+        }
     };
+
+    if (status === "success") {
+        return (
+            <div
+                data-testid="signup-card"
+                className="relative rounded-3xl border border-zinc-200 bg-white p-7 md:p-10 shadow-[0_30px_80px_-40px_rgba(15,15,15,0.15)] text-center"
+            >
+                <div className="mx-auto mb-5 flex size-14 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/30">
+                    <Mail className="size-6 text-emerald-600" />
+                </div>
+                <h2 className="font-heading text-2xl md:text-3xl font-medium text-zukvo-ink tracking-tight">
+                    Check your inbox
+                </h2>
+                <p className="mt-3 text-[14px] text-zinc-500 leading-relaxed max-w-sm mx-auto">
+                    We sent a verification link to{" "}
+                    <span className="font-medium text-zukvo-ink">{email}</span>. Click it to verify your email and continue.
+                </p>
+                <p className="mt-5 text-[12.5px] text-zinc-400">
+                    Didn't receive it?{" "}
+                    <button
+                        type="button"
+                        onClick={() => setStatus("idle")}
+                        className="text-zukvo-600 font-medium hover:text-zukvo-700"
+                    >
+                        Try again
+                    </button>
+                </p>
+            </div>
+        );
+    }
 
     return (
         <div
@@ -551,8 +611,32 @@ function SignupCard() {
                 Get started in under a minute.
             </p>
 
+            {/* Account type toggle */}
+            <div className="mt-7 grid grid-cols-2 gap-2.5">
+                {[
+                    { value: "freelancer", label: "Freelancer", desc: "Just me" },
+                    { value: "team", label: "Team", desc: "My company" },
+                ].map((opt) => (
+                    <button
+                        key={opt.value}
+                        type="button"
+                        onClick={() => setType(opt.value)}
+                        className={`flex flex-col items-start rounded-xl border px-4 py-3 text-left transition-all ${
+                            type === opt.value
+                                ? "border-zukvo-500 bg-zukvo-500/5 ring-2 ring-zukvo-500/20"
+                                : "border-zinc-200 bg-white hover:border-zinc-300"
+                        }`}
+                    >
+                        <span className={`text-[13.5px] font-medium ${type === opt.value ? "text-zukvo-700" : "text-zukvo-ink"}`}>
+                            {opt.label}
+                        </span>
+                        <span className="text-[11.5px] text-zinc-500">{opt.desc}</span>
+                    </button>
+                ))}
+            </div>
+
             {/* SSO */}
-            <div className="mt-7 space-y-2.5">
+            <div className="mt-5 space-y-2.5">
                 <SsoButton
                     provider="google"
                     label="Sign up with Google"
@@ -594,6 +678,17 @@ function SignupCard() {
                     onChange={setName}
                     testid="signup-name"
                 />
+                {type === "team" && (
+                    <FormField
+                        label="Company Name"
+                        icon={Building2}
+                        type="text"
+                        placeholder="Acme Corp"
+                        value={companyName}
+                        onChange={setCompanyName}
+                        testid="signup-company"
+                    />
+                )}
                 <div>
                     <label className="block text-[12px] font-medium text-zukvo-ink mb-1.5">
                         Password
@@ -673,17 +768,24 @@ function SignupCard() {
                     .
                 </p>
 
+                {errorMsg && (
+                    <p className="text-[13px] text-rose-600 bg-rose-50 border border-rose-200 rounded-xl px-3.5 py-2.5">
+                        {errorMsg}
+                    </p>
+                )}
+
                 <button
                     type="submit"
+                    disabled={status === "loading"}
                     data-testid="signup-submit"
-                    className="group w-full inline-flex items-center justify-center gap-2 rounded-xl text-white text-[14px] font-medium px-5 py-3.5 shadow-[0_15px_40px_-15px_rgba(99,102,241,0.55)] transition-all hover:shadow-[0_18px_50px_-15px_rgba(99,102,241,0.65)]"
+                    className="group w-full inline-flex items-center justify-center gap-2 rounded-xl text-white text-[14px] font-medium px-5 py-3.5 shadow-[0_15px_40px_-15px_rgba(99,102,241,0.55)] transition-all hover:shadow-[0_18px_50px_-15px_rgba(99,102,241,0.65)] disabled:opacity-70 disabled:cursor-not-allowed"
                     style={{
                         backgroundImage:
                             "linear-gradient(135deg, #6366F1, #8B5CF6, #A855F7)",
                     }}
                 >
-                    Create Free Account
-                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                    {status === "loading" ? "Creating account…" : "Create Free Account"}
+                    {status !== "loading" && <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />}
                 </button>
             </form>
 

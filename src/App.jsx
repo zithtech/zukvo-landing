@@ -22,6 +22,7 @@ import Squads from "@/pages/products/Squads";
 import Accounts from "@/pages/products/Accounts";
 import MailCalendar from "@/pages/products/MailCalendar";
 import EscalationManagement from "@/pages/products/EscalationManagement";
+import VerifyEmail from "@/pages/VerifyEmail";
 
 function ScrollToTop() {
     const { pathname, hash } = useLocation();
@@ -73,6 +74,7 @@ function App() {
                     <Route path="/products/accounts" element={<Accounts />} />
                     <Route path="/products/mail-calendar" element={<MailCalendar />} />
                     <Route path="/products/escalation-management" element={<EscalationManagement />} />
+                    <Route path="/verify-email" element={<VerifyEmail />} />
                 </Routes>
             </BrowserRouter>
         </div>
