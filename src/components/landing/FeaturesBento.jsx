@@ -70,7 +70,7 @@ export default function FeaturesBento() {
                         className="md:col-span-7 md:row-span-2 min-h-[420px]"
                         eyebrow="Zithport · Chrome extension"
                         title="Save jobs from any board. They land in Zukvo as Leads."
-                        body="Upwork, Contra, LinkedIn, niche boards — one click and the post becomes a structured Lead with budget, scope, deadline, and source attached."
+                        body="Upwork, Contra, LinkedIn, Niche boards — one click and the post becomes a structured Lead with budget, scope, deadline, and source attached."
                     >
                         <ZithportVisual />
                     </BentoCard>
@@ -201,7 +201,7 @@ export default function FeaturesBento() {
                         className="md:col-span-7"
                         eyebrow="Sprints · Tickets · Buckets · Bugs"
                         title="A workspace that ships, not just plans."
-                        body="Sprint cycles, tickets, buckets, bug lists — everything a serious team needs, with optional AI for breakdown and estimation."
+                        body="Sprint cycles, tickets, buckets, bug lists — everything a serious team needs, with optional AI for task breakdown and estimation."
                     >
                         <SprintShowcase />
                     </BentoCard>
@@ -267,9 +267,8 @@ function BentoCard({
     return (
         <div
             data-testid={testid}
-            className={`relative group rounded-2xl border ${
-                highlight ? "border-zukvo-500/30 bg-[#0E0E13]" : "border-white/10 bg-[#0E0E10]"
-            } p-7 md:p-8 overflow-hidden transition-colors hover:border-white/20 ${className}`}
+            className={`relative group rounded-2xl border ${highlight ? "border-zukvo-500/30 bg-[#0E0E13]" : "border-white/10 bg-[#0E0E10]"
+                } p-7 md:p-8 overflow-hidden transition-colors hover:border-white/20 ${className}`}
         >
             {highlight && (
                 <div
@@ -300,7 +299,7 @@ function BentoCard({
 const SPRINT_ACTIONS = [
     {
         icon: Trash2,
-        title: "Delete pending tickets",
+        title: "Delete pending Tickets",
         desc: "Clear out what's no longer relevant.",
         grad: "from-rose-500 to-red-600",
         ring: "ring-rose-400/30",
@@ -396,7 +395,7 @@ function ZithportVisual() {
                     aria-hidden
                     className="pointer-events-none absolute inset-0 opacity-[0.18]"
                     style={{
-                         backgroundImage:
+                        backgroundImage:
                             "radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)",
                         backgroundSize: "22px 22px",
                         maskImage:
@@ -469,7 +468,7 @@ function ZithportVisual() {
                         <div className="flex items-center gap-1">
                             <Sparkles className="size-2.5 text-zukvo-500" />
                             <span className="text-[8.5px] font-bold uppercase tracking-[0.2em] text-zukvo-600">
-                                BidIQ
+                                BidIQ AI
                             </span>
                         </div>
                         <div className="mt-0.5 text-[10.5px] font-semibold text-emerald-600 whitespace-nowrap">
@@ -572,27 +571,24 @@ function FlowStep({ n, icon: Icon, title, sub, state = "next" }) {
     const isActive = state === "active";
     return (
         <div
-            className={`group relative flex-1 min-w-0 rounded-xl border p-2.5 transition-colors ${
-                isActive
+            className={`group relative flex-1 min-w-0 rounded-xl border p-2.5 transition-colors ${isActive
                     ? "border-zukvo-500/50 bg-zukvo-500/[0.06] shadow-[inset_0_0_40px_-12px_rgba(99,102,241,0.4)]"
                     : isDone
-                    ? "border-white/[0.08] bg-white/[0.025]"
-                    : "border-white/[0.06] bg-white/[0.015]"
-            }`}
+                        ? "border-white/[0.08] bg-white/[0.025]"
+                        : "border-white/[0.06] bg-white/[0.015]"
+                }`}
         >
             {/* Top row: icon + step number */}
             <div className="flex items-center justify-between">
                 <span
-                    className={`inline-flex size-7 items-center justify-center rounded-lg ${
-                        isActive || isDone
+                    className={`inline-flex size-7 items-center justify-center rounded-lg ${isActive || isDone
                             ? "bg-gradient-to-br from-zukvo-500 to-violet-600 shadow-[0_6px_16px_-4px_rgba(99,102,241,0.55),inset_0_1px_0_0_rgba(255,255,255,0.25)]"
                             : "bg-white/[0.04] ring-1 ring-white/10"
-                    }`}
+                        }`}
                 >
                     <Icon
-                        className={`size-3.5 ${
-                            isActive || isDone ? "text-white" : "text-zinc-500"
-                        }`}
+                        className={`size-3.5 ${isActive || isDone ? "text-white" : "text-zinc-500"
+                            }`}
                     />
                 </span>
                 {isDone ? (
@@ -614,20 +610,18 @@ function FlowStep({ n, icon: Icon, title, sub, state = "next" }) {
             {/* Title + sub */}
             <div className="mt-2">
                 <div
-                    className={`text-[11.5px] font-semibold leading-tight tracking-tight truncate ${
-                        isActive || isDone ? "text-white" : "text-zinc-400"
-                    }`}
+                    className={`text-[11.5px] font-semibold leading-tight tracking-tight truncate ${isActive || isDone ? "text-white" : "text-zinc-400"
+                        }`}
                 >
                     {title}
                 </div>
                 <div
-                    className={`mt-0.5 text-[10px] leading-tight truncate ${
-                        isActive
+                    className={`mt-0.5 text-[10px] leading-tight truncate ${isActive
                             ? "text-zukvo-300"
                             : isDone
-                            ? "text-zinc-500"
-                            : "text-zinc-600"
-                    }`}
+                                ? "text-zinc-500"
+                                : "text-zinc-600"
+                        }`}
                 >
                     {sub}
                 </div>
@@ -636,13 +630,12 @@ function FlowStep({ n, icon: Icon, title, sub, state = "next" }) {
             {/* Bottom accent bar */}
             <div className="mt-2 h-0.5 rounded-full overflow-hidden bg-white/[0.04]">
                 <div
-                    className={`h-full rounded-full ${
-                        isDone
+                    className={`h-full rounded-full ${isDone
                             ? "w-full bg-gradient-to-r from-emerald-400 to-emerald-500"
                             : isActive
-                            ? "w-2/3 bg-gradient-to-r from-zukvo-400 to-violet-500"
-                            : "w-0"
-                    }`}
+                                ? "w-2/3 bg-gradient-to-r from-zukvo-400 to-violet-500"
+                                : "w-0"
+                        }`}
                 />
             </div>
         </div>
@@ -868,11 +861,10 @@ function SprintShowcase() {
                                             key={v.key}
                                             type="button"
                                             onClick={() => setOpenKey(v.key)}
-                                            className={`px-3 py-1.5 text-[11.5px] font-medium rounded-full transition-all ${
-                                                openKey === v.key
+                                            className={`px-3 py-1.5 text-[11.5px] font-medium rounded-full transition-all ${openKey === v.key
                                                     ? "bg-white text-zinc-900 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.4)]"
                                                     : "text-white/70 hover:text-white"
-                                            }`}
+                                                }`}
                                         >
                                             {v.title}
                                         </button>

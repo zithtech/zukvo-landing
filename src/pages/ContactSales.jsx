@@ -29,7 +29,7 @@ const VALUE_PROPS = [
         title: "Pricing & deployment, mapped out",
         sub: "Self-serve, team, or enterprise — with the deployment path that matches your security needs.",
     },
-   
+
     {
         icon: Headphones,
         title: "Dedicated onboarding lead",
@@ -93,8 +93,8 @@ export default function ContactSales() {
         setLoading(true);
         setError("");
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
-            const response = await axios.post(`${apiUrl}/api/contact-sales`, form);
+            const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+            const response = await axios.post(`${apiUrl}/api/public/web-inquiry/zithmi`, form);
             if (response.data && response.data.success) {
                 setSubmitted(true);
             } else {
@@ -103,7 +103,7 @@ export default function ContactSales() {
         } catch (err) {
             console.error("Form submission error:", err);
             setError(
-                err.response?.data?.message || 
+                err.response?.data?.message ||
                 "Unable to reach the server. Please check your connection and try again."
             );
         } finally {
@@ -179,7 +179,7 @@ export default function ContactSales() {
                         Tell us a little about your team — ours will reach out shortly with
                         the right next steps.
                     </p>
-                   
+
                 </div>
             </section>
 
@@ -246,7 +246,7 @@ export default function ContactSales() {
                                         <div className="text-zinc-500">Founder · Pathematic</div>
                                     </div>
                                 </div>
-                                
+
                             </div>
 
                             {/* Trust strip */}

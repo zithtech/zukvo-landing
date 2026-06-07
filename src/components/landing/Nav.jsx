@@ -309,6 +309,12 @@ export default function Nav() {
                                     className={cls}
                                 >
                                     {l.label}
+                                    {active && (
+                                        <span
+                                            aria-hidden="true"
+                                            className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full bg-zukvo-500"
+                                        />
+                                    )}
                                 </Link>
                             ) : (
                                 <a
@@ -318,6 +324,12 @@ export default function Nav() {
                                     className={cls}
                                 >
                                     {l.label}
+                                    {active && (
+                                        <span
+                                            aria-hidden="true"
+                                            className="pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full bg-zukvo-500"
+                                        />
+                                    )}
                                 </a>
                             );
                         })}

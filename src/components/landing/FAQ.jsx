@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 const ITEMS = [
     {
         q: "What is Zithport, and is it free?",
-        a: "Zithport is the Zukvo browser extension. It captures job postings from any board (Upwork, Contra, LinkedIn, niche sites) and saves them as structured Leads inside Zukvo. It's included on every plan — including the free trial.",
+        a: "Zithport is the Zukvo browser extension. It captures job postings from any board (Upwork, Contra, LinkedIn, Niche sites) and saves them as structured Leads inside Zukvo. It's included on every plan — including the free trial.",
     },
     {
         q: "How does BidIQ decide whether I should bid?",
@@ -64,17 +64,15 @@ export default function FAQ() {
                                             {it.q}
                                         </span>
                                         <Plus
-                                            className={`size-4 text-zukvo-400 mt-1 shrink-0 transition-transform duration-300 ${
-                                                open === i ? "rotate-45" : ""
-                                            }`}
+                                            className={`size-4 text-zukvo-400 mt-1 shrink-0 transition-transform duration-300 ${open === i ? "rotate-45" : ""
+                                                }`}
                                         />
                                     </div>
                                     <div
-                                        className={`grid transition-all duration-300 ease-out ${
-                                            open === i
+                                        className={`grid transition-all duration-300 ease-out ${open === i
                                                 ? "grid-rows-[1fr] opacity-100"
                                                 : "grid-rows-[0fr] opacity-0"
-                                        }`}
+                                            }`}
                                     >
                                         <div className="overflow-hidden">
                                             <p className="px-6 pb-5 -mt-1 text-[14px] text-zinc-400 leading-relaxed">
