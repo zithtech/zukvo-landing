@@ -1157,7 +1157,7 @@ function SprintCompletion() {
                             </h3>
                             <p className="mt-3 text-[14.5px] leading-relaxed text-zinc-400 max-w-xl">
                                 Sprint cycles, tickets, buckets, bug lists — everything a serious team
-                                needs, with optional AI for breakdown and estimation.
+                                needs, with optional AI for task breakdown and estimation.
                             </p>
                             <CompletionShowcase />
                         </div>
@@ -1367,7 +1367,7 @@ function CompletionShowcase() {
 const COMPLETION_ACTIONS = [
     {
         icon: Trash2,
-        title: "Delete pending tickets",
+        title: "Delete pending Tickets",
         desc: "Clear out what's no longer relevant.",
         grad: "from-rose-500 to-red-600",
         ring: "ring-rose-400/30",
