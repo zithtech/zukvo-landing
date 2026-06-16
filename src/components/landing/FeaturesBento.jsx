@@ -70,7 +70,7 @@ export default function FeaturesBento() {
                         className="md:col-span-7 md:row-span-2 min-h-[420px]"
                         eyebrow="Zithport · Chrome extension"
                         title="Save jobs from any board. They land in Zukvo as Leads."
-                        body="Upwork, Contra, LinkedIn, Niche boards — one click and the post becomes a structured Lead with budget, scope, deadline, and source attached."
+                        body="Upwork, Contra, LinkedIn, Niche boards — one click and the post becomes a structured Lead with budget, scope, deadline and source attached."
                     >
                         <ZithportVisual />
                     </BentoCard>

@@ -393,7 +393,7 @@ function TicketDetailsBacklog() {
                             The full picture in a single drawer.
                         </h3>
                         <p className="mt-4 text-[14.5px] text-zinc-400 leading-relaxed max-w-lg">
-                            Click any ticket to open a rich detail view — description, planning,
+                            Click any ticket to open a rich detail view — Description, planning,
                             estimation, time tracking, comments and attachments — all without leaving
                             your list.
                         </p>

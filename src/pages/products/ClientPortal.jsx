@@ -234,7 +234,7 @@ function Dashboard() {
                             {[
                                 { i: DollarSign, t: "Outstanding · Sprint · Milestones · Tickets" },
                                 { i: Activity, t: "Live activity feed from your team" },
-                                { i: FileText, t: "Shared documents + recent invoices" },
+                                { i: FileText, t: "Shared documents + Recent invoices" },
                                 { i: ShieldCheck, t: "Magic-link sign-in · no passwords" },
                             ].map((b, i) => (
                                 <li

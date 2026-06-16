@@ -229,6 +229,8 @@ export default function Nav() {
                                 className={`relative inline-flex items-center gap-1 px-3 py-2 text-[13px] font-medium transition-colors ${
                                     productsActive
                                         ? "text-zukvo-600"
+                                        : onDarkBg
+                                        ? "text-zinc-300 hover:text-white"
                                         : "text-zinc-700 hover:text-zukvo-600"
                                 }`}
                             >
@@ -299,6 +301,8 @@ export default function Nav() {
                             const cls = `relative px-3 py-2 text-[13px] font-medium transition-colors ${
                                 active
                                     ? "text-zukvo-600"
+                                    : onDarkBg
+                                    ? "text-zinc-300 hover:text-white"
                                     : "text-zinc-700 hover:text-zukvo-600"
                             }`;
                             return isPageRoute(l.href) ? (
@@ -339,14 +343,22 @@ export default function Nav() {
                         <a
                             href="#login"
                             data-testid="nav-signin-link"
-                            className="px-4 py-2 text-[13px] font-medium text-zinc-700 hover:text-zukvo-ink"
+                            className={`px-4 py-2 text-[13px] font-medium transition-colors ${
+                                onDarkBg
+                                    ? "text-zinc-300 hover:text-white"
+                                    : "text-zinc-700 hover:text-zukvo-ink"
+                            }`}
                         >
                             Sign in
                         </a>
                         <a
                             href="/signup"
                             data-testid="nav-cta-button"
-                            className="group inline-flex items-center gap-1.5 rounded-full bg-zukvo-ink text-white px-4 py-2 text-[13px] font-medium hover:bg-zukvo-600 transition-colors"
+                            className={`group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-medium transition-colors ${
+                                onDarkBg
+                                    ? "bg-white/10 text-white hover:bg-white/20 border border-white/15"
+                                    : "bg-zukvo-ink text-white hover:bg-zukvo-600"
+                            }`}
                         >
                             Get Zukvo
                             <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -369,7 +381,11 @@ export default function Nav() {
                     <button
                         data-testid="nav-mobile-toggle"
                         onClick={() => setOpen((s) => !s)}
-                        className="lg:hidden shrink-0 inline-flex items-center justify-center size-9 rounded-full border border-zinc-200 bg-white"
+                        className={`lg:hidden shrink-0 inline-flex items-center justify-center size-9 rounded-full border transition-colors ${
+                            onDarkBg
+                                ? "border-white/20 bg-white/5 text-white hover:bg-white/10"
+                                : "border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
+                        }`}
                         aria-label="Toggle menu"
                     >
                         {open ? <X className="size-4" /> : <Menu className="size-4" />}

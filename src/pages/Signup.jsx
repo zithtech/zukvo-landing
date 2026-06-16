@@ -202,6 +202,35 @@ function useSignupContext() {
 
 export default function Signup() {
     const ctx = useSignupContext();
+
+    useEffect(() => {
+        if (typeof window !== "undefined" && window.location.hash !== "") {
+            const hash = window.location.hash;
+            if (hash.includes("access_token=")) {
+                const params = new URLSearchParams(hash.substring(1));
+                const token = params.get("access_token");
+                if (token && window.opener) {
+                    window.opener.postMessage(
+                        { type: "microsoft-signup-token", token },
+                        window.location.origin
+                    );
+                    window.close();
+                }
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!document.getElementById("google-gsi-client")) {
+            const script = document.createElement("script");
+            script.src = "https://accounts.google.com/gsi/client";
+            script.id = "google-gsi-client";
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
+        }
+    }, []);
+
     return (
         <main
             data-testid="signup-page"
@@ -533,6 +562,138 @@ function SignupCard({ ctx }) {
     const [status, setStatus] = useState("idle"); // idle | loading | success | error
     const [errorMsg, setErrorMsg] = useState("");
 
+    const handleGoogleSignup = () => {
+        if (typeof window === "undefined" || !window.google) {
+            setErrorMsg("Google login is not ready yet. Please wait a few seconds and try again.");
+            return;
+        }
+
+        if (type === "team" && !companyName.trim()) {
+            setErrorMsg("Please enter your Company Name before signing up with Google.");
+            return;
+        }
+
+        setErrorMsg("");
+
+        try {
+            const client = window.google.accounts.oauth2.initTokenClient({
+                client_id: "945644412981-eu93b14d7jr5d0gd5s04758lu6mupad8.apps.googleusercontent.com",
+                scope: "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
+                callback: async (tokenResponse) => {
+                    if (tokenResponse.error) {
+                        setErrorMsg("Google Sign Up was cancelled or failed.");
+                        return;
+                    }
+                    if (tokenResponse.access_token) {
+                        setStatus("loading");
+                        try {
+                            const res = await axios.post(`${API_URL}/api/landing/signup/google`, {
+                                token: tokenResponse.access_token,
+                                type,
+                                companyName: type === "team" ? companyName : undefined,
+                                planConfig: {
+                                    tier: ctx.tier ?? null,
+                                    sets: ctx.sets,
+                                    ai: ctx.ai,
+                                    billing: ctx.billing,
+                                    currency: ctx.currency,
+                                },
+                            });
+
+                            const { tenantSubdomain, email: verifiedEmail } = res.data;
+                            const appUrl = new URL(import.meta.env.VITE_APP_URL || "http://localhost:3005");
+                            window.location.href = `${appUrl.protocol}//${tenantSubdomain}.${appUrl.host}/login?email=${encodeURIComponent(verifiedEmail)}&sso=google`;
+                        } catch (err) {
+                            const msg = err?.response?.data?.error || "Google sign up failed. Please try again.";
+                            setErrorMsg(msg);
+                            setStatus("error");
+                        }
+                    }
+                },
+            });
+            client.requestAccessToken();
+        } catch (err) {
+            console.error("Google auth initialisation error:", err);
+            setErrorMsg("Failed to initialize Google login popup.");
+        }
+    };
+
+    const handleMicrosoftSignup = () => {
+        if (type === "team" && !companyName.trim()) {
+            setErrorMsg("Please enter your Company Name before signing up with Microsoft.");
+            return;
+        }
+
+        setErrorMsg("");
+
+        const clientId = "2de414d6-6eff-4c4a-9480-f124cc8d4796";
+        const redirectUri = `${window.location.origin}${window.location.pathname}`;
+        const scope = encodeURIComponent("openid profile email User.Read");
+        const authUrl = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}&response_mode=fragment`;
+
+        const width = 600;
+        const height = 600;
+        const left = window.screen.width / 2 - width / 2;
+        const top = window.screen.height / 2 - height / 2;
+        const popup = window.open(
+            authUrl,
+            "microsoft-signup-popup",
+            `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
+        );
+
+        if (!popup) {
+            setErrorMsg("Popup blocked. Please allow popups for this site.");
+            return;
+        }
+
+        const messageListener = async (event) => {
+            if (event.origin !== window.location.origin) return;
+
+            if (event.data?.type === "microsoft-signup-token" && event.data?.token) {
+                const token = event.data.token;
+                cleanup();
+
+                setStatus("loading");
+                try {
+                    const res = await axios.post(`${API_URL}/api/landing/signup/microsoft`, {
+                        token,
+                        type,
+                        companyName: type === "team" ? companyName : undefined,
+                        planConfig: {
+                            tier: ctx.tier ?? null,
+                            sets: ctx.sets,
+                            ai: ctx.ai,
+                            billing: ctx.billing,
+                            currency: ctx.currency,
+                        },
+                    });
+
+                    const { tenantSubdomain, email: verifiedEmail } = res.data;
+                    const appUrl = new URL(import.meta.env.VITE_APP_URL || "http://localhost:3005");
+                    window.location.href = `${appUrl.protocol}//${tenantSubdomain}.${appUrl.host}/login?email=${encodeURIComponent(verifiedEmail)}&sso=microsoft`;
+                } catch (err) {
+                    const msg = err?.response?.data?.error || "Microsoft sign up failed. Please try again.";
+                    setErrorMsg(msg);
+                    setStatus("error");
+                }
+            }
+        };
+
+        window.addEventListener("message", messageListener);
+
+        const checkClosedInterval = setInterval(() => {
+            if (popup.closed) {
+                cleanup();
+                setStatus("idle");
+            }
+        }, 1000);
+
+        const cleanup = () => {
+            window.removeEventListener("message", messageListener);
+            clearInterval(checkClosedInterval);
+        };
+    };
+
     const pwdStrength = useMemo(() => {
         let s = 0;
         if (pwd.length >= 8) s++;
@@ -641,11 +802,13 @@ function SignupCard({ ctx }) {
                     provider="google"
                     label="Sign up with Google"
                     testid="signup-sso-google"
+                    onClick={handleGoogleSignup}
                 />
                 <SsoButton
                     provider="microsoft"
                     label="Sign up with Microsoft"
                     testid="signup-sso-microsoft"
+                    onClick={handleMicrosoftSignup}
                 />
             </div>
 
@@ -825,11 +988,12 @@ function FormField({ label, icon: Icon, type, placeholder, value, onChange, test
     );
 }
 
-function SsoButton({ provider, label, testid }) {
+function SsoButton({ provider, label, testid, onClick }) {
     return (
         <button
             type="button"
             data-testid={testid}
+            onClick={onClick}
             className="w-full inline-flex items-center justify-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 text-[14px] font-medium text-zukvo-ink hover:border-zinc-300 hover:bg-zinc-50 transition-colors"
         >
             <SsoIcon provider={provider} />
