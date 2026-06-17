@@ -227,7 +227,7 @@ function Overview() {
                         <ul className="mt-6 space-y-2.5">
                             {[
                                 { i: Award, t: "Performance gauge · weighted total" },
-                                { i: Ticket, t: "Ticket completion + timeliness + tracking" },
+                                { i: Ticket, t: "Ticket completion + Timeliness + Tracking" },
                                 { i: FileText, t: "BOD + EOD daily-update compliance" },
                                 { i: AlertTriangle, t: "Escalation penalties · capped" },
                             ].map((b, i) => (

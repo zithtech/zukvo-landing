@@ -30,7 +30,7 @@ export default function FinalCTA() {
                     </p>
                     <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
                         <a
-                            href="#trial"
+                            href="/signup"
                             data-testid="final-cta-primary"
                             className="group inline-flex items-center gap-2 rounded-full bg-zukvo-500 hover:bg-zukvo-600 transition-colors text-white px-6 py-3.5 text-sm font-medium"
                         >
