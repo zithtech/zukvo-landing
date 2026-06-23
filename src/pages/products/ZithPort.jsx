@@ -36,7 +36,8 @@ import zithSkillsmatchImg from "@/assets/zith -skillsmatch.png";
 import leadsImg from "@/assets/leads.png";
 import zithSavejobsImg from "@/assets/zith-savejobs.png";
 import jobsImg from "@/assets/jobs.png";
-import mainleadImg from "@/assets/mainlead.png";
+import mainleadImg from "@/assets/leadspage-dark.png";
+import mainleadImgLight from "@/assets/leadspage-light.png";
 
 const ZP_EMPTY_IMG = extensionImg;
 const ZP_EXTRACTED_IMG = extractImg;
@@ -608,6 +609,7 @@ function SavedSection() {
                     <ImageSlot
                         testid="zp-image-list"
                         src={mainleadImg}
+                        srcLight={mainleadImgLight}
                         alt="Saved jobs list"
                         label="Your Saved Jobs — Synced to Zukvo"
                         chromeUrl="chrome-extension://zithport/saved"

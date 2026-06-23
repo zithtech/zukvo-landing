@@ -35,21 +35,37 @@ import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import documentImg from "@/assets/document.png";
-import docViewImg from "@/assets/doc-view.png";
-import docManualCreationImg from "@/assets/doc-manual-creation.png";
-import docZaiCreationImg from "@/assets/doc-zai-creation.png";
-import docPublicLinkImg from "@/assets/doc-public-link.png";
-import docVersionHistoryImg from "@/assets/doc-version-history.png";
-import docLinkTicketImg from "@/assets/doc-link-ticket.png";
+import documentImg from "@/assets/documents-dark.png";
+import documentImgLight from "@/assets/documents-light.png";
+import docViewImg from "@/assets/doc-view-dark.png";
+import docViewImgLight from "@/assets/doc-view-light.png";
+import docManualCreationImg from "@/assets/doc-manual-creation-dark.png";
+import docManualCreationImgLight from "@/assets/doc-manual-creation-light.png";
+import docZaiCreationImg from "@/assets/doc-zai-creation-dark.png";
+import docZaiCreationImgLight from "@/assets/doc-zai-creation-light.png";
+import docPublicLinkImg from "@/assets/doc-public-link-dark.png";
+import docPublicLinkImgLight from "@/assets/doc-public-link-light.png";
+import docVersionHistoryImg from "@/assets/doc-version-history-dark.png";
+import docVersionHistoryImgLight from "@/assets/doc-version-history-light.png";
+import docLinkTicketImg from "@/assets/docticketattach-dark.png";
+import docLinkTicketImgLight from "@/assets/docticketattach-light.png";
+import docContributersImg from "@/assets/doc-contributers.png";
+import docTicketlinkImg from "@/assets/doc-ticketlink.png";
 
 const HUB_MAIN_IMG = documentImg;
+const HUB_MAIN_IMG_LIGHT = documentImgLight;
 const HUB_EDITOR_IMG = docViewImg;
+const HUB_EDITOR_IMG_LIGHT = docViewImgLight;
 const HUB_MANUAL_CREATION_IMG = docManualCreationImg;
+const HUB_MANUAL_CREATION_IMG_LIGHT = docManualCreationImgLight;
 const HUB_ZAI_CREATION_IMG = docZaiCreationImg;
+const HUB_ZAI_CREATION_IMG_LIGHT = docZaiCreationImgLight;
 const HUB_PUBLIC_LINK_IMG = docPublicLinkImg;
+const HUB_PUBLIC_LINK_IMG_LIGHT = docPublicLinkImgLight;
 const HUB_VERSION_HISTORY_IMG = docVersionHistoryImg;
+const HUB_VERSION_HISTORY_IMG_LIGHT = docVersionHistoryImgLight;
 const HUB_LINK_TICKET_IMG = docLinkTicketImg;
+const HUB_LINK_TICKET_IMG_LIGHT = docLinkTicketImgLight;
 
 const SUBMODULES = [
     { id: "hubs", label: "Hubs", icon: FolderTree },
@@ -250,18 +266,31 @@ function MainView() {
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7">
-                        <ImageSlot
-                            testid="dh-image-main"
-                            src={HUB_MAIN_IMG}
-                            alt="Document Hub main view"
-                            label="Document Hub — main view"
-                            chromeUrl="zukvo.app/work/document-hub"
-                            aspect="auto"
-                            objectFit="contain"
-                            className="max-w-[800px] mx-auto"
-                            caption="Live screenshot — Document Hub main listing."
-                        />
+                    <div className="lg:col-span-7 w-full min-w-0">
+                        <div className="relative max-w-[800px] mx-auto">
+                            <ImageSlot
+                                testid="dh-image-main"
+                                src={HUB_MAIN_IMG}
+                                srcLight={HUB_MAIN_IMG_LIGHT}
+                                alt="Document Hub main view"
+                                label="Document Hub — main view"
+                                chromeUrl="zukvo.app/work/document-hub"
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                caption="Live screenshot — Document Hub main listing."
+                            />
+
+                            {/* Floating Card: Contributors */}
+                            <div className="absolute z-20 -left-8 bottom-8 w-[220px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500">
+                                <img src={docContributersImg} alt="Document Contributors" className="w-full h-auto block" />
+                            </div>
+
+                            {/* Floating Card: Ticket Link */}
+                            <div className="absolute z-20 -right-8 top-20 w-[240px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500" style={{ animationDelay: "150ms" }}>
+                                <img src={docTicketlinkImg} alt="Document Ticket Link" className="w-full h-auto block" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -518,6 +547,7 @@ function CreationTypes() {
                         <ImageSlot
                             testid="dh-image-creation-page"
                             src={HUB_MANUAL_CREATION_IMG}
+                            srcLight={HUB_MANUAL_CREATION_IMG_LIGHT}
                             alt="Hub manual creation page"
                             label="Hub creation page"
                             chromeUrl="zukvo.app/work/document-hub/new"
@@ -530,6 +560,7 @@ function CreationTypes() {
                         <ImageSlot
                             testid="dh-image-creation-types"
                             src={HUB_ZAI_CREATION_IMG}
+                            srcLight={HUB_ZAI_CREATION_IMG_LIGHT}
                             alt="AI creation mode"
                             label="Manual vs Create-with-Zai"
                             chromeUrl="zukvo.app/work/document-hub/new?mode=zai"
@@ -590,6 +621,7 @@ function EditorSection() {
                         <ImageSlot
                             testid="dh-image-editor"
                             src={HUB_EDITOR_IMG}
+                            srcLight={HUB_EDITOR_IMG_LIGHT}
                             alt="Document Hub editor"
                             label="Document editor"
                             chromeUrl="zukvo.app/work/document-hub/play-store"
@@ -776,6 +808,7 @@ function SharingSection() {
                         <ImageSlot
                             testid="dh-image-public-share"
                             src={HUB_PUBLIC_LINK_IMG}
+                            srcLight={HUB_PUBLIC_LINK_IMG_LIGHT}
                             alt="Public share configuration"
                             label="Public share configuration"
                             chromeUrl="zukvo.app/work/document-hub/share"
@@ -912,10 +945,11 @@ function HistorySection() {
                     <div className="lg:col-span-7 space-y-5 min-w-0 w-full">
                         <HistoryMock />
                         <ImageSlot
-                            testid="dh-image-history"
+                            testid="dh-image-version-history"
                             src={HUB_VERSION_HISTORY_IMG}
+                            srcLight={HUB_VERSION_HISTORY_IMG_LIGHT}
                             alt="Version history panel"
-                            label="Version history panel"
+                            label="Version History · Drawer"
                             chromeUrl="zukvo.app/work/document-hub/history"
                             aspect="auto"
                             objectFit="contain"
@@ -1100,10 +1134,11 @@ function TicketLinking() {
                     </div>
                     <div className="lg:col-span-7 min-w-0 w-full">
                         <ImageSlot
-                            testid="dh-image-ticket-linking"
+                            testid="dh-image-ticket-link"
                             src={HUB_LINK_TICKET_IMG}
-                            alt="Ticket linking inside a Hub"
-                            label="Ticket linking inside a Hub"
+                            srcLight={HUB_LINK_TICKET_IMG_LIGHT}
+                            alt="Ticket linking configuration"
+                            label="Attach Tickets · Form"
                             chromeUrl="zukvo.app/work/document-hub/release-kit"
                             aspect="auto"
                             objectFit="contain"

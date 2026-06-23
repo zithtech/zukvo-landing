@@ -955,7 +955,7 @@ function SignupCard({ ctx }) {
             <div className="mt-6 text-center text-[12.5px] text-zinc-500">
                 Already have an account?{" "}
                 <a
-                    href="#login"
+                    href={`${import.meta.env.VITE_APP_URL || "http://localhost:3005"}/login`}
                     className="text-zukvo-600 font-medium hover:text-zukvo-700"
                 >
                     Sign in

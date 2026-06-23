@@ -49,12 +49,18 @@ import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import proposalPageImg from "@/assets/proposal-page.png";
-import proposalCreateImg from "@/assets/proposal-create.png";
-import proposalCreateWithZaiImg from "@/assets/proposal-create-with-zai.png";
-import proposalEnhanceWithZaiImg from "@/assets/proposal-enhance-with-zai.png";
-import proposalLivepreviewImg from "@/assets/proposal-livepreview.png";
-import proposalMailImg from "@/assets/proposal-mail.png";
+import proposalPageImg from "@/assets/proposal-page-dark.png";
+import proposalPageImgLight from "@/assets/proposal-page-light.png";
+import proposalCreateImg from "@/assets/proposalbuilder-dark.png";
+import proposalCreateImgLight from "@/assets/proposalbuilder-light.png";
+import proposalCreateWithZaiImg from "@/assets/proposal-create-with-zai-dark.png";
+import proposalCreateWithZaiImgLight from "@/assets/proposal-create-with-zai-light.png";
+import proposalEnhanceWithZaiImg from "@/assets/proposal-enhance-with-zai-dark.png";
+import proposalEnhanceWithZaiImgLight from "@/assets/proposal-enhance-with-zai-light.png";
+import proposalLivepreviewImg from "@/assets/proposal-livepreview-dark.png";
+import proposalLivepreviewImgLight from "@/assets/proposal-livepreview-light.png";
+import proposalMailImg from "@/assets/proposal-mail-dark.png";
+import proposalMailImgLight from "@/assets/proposal-mail-light.png";
 
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -266,6 +272,7 @@ function Dashboard() {
                         <ImageSlot
                             testid="prop-image-dashboard"
                             src={proposalPageImg}
+                            srcLight={proposalPageImgLight}
                             alt="Proposals Dashboard"
                             label="Proposals — Dashboard"
                             chromeUrl="zukvo.app/work/proposals"
@@ -647,6 +654,7 @@ function Builder() {
                     <ImageSlot
                         testid="prop-image-builder"
                         src={proposalCreateImg}
+                        srcLight={proposalCreateImgLight}
                         alt="Proposal Builder editor"
                         label="Proposal Builder · Section editor"
                         chromeUrl="zukvo.app/work/proposals/new"
@@ -830,6 +838,7 @@ function ZaiCreate() {
                     <ImageSlot
                         testid="prop-image-zai-create"
                         src={proposalCreateWithZaiImg}
+                        srcLight={proposalCreateWithZaiImgLight}
                         alt="AI proposal generator tool"
                         label="Zai · Create an entire proposal"
                         chromeUrl="zukvo.app/work/proposals/new?zai=1"
@@ -1020,6 +1029,7 @@ function ZaiEnhance() {
                     <ImageSlot
                         testid="prop-image-zai-enhance"
                         src={proposalEnhanceWithZaiImg}
+                        srcLight={proposalEnhanceWithZaiImgLight}
                         alt="Zai section enhancer"
                         label="Enhance with Zai · Smart Refinement"
                         chromeUrl="zukvo.app/work/proposals/new?enhance=1"
@@ -1076,6 +1086,7 @@ function PreviewSection() {
                         <ImageSlot
                             testid="prop-image-preview"
                             src={proposalLivepreviewImg}
+                            srcLight={proposalLivepreviewImgLight}
                             alt="Live Proposal Preview"
                             label="Proposal · Live Preview"
                             chromeUrl="zukvo.app/work/proposals/preview"
@@ -1340,6 +1351,7 @@ function MailSection() {
                         <ImageSlot
                             testid="prop-image-mail"
                             src={proposalMailImg}
+                            srcLight={proposalMailImgLight}
                             alt="Send proposal via mail"
                             label="Compose Email · Send proposal"
                             chromeUrl="zukvo.app/work/proposals/send"

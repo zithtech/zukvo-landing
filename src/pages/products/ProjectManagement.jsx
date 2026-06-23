@@ -31,12 +31,17 @@ import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import projectImg from "@/assets/project.png";
-import projectOverviewImg from "@/assets/projectoverview.png";
-import projectTrashImg from "@/assets/project-trash.png";
+import projectImg from "@/assets/project-dark.png";
+import projectImgLight from "@/assets/project-light.png";
+import projectOverviewImg from "@/assets/projectoverview-dark.png";
+import projectOverviewImgLight from "@/assets/projectoverview-light.png";
+import projectTrashImg from "@/assets/project-trash-dark.png";
+import projectTrashImgLight from "@/assets/project-trash-light.png";
 
 const PM_MAIN_IMG = projectImg;
+const PM_MAIN_IMG_LIGHT = projectImgLight;
 const PM_DETAILS_IMG = projectOverviewImg;
+const PM_DETAILS_IMG_LIGHT = projectOverviewImgLight;
 
 const SUBMODULES = [
     { id: "projects", label: "Projects", icon: KanbanSquare },
@@ -243,6 +248,7 @@ function MainView() {
                         <ImageSlot
                             testid="pm-image-main"
                             src={PM_MAIN_IMG}
+                            srcLight={PM_MAIN_IMG_LIGHT}
                             alt="Projects Management home view"
                             label="Projects — main view"
                             chromeUrl="zukvo.app/work/projects"
@@ -692,6 +698,7 @@ function ProjectDetails() {
                         <ImageSlot
                             testid="pm-image-details"
                             src={PM_DETAILS_IMG}
+                            srcLight={PM_DETAILS_IMG_LIGHT}
                             alt="Project details page"
                             label="Project Details — Zukvo #002"
                             chromeUrl="zukvo.app/work/projects/zukvo"
@@ -1291,6 +1298,7 @@ function TrashSection() {
                             <ImageSlot
                                 testid="pm-image-trash"
                                 src={projectTrashImg}
+                                srcLight={projectTrashImgLight}
                                 alt="Project Trash & Restore"
                                 label="Project Trash & Restore"
                                 chromeUrl="zukvo.app/work/projects/trash"

@@ -33,18 +33,29 @@ import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import timeTrackingImg from "@/assets/time-tracking.png";
-import myTrackingImg from "@/assets/my-tracking.png";
-import teamTrackingImg from "@/assets/team-tracking.png";
-import manageTimeImg from "@/assets/manage-time.png";
-import particularTicketsImg from "@/assets/particulartickets.png";
+import timeTrackingImg from "@/assets/time-tracking-dark.png";
+import timeTrackingImgLight from "@/assets/time-tracking-light.png";
+import myTrackingImg from "@/assets/my-tracking-dark.png";
+import myTrackingImgLight from "@/assets/my-tracking-light.png";
+import teamTrackingImg from "@/assets/team-tracking-dark.png";
+import teamTrackingImgLight from "@/assets/team-tracking-light.png";
+import manageTimeImg from "@/assets/manage-time-dark.png";
+import manageTimeImgLight from "@/assets/manage-time-light.png";
+import particularTicketsImg from "@/assets/particulartickets-dark.png";
+import particularTicketsImgLight from "@/assets/particulattickets-light.png";
 
 const TT_MY_IMG = myTrackingImg;
+const TT_MY_IMG_LIGHT = myTrackingImgLight;
 const TT_START_IMG = timeTrackingImg;
+const TT_START_IMG_LIGHT = timeTrackingImgLight;
 const TT_TEAM_IMG = teamTrackingImg;
+const TT_TEAM_IMG_LIGHT = teamTrackingImgLight;
 const TT_LOG_IMG = manageTimeImg;
+const TT_LOG_IMG_LIGHT = manageTimeImgLight;
 const TT_TICKET_IMG = particularTicketsImg;
-
+const TT_TICKET_IMG_LIGHT = particularTicketsImgLight;
+import ttActivityImg from "@/assets/timetrack-activity.png";
+import ttPerformanceImg from "@/assets/timetrack-performance.png";
 
 const SUBMODULES = [
     { id: "start", label: "Start a timer", icon: Play },
@@ -250,6 +261,7 @@ function StartTimer() {
                         <ImageSlot
                             testid="tt-image-start"
                             src={TT_START_IMG}
+                            srcLight={TT_START_IMG_LIGHT}
                             alt="Start a timer popover"
                             label="Start a timer · header popover"
                             chromeUrl="zukvo.app/home"
@@ -543,18 +555,31 @@ function MyTracking() {
                     </p>
                 </div>
 
-                <div className="zk-reveal mt-12">
-                    <ImageSlot
-                        testid="tt-image-my"
-                        src={TT_MY_IMG}
-                        alt="My Time Tracking"
-                        label="My Time Tracking — full page"
-                        chromeUrl="zukvo.app/work/time-tracking"
-                        aspect="auto"
-                        objectFit="contain"
-                        className="max-w-[800px] mx-auto"
-                        caption="Live screenshot — personal tracking view with KPIs, entries & 7-day activity."
-                    />
+                <div className="zk-reveal mt-12 w-full min-w-0">
+                    <div className="relative max-w-[800px] mx-auto">
+                        <ImageSlot
+                            testid="tt-image-my"
+                            src={TT_MY_IMG}
+                            srcLight={TT_MY_IMG_LIGHT}
+                            alt="My Time Tracking"
+                            label="My Time Tracking — full page"
+                            chromeUrl="zukvo.app/work/time-tracking"
+                            aspect="auto"
+                            objectFit="contain"
+                            className="w-full"
+                            caption="Live screenshot — personal tracking view with KPIs, entries & 7-day activity."
+                        />
+
+                        {/* Floating Card: Activity */}
+                        <div className="absolute z-20 -left-8 bottom-8 w-[220px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500">
+                            <img src={ttActivityImg} alt="Time Tracking Activity" className="w-full h-auto block" />
+                        </div>
+
+                        {/* Floating Card: Performance */}
+                        <div className="absolute z-20 -right-8 top-20 w-[240px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500" style={{ animationDelay: "150ms" }}>
+                            <img src={ttPerformanceImg} alt="Time Tracking Performance" className="w-full h-auto block" />
+                        </div>
+                    </div>
                 </div>
 
                 <div className="zk-reveal mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -728,6 +753,7 @@ function TeamTracking() {
                         <ImageSlot
                             testid="tt-image-team"
                             src={TT_TEAM_IMG}
+                            srcLight={TT_TEAM_IMG_LIGHT}
                             alt="Team Tracking"
                             label="Team Tracking — manager view"
                             chromeUrl="zukvo.app/work/time-tracking/team"
@@ -853,6 +879,7 @@ function ManagerAdjust() {
                         <ImageSlot
                             testid="tt-image-log"
                             src={TT_LOG_IMG}
+                            srcLight={TT_LOG_IMG_LIGHT}
                             alt="Log Time Session manager modal"
                             label="Log Time Session · 3 steps"
                             chromeUrl="zukvo.app/work/time-tracking/log"
@@ -971,6 +998,7 @@ function TicketDeepDive() {
                     <ImageSlot
                         testid="tt-image-ticket"
                         src={TT_TICKET_IMG}
+                        srcLight={TT_TICKET_IMG_LIGHT}
                         alt="Ticket detail panel from Time Tracking activity"
                         label="Ticket panel · opened from Time Tracking"
                         chromeUrl="zukvo.app/work/time-tracking → 001-0533"

@@ -38,19 +38,33 @@ import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import invoiceDashboardImg from "@/assets/invoice-dashboard.png";
-import invoiceCreateImg from "@/assets/invoice-create.png";
-import invoiceTemplateImg from "@/assets/invoice-template.png";
-import invoiceCustomerImg from "@/assets/invoice-customer.png";
-import invoicesListImg from "@/assets/invoices.png";
-import invoiceTrashImg from "@/assets/invoice-trash.png";
+import invoiceDashboardImg from "@/assets/invoice-dashboard-dark.png";
+import invoiceDashboardImgLight from "@/assets/invoice-dashboard-light.png";
+import invoiceCreateImg from "@/assets/invoice-create-dark.png";
+import invoiceCreateImgLight from "@/assets/invoice-create-light.png";
+import invoiceTemplateImg from "@/assets/invoice-template-dark.png";
+import invoiceTemplateImgLight from "@/assets/invoice-template-light.png";
+import invoiceCustomerImg from "@/assets/invoice-customer-dark.png";
+import invoiceCustomerImgLight from "@/assets/invoice-customer-light.png";
+import invoicesListImg from "@/assets/invoices-dark.png";
+import invoicesListImgLight from "@/assets/invoices-light.png";
+import invoiceTrashImg from "@/assets/invoice-trash-dark.png";
+import invoiceTrashImgLight from "@/assets/invoice-trash-light.png";
+import invoicePaymentImg from "@/assets/invoice-paymenttimeline.png";
+import invoiceAttachImg from "@/assets/invoice-attach.png";
 
 const INV_DASH_IMG = invoiceDashboardImg;
+const INV_DASH_IMG_LIGHT = invoiceDashboardImgLight;
 const INV_CREATE_IMG = invoiceCreateImg;
+const INV_CREATE_IMG_LIGHT = invoiceCreateImgLight;
 const INV_TEMPLATE_IMG = invoiceTemplateImg;
+const INV_TEMPLATE_IMG_LIGHT = invoiceTemplateImgLight;
 const INV_CUSTOMERS_IMG = invoiceCustomerImg;
+const INV_CUSTOMERS_IMG_LIGHT = invoiceCustomerImgLight;
 const INV_LIST_IMG = invoicesListImg;
+const INV_LIST_IMG_LIGHT = invoicesListImgLight;
 const INV_TRASH_IMG = invoiceTrashImg;
+const INV_TRASH_IMG_LIGHT = invoiceTrashImgLight;
 
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -251,18 +265,31 @@ function Dashboard() {
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7">
-                        <ImageSlot
-                            testid="inv-image-dashboard"
-                            src={INV_DASH_IMG}
-                            alt="Invoice Dashboard"
-                            label="Invoice — Dashboard"
-                            chromeUrl="zukvo.app/finance/invoice"
-                            aspect="auto"
-                            objectFit="contain"
-                            className="max-w-[800px] mx-auto"
-                            caption="Live screenshot — Invoice dashboard with KPIs, revenue & calendar."
-                        />
+                    <div className="lg:col-span-7 w-full min-w-0">
+                        <div className="relative max-w-[800px] mx-auto">
+                            <ImageSlot
+                                testid="inv-image-dashboard"
+                                src={INV_DASH_IMG}
+                                srcLight={INV_DASH_IMG_LIGHT}
+                                alt="Invoice Dashboard"
+                                label="Invoice — Dashboard"
+                                chromeUrl="zukvo.app/finance/invoice"
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                caption="Live screenshot — Invoice dashboard with KPIs, revenue & calendar."
+                            />
+
+                            {/* Floating Card: Attach */}
+                            <div className="absolute z-20 -left-8 bottom-8 w-[220px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500">
+                                <img src={invoiceAttachImg} alt="Invoice Attach" className="w-full h-auto block" />
+                            </div>
+
+                            {/* Floating Card: Payment Timeline */}
+                            <div className="absolute z-20 -right-8 top-20 w-[240px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500" style={{ animationDelay: "150ms" }}>
+                                <img src={invoicePaymentImg} alt="Invoice Payment Timeline" className="w-full h-auto block" />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -391,6 +418,7 @@ function InvoicesList() {
                     <ImageSlot
                         testid="inv-image-list"
                         src={INV_LIST_IMG}
+                        srcLight={INV_LIST_IMG_LIGHT}
                         alt="Invoices list view"
                         label="Invoices — list view"
                         chromeUrl="zukvo.app/finance/invoice/all"
@@ -432,6 +460,7 @@ function CreateInvoice() {
                     <ImageSlot
                         testid="inv-image-create"
                         src={INV_CREATE_IMG}
+                        srcLight={INV_CREATE_IMG_LIGHT}
                         alt="Create invoice page"
                         label="Create new invoice"
                         chromeUrl="zukvo.app/finance/invoice/new"
@@ -556,6 +585,7 @@ function Templates() {
                         <ImageSlot
                             testid="inv-image-templates"
                             src={INV_TEMPLATE_IMG}
+                            srcLight={INV_TEMPLATE_IMG_LIGHT}
                             alt="Invoice templates"
                             label="Templates · Create new template"
                             chromeUrl="zukvo.app/finance/invoice/templates"
@@ -714,6 +744,7 @@ function Customers() {
                         <ImageSlot
                             testid="inv-image-customers"
                             src={INV_CUSTOMERS_IMG}
+                            srcLight={INV_CUSTOMERS_IMG_LIGHT}
                             alt="Import clients as customers"
                             label="Customers · Import from active clients"
                             chromeUrl="zukvo.app/finance/invoice/customers"
@@ -1062,6 +1093,7 @@ function TrashSection() {
                             <ImageSlot
                                 testid="inv-image-trash"
                                 src={INV_TRASH_IMG}
+                                srcLight={INV_TRASH_IMG_LIGHT}
                                 alt="Invoice Trash list"
                                 label="Invoice Trash"
                                 chromeUrl="zukvo.app/finance/invoice/trash"

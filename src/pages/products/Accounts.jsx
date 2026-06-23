@@ -41,7 +41,10 @@ import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import accountsImg from "@/assets/accounts.png";
+import accountsImg from "@/assets/accounts-dark.png";
+import accountsImgLight from "@/assets/accounts-light.png";
+import accountsBreakdownImg from "@/assets/accounts-breakdown.png";
+import accountsLatestActivityImg from "@/assets/accounts-latestactivity.png";
 
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -242,17 +245,30 @@ function Dashboard() {
                         </ul>
                     </div>
                     <div className="lg:col-span-7 w-full min-w-0">
-                        <ImageSlot
-                            testid="accounts-image-dashboard"
-                            src={accountsImg}
-                            alt="Accounts Management Dashboard"
-                            label="Accounts Management · Dashboard"
-                            chromeUrl="zukvo.app/finance/accounts"
-                            aspect="auto"
-                            objectFit="contain"
-                            className="max-w-[800px] mx-auto"
-                            caption="Live screenshot — company accounts management ledger and KPIs."
-                        />
+                        <div className="relative max-w-[800px] mx-auto">
+                            <ImageSlot
+                                testid="accounts-image-dashboard"
+                                src={accountsImg}
+                                srcLight={accountsImgLight}
+                                alt="Accounts Management Dashboard"
+                                label="Accounts Management · Dashboard"
+                                chromeUrl="zukvo.app/finance/accounts"
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                caption="Live screenshot — company accounts management ledger and KPIs."
+                            />
+
+                            {/* Floating Card: Latest Activity */}
+                            <div className="absolute z-20 -left-10 -top-16 w-[220px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500">
+                                <img src={accountsLatestActivityImg} alt="Latest Activity Drawer" className="w-full h-auto block" />
+                            </div>
+
+                            {/* Floating Card: Category Breakdown */}
+                            <div className="absolute z-20 -right-10 -bottom-8 w-[240px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500" style={{ animationDelay: "150ms" }}>
+                                <img src={accountsBreakdownImg} alt="Category Breakdown Drawer" className="w-full h-auto block" />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -504,11 +520,10 @@ function Ledger() {
                                     </div>
                                     <div className="col-span-1">
                                         <span
-                                            className={`inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.18em] rounded-md border px-2 py-0.5 ${
-                                                r[2] === "DEBIT"
-                                                    ? "border-rose-400/30 bg-rose-500/10 text-rose-300"
-                                                    : "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
-                                            }`}
+                                            className={`inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.18em] rounded-md border px-2 py-0.5 ${r[2] === "DEBIT"
+                                                ? "border-rose-400/30 bg-rose-500/10 text-rose-300"
+                                                : "border-emerald-400/30 bg-emerald-500/10 text-emerald-300"
+                                                }`}
                                         >
                                             {r[2] === "DEBIT" ? (
                                                 <ArrowDown className="size-2.5" />
@@ -519,9 +534,8 @@ function Ledger() {
                                         </span>
                                     </div>
                                     <div
-                                        className={`col-span-2 text-[13px] font-medium font-mono ${
-                                            r[2] === "DEBIT" ? "text-rose-300" : "text-emerald-300"
-                                        }`}
+                                        className={`col-span-2 text-[13px] font-medium font-mono ${r[2] === "DEBIT" ? "text-rose-300" : "text-emerald-300"
+                                            }`}
                                     >
                                         {r[3]}
                                     </div>
@@ -741,7 +755,7 @@ function FormField({ label, placeholder, value, full, required, options }) {
             </div>
             {options ? (
                 <>
-                    <div 
+                    <div
                         className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between cursor-pointer hover:bg-black/40 transition-colors"
                         onClick={() => setOpen(!open)}
                     >
@@ -755,8 +769,8 @@ function FormField({ label, placeholder, value, full, required, options }) {
                             <div className="fixed inset-0 z-10" onClick={() => setOpen(false)}></div>
                             <div className="absolute z-20 w-full mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl max-h-48 overflow-y-auto">
                                 {options.map(opt => (
-                                    <div 
-                                        key={opt} 
+                                    <div
+                                        key={opt}
                                         className="px-3 py-2.5 text-[12.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors"
                                         onClick={() => { setSelected(opt); setOpen(false); }}
                                     >
@@ -769,7 +783,7 @@ function FormField({ label, placeholder, value, full, required, options }) {
                 </>
             ) : (
                 <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between">
-                    <input 
+                    <input
                         type="text"
                         className="bg-transparent border-none outline-none w-full text-zinc-200 placeholder:text-zinc-500"
                         placeholder={placeholder}
@@ -1105,19 +1119,17 @@ function RecentActivity() {
                                             className="rounded-xl border border-white/10 bg-white/[0.02] p-3.5 relative overflow-hidden"
                                         >
                                             <span
-                                                className={`absolute left-0 top-0 bottom-0 w-1 ${
-                                                    e.sign === "credit"
-                                                        ? "bg-emerald-400"
-                                                        : "bg-rose-400"
-                                                }`}
+                                                className={`absolute left-0 top-0 bottom-0 w-1 ${e.sign === "credit"
+                                                    ? "bg-emerald-400"
+                                                    : "bg-rose-400"
+                                                    }`}
                                             />
                                             <div className="flex items-start gap-3">
                                                 <span
-                                                    className={`inline-flex size-8 items-center justify-center rounded-md border shrink-0 ${
-                                                        e.sign === "credit"
-                                                            ? "bg-emerald-500/15 border-emerald-400/30 text-emerald-300"
-                                                            : "bg-rose-500/15 border-rose-400/30 text-rose-300"
-                                                    }`}
+                                                    className={`inline-flex size-8 items-center justify-center rounded-md border shrink-0 ${e.sign === "credit"
+                                                        ? "bg-emerald-500/15 border-emerald-400/30 text-emerald-300"
+                                                        : "bg-rose-500/15 border-rose-400/30 text-rose-300"
+                                                        }`}
                                                 >
                                                     {e.sign === "credit" ? (
                                                         <ArrowUp className="size-3.5" />
@@ -1131,11 +1143,10 @@ function RecentActivity() {
                                                             {e.t}
                                                         </div>
                                                         <span
-                                                            className={`shrink-0 font-mono text-[13px] font-medium ${
-                                                                e.sign === "credit"
-                                                                    ? "text-emerald-300"
-                                                                    : "text-rose-300"
-                                                            }`}
+                                                            className={`shrink-0 font-mono text-[13px] font-medium ${e.sign === "credit"
+                                                                ? "text-emerald-300"
+                                                                : "text-rose-300"
+                                                                }`}
                                                         >
                                                             {e.amt}
                                                         </span>
@@ -1154,13 +1165,12 @@ function RecentActivity() {
                                                         {e.tags.map((tg, k) => (
                                                             <span
                                                                 key={k}
-                                                                className={`shrink-0 inline-flex items-center text-[9.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${
-                                                                    tg === "Invoice"
-                                                                        ? "border-violet-400/30 bg-violet-500/10 text-violet-300"
-                                                                        : tg.includes("CLIENT")
-                                                                          ? "border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300"
-                                                                          : "border-white/10 bg-white/[0.04] text-zinc-300"
-                                                                }`}
+                                                                className={`shrink-0 inline-flex items-center text-[9.5px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ${tg === "Invoice"
+                                                                    ? "border-violet-400/30 bg-violet-500/10 text-violet-300"
+                                                                    : tg.includes("CLIENT")
+                                                                        ? "border-zukvo-500/30 bg-zukvo-500/10 text-zukvo-300"
+                                                                        : "border-white/10 bg-white/[0.04] text-zinc-300"
+                                                                    }`}
                                                             >
                                                                 {tg}
                                                             </span>

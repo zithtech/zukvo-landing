@@ -28,41 +28,71 @@ import {
     Maximize2,
     X,
     Repeat,
+    Moon,
+    Sun,
 } from "lucide-react";
 import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import ticketSprintImg from "@/assets/ticket-sprint.png";
-import ticketCreateWithZaiImg from "@/assets/ticket-create-with-zai.png";
-import createTicketZai1Img from "@/assets/createticketZai.png";
-import createTicketZai2Img from "@/assets/createticketZai2.png";
-import sprintCompletionSummaryImg from "@/assets/sprintcompletionsummary.png";
-import sprintCompletionPendingImg from "@/assets/sprintcompletionpending.png";
-import sprintCyclesMainImg from "@/assets/sprintcyclesmainpage.png";
-import sprintDetailsImg from "@/assets/sprntDetails.png";
-import ticketDetailsDrawerImg from "@/assets/ticketdetailsdrawer.png";
-import backlogsImg from "@/assets/backlogs.png";
-import ticketMainPageNewImg from "@/assets/ticketmainpagenew.png";
-import ticketsBoardViewImg from "@/assets/ticketsboardview.png";
-import ticketBucketImg from "@/assets/ticket-bucket.png";
-import ticketBuglistImg from "@/assets/ticket-buglist.png";
-import ticketTrashImg from "@/assets/ticket-trash.png";
-import ticketArchiveImg from "@/assets/ticket-archive.png";
-import ticketPerformanceImg from "@/assets/ticket-performance.png";
-import ticketViewImg from "@/assets/ticket-view.png";
+import ticketSprintImg from "@/assets/ticket-sprint-dark.png";
+import ticketSprintImgLight from "@/assets/ticket-sprint-light.png";
+import ticketCreateWithZaiImg from "@/assets/createticketzai-dark.png";
+import ticketCreateWithZaiImgLight from "@/assets/createticketzai-light.png";
+import createTicketZai1Img from "@/assets/createticketzai-dark.png";
+import createTicketZai1ImgLight from "@/assets/createticketzai-light.png";
+import createTicketZai2Img from "@/assets/createticketzai2-dark.png";
+import createTicketZai2ImgLight from "@/assets/createticketzai2-light.png";
+import sprintCompletionSummaryImg from "@/assets/sprintcompletionsummary-dark.png";
+import sprintCompletionSummaryImgLight from "@/assets/sprintcompletionsummary-light.png";
+import sprintCompletionPendingImg from "@/assets/sprintcompletionpending-dark.png";
+import sprintCompletionPendingImgLight from "@/assets/sprintcompletionpending-light.png";
+import sprintCyclesMainImg from "@/assets/sprintcyclemainpage-dark.png";
+import sprintCyclesMainImgLight from "@/assets/sprintcyclemainpage-light.png";
+import sprintDetailsImg from "@/assets/sprintdetails-dark.png";
+import sprintDetailsImgLight from "@/assets/sprintdetails-light.png";
+import ticketDetailsDrawerImg from "@/assets/ticket-view-dark.png";
+import ticketDetailsDrawerImgLight from "@/assets/ticket-view-light.png";
+import backlogsImg from "@/assets/backlog-dark.png";
+import backlogsImgLight from "@/assets/backlog-light.png";
+import ticketMainPageNewImg from "@/assets/tickets-dark.png";
+import ticketMainPageNewImgLight from "@/assets/tickets-light.png";
+import ticketsBoardViewImg from "@/assets/ticketsboardview-dark.png";
+import ticketsBoardViewImgLight from "@/assets/ticketsboardview-light.png";
+import ticketBucketImg from "@/assets/ticket-bucket-dark.png";
+import ticketBucketImgLight from "@/assets/ticket-bucket-light.png";
+import ticketBuglistImg from "@/assets/ticket-buglist-dark.png";
+import ticketBuglistImgLight from "@/assets/ticket-buglist-light.png";
+import ticketTrashImg from "@/assets/ticket-trash-dark.png";
+import ticketTrashImgLight from "@/assets/ticket-trash-light.png";
+import ticketArchiveImg from "@/assets/ticket-archive-dark.png";
+import ticketArchiveImgLight from "@/assets/ticket-archive-light.png";
+import ticketPerformanceImg from "@/assets/ticket-performance-dark.png";
+import ticketPerformanceImgLight from "@/assets/ticket-performance-light.png";
+import ticketViewImg from "@/assets/ticket-view-dark.png";
+import ticketViewImgLight from "@/assets/ticket-view-light.png";
 
 const SPRINT_IMG = ticketSprintImg;
+const SPRINT_IMG_LIGHT = ticketSprintImgLight;
 const ZAI_IMG = ticketCreateWithZaiImg;
+const ZAI_IMG_LIGHT = ticketCreateWithZaiImgLight;
 const MAIN_IMG = ticketMainPageNewImg;
+const MAIN_IMG_LIGHT = ticketMainPageNewImgLight;
 const BOARD_IMG = ticketsBoardViewImg;
+const BOARD_IMG_LIGHT = ticketsBoardViewImgLight;
 const BUCKET_IMG = ticketBucketImg;
+const BUCKET_IMG_LIGHT = ticketBucketImgLight;
 const BUGLIST_IMG = ticketBuglistImg;
+const BUGLIST_IMG_LIGHT = ticketBuglistImgLight;
 const TRASH_IMG = ticketTrashImg;
+const TRASH_IMG_LIGHT = ticketTrashImgLight;
 const ARCHIVE_IMG = ticketArchiveImg;
+const ARCHIVE_IMG_LIGHT = ticketArchiveImgLight;
 const CONFIG_IMG = ticketPerformanceImg;
+const CONFIG_IMG_LIGHT = ticketPerformanceImgLight;
 const DETAIL_IMG = ticketViewImg;
+const DETAIL_IMG_LIGHT = ticketViewImgLight;
 
 const SUBMODULES = [
     { id: "tickets", label: "Tickets", icon: Ticket },
@@ -233,6 +263,9 @@ function SubmoduleNav() {
 /* ---------------- MAIN VIEW ---------------- */
 
 function MainView() {
+    const [theme, setTheme] = useState("light");
+    const activeMainImg = theme === "light" ? MAIN_IMG_LIGHT : MAIN_IMG;
+    const activeBoardImg = theme === "light" ? BOARD_IMG_LIGHT : BOARD_IMG;
     return (
         <section id="tickets" data-testid="tm-main-view" className="relative bg-[#0A0A0A] text-white">
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
@@ -277,8 +310,28 @@ function MainView() {
 
                                 {/* Main screenshot — lifted */}
                                 <div className="relative rounded-xl overflow-hidden ring-1 ring-white/[0.12] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.06)]">
+                                    <div className="absolute top-2 right-2 z-20 flex items-center p-0.5 rounded-full bg-black/40 border border-white/10 shadow-inner">
+                                        <div 
+                                            className="absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] rounded-full bg-gradient-to-r from-zukvo-500 to-violet-500 shadow-sm transition-transform duration-300 ease-out"
+                                            style={{ transform: theme === 'light' ? 'translateX(100%)' : 'translateX(0)' }}
+                                        />
+                                        <button
+                                            onClick={() => setTheme("dark")}
+                                            className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'dark' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                                            aria-label="Dark theme"
+                                        >
+                                            <Moon className="size-3.5" />
+                                        </button>
+                                        <button
+                                            onClick={() => setTheme("light")}
+                                            className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'light' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                                            aria-label="Light theme"
+                                        >
+                                            <Sun className="size-3.5" />
+                                        </button>
+                                    </div>
                                     <img
-                                        src={MAIN_IMG}
+                                        src={activeMainImg}
                                         alt="Ticket Management main view"
                                         className="block w-full h-auto"
                                     />
@@ -340,7 +393,7 @@ function MainView() {
                             {/* Floating: Board view card — hangs off the bottom-right corner */}
                             <div className="absolute -bottom-2 -right-1 sm:-right-3 w-[38%] max-w-[230px] overflow-hidden rounded-lg bg-[#0E0E10] ring-1 ring-white/[0.16] shadow-[0_30px_60px_-16px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.05)_inset]">
                                 <img
-                                    src={BOARD_IMG}
+                                    src={activeBoardImg}
                                     alt="Tickets board view"
                                     loading="lazy"
                                     className="block w-full h-auto"
@@ -415,6 +468,7 @@ function TicketDetailsBacklog() {
                     <div className="relative">
                         <ZaiStepImage
                             src={ticketDetailsDrawerImg}
+                            srcLight={ticketDetailsDrawerImgLight}
                             alt="Ticket detail drawer — description, planning, time tracking"
                             badge="Ticket Detail"
                             icon={Ticket}
@@ -502,6 +556,7 @@ function TicketDetailsBacklog() {
                     </div>
                     <ZaiStepImage
                         src={backlogsImg}
+                        srcLight={backlogsImgLight}
                         alt="Backlog — all unscheduled tickets with status, priority and assignee"
                         badge="Backlog"
                         icon={ListChecks}
@@ -638,6 +693,7 @@ function ZaiShowcase() {
                 </div>
                 <ZaiStepImage
                     src={createTicketZai1Img}
+                    srcLight={createTicketZai1ImgLight}
                     alt="Create with Zai — describe your ticket in plain English"
                     badge="Create with Zai"
                 />
@@ -679,6 +735,7 @@ function ZaiShowcase() {
                 </div>
                 <ZaiStepImage
                     src={createTicketZai2Img}
+                    srcLight={createTicketZai2ImgLight}
                     alt="Review your ticket — Zai-generated description, estimate, and subtasks"
                     badge="Review your ticket"
                     className="lg:order-1"
@@ -688,7 +745,10 @@ function ZaiShowcase() {
     );
 }
 
-function ZaiStepImage({ src, alt, badge, icon: Icon = Sparkles, className = "" }) {
+function ZaiStepImage({ src, srcLight, alt, badge, icon: Icon = Sparkles, className = "" }) {
+    const [theme, setTheme] = useState("light");
+    const activeSrc = theme === "light" && srcLight ? srcLight : src;
+
     return (
         <div className={`zk-reveal relative ${className}`}>
             {/* Ambient glow */}
@@ -700,13 +760,35 @@ function ZaiStepImage({ src, alt, badge, icon: Icon = Sparkles, className = "" }
             </div>
             <div className="relative overflow-hidden rounded-2xl border border-white/[0.1] bg-[#0A0A12] p-2 shadow-[0_40px_90px_-24px_rgba(0,0,0,0.7),0_8px_30px_-12px_rgba(99,102,241,0.3)]">
                 <div className="relative overflow-hidden rounded-xl ring-1 ring-white/[0.08]">
-                    <img src={src} alt={alt} loading="lazy" className="block w-full h-auto" />
+                    {srcLight && (
+                        <div className="absolute top-2 right-2 z-20 flex items-center p-0.5 rounded-full bg-black/40 border border-white/10 shadow-inner">
+                            <div 
+                                className="absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] rounded-full bg-gradient-to-r from-zukvo-500 to-violet-500 shadow-sm transition-transform duration-300 ease-out"
+                                style={{ transform: theme === 'light' ? 'translateX(100%)' : 'translateX(0)' }}
+                            />
+                            <button
+                                onClick={() => setTheme("dark")}
+                                className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'dark' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                                aria-label="Dark theme"
+                            >
+                                <Moon className="size-3.5" />
+                            </button>
+                            <button
+                                onClick={() => setTheme("light")}
+                                className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'light' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                                aria-label="Light theme"
+                            >
+                                <Sun className="size-3.5" />
+                            </button>
+                        </div>
+                    )}
+                    <img src={activeSrc} alt={alt} loading="lazy" className="block w-full h-auto" />
                     <div
                         aria-hidden
                         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
                     />
                 </div>
-                <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-zukvo-ink/85 backdrop-blur px-2.5 py-1 text-white shadow-lg ring-1 ring-white/10">
+                <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-zukvo-ink/85 backdrop-blur px-2.5 py-1 text-white shadow-lg ring-1 ring-white/10 z-10">
                     <Icon className="size-3 text-zukvo-300" />
                     <span className="text-[10px] font-semibold tracking-tight">{badge}</span>
                 </span>
@@ -765,6 +847,7 @@ function SprintPlansDetails() {
                     </div>
                     <ZaiStepImage
                         src={sprintCyclesMainImg}
+                        srcLight={sprintCyclesMainImgLight}
                         alt="Sprint Cycles — plan and track every cycle"
                         badge="Sprint Cycles"
                         icon={GitBranch}
@@ -800,7 +883,8 @@ function SprintPlansDetails() {
                     </div>
                     <ZaiStepImage
                         src={sprintDetailsImg}
-                        alt="Sprint Detail — completion, team contribution, and tickets"
+                        srcLight={sprintDetailsImgLight}
+                        alt="Sprint detail — progress, timelines and tickets"
                         badge="Sprint Detail"
                         icon={GitBranch}
                         className="lg:order-1"
@@ -932,7 +1016,8 @@ function SprintBacklog() {
                             <ImageSlot
                                 testid="tm-image-sprint"
                                 src={SPRINT_IMG}
-                                alt="Sprint completion"
+                                srcLight={SPRINT_IMG_LIGHT}
+                                alt="Sprint creation flow"
                                 label="Sprint board"
                                 chromeUrl="zukvo.app/work/sprint"
                                 aspect="auto"
@@ -940,9 +1025,10 @@ function SprintBacklog() {
                                 caption="Live screenshot — active sprint board."
                             />
                             <ImageSlot
-                                testid="tm-image-creation"
+                                testid="tm-image-zai"
                                 src={ZAI_IMG}
-                                alt="Ticket creation"
+                                srcLight={ZAI_IMG_LIGHT}
+                                alt="Create ticket with Zai"
                                 label="Create ticket"
                                 chromeUrl="zukvo.app/work/new"
                                 aspect="auto"
@@ -1213,6 +1299,7 @@ const COMPLETION_VIEWS = [
     {
         key: "summary",
         src: sprintCompletionSummaryImg,
+        srcLight: sprintCompletionSummaryImgLight,
         eyebrow: "Sprint review",
         title: "Completion summary",
         sub: "Burn-down, velocity, and what shipped this cycle.",
@@ -1220,6 +1307,7 @@ const COMPLETION_VIEWS = [
     {
         key: "pending",
         src: sprintCompletionPendingImg,
+        srcLight: sprintCompletionPendingImgLight,
         eyebrow: "Carry-over",
         title: "Pending items",
         sub: "Decide what rolls to the next sprint or back to the backlog.",
@@ -1228,6 +1316,7 @@ const COMPLETION_VIEWS = [
 
 function CompletionShowcase() {
     const [openKey, setOpenKey] = useState(null);
+    const [theme, setTheme] = useState("light");
     const open = openKey ? COMPLETION_VIEWS.find((v) => v.key === openKey) : null;
 
     useEffect(() => {
@@ -1247,44 +1336,68 @@ function CompletionShowcase() {
     return (
         <>
             <div className="mt-5 -mx-7 md:-mx-8 -mb-7 md:-mb-8 grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-white/10 bg-[#0A0A12] p-4 rounded-b-2xl">
-                {COMPLETION_VIEWS.map((v) => (
-                    <button
-                        key={v.key}
-                        type="button"
-                        onClick={() => setOpenKey(v.key)}
-                        aria-label={`Expand ${v.title}`}
-                        className="group relative overflow-hidden rounded-xl ring-1 ring-white/[0.08] bg-[#0E0E13] cursor-zoom-in transition-all duration-300 hover:-translate-y-1 hover:ring-zukvo-500/40 hover:shadow-[0_24px_50px_-12px_rgba(99,102,241,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-zukvo-500/70 text-left"
-                    >
-                        <div className="relative overflow-hidden">
-                            <img
-                                src={v.src}
-                                alt={v.title}
-                                className="block w-full h-auto transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
-                            />
-                            <div
-                                aria-hidden
-                                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                            />
-                            <span
-                                aria-hidden
-                                className="absolute top-2.5 right-2.5 inline-flex size-8 items-center justify-center rounded-full bg-white/15 backdrop-blur-md text-white ring-1 ring-white/20 opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(0,0,0,0.5)]"
-                            >
-                                <Maximize2 className="size-3.5" />
-                            </span>
-                            <div
-                                aria-hidden
-                                className="pointer-events-none absolute inset-x-0 bottom-0 p-3.5 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
-                            >
-                                <div className="text-[9.5px] font-bold uppercase tracking-[0.22em] text-zukvo-300">
-                                    {v.eyebrow}
+                {COMPLETION_VIEWS.map((v) => {
+                    const activeSrc = theme === "light" && v.srcLight ? v.srcLight : v.src;
+                    return (
+                        <button
+                            key={v.key}
+                            type="button"
+                            onClick={() => setOpenKey(v.key)}
+                            aria-label={`Expand ${v.title}`}
+                            className="group relative overflow-hidden rounded-xl ring-1 ring-white/[0.08] bg-[#0E0E13] cursor-zoom-in transition-all duration-300 hover:-translate-y-1 hover:ring-zukvo-500/40 hover:shadow-[0_24px_50px_-12px_rgba(99,102,241,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-zukvo-500/70 text-left"
+                        >
+                            <div className="relative overflow-hidden">
+                                <div className="absolute top-2 right-2 z-20 flex items-center p-0.5 rounded-full bg-black/40 border border-white/10 shadow-inner" onClick={(e) => { e.stopPropagation(); }}>
+                                    <div 
+                                        className="absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] rounded-full bg-gradient-to-r from-zukvo-500 to-violet-500 shadow-sm transition-transform duration-300 ease-out"
+                                        style={{ transform: theme === 'light' ? 'translateX(100%)' : 'translateX(0)' }}
+                                    />
+                                    <div
+                                        onClick={(e) => { e.stopPropagation(); setTheme("dark"); }}
+                                        className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 cursor-pointer ${theme === 'dark' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                                        aria-label="Dark theme"
+                                    >
+                                        <Moon className="size-3.5" />
+                                    </div>
+                                    <div
+                                        onClick={(e) => { e.stopPropagation(); setTheme("light"); }}
+                                        className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 cursor-pointer ${theme === 'light' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                                        aria-label="Light theme"
+                                    >
+                                        <Sun className="size-3.5" />
+                                    </div>
                                 </div>
-                                <div className="mt-0.5 text-[13px] font-semibold text-white leading-tight">
-                                    {v.title}
+
+                                <img
+                                    src={activeSrc}
+                                    alt={v.title}
+                                    className="block w-full h-auto transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
+                                />
+                                <div
+                                    aria-hidden
+                                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                />
+                                <span
+                                    aria-hidden
+                                    className="absolute top-2.5 right-2.5 inline-flex size-8 items-center justify-center rounded-full bg-white/15 backdrop-blur-md text-white ring-1 ring-white/20 opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(0,0,0,0.5)]"
+                                >
+                                    <Maximize2 className="size-3.5" />
+                                </span>
+                                <div
+                                    aria-hidden
+                                    className="pointer-events-none absolute inset-x-0 bottom-0 p-3.5 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
+                                >
+                                    <div className="text-[9.5px] font-bold uppercase tracking-[0.22em] text-zukvo-300">
+                                        {v.eyebrow}
+                                    </div>
+                                    <div className="mt-0.5 text-[13px] font-semibold text-white leading-tight">
+                                        {v.title}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </button>
-                ))}
+                        </button>
+                    );
+                })}
             </div>
 
             {open &&
@@ -1317,7 +1430,7 @@ function CompletionShowcase() {
                                 </button>
 
                                 <img
-                                    src={open.src}
+                                    src={theme === "light" && open.srcLight ? open.srcLight : open.src}
                                     alt={open.title}
                                     className="block w-full h-auto max-h-[78vh] object-contain bg-[#0A0A12]"
                                 />
@@ -1463,6 +1576,7 @@ function BucketsSection() {
                         <ImageSlot
                             testid="tm-image-buckets"
                             src={BUCKET_IMG}
+                            srcLight={BUCKET_IMG_LIGHT}
                             alt="Buckets workspace"
                             label="Buckets workspace"
                             chromeUrl="zukvo.app/work/buckets"
@@ -1510,6 +1624,7 @@ function BugListSection() {
                         <ImageSlot
                             testid="tm-image-buglist"
                             src={BUGLIST_IMG}
+                            srcLight={BUGLIST_IMG_LIGHT}
                             alt="QA workspace bug list"
                             label="Bug list — collections + sheets"
                             chromeUrl="zukvo.app/work/bugs"
@@ -1624,6 +1739,7 @@ function TrashArchived() {
                         <ImageSlot
                             testid="tm-image-trash"
                             src={TRASH_IMG}
+                            srcLight={TRASH_IMG_LIGHT}
                             alt="Trash list view"
                             label="Trash — restore in one click"
                             chromeUrl="zukvo.app/work/trash"
@@ -1642,6 +1758,7 @@ function TrashArchived() {
                         <ImageSlot
                             testid="tm-image-archived"
                             src={ARCHIVE_IMG}
+                            srcLight={ARCHIVE_IMG_LIGHT}
                             alt="Archived tickets view"
                             label="Archived tickets"
                             chromeUrl="zukvo.app/work/archived"
@@ -1716,6 +1833,7 @@ function ConfigSection() {
                         <ImageSlot
                             testid="tm-image-configurations"
                             src={CONFIG_IMG}
+                            srcLight={CONFIG_IMG_LIGHT}
                             alt="Ticket configurations"
                             label="Ticket configurations"
                             chromeUrl="zukvo.app/admin/tickets"
@@ -1728,6 +1846,7 @@ function ConfigSection() {
                             <ImageSlot
                                 testid="tm-image-detail"
                                 src={DETAIL_IMG}
+                                srcLight={DETAIL_IMG_LIGHT}
                                 alt="Ticket details panel view"
                                 label="Ticket details panel"
                                 chromeUrl="zukvo.app/work/tickets/002-0731"

@@ -51,13 +51,21 @@ import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import clientsImg from "@/assets/clients.png";
-import clientCreateImg from "@/assets/client-create.png";
-import clientViewImg from "@/assets/client-view.png";
-import clientTeamImg from "@/assets/client-team.png";
-import clientInvoiceImg from "@/assets/client-invoice.png";
-import clientMeetingImg from "@/assets/client-meeting.png";
-import clientDocumentImg from "@/assets/client-document.png";
+import clientsImg from "@/assets/clients-dark.png";
+import clientCreateImg from "@/assets/client-create-dark.png";
+import clientViewImg from "@/assets/client-view-dark.png";
+import clientTeamImg from "@/assets/client-team-dark.png";
+import clientInvoiceImg from "@/assets/clent-invoice-dark.png";
+import clientMeetingImg from "@/assets/client-meeting-dark.png";
+import clientDocumentImg from "@/assets/client-document-dark.png";
+
+import clientsImgLight from "@/assets/clients-light.png";
+import clientCreateImgLight from "@/assets/client-create-light.png";
+import clientViewImgLight from "@/assets/client-view-light.png";
+import clientTeamImgLight from "@/assets/client-team-light.png";
+import clientInvoiceImgLight from "@/assets/client-invoice-light.png";
+import clientMeetingImgLight from "@/assets/client-meeting-light.png";
+import clientDocumentImgLight from "@/assets/client-document-light.png";
 
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -289,6 +297,7 @@ function Dashboard() {
                         <ImageSlot
                             testid="clients-image-dashboard"
                             src={clientsImg}
+                            srcLight={clientsImgLight}
                             alt="Client Management Dashboard"
                             label="Client Management — Dashboard"
                             chromeUrl="zukvo.app/admin/clients"
@@ -731,6 +740,7 @@ function CreateClient() {
                     <ImageSlot
                         testid="clients-image-create"
                         src={clientCreateImg}
+                        srcLight={clientCreateImgLight}
                         alt="Create Client wizard"
                         label="Create New Client · Stepper"
                         chromeUrl="zukvo.app/admin/clients/new"
@@ -1056,6 +1066,7 @@ function ClientProfile() {
                     <ImageSlot
                         testid="clients-image-profile"
                         src={clientViewImg}
+                        srcLight={clientViewImgLight}
                         alt="Client Profile dashboard"
                         label="Client profile · Trademark"
                         chromeUrl="zukvo.app/admin/clients/CL-000003"
@@ -1727,6 +1738,7 @@ function ActivitySection() {
                     <ImageSlot
                         testid="clients-image-activity"
                         src={clientTeamImg}
+                        srcLight={clientTeamImgLight}
                         alt="Client Activity timeline and operations"
                         label="Client · Activity & operations"
                         chromeUrl="zukvo.app/admin/clients/CL-000003/activity"
@@ -1767,6 +1779,7 @@ function InvoiceSection() {
                         <ImageSlot
                             testid="clients-image-invoice"
                             src={clientInvoiceImg}
+                            srcLight={clientInvoiceImgLight}
                             alt="Client Invoices view"
                             label="Client Invoices"
                             chromeUrl="zukvo.app/admin/clients/invoices"
@@ -1808,6 +1821,7 @@ function MeetingSection() {
                         <ImageSlot
                             testid="clients-image-meeting"
                             src={clientMeetingImg}
+                            srcLight={clientMeetingImgLight}
                             alt="Client Meetings schedule"
                             label="Client Meetings"
                             chromeUrl="zukvo.app/admin/clients/meetings"
@@ -1849,6 +1863,7 @@ function DocumentsSection() {
                         <ImageSlot
                             testid="clients-image-documents"
                             src={clientDocumentImg}
+                            srcLight={clientDocumentImgLight}
                             alt="Client Documents folder"
                             label="Client Documents"
                             chromeUrl="zukvo.app/admin/clients/documents"

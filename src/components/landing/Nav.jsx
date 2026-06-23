@@ -341,7 +341,7 @@ export default function Nav() {
 
                     <div className="hidden lg:flex items-center gap-2">
                         <a
-                            href="#login"
+                            href={`${import.meta.env.VITE_APP_URL || "http://localhost:3005"}/login`}
                             data-testid="nav-signin-link"
                             className={`px-4 py-2 text-[13px] font-medium transition-colors ${
                                 onDarkBg

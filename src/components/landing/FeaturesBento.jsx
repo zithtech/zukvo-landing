@@ -18,21 +18,33 @@ import {
     Trash2,
     Archive,
     Repeat,
+    Moon,
+    Sun,
 } from "lucide-react";
 
-import proposalPageImg from "@/assets/proposalbuilder.png";
-import ticketSprintImg from "@/assets/ticket-sprint.png";
-import leadsManagementImg from "@/assets/leadsmanagement.png";
-import sprintSummaryImg from "@/assets/sprintcompletionsummary.png";
-import sprintPendingImg from "@/assets/sprintcompletionpending.png";
+import proposalPageImg from "@/assets/proposalbuilder-dark.png";
+import proposalPageImgLight from "@/assets/proposalbuilder-light.png";
+import ticketSprintImg from "@/assets/ticket-sprint-dark.png";
+import leadsManagementImg from "@/assets/leadspage-dark.png";
+import leadsManagementImgLight from "@/assets/leadspage-light.png";
+import sprintSummaryImg from "@/assets/sprintcompletionsummary-dark.png";
+import sprintSummaryImgLight from "@/assets/sprintcompletionsummary-light.png";
+import sprintPendingImg from "@/assets/sprintcompletionpending-dark.png";
+import sprintPendingImgLight from "@/assets/sprintcompletionpending-light.png";
 
 const ZAI_IMG = proposalPageImg;
+const ZAI_IMG_LIGHT = proposalPageImgLight;
 const SPRINT_IMG = ticketSprintImg;
 const LEADS_IMG = leadsManagementImg;
+const LEADS_IMG_LIGHT = leadsManagementImgLight;
 const SPRINT_SUMMARY_IMG = sprintSummaryImg;
+const SPRINT_SUMMARY_IMG_LIGHT = sprintSummaryImgLight;
 const SPRINT_PENDING_IMG = sprintPendingImg;
+const SPRINT_PENDING_IMG_LIGHT = sprintPendingImgLight;
 
 export default function FeaturesBento() {
+    const [theme, setTheme] = useState("light");
+    const activeZaiImg = theme === "light" ? ZAI_IMG_LIGHT : ZAI_IMG;
     return (
         <section
             id="features"
@@ -119,8 +131,28 @@ export default function FeaturesBento() {
 
                             {/* Main screenshot — lifted with multi-shadow depth */}
                             <div className="absolute left-1/2 top-10 w-[88%] -translate-x-1/2 rounded-xl overflow-hidden ring-1 ring-white/[0.12] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.65),0_8px_30px_-10px_rgba(99,102,241,0.35),inset_0_1px_0_0_rgba(255,255,255,0.06)]">
+                                <div className="absolute top-2 right-2 z-30 flex items-center p-0.5 rounded-full bg-black/40 border border-white/10 shadow-inner">
+                                    <div 
+                                        className="absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] rounded-full bg-gradient-to-r from-zukvo-500 to-violet-500 shadow-sm transition-transform duration-300 ease-out"
+                                        style={{ transform: theme === 'light' ? 'translateX(100%)' : 'translateX(0)' }}
+                                    />
+                                    <button
+                                        onClick={() => setTheme("dark")}
+                                        className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'dark' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                                        aria-label="Dark theme"
+                                    >
+                                        <Moon className="size-3.5" />
+                                    </button>
+                                    <button
+                                        onClick={() => setTheme("light")}
+                                        className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'light' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                                        aria-label="Light theme"
+                                    >
+                                        <Sun className="size-3.5" />
+                                    </button>
+                                </div>
                                 <img
-                                    src={ZAI_IMG}
+                                    src={activeZaiImg}
                                     alt="Zai proposal builder draft view"
                                     className="block w-full h-auto object-cover object-top"
                                 />
@@ -130,8 +162,8 @@ export default function FeaturesBento() {
                                 />
                             </div>
 
-                            {/* Floating: Zai generating — glassmorphic card (top-right) */}
-                            <div className="absolute top-5 right-4 flex items-center gap-2.5 rounded-2xl bg-white/95 backdrop-blur-xl pl-1.5 pr-3 py-1.5 shadow-[0_24px_50px_-12px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.6)_inset] ring-1 ring-black/[0.04]">
+                            {/* Floating: Zai generating — glassmorphic card (top-left) */}
+                            <div className="absolute top-5 left-4 flex items-center gap-2.5 rounded-2xl bg-white/95 backdrop-blur-xl pl-1.5 pr-3 py-1.5 shadow-[0_24px_50px_-12px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.6)_inset] ring-1 ring-black/[0.04]">
                                 <span className="inline-flex size-8 items-center justify-center rounded-xl bg-gradient-to-br from-zukvo-500 to-violet-600 shadow-[0_6px_16px_-4px_rgba(99,102,241,0.6),inset_0_1px_0_0_rgba(255,255,255,0.3)]">
                                     <Sparkles className="size-4 text-white" />
                                 </span>
@@ -354,6 +386,9 @@ function SprintAction({ icon: Icon, title, desc, grad, ring, shadow }) {
 }
 
 function ZithportVisual() {
+    const [theme, setTheme] = useState("light");
+    const activeLeadsImg = theme === "light" ? LEADS_IMG_LIGHT : LEADS_IMG;
+
     return (
         <div className="relative mt-7">
             <div className="rounded-xl border border-white/10 bg-[#101014] p-4">
@@ -407,8 +442,28 @@ function ZithportVisual() {
                 <div
                     className="absolute left-1/2 top-6 w-[86%] -translate-x-1/2 rounded-xl overflow-hidden ring-1 ring-white/[0.12] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.65),0_8px_30px_-10px_rgba(99,102,241,0.35),inset_0_1px_0_0_rgba(255,255,255,0.06)]"
                 >
+                    <div className="absolute top-2 right-2 z-30 flex items-center p-0.5 rounded-full bg-black/40 border border-white/10 shadow-inner">
+                        <div 
+                            className="absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] rounded-full bg-gradient-to-r from-zukvo-500 to-violet-500 shadow-sm transition-transform duration-300 ease-out"
+                            style={{ transform: theme === 'light' ? 'translateX(100%)' : 'translateX(0)' }}
+                        />
+                        <button
+                            onClick={() => setTheme("dark")}
+                            className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'dark' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                            aria-label="Dark theme"
+                        >
+                            <Moon className="size-3.5" />
+                        </button>
+                        <button
+                            onClick={() => setTheme("light")}
+                            className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'light' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                            aria-label="Light theme"
+                        >
+                            <Sun className="size-3.5" />
+                        </button>
+                    </div>
                     <img
-                        src={LEADS_IMG}
+                        src={activeLeadsImg}
                         alt="Zukvo leads management pipeline view"
                         className="block w-full h-auto object-cover object-top"
                     />
@@ -419,8 +474,8 @@ function ZithportVisual() {
                     />
                 </div>
 
-                {/* Floating: Source pill — dark glass (top-right) */}
-                <div className="absolute top-6 right-4 inline-flex items-center gap-1.5 rounded-full bg-zinc-900/80 backdrop-blur-xl pl-2 pr-3 py-1.5 text-white shadow-[0_20px_40px_-12px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.08]">
+                {/* Floating: Source pill — dark glass (top-left) */}
+                <div className="absolute top-6 left-4 inline-flex items-center gap-1.5 rounded-full bg-zinc-900/80 backdrop-blur-xl pl-2 pr-3 py-1.5 text-white shadow-[0_20px_40px_-12px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.08]">
                     <span className="inline-flex size-5 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/10">
                         <Chrome className="size-3" />
                     </span>
@@ -723,6 +778,7 @@ const SPRINT_VIEWS = [
     {
         key: "summary",
         src: SPRINT_SUMMARY_IMG,
+        srcLight: SPRINT_SUMMARY_IMG_LIGHT,
         eyebrow: "Sprint review",
         title: "Completion summary",
         sub: "Burn-down, velocity, and what shipped this cycle.",
@@ -730,6 +786,7 @@ const SPRINT_VIEWS = [
     {
         key: "pending",
         src: SPRINT_PENDING_IMG,
+        srcLight: SPRINT_PENDING_IMG_LIGHT,
         eyebrow: "Carry-over",
         title: "Pending items",
         sub: "Decide what rolls to the next sprint or back to the backlog.",
@@ -738,6 +795,7 @@ const SPRINT_VIEWS = [
 
 function SprintShowcase() {
     const [openKey, setOpenKey] = useState(null);
+    const [theme, setTheme] = useState("light");
     const open = openKey ? SPRINT_VIEWS.find((v) => v.key === openKey) : null;
 
     useEffect(() => {
@@ -766,8 +824,28 @@ function SprintShowcase() {
                         className="group relative overflow-hidden rounded-xl ring-1 ring-white/[0.08] bg-[#0E0E13] cursor-zoom-in transition-all duration-300 hover:-translate-y-1 hover:ring-zukvo-500/40 hover:shadow-[0_24px_50px_-12px_rgba(99,102,241,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-zukvo-500/70 text-left"
                     >
                         <div className="relative overflow-hidden">
+                            <div className="absolute top-2 right-12 z-20 flex items-center p-0.5 rounded-full bg-black/40 border border-white/10 shadow-inner opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                                <div 
+                                    className="absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] rounded-full bg-gradient-to-r from-zukvo-500 to-violet-500 shadow-sm transition-transform duration-300 ease-out"
+                                    style={{ transform: theme === 'light' ? 'translateX(100%)' : 'translateX(0)' }}
+                                />
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); setTheme("dark"); }}
+                                    className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'dark' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                                    aria-label="Dark theme"
+                                >
+                                    <Moon className="size-3.5" />
+                                </button>
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); setTheme("light"); }}
+                                    className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'light' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+                                    aria-label="Light theme"
+                                >
+                                    <Sun className="size-3.5" />
+                                </button>
+                            </div>
                             <img
-                                src={v.src}
+                                src={theme === "light" ? v.srcLight : v.src}
                                 alt={v.title}
                                 className="block w-full h-auto transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
                             />

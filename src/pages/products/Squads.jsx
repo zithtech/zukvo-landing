@@ -36,8 +36,11 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
-import squardImg from "@/assets/squard.png";
-import squardCreateImg from "@/assets/squard-create.png";
+import squardImg from "@/assets/squard-dark.png";
+import squardImgLight from "@/assets/squard-light.png";
+import squardCreateImg from "@/assets/squard-create-dark.png";
+import squardCreateImgLight from "@/assets/squard-create-light.png";
+import squardStructureImg from "@/assets/squard-structure.png";
 
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -255,17 +258,26 @@ function Dashboard() {
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7">
-                        <ImageSlot
-                            testid="squads-image-dashboard"
-                            src={squardImg}
-                            alt="Squad Management Dashboard"
-                            label="Squad Management · Dashboard"
-                            chromeUrl="zukvo.app/work/squads"
-                            aspect="auto"
-                            objectFit="contain"
-                            caption="Squad management dashboard view."
-                        />
+                    <div className="lg:col-span-7 w-full min-w-0">
+                        <div className="relative max-w-[800px] mx-auto">
+                            <ImageSlot
+                                testid="squads-image-dashboard"
+                                src={squardImg}
+                                srcLight={squardImgLight}
+                                alt="Squad Management Dashboard"
+                                label="Squad Management · Dashboard"
+                                chromeUrl="zukvo.app/work/squads"
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                caption="Squad management dashboard view."
+                            />
+
+                            {/* Floating Card: Squad Structure */}
+                            <div className="absolute z-20 -right-8 top-20 w-[240px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500" style={{ animationDelay: "150ms" }}>
+                                <img src={squardStructureImg} alt="Squad Structure" className="w-full h-auto block" />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -878,6 +890,7 @@ function CreateSquad() {
                         <ImageSlot
                             testid="squads-image-create"
                             src={squardCreateImg}
+                            srcLight={squardCreateImgLight}
                             alt="Create Squad drawer"
                             label="Create Squad · Drawer"
                             chromeUrl="zukvo.app/work/squads/new"
