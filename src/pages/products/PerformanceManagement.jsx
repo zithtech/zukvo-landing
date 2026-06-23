@@ -38,8 +38,12 @@ import Nav from "@/components/landing/Nav";
 import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
-import performanceImg from "@/assets/performance.png";
-import ticketPerformanceImg from "@/assets/ticket-performance.png";
+import performanceImg from "@/assets/performance-dark.png";
+import performanceImgLight from "@/assets/performance-light.png";
+import ticketPerformanceImg from "@/assets/ticket-performance-dark.png";
+import ticketPerformanceImgLight from "@/assets/ticket-performance-light.png";
+import perfScoreImg from "@/assets/performance-score.png";
+import perfTicketScoreImg from "@/assets/performancr-ticketscore.png";
 
 
 const SUBMODULES = [
@@ -240,17 +244,31 @@ function Overview() {
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7">
-                        <ImageSlot
-                            testid="perf-image-overview"
-                            src={performanceImg}
-                            alt="Performance Management Overview"
-                            label="Performance Management · Overview"
-                            chromeUrl="zukvo.app/hrms/performance"
-                            aspect="auto"
-                            objectFit="contain"
-                            caption="Performance management overview dashboard."
-                        />
+                    <div className="lg:col-span-7 w-full min-w-0">
+                        <div className="relative max-w-[800px] mx-auto">
+                            <ImageSlot
+                                testid="perf-image-overview"
+                                src={performanceImg}
+                                srcLight={performanceImgLight}
+                                alt="Performance Management Overview"
+                                label="Performance Management · Overview"
+                                chromeUrl="zukvo.app/hrms/performance"
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                caption="Performance management overview dashboard."
+                            />
+
+                            {/* Floating Card: Performance Score */}
+                            <div className="absolute z-20 -left-8 bottom-8 w-[220px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500">
+                                <img src={perfScoreImg} alt="Performance Score" className="w-full h-auto block" />
+                            </div>
+
+                            {/* Floating Card: Ticket Score */}
+                            <div className="absolute z-20 -right-8 top-20 w-[240px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500" style={{ animationDelay: "150ms" }}>
+                                <img src={perfTicketScoreImg} alt="Ticket Score" className="w-full h-auto block" />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -645,6 +663,7 @@ function TicketPerformance() {
                     <ImageSlot
                         testid="perf-image-tickets"
                         src={ticketPerformanceImg}
+                        srcLight={ticketPerformanceImgLight}
                         alt="Ticket Performance Details"
                         label="Ticket Performance Details"
                         chromeUrl="zukvo.app/hrms/performance/tickets"

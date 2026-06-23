@@ -1,5 +1,5 @@
 import "@/App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Landing from "@/pages/Landing";
 import Signup from "@/pages/Signup";
@@ -23,6 +23,46 @@ import Accounts from "@/pages/products/Accounts";
 import MailCalendar from "@/pages/products/MailCalendar";
 import EscalationManagement from "@/pages/products/EscalationManagement";
 import VerifyEmail from "@/pages/VerifyEmail";
+
+function LoginRedirect() {
+    const { search } = useLocation();
+    const [isLoop, setIsLoop] = useState(false);
+
+    useEffect(() => {
+        const appUrl = import.meta.env.VITE_APP_URL || "http://localhost:3005";
+        
+        // Prevent infinite loop if VITE_APP_URL is pointing back to this landing page
+        try {
+            const targetUrl = new URL(appUrl);
+            if (targetUrl.origin === window.location.origin) {
+                setIsLoop(true);
+                return;
+            }
+        } catch (e) {
+            // ignore invalid URL
+        }
+
+        window.location.replace(`${appUrl}/login${search}`);
+    }, [search]);
+
+    if (isLoop) {
+        return (
+            <div className="flex h-screen w-full items-center justify-center bg-zinc-50 p-6 text-center text-zinc-800">
+                <div className="max-w-md rounded-2xl border border-rose-200 bg-white p-8 shadow-xl">
+                    <h1 className="mb-4 text-xl font-bold text-rose-600">Configuration Error</h1>
+                    <p className="mb-4 text-sm text-zinc-600">
+                        The landing page is trying to redirect you to the main application's login page, but the <code className="bg-zinc-100 px-1 py-0.5 rounded text-zinc-800">VITE_APP_URL</code> environment variable is pointing back to this landing page.
+                    </p>
+                    <p className="text-sm text-zinc-600">
+                        Please update <code className="bg-zinc-100 px-1 py-0.5 rounded text-zinc-800">VITE_APP_URL</code> in your landing page deployment settings to point to your actual Zukvo App domain (e.g., <code className="bg-zinc-100 px-1 py-0.5 rounded text-zinc-800">https://app.zukvo.com</code>).
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    return null;
+}
 
 function ScrollToTop() {
     const { pathname, hash } = useLocation();
@@ -48,6 +88,7 @@ function App() {
                 <ScrollToTop />
                 <Routes>
                     <Route path="/" element={<Landing />} />
+                    <Route path="/login" element={<LoginRedirect />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact-sales" element={<ContactSales />} />

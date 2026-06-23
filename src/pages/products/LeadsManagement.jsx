@@ -47,12 +47,20 @@ import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import leadspageImg from "@/assets/leadspage.png";
-import newleadImg from "@/assets/newlead.png";
-import bidiqImg from "@/assets/bidiq.png";
-import leadDetailViewImg from "@/assets/lead-detail-view.png";
-import leadProposalImg from "@/assets/lead-proposal.png";
-import leadsTimelineImg from "@/assets/leads-timeline.png";
+import leadspageImg from "@/assets/leadspage-dark.png";
+import leadspageImgLight from "@/assets/leadspage-light.png";
+import newleadImg from "@/assets/newlead-dark.png";
+import newleadImgLight from "@/assets/newlead-light.png";
+import bidiqImg from "@/assets/bidiq-dark.png";
+import bidiqImgLight from "@/assets/bidiq-light.png";
+import leadDetailViewImg from "@/assets/lead-detail-view-dark.png";
+import leadDetailViewImgLight from "@/assets/lead-detail-view-light.png";
+import leadProposalImg from "@/assets/leads-proposal-dark.png";
+import leadProposalImgLight from "@/assets/leads-proposal-light.png";
+import leadsTimelineImg from "@/assets/lead-timeline-dark.png";
+import leadsTimelineImgLight from "@/assets/lead-timeline-light.png";
+import leadsFloatingImg from "@/assets/leads.png";
+import leadsPlatformImg from "@/assets/lead-platform.png";
 
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -253,18 +261,31 @@ function Dashboard() {
                             ))}
                         </ul>
                     </div>
-                    <div className="lg:col-span-7">
-                        <ImageSlot
-                            testid="leads-image-dashboard"
-                            src={leadspageImg}
-                            alt="Leads Management Dashboard"
-                            label="Leads Management — Dashboard"
-                            chromeUrl="zukvo.app/work/leads"
-                            aspect="auto"
-                            objectFit="contain"
-                            className="max-w-[800px] mx-auto"
-                            caption="Live screenshot — Leads Management dashboard and opportunity tracking."
-                        />
+                    <div className="lg:col-span-7 w-full min-w-0">
+                        <div className="relative max-w-[800px] mx-auto">
+                            <ImageSlot
+                                testid="leads-image-dashboard"
+                                src={leadspageImg}
+                                srcLight={leadspageImgLight}
+                                alt="Leads Management Dashboard"
+                                label="Leads Management — Dashboard"
+                                chromeUrl="zukvo.app/work/leads"
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                caption="Live screenshot — Leads Management dashboard and opportunity tracking."
+                            />
+
+                            {/* Floating Card: Platform */}
+                            <div className="absolute z-20 -left-8 bottom-8 w-[220px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500">
+                                <img src={leadsPlatformImg} alt="Lead Platform" className="w-full h-auto block" />
+                            </div>
+
+                            {/* Floating Card: Leads Summary */}
+                            <div className="absolute z-20 -right-8 top-20 w-[240px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500" style={{ animationDelay: "150ms" }}>
+                                <img src={leadsFloatingImg} alt="Leads Summary" className="w-full h-auto block" />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -531,6 +552,7 @@ function CreateLead() {
                         <ImageSlot
                             testid="leads-image-create"
                             src={newleadImg}
+                            srcLight={newleadImgLight}
                             alt="Create Lead drawer form"
                             label="New Lead Entry · Drawer"
                             chromeUrl="zukvo.app/work/leads/new"
@@ -948,7 +970,8 @@ function BidIQSection() {
                     <ImageSlot
                         testid="leads-image-bidiq"
                         src={bidiqImg}
-                        alt="BidIQ Intelligence verdict report"
+                        srcLight={bidiqImgLight}
+                        alt="BidIQ Analysis Modal"
                         label="BidIQ · Lead intelligence report"
                         chromeUrl="zukvo.app/work/leads/bidiq/lead-1"
                         aspect="auto"
@@ -1299,7 +1322,8 @@ function LeadDetail() {
                     <ImageSlot
                         testid="leads-image-detail"
                         src={leadDetailViewImg}
-                        alt="Lead detail view"
+                        srcLight={leadDetailViewImgLight}
+                        alt="Lead Detail Drawer"
                         label="Lead detail · One-page view"
                         chromeUrl="zukvo.app/work/leads/lead-1"
                         aspect="auto"
@@ -1448,7 +1472,8 @@ function ProposalLink() {
                             <ImageSlot
                                 testid="leads-image-proposal"
                                 src={leadProposalImg}
-                                alt="Lead proposal creation"
+                                srcLight={leadProposalImgLight}
+                                alt="Lead to Proposal flow"
                                 label="Lead · Generate proposal"
                                 chromeUrl="zukvo.app/work/leads/lead-1/proposal"
                                 aspect="auto"
@@ -1755,7 +1780,8 @@ function TimelineSection() {
                         <ImageSlot
                             testid="leads-image-timeline"
                             src={leadsTimelineImg}
-                            alt="Lead activity timeline"
+                            srcLight={leadsTimelineImgLight}
+                            alt="Lead Timeline view"
                             label="Lead · Activity timeline"
                             chromeUrl="zukvo.app/work/leads/lead-1/timeline"
                             aspect="auto"

@@ -41,22 +41,29 @@ import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import integrationImg from "@/assets/integration.png";
-import mailImg from "@/assets/Mail.png";
-import createMailImg from "@/assets/createmail.png";
-import calendarImg from "@/assets/calendar.png";
-import calendarDayImg from "@/assets/calendar-day.png";
-import calendarWeekImg from "@/assets/cal-week.png";
-import createEventImg from "@/assets/createevent.png";
+import integrationImg from "@/assets/integrations-dark.png";
+import integrationImgLight from "@/assets/integrations-light.png";
+import mailImg from "@/assets/mail-dark.png";
+import mailImgLight from "@/assets/mail-light.png";
+import createMailImg from "@/assets/createmail-dark.png";
+import createMailImgLight from "@/assets/createmail-light.png";
+import calendarImg from "@/assets/calendar-dark.png";
+import calendarImgLight from "@/assets/calendar-light.png";
+import calendarDayImg from "@/assets/calendar-day-dark.png";
+import calendarDayImgLight from "@/assets/calendar-day-light.png";
+import calendarWeekImg from "@/assets/calendar-week-dark.png";
+import calendarWeekImgLight from "@/assets/calendar-week-light.png";
+import createEventImg from "@/assets/createevent-dark.png";
+import createEventImgLight from "@/assets/createevent-light.png";
 
 const MAIL_CAL_SCREENSHOTS = [
-    { src: integrationImg, label: "Integrations", url: "zukvo.app/connect/integrations", caption: "Integrations view - Connect Zoho or Office 365" },
-    { src: mailImg, label: "Inbox", url: "zukvo.app/mail/inbox", caption: "Inbox view - Manage threads and convert to tickets" },
-    { src: createMailImg, label: "Compose Mail", url: "zukvo.app/mail/compose", caption: "Compose view - Rich text editor and attachments" },
-    { src: calendarImg, label: "Calendar (Month)", url: "zukvo.app/calendar/month", caption: "Month view - Track personal, team and project timelines" },
-    { src: calendarWeekImg, label: "Calendar (Week)", url: "zukvo.app/calendar/week", caption: "Week view - Detailed weekly view of events" },
-    { src: calendarDayImg, label: "Calendar (Day)", url: "zukvo.app/calendar/day", caption: "Day view - Hour-by-hour daily schedule" },
-    { src: createEventImg, label: "Create Event", url: "zukvo.app/calendar/new-event", caption: "Create Event view - Set title, date and layer attribution" },
+    { src: integrationImg, srcLight: integrationImgLight, label: "Integrations", url: "zukvo.app/connect/integrations", caption: "Integrations view - Connect Zoho or Office 365" },
+    { src: mailImg, srcLight: mailImgLight, label: "Inbox", url: "zukvo.app/mail/inbox", caption: "Inbox view - Manage threads and convert to tickets" },
+    { src: createMailImg, srcLight: createMailImgLight, label: "Compose Mail", url: "zukvo.app/mail/compose", caption: "Compose view - Rich text editor and attachments" },
+    { src: calendarImg, srcLight: calendarImgLight, label: "Calendar (Month)", url: "zukvo.app/calendar/month", caption: "Month view - Track personal, team and project timelines" },
+    { src: calendarWeekImg, srcLight: calendarWeekImgLight, label: "Calendar (Week)", url: "zukvo.app/calendar/week", caption: "Week view - Detailed weekly view of events" },
+    { src: calendarDayImg, srcLight: calendarDayImgLight, label: "Calendar (Day)", url: "zukvo.app/calendar/day", caption: "Day view - Hour-by-hour daily schedule" },
+    { src: createEventImg, srcLight: createEventImgLight, label: "Create Event", url: "zukvo.app/calendar/new-event", caption: "Create Event view - Set title, date and layer attribution" },
 ];
 
 const SUBMODULES = [
@@ -345,6 +352,7 @@ function Integrations() {
                     <ImageSlot
                         testid="mc-image-integrations"
                         src={MAIL_CAL_SCREENSHOTS[activeImageIdx].src}
+                        srcLight={MAIL_CAL_SCREENSHOTS[activeImageIdx].srcLight}
                         label={MAIL_CAL_SCREENSHOTS[activeImageIdx].label}
                         chromeUrl={MAIL_CAL_SCREENSHOTS[activeImageIdx].url}
                         aspect="21/9"

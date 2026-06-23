@@ -33,13 +33,19 @@ import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import dailyUpdatesImg from "@/assets/daily-updates.png";
-import viewUpdatesImg from "@/assets/view-updates.png";
-import submitUpdateImg from "@/assets/submit-update.png";
+import dailyUpdatesImg from "@/assets/daily-updates-dark.png";
+import dailyUpdatesImgLight from "@/assets/daily-updates-light.png";
+import viewUpdatesImg from "@/assets/view-updates-dark.png";
+import viewUpdatesImgLight from "@/assets/view-updates-light.png";
+import submitUpdateImg from "@/assets/submit-updates-dark.png";
+import submitUpdateImgLight from "@/assets/submit-updates-light.png";
 
 const DU_OVERVIEW_IMG = dailyUpdatesImg;
+const DU_OVERVIEW_IMG_LIGHT = dailyUpdatesImgLight;
 const DU_DETAIL_IMG = viewUpdatesImg;
+const DU_DETAIL_IMG_LIGHT = viewUpdatesImgLight;
 const DU_FORM_IMG = submitUpdateImg;
+const DU_FORM_IMG_LIGHT = submitUpdateImgLight;
 
 
 const SUBMODULES = [
@@ -248,6 +254,7 @@ function Overview() {
                         <ImageSlot
                             testid="du-image-overview"
                             src={DU_OVERVIEW_IMG}
+                            srcLight={DU_OVERVIEW_IMG_LIGHT}
                             alt="Daily Status Updates overview"
                             label="Daily Updates — team overview"
                             chromeUrl="zukvo.app/work/daily-updates"
@@ -524,6 +531,7 @@ function SubmitFlow() {
                     <ImageSlot
                         testid="du-image-form"
                         src={DU_FORM_IMG}
+                        srcLight={DU_FORM_IMG_LIGHT}
                         alt="Submit Daily Update form"
                         label="Submit daily update"
                         chromeUrl="zukvo.app/work/daily-updates/new"
@@ -779,6 +787,7 @@ function UpdateDetail() {
                         <ImageSlot
                             testid="du-image-detail"
                             src={DU_DETAIL_IMG}
+                            srcLight={DU_DETAIL_IMG_LIGHT}
                             alt="Daily update detail panel"
                             label="Update detail · side panel"
                             chromeUrl="zukvo.app/work/daily-updates/priyadharshini"

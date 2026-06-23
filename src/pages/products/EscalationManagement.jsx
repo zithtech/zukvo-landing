@@ -45,8 +45,12 @@ import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import ImageSlot from "@/components/ImageSlot";
 
-import escaltionImg from "@/assets/escaltion.png";
-import escaltionDrawerImg from "@/assets/escaltion-drawer.png";
+import escaltionImg from "@/assets/escaltion-dark.png";
+import escaltionImgLight from "@/assets/escaltion-light.png";
+import escaltionDrawerImg from "@/assets/escaltion-drawer-dark.png";
+import escaltionDrawerImgLight from "@/assets/escaltion-drawer-light.png";
+import escaltionCategoriesImg from "@/assets/escaltion-categories.png";
+import escaltionStatusImg from "@/assets/escaltion-status.png";
 
 const SUBMODULES = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -246,17 +250,30 @@ function Dashboard() {
                         </ul>
                     </div>
                     <div className="lg:col-span-7 w-full min-w-0">
-                        <ImageSlot
-                            testid="esc-image-dashboard"
-                            src={escaltionImg}
-                            alt="Escalations dashboard view"
-                            label="Escalations · Dashboard"
-                            chromeUrl="zukvo.app/work/escalations"
-                            aspect="auto"
-                            objectFit="contain"
-                            className="max-w-[800px] mx-auto"
-                            caption="Live screenshot — Escalations dashboard."
-                        />
+                        <div className="relative max-w-[800px] mx-auto">
+                            <ImageSlot
+                                testid="esc-image-dashboard"
+                                src={escaltionImg}
+                                srcLight={escaltionImgLight}
+                                alt="Escalations dashboard view"
+                                label="Escalations · Dashboard"
+                                chromeUrl="zukvo.app/work/escalations"
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                caption="Live screenshot — Escalations dashboard."
+                            />
+
+                            {/* Floating Card: Status */}
+                            <div className="absolute z-20 -left-8 bottom-12 w-[220px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500">
+                                <img src={escaltionStatusImg} alt="Escalation Status" className="w-full h-auto block" />
+                            </div>
+
+                            {/* Floating Card: Categories */}
+                            <div className="absolute z-20 -right-8 top-20 w-[240px] hidden xl:block zk-reveal rounded-xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5 hover:-translate-y-2 transition-transform duration-500" style={{ animationDelay: "150ms" }}>
+                                <img src={escaltionCategoriesImg} alt="Escalation Categories" className="w-full h-auto block" />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -337,20 +354,18 @@ function Dashboard() {
                             key={x.id}
                             type="button"
                             onClick={() => setTab(x.id)}
-                            className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 transition-colors ${
-                                tab === x.id
-                                    ? "bg-zukvo-500/15 text-zukvo-200 border-b-2 border-zukvo-400"
-                                    : "text-zinc-400 hover:text-white"
-                            }`}
+                            className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 transition-colors ${tab === x.id
+                                ? "bg-zukvo-500/15 text-zukvo-200 border-b-2 border-zukvo-400"
+                                : "text-zinc-400 hover:text-white"
+                                }`}
                         >
                             <x.i className="size-3.5" />
                             {x.t}
                             <span
-                                className={`text-[10px] rounded-full px-1.5 ${
-                                    tab === x.id
-                                        ? "bg-zukvo-500/30 text-zukvo-100"
-                                        : "bg-white/10 text-zinc-400"
-                                }`}
+                                className={`text-[10px] rounded-full px-1.5 ${tab === x.id
+                                    ? "bg-zukvo-500/30 text-zukvo-100"
+                                    : "bg-white/10 text-zinc-400"
+                                    }`}
                             >
                                 {x.c}
                             </span>
@@ -516,13 +531,12 @@ function Kpi({ icon: Icon, kicker, value, sub, tone, legend, pct, chip }) {
                 <div className="mt-3">
                     <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
                         <div
-                            className={`h-full ${
-                                tone === "rose"
-                                    ? "bg-rose-400"
-                                    : tone === "emerald"
-                                      ? "bg-emerald-400"
-                                      : "bg-zukvo-400"
-                            }`}
+                            className={`h-full ${tone === "rose"
+                                ? "bg-rose-400"
+                                : tone === "emerald"
+                                    ? "bg-emerald-400"
+                                    : "bg-zukvo-400"
+                                }`}
                             style={{ width: `${pct}%` }}
                         />
                     </div>
@@ -615,9 +629,9 @@ function RaiseEscalation() {
                                         value="Sebastian"
                                         options={["Bharathi", "Sebastian", "Admin User", "Abiraham Immanvel", "Priyadharshini"]}
                                     />
-                                    <FormField 
-                                        label="Category" 
-                                        value="Production Deployment" 
+                                    <FormField
+                                        label="Category"
+                                        value="Production Deployment"
                                         options={["Production Deployment", "Security Vulnerability", "Performance Degradation", "UI Regression", "Data Inconsistency"]}
                                     />
                                 </DrawerStep>
@@ -745,6 +759,7 @@ function RaiseEscalation() {
                         <ImageSlot
                             testid="esc-image-raise"
                             src={escaltionDrawerImg}
+                            srcLight={escaltionDrawerImgLight}
                             alt="Raise Manual Escalation drawer"
                             label="Raise Manual Escalation · Drawer"
                             chromeUrl="zukvo.app/work/escalations/new"
@@ -794,7 +809,7 @@ function FormField({ label, placeholder, value, options }) {
             </div>
             {options ? (
                 <>
-                    <div 
+                    <div
                         className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between cursor-pointer hover:bg-black/40 transition-colors"
                         onClick={() => setOpen(!open)}
                     >
@@ -808,8 +823,8 @@ function FormField({ label, placeholder, value, options }) {
                             <div className="fixed inset-0 z-10" onClick={() => setOpen(false)}></div>
                             <div className="absolute z-20 w-full mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl max-h-48 overflow-y-auto">
                                 {options.map(opt => (
-                                    <div 
-                                        key={opt} 
+                                    <div
+                                        key={opt}
                                         className="px-3 py-2.5 text-[12.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors"
                                         onClick={() => { setSelected(opt); setOpen(false); }}
                                     >
@@ -822,7 +837,7 @@ function FormField({ label, placeholder, value, options }) {
                 </>
             ) : (
                 <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between">
-                    <input 
+                    <input
                         type="text"
                         className="bg-transparent border-none outline-none w-full text-zinc-200 placeholder:text-zinc-500"
                         placeholder={placeholder}
@@ -850,7 +865,7 @@ function FormFieldInline({ label, icon: Icon, placeholder, value, options }) {
             </div>
             {options ? (
                 <>
-                    <div 
+                    <div
                         className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between cursor-pointer hover:bg-black/40 transition-colors"
                         onClick={() => setOpen(!open)}
                     >
@@ -864,8 +879,8 @@ function FormFieldInline({ label, icon: Icon, placeholder, value, options }) {
                             <div className="fixed inset-0 z-10" onClick={() => setOpen(false)}></div>
                             <div className="absolute z-20 w-full mt-1 rounded-md border border-white/10 bg-[#1E1E22] shadow-xl max-h-48 overflow-y-auto">
                                 {options.map(opt => (
-                                    <div 
-                                        key={opt} 
+                                    <div
+                                        key={opt}
                                         className="px-3 py-2.5 text-[12.5px] text-zinc-300 hover:bg-white/10 cursor-pointer transition-colors"
                                         onClick={() => { setSelected(opt); setOpen(false); }}
                                     >
@@ -878,7 +893,7 @@ function FormFieldInline({ label, icon: Icon, placeholder, value, options }) {
                 </>
             ) : (
                 <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-[12.5px] flex items-center justify-between">
-                    <input 
+                    <input
                         type="text"
                         className="bg-transparent border-none outline-none w-full text-zinc-200 placeholder:text-zinc-500"
                         placeholder={placeholder}
@@ -1031,20 +1046,18 @@ function MasterData() {
                                             key={x.id}
                                             type="button"
                                             onClick={() => setTab(x.id)}
-                                            className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 transition-colors ${
-                                                tab === x.id
-                                                    ? "bg-zukvo-500/15 text-zukvo-200"
-                                                    : "text-zinc-400"
-                                            }`}
+                                            className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 transition-colors ${tab === x.id
+                                                ? "bg-zukvo-500/15 text-zukvo-200"
+                                                : "text-zinc-400"
+                                                }`}
                                         >
                                             <x.i className="size-3" />
                                             {x.t}
                                             <span
-                                                className={`text-[10px] rounded-full px-1.5 ${
-                                                    tab === x.id
-                                                        ? "bg-zukvo-500/30 text-zukvo-100"
-                                                        : "bg-white/10 text-zinc-400"
-                                                }`}
+                                                className={`text-[10px] rounded-full px-1.5 ${tab === x.id
+                                                    ? "bg-zukvo-500/30 text-zukvo-100"
+                                                    : "bg-white/10 text-zinc-400"
+                                                    }`}
                                             >
                                                 {x.c}
                                             </span>
@@ -1064,19 +1077,18 @@ function MasterData() {
                                 >
                                     <div className="col-span-9 flex items-center gap-3">
                                         <span
-                                            className={`inline-flex size-2.5 rounded-full ${
-                                                tone === "zukvo"
-                                                    ? "bg-zukvo-400"
-                                                    : tone === "violet"
-                                                      ? "bg-violet-400"
-                                                      : tone === "rose"
+                                            className={`inline-flex size-2.5 rounded-full ${tone === "zukvo"
+                                                ? "bg-zukvo-400"
+                                                : tone === "violet"
+                                                    ? "bg-violet-400"
+                                                    : tone === "rose"
                                                         ? "bg-rose-400"
                                                         : tone === "amber"
-                                                          ? "bg-amber-400"
-                                                          : tone === "emerald"
-                                                            ? "bg-emerald-400"
-                                                            : "bg-zukvo-400"
-                                            }`}
+                                                            ? "bg-amber-400"
+                                                            : tone === "emerald"
+                                                                ? "bg-emerald-400"
+                                                                : "bg-zukvo-400"
+                                                }`}
                                         />
                                         <div>
                                             <div className="text-[13px] text-zinc-100">{t}</div>
@@ -1279,11 +1291,10 @@ function NewCategory() {
                                                     key={s.id}
                                                     type="button"
                                                     onClick={() => setColor(s.id)}
-                                                    className={`size-8 rounded-md ${s.c} relative ring-2 transition-all ${
-                                                        color === s.id
-                                                            ? "ring-white"
-                                                            : "ring-transparent hover:ring-white/30"
-                                                    }`}
+                                                    className={`size-8 rounded-md ${s.c} relative ring-2 transition-all ${color === s.id
+                                                        ? "ring-white"
+                                                        : "ring-transparent hover:ring-white/30"
+                                                        }`}
                                                 >
                                                     {color === s.id && (
                                                         <CheckCircle2 className="absolute inset-0 m-auto size-4 text-white" />
