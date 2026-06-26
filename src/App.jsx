@@ -32,9 +32,12 @@ function LoginRedirect() {
         const appUrl = import.meta.env.VITE_APP_URL || "http://localhost:3005";
         
         // Prevent infinite loop if VITE_APP_URL is pointing back to this landing page
+        // (Handles www vs non-www discrepancy to avoid blinking/redirect loops)
         try {
             const targetUrl = new URL(appUrl);
-            if (targetUrl.origin === window.location.origin) {
+            const targetHost = targetUrl.hostname.replace(/^www\./, '');
+            const currentHost = window.location.hostname.replace(/^www\./, '');
+            if (targetHost === currentHost) {
                 setIsLoop(true);
                 return;
             }
