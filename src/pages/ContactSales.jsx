@@ -94,7 +94,15 @@ export default function ContactSales() {
         setError("");
         try {
             const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
-            const response = await axios.post(`${apiUrl}/api/public/web-inquiry/zithmi`, form);
+            const response = await axios.post(
+                `${apiUrl}/api/public/web-inquiry/submit`,
+                form,
+                {
+                    headers: {
+                        'x-web-inquiry-key': import.meta.env.VITE_WEB_INQUIRY_KEY || '59664/secretkey/zithmi'
+                    }
+                }
+            );
             if (response.data && response.data.success) {
                 setSubmitted(true);
             } else {
@@ -216,7 +224,7 @@ export default function ContactSales() {
                                 </ul>
                             </div>
 
-                            {/* Testimonial / stat card */}
+                            {/* Direct Contact info */}
                             <div
                                 data-testid="cs-testimonial-card"
                                 className="zk-reveal relative overflow-hidden rounded-2xl border border-white/10 bg-[#0E0E10] p-6 md:p-7"
@@ -228,25 +236,34 @@ export default function ContactSales() {
                                 <div className="flex items-center gap-2">
                                     <ZMark size={22} variant="dark" />
                                     <span className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">
-                                        Customer · Pathematic
+                                        Point of Contact
                                     </span>
                                 </div>
-                                <p className="mt-4 text-[15px] md:text-[16px] text-zinc-200 leading-relaxed">
-                                    “Zukvo replaced five separate tools and gave our agency a
-                                    single source of truth for client work. ROI in six weeks.”
-                                </p>
-                                <div className="mt-5 flex items-center gap-3">
-                                    <span className="inline-flex size-9 items-center justify-center rounded-full bg-violet-500/25 text-violet-200 text-[11px] font-bold border border-violet-400/30">
-                                        KR
-                                    </span>
-                                    <div className="text-[12.5px]">
-                                        <div className="text-white font-medium">
-                                            Krishnan
+                                <div className="mt-6 space-y-4">
+                                    <div className="flex items-start gap-3">
+                                        <span className="inline-flex size-9 items-center justify-center rounded-full bg-violet-500/25 text-violet-200 text-[11px] font-bold border border-violet-400/30 shrink-0">
+                                            DD
+                                        </span>
+                                        <div className="flex flex-col">
+                                            <div className="text-[14px] text-zinc-200 font-medium">Divya Dhamodharan</div>
+                                            <a href="tel:+918072255742" className="text-[13px] text-zinc-400 hover:text-violet-300 mt-1 transition-colors">
+                                                +91 80722 55742
+                                            </a>
                                         </div>
-                                        <div className="text-zinc-500">Founder · Pathematic</div>
+                                    </div>
+                                    <div className="h-px bg-white/5 w-full my-2"></div>
+                                    <div className="flex items-start gap-3">
+                                        <span className="inline-flex size-9 items-center justify-center rounded-full bg-emerald-500/25 text-emerald-200 text-[11px] font-bold border border-emerald-400/30 shrink-0">
+                                            MR
+                                        </span>
+                                        <div className="flex flex-col">
+                                            <div className="text-[14px] text-zinc-200 font-medium">Mithun Ravichandran</div>
+                                            <a href="tel:+919524715360" className="text-[13px] text-zinc-400 hover:text-violet-300 mt-1 transition-colors">
+                                                +91 95247 15360
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             {/* Trust strip */}

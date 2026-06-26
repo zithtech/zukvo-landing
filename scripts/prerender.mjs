@@ -128,8 +128,21 @@ async function main() {
       });
 
       await page.goto(url, { waitUntil: "networkidle0", timeout: 60_000 });
-      // give Helmet a tick to flush
-      await new Promise((r) => setTimeout(r, 150));
+
+      // Wait for the footer to be present in the DOM — this ensures React has
+      // fully rendered the entire page tree (including all sections) before we
+      // capture the HTML. Heavy product pages can take several seconds to paint
+      // all sections on Vercel's @sparticuz/chromium.
+      try {
+        await page.waitForSelector("footer, [data-testid='site-footer']", { timeout: 10_000 });
+      } catch (_) {
+        // footer selector not found — fall through and capture what we have
+        console.warn(`[prerender] footer not found on ${path}, capturing partial render`);
+      }
+
+      // Extra buffer for react-helmet-async to flush <head> changes and for any
+      // remaining micro-tasks / IntersectionObserver reveals to settle.
+      await new Promise((r) => setTimeout(r, 2_000));
 
       const html = await page.content();
 

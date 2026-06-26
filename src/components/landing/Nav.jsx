@@ -141,7 +141,7 @@ export default function Nav() {
 
         // Attach scroll listener
         window.addEventListener("scroll", handleScroll, { passive: true });
-        
+
         // Run immediately on path/scroll change
         handleScroll();
 
@@ -175,11 +175,10 @@ export default function Nav() {
         >
             <div className="mx-auto max-w-7xl px-5 md:px-8">
                 <div
-                    className={`flex items-center justify-between rounded-full border transition-all duration-300 ${
-                        scrolled
-                            ? "border-zinc-200/80 bg-white/85 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(15,15,15,0.08)] px-3 pl-5 py-2"
-                            : "border-transparent bg-transparent px-3 pl-5 py-2"
-                    }`}
+                    className={`flex items-center justify-between rounded-full border transition-all duration-300 ${scrolled
+                        ? "border-zinc-200/80 bg-white/85 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(15,15,15,0.08)] px-3 pl-5 py-2"
+                        : "border-transparent bg-transparent px-3 pl-5 py-2"
+                        }`}
                 >
                     <Link to="/" className="flex items-center gap-2 md:gap-2.5 min-w-0 shrink" data-testid="nav-logo-link">
                         <span className={`inline-flex ${playIntro ? "zk-logo-runner" : ""}`}>
@@ -226,13 +225,12 @@ export default function Nav() {
                             <button
                                 data-testid="nav-products-trigger"
                                 onClick={() => setProductsOpen((s) => !s)}
-                                className={`relative inline-flex items-center gap-1 px-3 py-2 text-[13px] font-medium transition-colors ${
-                                    productsActive
-                                        ? "text-zukvo-600"
-                                        : onDarkBg
+                                className={`relative inline-flex items-center gap-1 px-3 py-2 text-[13px] font-medium transition-colors ${productsActive
+                                    ? "text-zukvo-600"
+                                    : onDarkBg
                                         ? "text-zinc-300 hover:text-white"
                                         : "text-zinc-700 hover:text-zukvo-600"
-                                }`}
+                                    }`}
                             >
                                 Products
                                 <ChevronDown
@@ -298,13 +296,12 @@ export default function Nav() {
 
                         {LINKS.map((l) => {
                             const active = isLinkActive(l.href);
-                            const cls = `relative px-3 py-2 text-[13px] font-medium transition-colors ${
-                                active
-                                    ? "text-zukvo-600"
-                                    : onDarkBg
+                            const cls = `relative px-3 py-2 text-[13px] font-medium transition-colors ${active
+                                ? "text-zukvo-600"
+                                : onDarkBg
                                     ? "text-zinc-300 hover:text-white"
                                     : "text-zinc-700 hover:text-zukvo-600"
-                            }`;
+                                }`;
                             return isPageRoute(l.href) ? (
                                 <Link
                                     key={l.label}
@@ -341,24 +338,22 @@ export default function Nav() {
 
                     <div className="hidden lg:flex items-center gap-2">
                         <a
-                            href={`${import.meta.env.VITE_APP_URL || "http://localhost:3005"}/login`}
+                            href={`${import.meta.env.VITE_APP_URL || "https://app.zukvo.com"}/login`}
                             data-testid="nav-signin-link"
-                            className={`px-4 py-2 text-[13px] font-medium transition-colors ${
-                                onDarkBg
-                                    ? "text-zinc-300 hover:text-white"
-                                    : "text-zinc-700 hover:text-zukvo-ink"
-                            }`}
+                            className={`px-4 py-2 text-[13px] font-medium transition-colors ${onDarkBg
+                                ? "text-zinc-300 hover:text-white"
+                                : "text-zinc-700 hover:text-zukvo-ink"
+                                }`}
                         >
                             Sign in
                         </a>
                         <a
                             href="/signup"
                             data-testid="nav-cta-button"
-                            className={`group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-medium transition-colors ${
-                                onDarkBg
-                                    ? "bg-white/10 text-white hover:bg-white/20 border border-white/15"
-                                    : "bg-zukvo-ink text-white hover:bg-zukvo-600"
-                            }`}
+                            className={`group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-medium transition-colors ${onDarkBg
+                                ? "bg-white/10 text-white hover:bg-white/20 border border-white/15"
+                                : "bg-zukvo-ink text-white hover:bg-zukvo-600"
+                                }`}
                         >
                             Get Zukvo
                             <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -367,11 +362,10 @@ export default function Nav() {
                             to="/contact-sales"
                             data-testid="nav-contact-sales"
                             aria-current={contactSalesActive ? "page" : undefined}
-                            className={`group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-medium transition-colors ${
-                                contactSalesActive
-                                    ? "bg-zukvo-500 text-white border border-zukvo-500 hover:bg-zukvo-600"
-                                    : "border border-zinc-300 bg-white/70 backdrop-blur text-zukvo-ink hover:border-zukvo-500/40 hover:bg-white"
-                            }`}
+                            className={`group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-medium transition-colors ${contactSalesActive
+                                ? "bg-zukvo-500 text-white border border-zukvo-500 hover:bg-zukvo-600"
+                                : "border border-zinc-300 bg-white/70 backdrop-blur text-zukvo-ink hover:border-zukvo-500/40 hover:bg-white"
+                                }`}
                         >
                             Contact Sales
                             <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -381,11 +375,10 @@ export default function Nav() {
                     <button
                         data-testid="nav-mobile-toggle"
                         onClick={() => setOpen((s) => !s)}
-                        className={`lg:hidden shrink-0 inline-flex items-center justify-center size-9 rounded-full border transition-colors ${
-                            onDarkBg
-                                ? "border-white/20 bg-white/5 text-white hover:bg-white/10"
-                                : "border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
-                        }`}
+                        className={`lg:hidden shrink-0 inline-flex items-center justify-center size-9 rounded-full border transition-colors ${onDarkBg
+                            ? "border-white/20 bg-white/5 text-white hover:bg-white/10"
+                            : "border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
+                            }`}
                         aria-label="Toggle menu"
                     >
                         {open ? <X className="size-4" /> : <Menu className="size-4" />}
@@ -400,11 +393,10 @@ export default function Nav() {
                         <Link
                             to="/products"
                             onClick={() => setOpen(false)}
-                            className={`block px-3 py-2 text-sm font-medium rounded-md ${
-                                productsActive
-                                    ? "text-zukvo-600 bg-zukvo-500/10"
-                                    : "text-zukvo-ink"
-                            }`}
+                            className={`block px-3 py-2 text-sm font-medium rounded-md ${productsActive
+                                ? "text-zukvo-600 bg-zukvo-500/10"
+                                : "text-zukvo-ink"
+                                }`}
                         >
                             Products
                         </Link>
@@ -427,11 +419,10 @@ export default function Nav() {
                         </div>
                         {LINKS.map((l) => {
                             const active = isLinkActive(l.href);
-                            const cls = `block px-3 py-2 text-sm rounded-md ${
-                                active
-                                    ? "text-zukvo-600 bg-zukvo-500/10 font-medium"
-                                    : "text-zinc-700 hover:text-zukvo-600"
-                            }`;
+                            const cls = `block px-3 py-2 text-sm rounded-md ${active
+                                ? "text-zukvo-600 bg-zukvo-500/10 font-medium"
+                                : "text-zinc-700 hover:text-zukvo-600"
+                                }`;
                             return isPageRoute(l.href) ? (
                                 <Link
                                     key={l.label}
@@ -461,11 +452,10 @@ export default function Nav() {
                         <Link
                             to="/contact-sales"
                             onClick={() => setOpen(false)}
-                            className={`mt-2 block text-center rounded-full px-4 py-2 text-sm font-medium ${
-                                contactSalesActive
-                                    ? "bg-zukvo-500 text-white border border-zukvo-500"
-                                    : "border border-zinc-300 bg-white text-zukvo-ink"
-                            }`}
+                            className={`mt-2 block text-center rounded-full px-4 py-2 text-sm font-medium ${contactSalesActive
+                                ? "bg-zukvo-500 text-white border border-zukvo-500"
+                                : "border border-zinc-300 bg-white text-zukvo-ink"
+                                }`}
                         >
                             Contact Sales
                         </Link>
