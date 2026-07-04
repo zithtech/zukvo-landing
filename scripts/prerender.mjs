@@ -140,9 +140,22 @@ async function main() {
         console.warn(`[prerender] footer not found on ${path}, capturing partial render`);
       }
 
-      // Extra buffer for react-helmet-async to flush <head> changes and for any
-      // remaining micro-tasks / IntersectionObserver reveals to settle.
-      await new Promise((r) => setTimeout(r, 2_000));
+      // Short buffer for react-helmet-async to flush <head> changes.
+      // We intentionally keep this short to avoid IntersectionObserver reveals
+      // from firing on off-screen content during prerender — those is-visible
+      // classes would bake into the static HTML and cause content from one page
+      // to bleed through into another page on production.
+      await new Promise((r) => setTimeout(r, 500));
+
+      // Strip `is-visible` from all `.zk-reveal` elements before capturing HTML.
+      // IntersectionObserver may have marked off-screen elements as visible during
+      // the render window; baking those classes into the prerendered HTML causes
+      // "ghost" content from adjacent pages to appear below the footer in production.
+      await page.evaluate(() => {
+        document.querySelectorAll('.zk-reveal.is-visible').forEach((el) => {
+          el.classList.remove('is-visible');
+        });
+      });
 
       const html = await page.content();
 

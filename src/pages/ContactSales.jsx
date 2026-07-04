@@ -224,9 +224,9 @@ export default function ContactSales() {
                                 </ul>
                             </div>
 
-                            {/* Testimonial / stat card */}
+                            {/* Contact persons card */}
                             <div
-                                data-testid="cs-testimonial-card"
+                                data-testid="cs-contact-card"
                                 className="zk-reveal relative overflow-hidden rounded-2xl border border-white/10 bg-[#0E0E10] p-6 md:p-7"
                                 style={{
                                     backgroundImage:
@@ -236,25 +236,43 @@ export default function ContactSales() {
                                 <div className="flex items-center gap-2">
                                     <ZMark size={22} variant="dark" />
                                     <span className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">
-                                        Customer · Pathematic
+                                        Talk to us directly
                                     </span>
                                 </div>
-                                <p className="mt-4 text-[15px] md:text-[16px] text-zinc-200 leading-relaxed">
-                                    “Zukvo replaced five separate tools and gave our agency a
-                                    single source of truth for client work. ROI in six weeks.”
+                                <p className="mt-4 text-[13px] text-zinc-400 leading-relaxed">
+                                    Reach out to our team — we're happy to walk you through everything.
                                 </p>
-                                <div className="mt-5 flex items-center gap-3">
-                                    <span className="inline-flex size-9 items-center justify-center rounded-full bg-violet-500/25 text-violet-200 text-[11px] font-bold border border-violet-400/30">
-                                        KR
-                                    </span>
-                                    <div className="text-[12.5px]">
-                                        <div className="text-white font-medium">
-                                            Krishnan
+                                <div className="mt-5 flex flex-col gap-3">
+                                    <div className="flex items-center gap-3">
+                                        <span className="inline-flex size-9 items-center justify-center rounded-full bg-violet-500/25 text-violet-200 text-[11px] font-bold border border-violet-400/30">
+                                            DD
+                                        </span>
+                                        <div className="text-[12.5px]">
+                                            <div className="text-white font-medium">Divya Dhamodharan</div>
+                                            <a
+                                                href="tel:+918072255742"
+                                                className="text-zinc-400 hover:text-zukvo-300 transition-colors"
+                                            >
+                                                +91 80722 55742
+                                            </a>
                                         </div>
-                                        <div className="text-zinc-500">Founder · Pathematic</div>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <span className="inline-flex size-9 items-center justify-center rounded-full bg-indigo-500/25 text-indigo-200 text-[11px] font-bold border border-indigo-400/30">
+                                            MR
+                                        </span>
+                                        <div className="text-[12.5px]">
+                                            <div className="text-white font-medium">Mithun Ravichandran
+                                            </div>
+                                            <a
+                                                href="tel:+919524715360"
+                                                className="text-zinc-400 hover:text-zukvo-300 transition-colors"
+                                            >
+                                                +91 9524715360
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             {/* Trust strip */}
