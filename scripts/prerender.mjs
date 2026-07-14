@@ -159,11 +159,26 @@ async function main() {
 
       const html = await page.content();
 
+      // Inject a blocking inline script that clears #root BEFORE React's module
+      // script executes. This is the definitive fix for the "page bleeds under
+      // footer in production" bug:
+      //   - SEO crawlers (no JS) still read the full prerendered body.
+      //   - Real users: the script fires synchronously during HTML parse, wipes
+      //     the stale prerendered DOM, and React mounts onto a clean #root.
+      // Without this, createRoot() encounters pre-existing DOM children and
+      // React 18/19 can leave orphaned nodes from adjacent pages visible after
+      // the footer until the next repaint.
+      const CLEAR_ROOT_SCRIPT = `<script>!function(){var r=document.getElementById('root');if(r)r.innerHTML='';}();<\/script>`;
+      const fixedHtml = html.replace(
+        /(<script\s[^>]*type=["']module["'][^>]*>)/i,
+        CLEAR_ROOT_SCRIPT + '$1'
+      );
+
       // Decide output path: "/" -> index.html; "/foo/bar" -> foo/bar.html
       const outRel = path === "/" ? "index.html" : path.replace(/^\//, "") + ".html";
       const outPath = join(BUILD_DIR, outRel);
       mkdirSync(dirname(outPath), { recursive: true });
-      writeFileSync(outPath, html);
+      writeFileSync(outPath, fixedHtml);
       console.log(`[prerender] ${path}  ->  ${outRel}`);
       ok++;
     } catch (err) {
