@@ -603,11 +603,12 @@ function SignupCard({ ctx }) {
                             const { tenantSubdomain, email: verifiedEmail, accessToken } = res.data;
                             const appUrl = new URL(import.meta.env.VITE_APP_URL || "http://localhost:3005");
                             // If backend returned an accessToken, use it to auto-login (skip login page)
+                            const host = appUrl.host.startsWith("app.") ? appUrl.host.replace(/^app\./, `${tenantSubdomain}.`) : `${tenantSubdomain}.${appUrl.host}`;
                             if (accessToken) {
-                                window.location.href = `${appUrl.protocol}//${tenantSubdomain}.${appUrl.host}/login?token=${accessToken}`;
+                                window.location.href = `${appUrl.protocol}//${host}/login?token=${accessToken}`;
                             } else {
                                 // Fallback: go to login page (user will need to sign in)
-                                window.location.href = `${appUrl.protocol}//${tenantSubdomain}.${appUrl.host}/login?email=${encodeURIComponent(verifiedEmail)}&sso=google`;
+                                window.location.href = `${appUrl.protocol}//${host}/login?email=${encodeURIComponent(verifiedEmail)}&sso=google`;
                             }
                         } catch (err) {
                             const msg = err?.response?.data?.error || "Google sign up failed. Please try again.";
@@ -677,11 +678,12 @@ function SignupCard({ ctx }) {
                     const { tenantSubdomain, email: verifiedEmail, accessToken } = res.data;
                     const appUrl = new URL(import.meta.env.VITE_APP_URL || "http://localhost:3005");
                     // If backend returned an accessToken, use it to auto-login (skip login page)
+                    const host = appUrl.host.startsWith("app.") ? appUrl.host.replace(/^app\./, `${tenantSubdomain}.`) : `${tenantSubdomain}.${appUrl.host}`;
                     if (accessToken) {
-                        window.location.href = `${appUrl.protocol}//${tenantSubdomain}.${appUrl.host}/login?token=${accessToken}`;
+                        window.location.href = `${appUrl.protocol}//${host}/login?token=${accessToken}`;
                     } else {
                         // Fallback: go to login page (user will need to sign in)
-                        window.location.href = `${appUrl.protocol}//${tenantSubdomain}.${appUrl.host}/login?email=${encodeURIComponent(verifiedEmail)}&sso=microsoft`;
+                        window.location.href = `${appUrl.protocol}//${host}/login?email=${encodeURIComponent(verifiedEmail)}&sso=microsoft`;
                     }
                 } catch (err) {
                     const msg = err?.response?.data?.error || "Microsoft sign up failed. Please try again.";
