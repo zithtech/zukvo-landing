@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from "react";
-import { Check, Sparkles, Plus, Wand2 } from "lucide-react";
+import React, { useMemo, useState, useEffect } from "react";
+import { Check, Sparkles, Plus, Wand2, Loader2 } from "lucide-react";
+import axios from "axios";
 
 const TIERS = [
     {
@@ -204,6 +205,50 @@ export default function Pricing() {
         set1: true,
         set3: true,
     }));
+    const [dynamicPlans, setDynamicPlans] = useState([]);
+    const [loadingPlans, setLoadingPlans] = useState(true);
+
+    useEffect(() => {
+        const fetchPlans = async () => {
+            try {
+                const adminUrl = import.meta.env.VITE_ADMIN_URL || 'http://localhost:5000/api/plans';
+                const res = await axios.get(adminUrl);
+                const data = Array.isArray(res.data) ? res.data : (res.data?.data || []);
+                const filteredData = data.filter(plan => plan.plan_type !== 'FREE');
+                
+                const mapped = filteredData.map((plan, index) => {
+                    const features = (plan.includes || []).map(inc => {
+                        if (typeof inc === 'string') return { text: inc };
+                        return { 
+                            text: inc.title || '', 
+                            children: inc.subPoints && inc.subPoints.length > 0 ? inc.subPoints : undefined 
+                        };
+                    });
+
+                    return {
+                        id: plan.id.toString(),
+                        name: plan.name,
+                        kicker: plan.description || 'For your team',
+                        priceUSD: Number(plan.monthly_amount) || 0,
+                        priceINR: Math.round((Number(plan.monthly_amount) || 0) * 83), // Assuming USD base, approximate INR
+                        cta: (plan.plan_type === 'TRIAL' || plan.trial_days > 0) ? "Start trial" : "Get started",
+                        featured: index === 1, // Highlight the second plan
+                        includesLabel: "Includes",
+                        custom: plan.plan_type === 'CUSTOM',
+                        features
+                    };
+                });
+                
+                setDynamicPlans(mapped.length > 0 ? mapped : TIERS);
+            } catch (err) {
+                console.error("Failed to fetch plans", err);
+                setDynamicPlans(TIERS); // Fallback to static if backend fails
+            } finally {
+                setLoadingPlans(false);
+            }
+        };
+        fetchPlans();
+    }, []);
 
     const toggleSet = (id) => {
         if (id === "set6") return; // Connect is always included
@@ -284,7 +329,12 @@ export default function Pricing() {
                 </div>
 
                 <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-                    {TIERS.map((t) => {
+                    {loadingPlans ? (
+                        <div className="col-span-full flex flex-col items-center justify-center py-20">
+                            <Loader2 className="size-8 text-zukvo-500 animate-spin mb-4" />
+                            <div className="text-zinc-400 font-medium">Loading active plans...</div>
+                        </div>
+                    ) : dynamicPlans.map((t) => {
                         const isINR = currency === "INR";
                         const price = isINR ? t.priceINR : t.priceUSD;
                         const symbol = isINR ? "₹" : "$";

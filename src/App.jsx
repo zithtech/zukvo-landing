@@ -23,6 +23,7 @@ import Accounts from "@/pages/products/Accounts";
 import MailCalendar from "@/pages/products/MailCalendar";
 import EscalationManagement from "@/pages/products/EscalationManagement";
 import VerifyEmail from "@/pages/VerifyEmail";
+import PendingApproval from "@/pages/PendingApproval";
 
 function LoginRedirect() {
     const { search } = useLocation();
@@ -119,6 +120,8 @@ function App() {
                     <Route path="/products/mail-calendar" element={<MailCalendar />} />
                     <Route path="/products/escalation-management" element={<EscalationManagement />} />
                     <Route path="/verify-email" element={<VerifyEmail />} />
+                    <Route path="/pending-approval" element={<PendingApproval />} />
+                    <Route path="*" element={<Landing />} />
                 </Routes>
             </BrowserRouter>
         </div>

@@ -192,7 +192,7 @@ function useSignupContext() {
             tier: p.get("tier"),
             sets: (p.get("sets") || "").split(",").filter(Boolean),
             ai: (p.get("ai") || "").split(",").filter(Boolean),
-            billing: p.get("billing") === "monthly" ? "monthly" : "yearly",
+            billing: p.get("billing") === "yearly" ? "yearly" : "monthly",
             currency: p.get("currency") === "INR" ? "INR" : "USD",
         };
     }, [search]);
@@ -228,6 +228,14 @@ export default function Signup() {
             script.async = true;
             script.defer = true;
             document.head.appendChild(script);
+        }
+        // Load Razorpay checkout script for paid plan signups
+        if (!document.getElementById("razorpay-checkout-js")) {
+            const rzpScript = document.createElement("script");
+            rzpScript.src = "https://checkout.razorpay.com/v1/checkout.js";
+            rzpScript.id = "razorpay-checkout-js";
+            rzpScript.async = true;
+            document.head.appendChild(rzpScript);
         }
     }, []);
 
@@ -289,8 +297,60 @@ function MinimalNav() {
 /* ---------------- PLAN SUMMARY ---------------- */
 
 function PlanSummary({ ctx }) {
-    if (ctx.tier && TIERS[ctx.tier]) {
-        return <TierSummary tier={TIERS[ctx.tier]} currency={ctx.currency} />;
+    const [dynamicTiers, setDynamicTiers] = useState(null);
+
+    useEffect(() => {
+        const fetchPlans = async () => {
+            try {
+                const adminUrl = import.meta.env.VITE_ADMIN_URL || 'http://localhost:5000/api/plans';
+                const res = await axios.get(adminUrl);
+                const data = Array.isArray(res.data) ? res.data : (res.data?.data || []);
+
+                const mapped = data.reduce((acc, plan, index) => {
+                    const features = (plan.includes || []).map(inc => {
+                        if (typeof inc === 'string') return inc;
+                        // TierSummary in Signup just renders a flat list of strings
+                        return inc.title;
+                    });
+
+                    const id = plan.id.toString();
+                    acc[id] = {
+                        id,
+                        name: plan.name,
+                        kicker: plan.description || 'For your team',
+                        priceUSD: Number(plan.monthly_amount) || 0,
+                        priceINR: Math.round((Number(plan.monthly_amount) || 0) * 83),
+                        featured: index === 1,
+                        custom: plan.plan_type === 'CUSTOM',
+                        trial: (plan.plan_type === 'TRIAL' || plan.trial_days > 0) ? "Start free " : "Get started today",
+                        features
+                    };
+                    return acc;
+                }, {});
+
+                setDynamicTiers(Object.keys(mapped).length > 0 ? mapped : TIERS);
+            } catch (err) {
+                console.error("Failed to fetch plans for signup", err);
+                setDynamicTiers(TIERS);
+            }
+        };
+        fetchPlans();
+    }, []);
+
+    if (!dynamicTiers) {
+        return (
+            <div className="flex flex-col items-center justify-center p-10 text-zinc-400">
+                <div className="animate-pulse flex flex-col items-center">
+                    <div className="h-4 w-32 bg-zinc-200 rounded mb-4"></div>
+                    <div className="h-10 w-48 bg-zinc-200 rounded mb-4"></div>
+                    <div className="h-4 w-24 bg-zinc-200 rounded"></div>
+                </div>
+            </div>
+        );
+    }
+
+    if (ctx.tier && dynamicTiers[ctx.tier]) {
+        return <TierSummary tier={dynamicTiers[ctx.tier]} currency={ctx.currency} />;
     }
     if (ctx.sets && ctx.sets.length > 0) {
         return <ModulesSummary selected={ctx.sets} ai={ctx.ai} billing={ctx.billing} />;
@@ -440,12 +500,12 @@ function ModulesSummary({ selected, ai, billing }) {
                     const price = s.free
                         ? "Free"
                         : s.hasAi
-                          ? billing === "yearly"
-                              ? `$${isAi ? s.pricing.withAi.yearly : s.pricing.withoutAi.yearly}`
-                              : `$${isAi ? s.pricing.withAi.monthly : s.pricing.withoutAi.monthly}`
-                          : billing === "yearly"
-                            ? `$${s.priceYearly}`
-                            : `$${s.priceMonthly}`;
+                            ? billing === "yearly"
+                                ? `$${isAi ? s.pricing.withAi.yearly : s.pricing.withoutAi.yearly}`
+                                : `$${isAi ? s.pricing.withAi.monthly : s.pricing.withoutAi.monthly}`
+                            : billing === "yearly"
+                                ? `$${s.priceYearly}`
+                                : `$${s.priceMonthly}`;
                     return (
                         <div
                             key={s.id}
@@ -468,11 +528,10 @@ function ModulesSummary({ selected, ai, billing }) {
                             <div className="flex items-center gap-2 shrink-0">
                                 {s.hasAi && (
                                     <span
-                                        className={`inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] border ${
-                                            isAi
+                                        className={`inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] border ${isAi
                                                 ? "bg-zukvo-500/10 text-zukvo-600 border-zukvo-500/30"
                                                 : "border-zinc-200 text-zinc-400"
-                                        }`}
+                                            }`}
                                     >
                                         <Wand2 className="size-2.5" />{" "}
                                         {isAi ? "With AI" : "No AI"}
@@ -551,6 +610,34 @@ function ChangePlanLink({ label = "Change plan" }) {
 /* ---------------- SIGNUP FORM ---------------- */
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
+const APP_URL = import.meta.env.VITE_APP_URL || "http://localhost:3005";
+
+/**
+ * Builds the login URL for a tenant workspace.
+ * On localhost: uses ?subdomain= param because subdomain.localhost doesn't resolve in browsers.
+ * On prod: uses subdomain prefix (e.g. https://srvsh.zukvo.com/login).
+ */
+function buildLoginUrl(tenantSubdomain, accessToken, email, sso) {
+    const appUrl = new URL(APP_URL);
+    const isLocalhost = appUrl.hostname === "localhost" || appUrl.hostname === "127.0.0.1";
+    let base;
+    if (isLocalhost) {
+        // localhost can't do subdomain routing — pass subdomain as query param
+        base = `${appUrl.protocol}//${appUrl.host}/login`;
+    } else {
+        // Production: strip "app." prefix and prepend tenant subdomain
+        const baseDomain = appUrl.hostname.replace(/^app\./, '');
+        base = `${appUrl.protocol}//${tenantSubdomain}.${baseDomain}/login`;
+    }
+    const params = new URLSearchParams();
+    if (isLocalhost) params.set('subdomain', tenantSubdomain);
+    if (accessToken) params.set('token', accessToken);
+    else if (email) {
+        params.set('email', email);
+        if (sso) params.set('sso', sso);
+    }
+    return `${base}?${params.toString()}`;
+}
 
 function SignupCard({ ctx }) {
     const [showPwd, setShowPwd] = useState(false);
@@ -600,15 +687,61 @@ function SignupCard({ ctx }) {
                                 },
                             });
 
-                            const { tenantSubdomain, email: verifiedEmail, accessToken } = res.data;
-                            const appUrl = new URL(import.meta.env.VITE_APP_URL || "http://localhost:3005");
-                            // If backend returned an accessToken, use it to auto-login (skip login page)
-                            const host = appUrl.host.startsWith("app.") ? appUrl.host.replace(/^app\./, `${tenantSubdomain}.`) : `${tenantSubdomain}.${appUrl.host}`;
-                            if (accessToken) {
-                                window.location.href = `${appUrl.protocol}//${host}/login?token=${accessToken}`;
+                            const { tenantSubdomain, email: verifiedEmail, accessToken, decision } = res.data;
+                            const loginUrl = buildLoginUrl(tenantSubdomain, accessToken, verifiedEmail, 'google');
+
+                            if (decision?.action === 'PAYMENT_REQUIRED') {
+                                const options = {
+                                    key: decision.key || decision.data?.key,
+                                    name: 'Zukvo',
+                                    description: 'Subscription Payment',
+                                    handler: async (response) => {
+                                        try {
+                                            const adminApiUrl = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:5000';
+                                            const verifyRes = await axios.post(`${adminApiUrl}/api/payments/verify`, {
+                                                razorpay_order_id: response.razorpay_order_id,
+                                                razorpay_payment_id: response.razorpay_payment_id,
+                                                razorpay_signature: response.razorpay_signature,
+                                                razorpay_subscription_id: response.razorpay_subscription_id,
+                                            });
+                                            if (verifyRes.data.success) {
+                                                window.location.href = loginUrl;
+                                            } else {
+                                                setErrorMsg('Payment verification failed.');
+                                                setStatus('error');
+                                            }
+                                        } catch (verifyErr) {
+                                            setErrorMsg('Error verifying payment.');
+                                            setStatus('error');
+                                        }
+                                    },
+                                    prefill: { email: verifiedEmail },
+                                    theme: { color: '#6366F1' },
+                                };
+                                
+                                if (decision.subscription_id) {
+                                    options.subscription_id = decision.subscription_id;
+                                } else if (decision.data?.orderId) {
+                                    options.order_id = decision.data.orderId;
+                                    options.amount = decision.data.amount;
+                                    options.currency = decision.data.currency;
+                                }
+
+                                const rzp = new window.Razorpay(options);
+                                rzp.on('payment.failed', (r) => {
+                                    setErrorMsg(`Payment failed: ${r.error.description}`);
+                                    setStatus('error');
+                                });
+                                rzp.open();
+                                setStatus('idle');
+                            } else if (decision?.action === 'PENDING_APPROVAL') {
+                                window.location.href = '/pending-approval';
+                            } else if (decision?.action === 'API_ERROR') {
+                                setErrorMsg(`Payment setup failed: ${decision.message || 'Please contact support'}`);
+                                setStatus('error');
                             } else {
-                                // Fallback: go to login page (user will need to sign in)
-                                window.location.href = `${appUrl.protocol}//${host}/login?email=${encodeURIComponent(verifiedEmail)}&sso=google`;
+                                // TRIAL_STARTED, FREE_ACTIVATED, or fallback
+                                window.location.href = loginUrl;
                             }
                         } catch (err) {
                             const msg = err?.response?.data?.error || "Google sign up failed. Please try again.";
@@ -675,15 +808,61 @@ function SignupCard({ ctx }) {
                         },
                     });
 
-                    const { tenantSubdomain, email: verifiedEmail, accessToken } = res.data;
-                    const appUrl = new URL(import.meta.env.VITE_APP_URL || "http://localhost:3005");
-                    // If backend returned an accessToken, use it to auto-login (skip login page)
-                    const host = appUrl.host.startsWith("app.") ? appUrl.host.replace(/^app\./, `${tenantSubdomain}.`) : `${tenantSubdomain}.${appUrl.host}`;
-                    if (accessToken) {
-                        window.location.href = `${appUrl.protocol}//${host}/login?token=${accessToken}`;
+                    const { tenantSubdomain, email: verifiedEmail, accessToken, decision } = res.data;
+                    const loginUrl = buildLoginUrl(tenantSubdomain, accessToken, verifiedEmail, 'microsoft');
+
+                    if (decision?.action === 'PAYMENT_REQUIRED') {
+                        const options = {
+                            key: decision.key || decision.data?.key,
+                            name: 'Zukvo',
+                            description: 'Subscription Payment',
+                            handler: async (response) => {
+                                try {
+                                    const adminApiUrl = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:5000';
+                                    const verifyRes = await axios.post(`${adminApiUrl}/api/payments/verify`, {
+                                        razorpay_order_id: response.razorpay_order_id,
+                                        razorpay_payment_id: response.razorpay_payment_id,
+                                        razorpay_signature: response.razorpay_signature,
+                                        razorpay_subscription_id: response.razorpay_subscription_id,
+                                    });
+                                    if (verifyRes.data.success) {
+                                        window.location.href = loginUrl;
+                                    } else {
+                                        setErrorMsg('Payment verification failed.');
+                                        setStatus('error');
+                                    }
+                                } catch (verifyErr) {
+                                    setErrorMsg('Error verifying payment.');
+                                    setStatus('error');
+                                }
+                            },
+                            prefill: { email: verifiedEmail },
+                            theme: { color: '#6366F1' },
+                        };
+                        
+                        if (decision.subscription_id) {
+                            options.subscription_id = decision.subscription_id;
+                        } else if (decision.data?.orderId) {
+                            options.order_id = decision.data.orderId;
+                            options.amount = decision.data.amount;
+                            options.currency = decision.data.currency;
+                        }
+
+                        const rzp = new window.Razorpay(options);
+                        rzp.on('payment.failed', (r) => {
+                            setErrorMsg(`Payment failed: ${r.error.description}`);
+                            setStatus('error');
+                        });
+                        rzp.open();
+                        setStatus('idle');
+                    } else if (decision?.action === 'PENDING_APPROVAL') {
+                        window.location.href = '/pending-approval';
+                    } else if (decision?.action === 'API_ERROR') {
+                        setErrorMsg(`Payment setup failed: ${decision.message || 'Please contact support'}`);
+                        setStatus('error');
                     } else {
-                        // Fallback: go to login page (user will need to sign in)
-                        window.location.href = `${appUrl.protocol}//${host}/login?email=${encodeURIComponent(verifiedEmail)}&sso=microsoft`;
+                        // TRIAL_STARTED, FREE_ACTIVATED, or fallback
+                        window.location.href = loginUrl;
                     }
                 } catch (err) {
                     const msg = err?.response?.data?.error || "Microsoft sign up failed. Please try again.";
@@ -796,11 +975,10 @@ function SignupCard({ ctx }) {
                         key={opt.value}
                         type="button"
                         onClick={() => setType(opt.value)}
-                        className={`flex flex-col items-start rounded-xl border px-4 py-3 text-left transition-all ${
-                            type === opt.value
+                        className={`flex flex-col items-start rounded-xl border px-4 py-3 text-left transition-all ${type === opt.value
                                 ? "border-zukvo-500 bg-zukvo-500/5 ring-2 ring-zukvo-500/20"
                                 : "border-zinc-200 bg-white hover:border-zinc-300"
-                        }`}
+                            }`}
                     >
                         <span className={`text-[13.5px] font-medium ${type === opt.value ? "text-zukvo-700" : "text-zukvo-ink"}`}>
                             {opt.label}
@@ -901,27 +1079,26 @@ function SignupCard({ ctx }) {
                             {[1, 2, 3, 4].map((i) => (
                                 <span
                                     key={i}
-                                    className={`h-1 flex-1 rounded-full transition-colors ${
-                                        i <= pwdStrength
+                                    className={`h-1 flex-1 rounded-full transition-colors ${i <= pwdStrength
                                             ? pwdStrength <= 1
                                                 ? "bg-rose-400"
                                                 : pwdStrength <= 2
-                                                  ? "bg-amber-400"
-                                                  : pwdStrength <= 3
-                                                    ? "bg-zukvo-500"
-                                                    : "bg-emerald-500"
+                                                    ? "bg-amber-400"
+                                                    : pwdStrength <= 3
+                                                        ? "bg-zukvo-500"
+                                                        : "bg-emerald-500"
                                             : "bg-zinc-200"
-                                    }`}
+                                        }`}
                                 />
                             ))}
                             <span className="ml-2 text-[10.5px] text-zinc-500 uppercase tracking-[0.18em] w-16 text-right">
                                 {pwdStrength <= 1
                                     ? "Weak"
                                     : pwdStrength <= 2
-                                      ? "OK"
-                                      : pwdStrength <= 3
-                                        ? "Strong"
-                                        : "Excellent"}
+                                        ? "OK"
+                                        : pwdStrength <= 3
+                                            ? "Strong"
+                                            : "Excellent"}
                             </span>
                         </div>
                     )}
