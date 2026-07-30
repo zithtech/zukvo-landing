@@ -35,6 +35,10 @@ const READY_SLUGS = new Set([
     "accounts",
     "mail-calendar",
     "escalation-management",
+    "clock-in-out",
+    "leave-attendance",
+    "payroll-payslip",
+    "reimbursement",
 ]);
 
 const INTRO_STORAGE_KEY = "zk_logo_intro_played";

@@ -16,6 +16,10 @@ import {
     Chrome,
     LayoutDashboard,
     Siren,
+    Clock,
+    CalendarDays,
+    Banknote,
+    Wallet,
 } from "lucide-react";
 
 // Central product catalog — used by nav dropdown and /products page
@@ -290,6 +294,70 @@ export const PRODUCTS = [
             "Google + Apple calendars",
             "Email → ticket",
             "Meetings → time entries",
+        ],
+    },
+    {
+        slug: "clock-in-out",
+        name: "Clock In & Clock Out",
+        tagline: "Effortless time tracking every day.",
+        kicker: "Operate",
+        icon: Clock,
+        accent: "emerald",
+        description:
+            "Allow your team to clock in and clock out with a single click. Keep track of working hours, breaks, and overtime effortlessly.",
+        bullets: [
+            "1-click clock in/out",
+            "Automated timesheets",
+            "Overtime tracking",
+            "Break management",
+        ],
+    },
+    {
+        slug: "leave-attendance",
+        name: "Leave Management",
+        tagline: "Manage leaves without the paperwork.",
+        kicker: "Team",
+        icon: CalendarDays,
+        accent: "indigo",
+        description:
+            "Streamline your team's leave requests, approvals, and attendance tracking in one centralized dashboard.",
+        bullets: [
+            "Custom leave types",
+            "Approval workflows",
+            "Attendance tracking",
+            "Team availability calendar",
+        ],
+    },
+    {
+        slug: "payroll-payslip",
+        name: "Payroll & Payslip",
+        tagline: "Automated payroll. Zero headaches.",
+        kicker: "Finance",
+        icon: Banknote,
+        accent: "emerald",
+        description:
+            "Calculate salaries, manage deductions, and generate payslips automatically. Seamlessly integrated with time tracking and leave management.",
+        bullets: [
+            "Automated salary calculation",
+            "Deductions & taxes",
+            "One-click payslips",
+            "Integration with time tracking",
+        ],
+    },
+    {
+        slug: "reimbursement",
+        name: "Reimbursement",
+        tagline: "Expense claims approved in clicks.",
+        kicker: "Finance",
+        icon: Wallet,
+        accent: "violet",
+        description:
+            "Submit, approve, and settle expense claims without spreadsheets. Centralize your team's expenses with fast reimbursements.",
+        bullets: [
+            "Receipt scanning",
+            "Approval workflows",
+            "Expense categories",
+            "Fast settlement",
         ],
     },
 ];

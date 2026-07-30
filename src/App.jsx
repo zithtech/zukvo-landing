@@ -22,6 +22,10 @@ import Squads from "@/pages/products/Squads";
 import Accounts from "@/pages/products/Accounts";
 import MailCalendar from "@/pages/products/MailCalendar";
 import EscalationManagement from "@/pages/products/EscalationManagement";
+import ClockInOut from "@/pages/products/ClockInOut";
+import LeaveAttendance from "@/pages/products/LeaveAttendance";
+import PayrollPayslip from "@/pages/products/PayrollPayslip";
+import Reimbursement from "@/pages/products/Reimbursement";
 import VerifyEmail from "@/pages/VerifyEmail";
 
 function LoginRedirect() {
@@ -118,6 +122,10 @@ function App() {
                     <Route path="/products/accounts" element={<Accounts />} />
                     <Route path="/products/mail-calendar" element={<MailCalendar />} />
                     <Route path="/products/escalation-management" element={<EscalationManagement />} />
+                    <Route path="/products/clock-in-out" element={<ClockInOut />} />
+                    <Route path="/products/leave-attendance" element={<LeaveAttendance />} />
+                    <Route path="/products/payroll-payslip" element={<PayrollPayslip />} />
+                    <Route path="/products/reimbursement" element={<Reimbursement />} />
                     <Route path="/verify-email" element={<VerifyEmail />} />
                 </Routes>
             </BrowserRouter>
