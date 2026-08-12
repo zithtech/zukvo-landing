@@ -94,58 +94,6 @@ export default function PayrollPayslip() {
     );
 }
 
-/* ---------------- TABS COMPONENT ---------------- */
-
-function ImageTabs({ tabs, accent = "zukvo" }) {
-    const [active, setActive] = useState(0);
-
-    const glowColors = {
-        violet: "from-violet-500/20 to-purple-500/20",
-        emerald: "from-emerald-500/20 to-teal-500/20",
-        amber: "from-amber-500/20 to-orange-500/20",
-        rose: "from-rose-500/20 to-pink-500/20",
-        cyan: "from-cyan-500/20 to-blue-500/20",
-        zukvo: "from-zukvo-500/20 to-indigo-500/20",
-    };
-
-    return (
-        <div className="flex flex-col gap-8 w-full max-w-full">
-            <div className="flex justify-center w-full">
-                <div className="inline-flex p-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-inner overflow-x-auto no-scrollbar max-w-full">
-                    {tabs.map((t, i) => (
-                        <button
-                            key={i}
-                            onClick={() => setActive(i)}
-                            className={`relative whitespace-nowrap px-6 py-2.5 rounded-full text-[13.5px] font-medium transition-all duration-300 ${
-                                active === i 
-                                ? 'bg-white text-zinc-900 shadow-md' 
-                                : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'
-                            }`}
-                        >
-                            {t.tabLabel}
-                        </button>
-                    ))}
-                </div>
-            </div>
-            <div className="relative w-full max-w-full">
-                <div className={`absolute -inset-2 bg-gradient-to-r ${glowColors[accent]} blur-2xl opacity-60 rounded-3xl transition-all duration-700`} />
-                <div className="relative animate-in fade-in zoom-in-[0.98] duration-500 w-full" key={active}>
-                    <ImageSlot
-                        testid={tabs[active].testid}
-                        label={tabs[active].label}
-                        chromeUrl={tabs[active].chromeUrl}
-                        aspect="auto"
-                        objectFit="contain"
-                        caption={tabs[active].caption}
-                        src={tabs[active].src}
-                        srcLight={tabs[active].srcLight}
-                    />
-                </div>
-            </div>
-        </div>
-    );
-}
-
 /* ---------------- HERO ---------------- */
 
 function Hero() {
@@ -252,6 +200,8 @@ function SubmoduleNav() {
 /* ---------------- SETUP ---------------- */
 
 function SetupSection() {
+    const [theme, setTheme] = useState("light");
+
     return (
         <section
             id="setup"
@@ -261,51 +211,54 @@ function SetupSection() {
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
                     <div className="lg:col-span-5">
-                        <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-violet-300">
-                            Setup
+                        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.22em] text-violet-300 mb-6">
+                            <Settings className="size-3.5" /> Setup
                         </div>
-                        <h2 className="mt-4 font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
+                        <h2 className="font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
                             Schedules & Employee Pay Setup.
                         </h2>
                         <p className="mt-5 text-zinc-400 leading-relaxed text-[15px] md:text-base max-w-md">
                             Define <strong>when</strong> payroll runs and <strong>who</strong> runs together using Pay Schedules and Groups. Then, use Employee Pay Setup to stamp a real number onto a real person, applying a salary structure at their specific CTC.
                         </p>
-                        <ul className="mt-6 space-y-2.5">
+                        
+                        <div className="mt-8 space-y-4">
                             {[
-                                { i: Calendar, t: "Pay Schedules: payroll calendars" },
-                                { i: Users, t: "Pay Groups: buckets of employees" },
-                                { i: Settings, t: "Employee Setup: lock in agreed salary" },
+                                { i: Calendar, t: "Pay Schedules: payroll calendars", d: "Model real-world pay cycles precisely." },
+                                { i: Users, t: "Pay Groups: buckets of employees", d: "Group employees seamlessly based on pay cycles." },
+                                { i: Settings, t: "Employee Setup: lock in agreed salary", d: "Turn a template into a person's pay by locking in their CTC." },
                             ].map((b, i) => (
-                                <li
-                                    key={i}
-                                    className="flex items-center gap-2.5 text-[14px] text-zinc-300"
-                                >
-                                    <b.i className="size-4 text-violet-300" /> {b.t}
-                                </li>
+                                <div key={i} className="flex items-start gap-3">
+                                    <CheckCircle2 className="mt-0.5 size-4.5 text-violet-400 shrink-0" />
+                                    <div>
+                                        <span className="text-[14.5px] font-medium text-white block">{b.t}</span>
+                                        <span className="text-[13.5px] text-zinc-400 block mt-0.5">{b.d}</span>
+                                    </div>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     </div>
-                    <div className="lg:col-span-7">
-                        <ImageTabs accent="violet" tabs={[
-                            {
-                                tabLabel: "Employee Pay Setup",
-                                testid: "payroll-image-setup-employee",
-                                label: "Employee Pay Setup",
-                                chromeUrl: "zukvo.app/payroll/setup/employee",
-                                caption: "Turn a template into a person's pay by locking in their CTC.",
-                                src: setupDark,
-                                srcLight: setupLight
-                            },
-                            {
-                                tabLabel: "Pay Schedules",
-                                testid: "payroll-image-setup-schedule",
-                                label: "Pay Schedules & Groups",
-                                chromeUrl: "zukvo.app/payroll/setup/schedule",
-                                caption: "Model real-world pay cycles precisely.",
-                                src: scheduleDark,
-                                srcLight: scheduleLight
-                            }
-                        ]} />
+                    
+                    <div className="lg:col-span-7 relative zk-reveal">
+                        <div className="relative mx-auto w-full max-w-[600px] px-8 py-16">
+                            <ImageSlot
+                                src={setupDark}
+                                srcLight={setupLight}
+                                alt="Employee Pay Setup"
+                                label="Employee Pay Setup"
+                                chromeUrl="zukvo.app/payroll/setup/employee"
+                                caption="Turn a template into a person's pay by locking in their CTC."
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                theme={theme}
+                                onThemeChange={setTheme}
+                            />
+                            <FloatingImage 
+                                src={theme === "light" ? scheduleLight : scheduleDark} 
+                                className="-bottom-8 -left-6 w-[55%] max-w-[320px] z-10" 
+                                alt="Pay Schedules" 
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -316,6 +269,8 @@ function SetupSection() {
 /* ---------------- STRUCTURES ---------------- */
 
 function StructuresSection() {
+    const [theme, setTheme] = useState("light");
+
     return (
         <section
             id="structures"
@@ -324,52 +279,55 @@ function StructuresSection() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-7 order-2 lg:order-1">
-                        <ImageTabs accent="emerald" tabs={[
-                            {
-                                tabLabel: "Salary Structures",
-                                testid: "payroll-image-structures",
-                                label: "Salary Structures",
-                                chromeUrl: "zukvo.app/payroll/structures",
-                                caption: "A sentence: a meaningful, reusable arrangement of words.",
-                                src: structureDark,
-                                srcLight: structureLight
-                            },
-                            {
-                                tabLabel: "Salary Components",
-                                testid: "payroll-image-components",
-                                label: "Salary Components",
-                                chromeUrl: "zukvo.app/payroll/components",
-                                caption: "The vocabulary: building blocks from which all salaries are constructed.",
-                                src: componentDark,
-                                srcLight: componentLight
-                            }
-                        ]} />
-                    </div>
-                    <div className="lg:col-span-5 order-1 lg:order-2">
-                        <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-emerald-300">
-                            Structures
+                    <div className="lg:col-span-7 relative zk-reveal order-2 lg:order-1">
+                        <div className="relative mx-auto w-full max-w-[600px] px-8 py-16">
+                            <ImageSlot
+                                src={structureDark}
+                                srcLight={structureLight}
+                                alt="Salary Structures"
+                                label="Salary Structures"
+                                chromeUrl="zukvo.app/payroll/structures"
+                                caption="A sentence: a meaningful, reusable arrangement of words."
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                theme={theme}
+                                onThemeChange={setTheme}
+                            />
+                            <FloatingImage 
+                                src={theme === "light" ? componentLight : componentDark} 
+                                className="-top-8 -right-6 w-[55%] max-w-[320px] z-10" 
+                                alt="Salary Components" 
+                            />
                         </div>
-                        <h2 className="mt-4 font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
+                    </div>
+                    
+                    <div className="lg:col-span-5 order-1 lg:order-2">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.22em] text-emerald-300 mb-6">
+                            <Layers className="size-3.5" /> Structures
+                        </div>
+                        <h2 className="font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
                             Components & Structures.
                         </h2>
                         <p className="mt-5 text-zinc-400 leading-relaxed text-[15px] md:text-base max-w-md">
                             <strong>Components</strong> are the library of building blocks with rules (taxable, PF/ESI). <strong>Structures</strong> are where components are assembled into reusable templates (grades). 
                             Define a grade once, and automate the maths for any CTC level.
                         </p>
-                        <ul className="mt-6 space-y-2.5">
+                        
+                        <div className="mt-8 space-y-4">
                             {[
-                                { i: Layers, t: "Components: standardized pay elements" },
-                                { i: Settings, t: "Structures: templates for pay scales" },
+                                { t: "Components: standardized pay elements", d: "The vocabulary: building blocks from which all salaries are constructed." },
+                                { t: "Structures: templates for pay scales", d: "A meaningful, reusable arrangement of components." },
                             ].map((b, i) => (
-                                <li
-                                    key={i}
-                                    className="flex items-center gap-2.5 text-[14px] text-zinc-300"
-                                >
-                                    <b.i className="size-4 text-emerald-300" /> {b.t}
-                                </li>
+                                <div key={i} className="flex items-start gap-3">
+                                    <CheckCircle2 className="mt-0.5 size-4.5 text-emerald-400 shrink-0" />
+                                    <div>
+                                        <span className="text-[14.5px] font-medium text-white block">{b.t}</span>
+                                        <span className="text-[13.5px] text-zinc-400 block mt-0.5">{b.d}</span>
+                                    </div>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -380,6 +338,8 @@ function StructuresSection() {
 /* ---------------- COMPLIANCE ---------------- */
 
 function ComplianceSection() {
+    const [theme, setTheme] = useState("light");
+
     return (
         <section
             id="compliance"
@@ -389,60 +349,59 @@ function ComplianceSection() {
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
                     <div className="lg:col-span-5">
-                        <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-amber-300">
-                            Compliance
+                        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.22em] text-amber-300 mb-6">
+                            <Landmark className="size-3.5" /> Compliance
                         </div>
-                        <h2 className="mt-4 font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
+                        <h2 className="font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
                             Statutory rules & obligations.
                         </h2>
                         <p className="mt-5 text-zinc-400 leading-relaxed text-[15px] md:text-base max-w-md">
                             These aren't company-invented numbers — they're legal obligations. Centralize rates, thresholds, and rules prescribed by the government for Provident Fund (PF) and Employee State Insurance (ESI) so they're applied uniformly.
                         </p>
-                        <ul className="mt-6 space-y-2.5">
+                        
+                        <div className="mt-8 space-y-4">
                             {[
-                                { i: Landmark, t: "Provident Fund (PF): retirement savings" },
-                                { i: Scale, t: "ESI: medical/health insurance" },
-                                { i: FileText, t: "Professional Tax: regional contributions" },
+                                { t: "Provident Fund (PF): retirement savings", d: "Mandatory retirement-savings scheme mapped directly to basic salaries." },
+                                { t: "ESI: medical/health insurance", d: "Ensure compliance with statutory medical health insurance rules." },
+                                { t: "Professional Tax: regional contributions", d: "Easily manage state-specific professional tax rules across your organization." },
                             ].map((b, i) => (
-                                <li
-                                    key={i}
-                                    className="flex items-center gap-2.5 text-[14px] text-zinc-300"
-                                >
-                                    <b.i className="size-4 text-amber-300" /> {b.t}
-                                </li>
+                                <div key={i} className="flex items-start gap-3">
+                                    <CheckCircle2 className="mt-0.5 size-4.5 text-amber-400 shrink-0" />
+                                    <div>
+                                        <span className="text-[14.5px] font-medium text-white block">{b.t}</span>
+                                        <span className="text-[13.5px] text-zinc-400 block mt-0.5">{b.d}</span>
+                                    </div>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     </div>
-                    <div className="lg:col-span-7">
-                        <ImageTabs accent="amber" tabs={[
-                            {
-                                tabLabel: "Provident Fund",
-                                testid: "payroll-image-pf",
-                                label: "Statutory PF",
-                                chromeUrl: "zukvo.app/payroll/pf",
-                                caption: "Mandatory retirement-savings scheme.",
-                                src: pfDark,
-                                srcLight: pfLight
-                            },
-                            {
-                                tabLabel: "ESI",
-                                testid: "payroll-image-esi",
-                                label: "Statutory ESI",
-                                chromeUrl: "zukvo.app/payroll/esi",
-                                caption: "Medical/health-insurance scheme.",
-                                src: esiDark,
-                                srcLight: esiLight
-                            },
-                            {
-                                tabLabel: "Professional Tax",
-                                testid: "payroll-image-pt",
-                                label: "Professional Tax",
-                                chromeUrl: "zukvo.app/payroll/pt",
-                                caption: "Regional statutory contributions.",
-                                src: ptDark,
-                                srcLight: ptLight
-                            }
-                        ]} />
+                    
+                    <div className="lg:col-span-7 relative zk-reveal">
+                        <div className="relative mx-auto w-full max-w-[600px] px-8 py-16">
+                            <ImageSlot
+                                src={pfDark}
+                                srcLight={pfLight}
+                                alt="Statutory PF"
+                                label="Statutory PF"
+                                chromeUrl="zukvo.app/payroll/pf"
+                                caption="Mandatory retirement-savings scheme."
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                theme={theme}
+                                onThemeChange={setTheme}
+                            />
+                            <FloatingImage 
+                                src={theme === "light" ? esiLight : esiDark} 
+                                className="-bottom-8 -left-6 w-[45%] max-w-[280px] z-10" 
+                                alt="Statutory ESI" 
+                            />
+                            <FloatingImage 
+                                src={theme === "light" ? ptLight : ptDark} 
+                                className="-top-8 -right-6 w-[45%] max-w-[280px] z-10" 
+                                alt="Professional Tax" 
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -453,6 +412,8 @@ function ComplianceSection() {
 /* ---------------- PAYSLIPS & BANK ---------------- */
 
 function PayslipsSection() {
+    const [theme, setTheme] = useState("light");
+
     return (
         <section
             id="payslips"
@@ -461,51 +422,54 @@ function PayslipsSection() {
         >
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
-                    <div className="lg:col-span-7 order-2 lg:order-1">
-                        <ImageTabs accent="rose" tabs={[
-                            {
-                                tabLabel: "Payslip Template",
-                                testid: "payroll-image-payslips",
-                                label: "Payslip Template",
-                                chromeUrl: "zukvo.app/payroll/payslips",
-                                caption: "A branded, consistent, legal/financial document.",
-                                src: payslipDark,
-                                srcLight: payslipLight
-                            },
-                            {
-                                tabLabel: "Bank Settings",
-                                testid: "payroll-image-bank",
-                                label: "Bank Settings & Disbursement",
-                                chromeUrl: "zukvo.app/payroll/bank",
-                                caption: "Define the source account and disbursement format.",
-                                src: bankDark,
-                                srcLight: bankLight
-                            }
-                        ]} />
-                    </div>
-                    <div className="lg:col-span-5 order-1 lg:order-2">
-                        <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-rose-300">
-                            Payslips & Bank
+                    <div className="lg:col-span-7 relative zk-reveal order-2 lg:order-1">
+                        <div className="relative mx-auto w-full max-w-[600px] px-8 py-16">
+                            <ImageSlot
+                                src={payslipDark}
+                                srcLight={payslipLight}
+                                alt="Payslip Template"
+                                label="Payslip Template"
+                                chromeUrl="zukvo.app/payroll/payslips"
+                                caption="A branded, consistent, legal/financial document."
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                theme={theme}
+                                onThemeChange={setTheme}
+                            />
+                            <FloatingImage 
+                                src={theme === "light" ? bankLight : bankDark} 
+                                className="-bottom-8 -right-6 w-[55%] max-w-[320px] z-10" 
+                                alt="Bank Settings" 
+                            />
                         </div>
-                        <h2 className="mt-4 font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
+                    </div>
+                    
+                    <div className="lg:col-span-5 order-1 lg:order-2">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.22em] text-rose-300 mb-6">
+                            <FileText className="size-3.5" /> Payslips & Bank
+                        </div>
+                        <h2 className="font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
                             The outputs of payroll.
                         </h2>
                         <p className="mt-5 text-zinc-400 leading-relaxed text-[15px] md:text-base max-w-md">
                             Control what the employee receives and how the money is sent. Standardize payslip appearance, control disclosures, and match your bank's exact format so disbursement files import cleanly.
                         </p>
-                        <ul className="mt-6 space-y-2.5">
+                        
+                        <div className="mt-8 space-y-4">
                             {[
-                                { i: FileText, t: "Payslip Template: standard formatting" },
-                                { i: Wallet, t: "Bank Settings: disbursement formatting" },
+                                { t: "Payslip Template: standard formatting", d: "Ensure brand consistency across all financial output documents." },
+                                { t: "Bank Settings: disbursement formatting", d: "Define the source account and auto-generate clean disbursement formats." },
                             ].map((b, i) => (
-                                <li
-                                    key={i}
-                                    className="flex items-center gap-2.5 text-[14px] text-zinc-300"
-                                >
-                                    <b.i className="size-4 text-rose-300" /> {b.t}
-                                </li>
+                                <div key={i} className="flex items-start gap-3">
+                                    <CheckCircle2 className="mt-0.5 size-4.5 text-rose-400 shrink-0" />
+                                    <div>
+                                        <span className="text-[14.5px] font-medium text-white block">{b.t}</span>
+                                        <span className="text-[13.5px] text-zinc-400 block mt-0.5">{b.d}</span>
+                                    </div>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -516,6 +480,8 @@ function PayslipsSection() {
 /* ---------------- RUN PAYROLL ---------------- */
 
 function RunPayrollSection() {
+    const [theme, setTheme] = useState("light");
+
     return (
         <section
             id="run-payroll"
@@ -525,51 +491,54 @@ function RunPayrollSection() {
             <div className="relative mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-28">
                 <div className="zk-reveal grid lg:grid-cols-12 gap-10 items-center">
                     <div className="lg:col-span-5">
-                        <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-300">
-                            Run Payroll
+                        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-300 mb-6">
+                            <PlayCircle className="size-3.5" /> Run Payroll
                         </div>
-                        <h2 className="mt-4 font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
+                        <h2 className="font-heading font-medium text-3xl md:text-4xl lg:text-5xl tracking-[-0.03em]">
                             Compute & Approve.
                         </h2>
                         <p className="mt-5 text-zinc-400 leading-relaxed text-[15px] md:text-base max-w-md">
                             <strong>Run Payroll</strong> is the event — generating the month's salaries in one action by pulling frozen salary breakdowns and applying real-world adjustments. <br /><br />
                             <strong>Approval Workflows</strong> enforce accountability via sign-off chains to prevent errors before money moves.
                         </p>
-                        <ul className="mt-6 space-y-2.5">
+                        
+                        <div className="mt-8 space-y-4">
                             {[
-                                { i: PlayCircle, t: "Produce a single reviewable register" },
-                                { i: CheckCircle2, t: "Enforce multi-step sign-off chains" },
+                                { t: "Produce a single reviewable register", d: "Produce the salary register for the month." },
+                                { t: "Enforce multi-step sign-off chains", d: "Ordered list of approval steps for foolproof sign-offs." },
                             ].map((b, i) => (
-                                <li
-                                    key={i}
-                                    className="flex items-center gap-2.5 text-[14px] text-zinc-300"
-                                >
-                                    <b.i className="size-4 text-cyan-300" /> {b.t}
-                                </li>
+                                <div key={i} className="flex items-start gap-3">
+                                    <CheckCircle2 className="mt-0.5 size-4.5 text-cyan-400 shrink-0" />
+                                    <div>
+                                        <span className="text-[14.5px] font-medium text-white block">{b.t}</span>
+                                        <span className="text-[13.5px] text-zinc-400 block mt-0.5">{b.d}</span>
+                                    </div>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     </div>
-                    <div className="lg:col-span-7">
-                        <ImageTabs accent="cyan" tabs={[
-                            {
-                                tabLabel: "Run Payroll",
-                                testid: "payroll-image-run",
-                                label: "Run Payroll",
-                                chromeUrl: "zukvo.app/payroll/run",
-                                caption: "Produce the salary register for the month.",
-                                src: runDark,
-                                srcLight: runLight
-                            },
-                            {
-                                tabLabel: "Approval Workflows",
-                                testid: "payroll-image-approval",
-                                label: "Approval Workflows",
-                                chromeUrl: "zukvo.app/payroll/approvals",
-                                caption: "Ordered list of approval steps.",
-                                src: approvalDark,
-                                srcLight: approvalLight
-                            }
-                        ]} />
+                    
+                    <div className="lg:col-span-7 relative zk-reveal">
+                        <div className="relative mx-auto w-full max-w-[600px] px-8 py-16">
+                            <ImageSlot
+                                src={runDark}
+                                srcLight={runLight}
+                                alt="Run Payroll"
+                                label="Run Payroll"
+                                chromeUrl="zukvo.app/payroll/run"
+                                caption="Produce the salary register for the month."
+                                aspect="auto"
+                                objectFit="contain"
+                                className="w-full"
+                                theme={theme}
+                                onThemeChange={setTheme}
+                            />
+                            <FloatingImage 
+                                src={theme === "light" ? approvalLight : approvalDark} 
+                                className="-bottom-8 -left-6 w-[55%] max-w-[320px] z-10" 
+                                alt="Approval Workflows" 
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -614,5 +583,14 @@ function FinalCTA() {
                 </div>
             </div>
         </section>
+    );
+}
+
+// ---------------- Helpers ----------------
+function FloatingImage({ src, alt, className }) {
+    return (
+        <div className={`absolute rounded-xl ring-1 ring-white/[0.12] shadow-2xl bg-[#0E0E10] overflow-hidden group hover:z-50 transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] ${className}`}>
+            <img src={src} className="block w-full h-auto" alt={alt} />
+        </div>
     );
 }

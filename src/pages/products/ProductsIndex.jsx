@@ -25,6 +25,7 @@ const READY = new Set([
     "leave-attendance",
     "payroll-payslip",
     "reimbursement",
+    "timesheet",
 ]);
 
 export default function ProductsIndex() {

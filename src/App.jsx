@@ -7,6 +7,10 @@ import About from "@/pages/About";
 import ContactSales from "@/pages/ContactSales";
 import ProductsIndex from "@/pages/products/ProductsIndex";
 import TicketManagement from "@/pages/products/TicketManagement";
+import OpeningManagement from "@/pages/products/OpeningManagement";
+import OnboardingExit from "@/pages/products/OnboardingExit";
+import QaWorkspace from "@/pages/products/QaWorkspace";
+import DocSuite from "@/pages/products/DocSuite";
 import DocumentHub from "@/pages/products/DocumentHub";
 import ProjectManagement from "@/pages/products/ProjectManagement";
 import Invoice from "@/pages/products/Invoice";
@@ -26,6 +30,7 @@ import ClockInOut from "@/pages/products/ClockInOut";
 import LeaveAttendance from "@/pages/products/LeaveAttendance";
 import PayrollPayslip from "@/pages/products/PayrollPayslip";
 import Reimbursement from "@/pages/products/Reimbursement";
+import Timesheet from "@/pages/products/Timesheet";
 import VerifyEmail from "@/pages/VerifyEmail";
 
 function LoginRedirect() {
@@ -104,6 +109,19 @@ function App() {
                         path="/products/ticket-management"
                         element={<TicketManagement />}
                     />
+                    <Route
+                        path="/products/opening-management"
+                        element={<OpeningManagement />}
+                    />
+                    <Route
+                        path="/products/onboarding-exit"
+                        element={<OnboardingExit />}
+                    />
+                    <Route
+                        path="/products/qa-workspace"
+                        element={<QaWorkspace />}
+                    />
+                    <Route path="/products/doc-suite" element={<DocSuite />} />
                     <Route path="/products/document-hub" element={<DocumentHub />} />
                     <Route
                         path="/products/project-management"
@@ -126,6 +144,7 @@ function App() {
                     <Route path="/products/leave-attendance" element={<LeaveAttendance />} />
                     <Route path="/products/payroll-payslip" element={<PayrollPayslip />} />
                     <Route path="/products/reimbursement" element={<Reimbursement />} />
+                    <Route path="/products/timesheet" element={<Timesheet />} />
                     <Route path="/verify-email" element={<VerifyEmail />} />
                 </Routes>
             </BrowserRouter>

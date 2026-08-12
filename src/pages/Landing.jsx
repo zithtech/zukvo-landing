@@ -9,6 +9,7 @@ import ComingSoon from "@/components/landing/ComingSoon";
 import FAQ from "@/components/landing/FAQ";
 import FinalCTA from "@/components/landing/FinalCTA";
 import Footer from "@/components/landing/Footer";
+import Hotspot from "@/components/landing/Hotspot";
 
 import SEO from "@/components/SEO";
 export default function Landing() {
@@ -39,7 +40,8 @@ export default function Landing() {
             <FeaturesBento />
             <Audiences />
             <Pricing />
-            <ComingSoon />
+            {/* <ComingSoon /> */}
+            <Hotspot />
             <FAQ />
             <FinalCTA />
             <Footer />

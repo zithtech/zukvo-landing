@@ -19,8 +19,17 @@ export default function ImageSlot({
     className = "",
     chromeUrl = "zukvo.app",
     testid,
+    theme: controlledTheme,
+    onThemeChange,
 }) {
-    const [theme, setTheme] = useState("light");
+    const [internalTheme, setInternalTheme] = useState("light");
+    const theme = controlledTheme !== undefined ? controlledTheme : internalTheme;
+    
+    const handleThemeToggle = (newTheme) => {
+        if (onThemeChange) onThemeChange(newTheme);
+        if (controlledTheme === undefined) setInternalTheme(newTheme);
+    };
+
     const currentSrc = theme === "light" && srcLight ? srcLight : src;
 
     return (
@@ -44,14 +53,14 @@ export default function ImageSlot({
                             style={{ transform: theme === 'light' ? 'translateX(100%)' : 'translateX(0)' }}
                         />
                         <button
-                            onClick={() => setTheme("dark")}
+                            onClick={() => handleThemeToggle("dark")}
                             className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'dark' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
                             aria-label="Dark theme"
                         >
                             <Moon className="size-3.5" />
                         </button>
                         <button
-                            onClick={() => setTheme("light")}
+                            onClick={() => handleThemeToggle("light")}
                             className={`relative z-10 p-1.5 rounded-full transition-colors duration-300 ${theme === 'light' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
                             aria-label="Light theme"
                         >
