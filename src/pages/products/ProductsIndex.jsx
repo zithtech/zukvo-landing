@@ -21,6 +21,11 @@ const READY = new Set([
     "accounts",
     "mail-calendar",
     "escalation-management",
+    "clock-in-out",
+    "leave-attendance",
+    "payroll-payslip",
+    "reimbursement",
+    "timesheet",
 ]);
 
 export default function ProductsIndex() {
