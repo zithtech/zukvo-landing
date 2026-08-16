@@ -816,10 +816,22 @@ function SprintShowcase() {
         <>
             <div className="mt-5 -mx-6 -mb-7 grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-white/10 bg-[#0A0A12] p-4 rounded-b-2xl">
                 {SPRINT_VIEWS.map((v) => (
-                    <button
+                    // Deliberately a div, not a button: this card contains the
+                    // theme-toggle buttons below. A <button> inside a <button> is
+                    // invalid HTML — the browser silently closes the outer one when
+                    // it reparses the prerendered markup, which dumps every section
+                    // after this point out of #root and onto the page tail.
+                    <div
                         key={v.key}
-                        type="button"
+                        role="button"
+                        tabIndex={0}
                         onClick={() => setOpenKey(v.key)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                setOpenKey(v.key);
+                            }
+                        }}
                         aria-label={`Expand ${v.title}`}
                         className="group relative overflow-hidden rounded-xl ring-1 ring-white/[0.08] bg-[#0E0E13] cursor-zoom-in transition-all duration-300 hover:-translate-y-1 hover:ring-zukvo-500/40 hover:shadow-[0_24px_50px_-12px_rgba(99,102,241,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-zukvo-500/70 text-left"
                     >
@@ -874,7 +886,7 @@ function SprintShowcase() {
                                 </div>
                             </div>
                         </div>
-                    </button>
+                    </div>
                 ))}
             </div>
 
