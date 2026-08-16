@@ -10,7 +10,7 @@
  */
 import { fileURLToPath } from "node:url";
 import { dirname, join, resolve } from "node:path";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { createServer } from "node:http";
 import { ROUTES } from "./routes.mjs";
 
@@ -85,7 +85,11 @@ function serveStatic(req, res) {
   // for paths without a corresponding asset file, so React starts from a clean
   // <head> on every prerender request.
   const ext = "." + filePath.split(".").pop();
-  if (!existsSync(filePath)) {
+  // A route path can collide with a real directory in build/ (e.g. the static
+  // file public/products/zithport/google….html makes build/products/zithport a
+  // directory). Treat directories as "no asset here" so the SPA fallback runs,
+  // instead of readFileSync() throwing EISDIR and serving a 500 to the renderer.
+  if (!existsSync(filePath) || statSync(filePath).isDirectory()) {
     res.writeHead(200, { "Content-Type": MIME[".html"] });
     res.end(PRISTINE_INDEX);
     return;

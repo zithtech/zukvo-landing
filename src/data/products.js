@@ -16,6 +16,14 @@ import {
     Chrome,
     LayoutDashboard,
     Siren,
+    Clock,
+    CalendarDays,
+    Banknote,
+    Wallet,
+    Users,
+    DoorOpen,
+    ShieldCheck,
+    FileText,
 } from "lucide-react";
 
 // Central product catalog — used by nav dropdown and /products page
@@ -116,22 +124,38 @@ export const PRODUCTS = [
             "Trash & restore",
         ],
     },
-    // {
-    //     slug: "time-sheet",
-    //     name: "Time Sheet",
-    //     tagline: "Approvals without spreadsheets.",
-    //     kicker: "Operate",
-    //     icon: CalendarRange,
-    //     accent: "emerald",
-    //     description:
-    //         "Weekly time sheets for every team member with manager approvals, lock-after-submit, and automated pay-period exports.",
-    //     bullets: [
-    //         "Weekly submission + approvals",
-    //         "Lock after submit",
-    //         "Payroll-friendly exports",
-    //         "Policy + overtime rules",
-    //     ],
-    // },
+    {
+        slug: "doc-suite",
+        name: "Doc Suite",
+        tagline: "Intelligent document templates and generation.",
+        kicker: "Knowledge",
+        icon: FileText,
+        accent: "blue",
+        description:
+            "Design intelligent templates with placeholders and automated layouts, then seamlessly generate perfect letters and documentation on demand.",
+        bullets: [
+            "Advanced Template Builder",
+            "AI-powered Generation",
+            "Placeholder Letter Composer",
+            "Generated Records Archive",
+        ],
+    },
+    {
+        slug: "timesheet",
+        name: "Timesheet",
+        tagline: "Approvals without spreadsheets.",
+        kicker: "Operate",
+        icon: CalendarRange,
+        accent: "emerald",
+        description:
+            "Weekly timesheets for every team member with manager approvals, lock-after-submit, and automated reporting exports.",
+        bullets: [
+            "Weekly submission + approvals",
+            "Lock after submit",
+            "Easy reporting exports",
+            "Policy + overtime rules",
+        ],
+    },
     {
         slug: "proposals",
         name: "Proposals",
@@ -290,6 +314,118 @@ export const PRODUCTS = [
             "Google + Apple calendars",
             "Email → ticket",
             "Meetings → time entries",
+        ],
+    },
+    {
+        slug: "clock-in-out",
+        name: "Clock In & Clock Out",
+        tagline: "Effortless time tracking every day.",
+        kicker: "Operate",
+        icon: Clock,
+        accent: "emerald",
+        description:
+            "Allow your team to clock in and clock out with a single click. Keep track of working hours, breaks, and overtime effortlessly.",
+        bullets: [
+            "1-click clock in/out",
+            "Automated timesheets",
+            "Overtime tracking",
+            "Break management",
+        ],
+    },
+    {
+        slug: "leave-attendance",
+        name: "Leave Management",
+        tagline: "Manage leaves without the paperwork.",
+        kicker: "Team",
+        icon: CalendarDays,
+        accent: "indigo",
+        description:
+            "Streamline your team's leave requests, approvals, and attendance tracking in one centralized dashboard.",
+        bullets: [
+            "Custom leave types",
+            "Approval workflows",
+            "Attendance tracking",
+            "Team availability calendar",
+        ],
+    },
+    {
+        slug: "payroll-payslip",
+        name: "Payroll & Payslip",
+        tagline: "Automated payroll. Zero headaches.",
+        kicker: "Finance",
+        icon: Banknote,
+        accent: "emerald",
+        description:
+            "Calculate salaries, manage deductions, and generate payslips automatically. Seamlessly integrated with time tracking and leave management.",
+        bullets: [
+            "Automated salary calculation",
+            "Deductions & taxes",
+            "One-click payslips",
+            "Integration with time tracking",
+        ],
+    },
+    {
+        slug: "reimbursement",
+        name: "Reimbursement",
+        tagline: "Expense claims approved in clicks.",
+        kicker: "Finance",
+        icon: Wallet,
+        accent: "violet",
+        description:
+            "Submit, approve, and settle expense claims without spreadsheets. Centralize your team's expenses with fast reimbursements.",
+        bullets: [
+            "Receipt scanning",
+            "Approval workflows",
+            "Expense categories",
+            "Fast settlement",
+        ],
+    },
+    {
+        slug: "opening-management",
+        name: "Opening Management",
+        tagline: "The fastest way to scale your team.",
+        kicker: "Grow",
+        icon: Users,
+        accent: "indigo",
+        description:
+            "Openings, pipelines, candidates, and offers — engineered to be frictionless and Zai-assisted. Publish a role, track interviews, align your team, and ship the offer.",
+        bullets: [
+            "AI Candidate Matching",
+            "Custom Pipelines",
+            "Collaborative Hiring",
+            "1-Click Offers",
+        ],
+    },
+    {
+        slug: "onboarding-exit",
+        name: "Onboarding & Exit",
+        tagline: "Start them right. Close them clean.",
+        kicker: "Team",
+        icon: DoorOpen,
+        accent: "indigo",
+        description:
+            "From Day One to the Final Day. Eliminate manual data entry with self-serve invites and protect company assets with strict 4-step department clearances.",
+        bullets: [
+            "Self-serve employee invites",
+            "4-step department clearances",
+            "Locked F&F settlements",
+            "Configurable exit policies",
+        ],
+    },
+    {
+        slug: "qa-workspace",
+        name: "QA Workspace",
+        tagline: "The ultimate testing engine.",
+        kicker: "Work",
+        icon: ShieldCheck,
+        accent: "indigo",
+        description:
+            "From massive 12-step test scopes to AI-generated test cases, suites, and runs. Find bugs instantly and let HiveBug AI route them into actionable engineering tickets.",
+        bullets: [
+            "12-step scope builder",
+            "AI test case generator",
+            "Structured suites & runs",
+            "HiveBug AI issue routing",
         ],
     },
 ];

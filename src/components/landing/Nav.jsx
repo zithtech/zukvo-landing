@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ArrowUpRight, Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import mainLogo from "@/assets/mainLogo.png";
@@ -35,6 +35,15 @@ const READY_SLUGS = new Set([
     "accounts",
     "mail-calendar",
     "escalation-management",
+    "clock-in-out",
+    "leave-attendance",
+    "payroll-payslip",
+    "reimbursement",
+    "timesheet",
+    "opening-management",
+    "onboarding-exit",
+    "qa-workspace",
+    "doc-suite",
 ]);
 
 const INTRO_STORAGE_KEY = "zk_logo_intro_played";
@@ -43,6 +52,7 @@ export default function Nav() {
     const [scrolled, setScrolled] = useState(false);
     const [open, setOpen] = useState(false);
     const [productsOpen, setProductsOpen] = useState(false);
+    const productsTimeoutRef = useRef(null);
     const [activeSection, setActiveSection] = useState("");
     const [isMobile, setIsMobile] = useState(() => {
         if (typeof window === "undefined") return false;
@@ -82,6 +92,12 @@ export default function Nav() {
     const productsActive =
         location.pathname === "/products" || location.pathname.startsWith("/products/");
     const contactSalesActive = location.pathname === "/contact-sales";
+
+    useEffect(() => {
+        return () => {
+            if (productsTimeoutRef.current) clearTimeout(productsTimeoutRef.current);
+        };
+    }, []);
 
     useEffect(() => {
         const sectionIds = ["features", "audiences", "pricing", "faq"];
@@ -173,7 +189,7 @@ export default function Nav() {
             data-testid="site-nav"
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-5"}`}
         >
-            <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <div className="relative mx-auto max-w-7xl px-5 md:px-8">
                 <div
                     className={`flex items-center justify-between rounded-full border transition-all duration-300 ${scrolled
                         ? "border-zinc-200/80 bg-white/85 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(15,15,15,0.08)] px-3 pl-5 py-2"
@@ -218,9 +234,15 @@ export default function Nav() {
                     <nav className="hidden lg:flex items-center gap-1">
                         {/* Products mega dropdown */}
                         <div
-                            className="relative"
-                            onMouseEnter={() => setProductsOpen(true)}
-                            onMouseLeave={() => setProductsOpen(false)}
+                            onMouseEnter={() => {
+                                if (productsTimeoutRef.current) clearTimeout(productsTimeoutRef.current);
+                                setProductsOpen(true);
+                            }}
+                            onMouseLeave={() => {
+                                productsTimeoutRef.current = setTimeout(() => {
+                                    setProductsOpen(false);
+                                }, 150);
+                            }}
                         >
                             <button
                                 data-testid="nav-products-trigger"
@@ -247,10 +269,10 @@ export default function Nav() {
                             {productsOpen && (
                                 <div
                                     data-testid="nav-products-menu"
-                                    className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[720px] max-w-[92vw]"
+                                    className="absolute left-[48%] -translate-x-1/2 top-full pt-3 w-[1040px] max-w-[94vw]"
                                 >
                                     <div className="rounded-2xl border border-zinc-200 bg-white shadow-[0_20px_60px_-20px_rgba(15,15,15,0.18)] p-3">
-                                        <div className="grid grid-cols-2 gap-1">
+                                        <div className="grid grid-cols-3 gap-1">
                                             {PRODUCTS.map((p) => (
                                                 <Link
                                                     key={p.slug}

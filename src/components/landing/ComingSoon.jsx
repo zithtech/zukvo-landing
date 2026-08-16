@@ -1,37 +1,15 @@
 import React from "react";
 import {
     Sparkles,
-    Clock,
-    CalendarCheck,
-    Wallet,
-    Receipt,
     UserPlus,
     Briefcase,
     ClipboardList,
     Telescope,
 } from "lucide-react";
 
+
 const PRODUCTS = [
-    {
-        icon: Clock,
-        title: "Clock In & Clock Out System",
-        body: "Simple in/out punches with location & device context.",
-    },
-    {
-        icon: CalendarCheck,
-        title: "Leave & Attendance Management",
-        body: "Policies, approvals, balances, and holiday calendars in one place.",
-    },
-    {
-        icon: Wallet,
-        title: "Payroll & Payslip Management",
-        body: "Auto-calculated runs with tax-ready payslips your team can download.",
-    },
-    {
-        icon: Receipt,
-        title: "Reimbursement",
-        body: "Submit, approve, and settle expense claims without spreadsheets.",
-    },
+
     {
         icon: UserPlus,
         title: "Employee Onboarding & Exit",
