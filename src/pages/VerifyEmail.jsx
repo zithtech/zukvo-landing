@@ -37,6 +37,15 @@ export default function VerifyEmail() {
                 setErrorMsg(msg);
                 setStatus("error");
             });
+            
+        // Load Razorpay Script
+        if (!document.getElementById("razorpay-checkout-js")) {
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.id = "razorpay-checkout-js";
+            script.async = true;
+            document.head.appendChild(script);
+        }
     }, []);
 
     const handleSetupWorkspace = async () => {
@@ -44,10 +53,67 @@ export default function VerifyEmail() {
         setSetupError("");
         try {
             const res = await axios.post(`${API_URL}/api/landing/complete-registration`, { token });
-            const { tenantSubdomain, email } = res.data;
+            const { tenantSubdomain, email, decision } = res.data;
             const appUrl = new URL(APP_URL);
-            window.location.href = `${appUrl.protocol}//${tenantSubdomain}.${appUrl.host}/login?email=${encodeURIComponent(email)}`;
+            const redirectUrl = `${appUrl.protocol}//${tenantSubdomain}.${appUrl.host}/login?email=${encodeURIComponent(email)}`;
+
+            if (decision?.action === 'PAYMENT_REQUIRED') {
+                const options = {
+                    key: decision.key || decision.data?.key || "rzp_test_mock_key", // Fallback if env missing
+                    name: "Zukvo",
+                    description: "Subscription Payment",
+                    handler: async function (response) {
+                        try {
+                            const verifyRes = await axios.post(`http://localhost:5000/api/payments/verify`, {
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                                razorpay_subscription_id: response.razorpay_subscription_id
+                            });
+                            if (verifyRes.data.success) {
+                                window.location.href = redirectUrl;
+                            } else {
+                                setSetupError("Payment verification failed.");
+                                setSetupStatus("error");
+                            }
+                        } catch (err) {
+                            console.error("Verification failed", err);
+                            setSetupError("Error verifying payment with Admin.");
+                            setSetupStatus("error");
+                        }
+                    },
+                    prefill: {
+                        name: verifyData?.name || "",
+                        email: verifyData?.email || email || "",
+                    },
+                    theme: { color: "#6366F1" }
+                };
+
+                if (decision.subscription_id) {
+                    options.subscription_id = decision.subscription_id;
+                } else if (decision.data?.orderId) {
+                    options.order_id = decision.data.orderId;
+                    options.amount = decision.data.amount;
+                    options.currency = decision.data.currency;
+                }
+
+                const rzp1 = new window.Razorpay(options);
+                rzp1.on('payment.failed', function (response){
+                    setSetupError(`Payment failed: ${response.error.description}`);
+                    setSetupStatus("error");
+                });
+                rzp1.open();
+            } else if (decision?.action === 'PENDING_APPROVAL') {
+                window.location.href = '/pending-approval';
+            } else if (decision?.action === 'API_ERROR') {
+                setSetupError(`Payment setup failed: ${decision.message || 'Please contact support'}`);
+                setSetupStatus("error");
+            } else {
+                // For TRIAL_STARTED, FREE_ACTIVATED, DOWNGRADE_SCHEDULED
+                window.location.href = redirectUrl;
+            }
         } catch (err) {
+            console.error("Complete Registration Error:", err);
             const msg = err?.response?.data?.error || "Something went wrong. Please try again.";
             setSetupError(msg);
             setSetupStatus("error");
@@ -106,7 +172,7 @@ export default function VerifyEmail() {
                             )}
                         </button>
                         <p className="mt-4 text-[12px] text-zinc-400">
-                            You'll be taken to Zukov to complete your workspace setup.
+                            You'll be taken to Zukvo to complete your workspace setup.
                         </p>
                     </>
                 )}

@@ -32,6 +32,7 @@ import PayrollPayslip from "@/pages/products/PayrollPayslip";
 import Reimbursement from "@/pages/products/Reimbursement";
 import Timesheet from "@/pages/products/Timesheet";
 import VerifyEmail from "@/pages/VerifyEmail";
+import PendingApproval from "@/pages/PendingApproval";
 
 function LoginRedirect() {
     const { search } = useLocation();
@@ -146,6 +147,8 @@ function App() {
                     <Route path="/products/reimbursement" element={<Reimbursement />} />
                     <Route path="/products/timesheet" element={<Timesheet />} />
                     <Route path="/verify-email" element={<VerifyEmail />} />
+                    <Route path="/pending-approval" element={<PendingApproval />} />
+                    <Route path="*" element={<Landing />} />
                 </Routes>
             </BrowserRouter>
         </div>
