@@ -211,7 +211,12 @@ export default function Pricing() {
     useEffect(() => {
         const fetchPlans = async () => {
             try {
-                const adminUrl = import.meta.env.VITE_ADMIN_URL || 'http://localhost:5000/api/plans';
+                // Ask for Zukvo plans only. The admin serves several products now,
+                // and without this filter every Testiez plan would render on the
+                // Zukvo pricing page. Appended defensively so a VITE_ADMIN_URL that
+                // already carries a query string still works.
+                const adminBase = import.meta.env.VITE_ADMIN_URL || 'http://localhost:5000/api/plans';
+                const adminUrl = adminBase + (adminBase.includes('?') ? '&' : '?') + 'product=ZUKVO';
                 const res = await axios.get(adminUrl);
                 const data = Array.isArray(res.data) ? res.data : (res.data?.data || []);
                 const filteredData = data.filter(plan => plan.plan_type !== 'FREE');
