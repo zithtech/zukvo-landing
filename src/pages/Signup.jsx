@@ -302,7 +302,7 @@ function PlanSummary({ ctx }) {
     useEffect(() => {
         const fetchPlans = async () => {
             try {
-                const adminUrl = import.meta.env.VITE_ADMIN_URL || 'http://localhost:5000/api/plans';
+                const adminUrl = import.meta.env.VITE_ADMIN_URL || 'http://localhost:4001/api/plans';
                 const res = await axios.get(adminUrl);
                 const data = Array.isArray(res.data) ? res.data : (res.data?.data || []);
 
@@ -639,6 +639,23 @@ function buildLoginUrl(tenantSubdomain, accessToken, email, sso) {
     return `${base}?${params.toString()}`;
 }
 
+/**
+ * The subdomain the backend will derive from a workspace name.
+ *
+ * Mirrors slugify() in zukvo-be/src/controllers/landingSignupController.ts.
+ * Only a preview — a collision appends -2 there — but it has to agree on the
+ * shape, or the form promises a URL the customer will not get.
+ */
+function slugPreview(text) {
+    return (text || "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
+}
+
 function SignupCard({ ctx }) {
     const [showPwd, setShowPwd] = useState(false);
     const [pwd, setPwd] = useState("");
@@ -646,6 +663,7 @@ function SignupCard({ ctx }) {
     const [name, setName] = useState("");
     const [type, setType] = useState("freelancer"); // freelancer | team
     const [companyName, setCompanyName] = useState("");
+    const [workspaceName, setWorkspaceName] = useState("");
     const [status, setStatus] = useState("idle"); // idle | loading | success | error
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -678,6 +696,7 @@ function SignupCard({ ctx }) {
                                 token: tokenResponse.access_token,
                                 type,
                                 companyName: type === "team" ? companyName : undefined,
+                        workspaceName: type === "team" ? undefined : workspaceName,
                                 planConfig: {
                                     tier: ctx.tier ?? null,
                                     sets: ctx.sets,
@@ -697,7 +716,7 @@ function SignupCard({ ctx }) {
                                     description: 'Subscription Payment',
                                     handler: async (response) => {
                                         try {
-                                            const adminApiUrl = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:5000';
+                                            const adminApiUrl = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:4001';
                                             const verifyRes = await axios.post(`${adminApiUrl}/api/payments/verify`, {
                                                 razorpay_order_id: response.razorpay_order_id,
                                                 razorpay_payment_id: response.razorpay_payment_id,
@@ -799,6 +818,7 @@ function SignupCard({ ctx }) {
                         token,
                         type,
                         companyName: type === "team" ? companyName : undefined,
+                        workspaceName: type === "team" ? undefined : workspaceName,
                         planConfig: {
                             tier: ctx.tier ?? null,
                             sets: ctx.sets,
@@ -818,7 +838,7 @@ function SignupCard({ ctx }) {
                             description: 'Subscription Payment',
                             handler: async (response) => {
                                 try {
-                                    const adminApiUrl = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:5000';
+                                    const adminApiUrl = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:4001';
                                     const verifyRes = await axios.post(`${adminApiUrl}/api/payments/verify`, {
                                         razorpay_order_id: response.razorpay_order_id,
                                         razorpay_payment_id: response.razorpay_payment_id,
@@ -907,6 +927,7 @@ function SignupCard({ ctx }) {
                 password: pwd,
                 type,
                 companyName: type === "team" ? companyName : undefined,
+                workspaceName: type === "team" ? undefined : workspaceName,
                 planConfig: {
                     tier: ctx.tier ?? null,
                     sets: ctx.sets,
@@ -1043,6 +1064,33 @@ function SignupCard({ ctx }) {
                         onChange={setCompanyName}
                         testid="signup-company"
                     />
+                )}
+                {/*
+                    Optional for a freelancer, and asked here rather than after
+                    login because the subdomain is derived from it. Left blank,
+                    the workspace is named after the person — putting their own
+                    name in a URL they share with clients, and forcing the app
+                    to ask for a name later and rename the subdomain, which
+                    changes origin and bounces them through the login page.
+                */}
+                {type === "freelancer" && (
+                    <FormField
+                        label="Workspace Name (optional)"
+                        icon={Building2}
+                        type="text"
+                        placeholder="Northlight Studio"
+                        value={workspaceName}
+                        onChange={setWorkspaceName}
+                        testid="signup-workspace"
+                    />
+                )}
+                {(type === "team" ? companyName : workspaceName || name).trim() && (
+                    <p className="text-[12px] text-zinc-500 -mt-1">
+                        Your workspace will live at{" "}
+                        <span className="font-medium text-zukvo-ink">
+                            {slugPreview(type === "team" ? companyName : workspaceName || name)}.zukvo.com
+                        </span>
+                    </p>
                 )}
                 <div>
                     <label className="block text-[12px] font-medium text-zukvo-ink mb-1.5">
