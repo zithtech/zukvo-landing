@@ -1005,6 +1005,7 @@ function SignupCard({ ctx }) {
                     value={email}
                     onChange={setEmail}
                     testid="signup-email"
+                    autoComplete="email"
                 />
                 <FormField
                     label="Full Name"
@@ -1014,6 +1015,7 @@ function SignupCard({ ctx }) {
                     value={name}
                     onChange={setName}
                     testid="signup-name"
+                    autoComplete="name"
                 />
                 {type === "team" && (
                     <FormField
@@ -1024,6 +1026,7 @@ function SignupCard({ ctx }) {
                         value={companyName}
                         onChange={setCompanyName}
                         testid="signup-company"
+                        autoComplete="organization"
                     />
                 )}
                 {/*
@@ -1043,6 +1046,7 @@ function SignupCard({ ctx }) {
                         value={workspaceName}
                         onChange={setWorkspaceName}
                         testid="signup-workspace"
+                        autoComplete="organization"
                     />
                 )}
                 {(type === "team" ? companyName : workspaceName || name).trim() && (
@@ -1062,11 +1066,17 @@ function SignupCard({ ctx }) {
                         <span className="pl-3.5 text-zinc-400">
                             <Lock className="size-4" />
                         </span>
+                        {/* "new-password", not "current-password": it tells the
+                            browser this form CREATES an account rather than
+                            signing in to one, which stops saved credentials
+                            being offered against the form at all — and with
+                            them, the mis-aimed username fill above. */}
                         <input
                             type={showPwd ? "text" : "password"}
                             value={pwd}
                             onChange={(e) => setPwd(e.target.value)}
                             placeholder="At least 8 characters"
+                            autoComplete="new-password"
                             data-testid="signup-password"
                             className="flex-1 bg-transparent px-3 py-3 text-[14px] text-zukvo-ink placeholder:text-zinc-400 focus:outline-none"
                         />
@@ -1166,7 +1176,15 @@ function SignupCard({ ctx }) {
     );
 }
 
-function FormField({ label, icon: Icon, type, placeholder, value, onChange, testid }) {
+/**
+ * `autoComplete` is required, not optional, on purpose.
+ *
+ * Every field here used to be anonymous — no autocomplete, no name — so Chrome
+ * fell back to its heuristic: find the password input, treat the nearest text
+ * input ABOVE it as the username. That is Workspace Name, which is how a saved
+ * email address ended up filled into the field that names the workspace.
+ */
+function FormField({ label, icon: Icon, type, placeholder, value, onChange, testid, autoComplete }) {
     return (
         <div>
             <label className="block text-[12px] font-medium text-zukvo-ink mb-1.5">
@@ -1181,6 +1199,7 @@ function FormField({ label, icon: Icon, type, placeholder, value, onChange, test
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     placeholder={placeholder}
+                    autoComplete={autoComplete}
                     data-testid={testid}
                     className="flex-1 bg-transparent px-3 py-3 text-[14px] text-zukvo-ink placeholder:text-zinc-400 focus:outline-none"
                 />
