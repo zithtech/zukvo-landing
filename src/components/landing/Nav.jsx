@@ -359,8 +359,12 @@ export default function Nav() {
                     </nav>
 
                     <div className="hidden lg:flex items-center gap-2">
-                        <a
-                            href={`${import.meta.env.VITE_APP_URL || "https://app.zukvo.com"}/login`}
+                        {/* /signin, not the app itself: every workspace has its
+                            own host, so the app root cannot know whose login
+                            form to show. The page asks for the workspace name
+                            and forwards to {name}.zukvo.com. */}
+                        <Link
+                            to="/signin"
                             data-testid="nav-signin-link"
                             className={`px-4 py-2 text-[13px] font-medium transition-colors ${onDarkBg
                                 ? "text-zinc-300 hover:text-white"
@@ -368,7 +372,7 @@ export default function Nav() {
                                 }`}
                         >
                             Sign in
-                        </a>
+                        </Link>
                         <a
                             href="/signup"
                             data-testid="nav-cta-button"
@@ -465,6 +469,16 @@ export default function Nav() {
                                 </a>
                             );
                         })}
+                        {/* The mobile sheet had no way in for an existing
+                            customer at all — only ways to buy. */}
+                        <Link
+                            to="/signin"
+                            onClick={() => setOpen(false)}
+                            data-testid="nav-signin-link-mobile"
+                            className="mt-2 block px-3 py-2 text-sm rounded-md text-zinc-700 hover:text-zukvo-600"
+                        >
+                            Sign in
+                        </Link>
                         <a
                             href="/signup"
                             className="mt-2 block text-center rounded-full bg-zukvo-ink text-white px-4 py-2 text-sm font-medium"

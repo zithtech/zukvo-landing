@@ -4,9 +4,7 @@ import { CheckCircle, XCircle, Loader2, ArrowRight } from "lucide-react";
 import axios from "axios";
 import ZukvoLogo from "@/components/ZukvoLogo";
 import SEO from "@/components/SEO";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
-const APP_URL = import.meta.env.VITE_APP_URL || "http://localhost:3005";
+import { API_URL, buildLoginUrl } from "@/lib/workspace";
 
 /**
  * Verify the emailed link and open the workspace.
@@ -71,17 +69,19 @@ export default function VerifyEmail() {
                 );
                 const { tenantSubdomain, email, accessToken, decision } = res.data;
 
-                const appUrl = new URL(APP_URL);
-                const base = `${appUrl.protocol}//${tenantSubdomain}.${appUrl.host}`;
                 // Clicking the link sent to this mailbox already proved control of
                 // the address, and the password was chosen minutes ago on the
                 // signup form — so the backend mints a session here and the
                 // workspace opens signed in, the same way the Google/Microsoft
                 // signups do. The ?email= form is the fallback for a backend that
                 // mints no token.
+                //
+                // Via the shared builder rather than assembled here: this used to
+                // prefix the slug onto VITE_APP_URL's host verbatim, so an app
+                // served at app.zukvo.com sent people to acme.app.zukvo.com.
                 const redirectUrl = accessToken
-                    ? `${base}/login?token=${encodeURIComponent(accessToken)}`
-                    : `${base}/login?email=${encodeURIComponent(email)}`;
+                    ? buildLoginUrl(tenantSubdomain, accessToken)
+                    : buildLoginUrl(tenantSubdomain, null, email);
 
                 if (decision?.action === "PAYMENT_REQUIRED") {
                     setOpenCheckout(() => () => startCheckout({
