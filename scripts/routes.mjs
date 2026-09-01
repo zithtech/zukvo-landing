@@ -19,7 +19,7 @@ export const ROUTES = [
   { path: "/products/accounts", changefreq: "monthly", priority: 0.8 },
   { path: "/products/mail-calendar", changefreq: "monthly", priority: 0.8 },
   { path: "/products/escalation-management", changefreq: "monthly", priority: 0.8 },
-  // /signup is intentionally excluded (noindex)
+  // /signup and /signin are intentionally excluded (noindex)
 ];
 
 export const SITE_URL = "https://zukvo.com";

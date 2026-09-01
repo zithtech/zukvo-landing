@@ -1,8 +1,9 @@
 import "@/App.css";
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Landing from "@/pages/Landing";
 import Signup from "@/pages/Signup";
+import SignIn from "@/pages/SignIn";
 import About from "@/pages/About";
 import ContactSales from "@/pages/ContactSales";
 import ProductsIndex from "@/pages/products/ProductsIndex";
@@ -34,29 +35,44 @@ import Timesheet from "@/pages/products/Timesheet";
 import VerifyEmail from "@/pages/VerifyEmail";
 import PendingApproval from "@/pages/PendingApproval";
 
+/**
+ * Legacy /login entry point — bookmarks, old emails, anything already pointing
+ * here.
+ *
+ * It used to forward straight to the app's own /login, which lands on the root
+ * host with no idea which tenant to show. /signin asks for the workspace first,
+ * so this now hands over to it, carrying the query string along so a
+ * `?workspace=` or `?subdomain=` on the original link still prefills the field.
+ *
+ * The misconfiguration guard below stays: /signin derives tenant hosts from
+ * VITE_APP_URL too, so a VITE_APP_URL pointing back at this landing page is
+ * still broken, just one page later.
+ */
 function LoginRedirect() {
     const { search } = useLocation();
-    const [isLoop, setIsLoop] = useState(false);
+    // null until the check has run. Handing back <Navigate/> on the first frame
+    // would unmount this component before the effect fires, and the guard below
+    // would never get the chance to report a bad VITE_APP_URL.
+    const [isLoop, setIsLoop] = useState(null);
 
     useEffect(() => {
         const appUrl = import.meta.env.VITE_APP_URL || "http://localhost:3005";
-        
+
         // Prevent infinite loop if VITE_APP_URL is pointing back to this landing page
         // (Handles www vs non-www discrepancy to avoid blinking/redirect loops)
         try {
             const targetUrl = new URL(appUrl);
             const targetHost = targetUrl.hostname.replace(/^www\./, '');
             const currentHost = window.location.hostname.replace(/^www\./, '');
-            if (targetHost === currentHost) {
-                setIsLoop(true);
-                return;
-            }
+            setIsLoop(targetHost === currentHost);
+            return;
         } catch (e) {
             // ignore invalid URL
         }
-
-        window.location.replace(`${appUrl}/login${search}`);
+        setIsLoop(false);
     }, [search]);
+
+    if (isLoop === null) return null;
 
     if (isLoop) {
         return (
@@ -74,7 +90,7 @@ function LoginRedirect() {
         );
     }
 
-    return null;
+    return <Navigate to={`/signin${search}`} replace />;
 }
 
 function ScrollToTop() {
@@ -102,6 +118,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Landing />} />
                     <Route path="/login" element={<LoginRedirect />} />
+                    <Route path="/signin" element={<SignIn />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact-sales" element={<ContactSales />} />
