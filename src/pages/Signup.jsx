@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import ZukvoLogo from "@/components/ZukvoLogo";
 import SEO from "@/components/SEO";
+import { API_URL, WORKSPACE_DOMAIN, buildLoginUrl, slugify } from "@/lib/workspace";
 
 /* ---------------- DATA (mirrors Pricing.jsx) ---------------- */
 
@@ -280,14 +281,14 @@ function MinimalNav() {
                     <span className="hidden sm:inline text-zinc-500">
                         Already have an account?
                     </span>
-                    <a
-                        href="#login"
+                    <Link
+                        to="/signin"
                         data-testid="signup-signin"
                         className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5 text-zukvo-ink font-medium hover:border-zinc-300 transition-colors"
                     >
                         Sign in
                         <ArrowRight className="size-3.5" />
-                    </a>
+                    </Link>
                 </div>
             </div>
         </header>
@@ -614,35 +615,12 @@ function ChangePlanLink({ label = "Change plan" }) {
 
 /* ---------------- SIGNUP FORM ---------------- */
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
-const APP_URL = import.meta.env.VITE_APP_URL || "http://localhost:3005";
-
 /**
- * Builds the login URL for a tenant workspace.
- * On localhost: uses ?subdomain= param because subdomain.localhost doesn't resolve in browsers.
- * On prod: uses subdomain prefix (e.g. https://srvsh.zukvo.com/login).
+ * buildLoginUrl and the slug preview now live in @/lib/workspace, shared with
+ * /signin — which has to turn the same workspace name back into the same
+ * address this form promises.
  */
-function buildLoginUrl(tenantSubdomain, accessToken, email, sso) {
-    const appUrl = new URL(APP_URL);
-    const isLocalhost = appUrl.hostname === "localhost" || appUrl.hostname === "127.0.0.1";
-    let base;
-    if (isLocalhost) {
-        // localhost can't do subdomain routing — pass subdomain as query param
-        base = `${appUrl.protocol}//${appUrl.host}/login`;
-    } else {
-        // Production: strip "app." prefix and prepend tenant subdomain
-        const baseDomain = appUrl.hostname.replace(/^app\./, '');
-        base = `${appUrl.protocol}//${tenantSubdomain}.${baseDomain}/login`;
-    }
-    const params = new URLSearchParams();
-    if (isLocalhost) params.set('subdomain', tenantSubdomain);
-    if (accessToken) params.set('token', accessToken);
-    else if (email) {
-        params.set('email', email);
-        if (sso) params.set('sso', sso);
-    }
-    return `${base}?${params.toString()}`;
-}
+const slugPreview = slugify;
 
 function SignupCard({ ctx }) {
     const [showPwd, setShowPwd] = useState(false);
@@ -651,6 +629,7 @@ function SignupCard({ ctx }) {
     const [name, setName] = useState("");
     const [type, setType] = useState("freelancer"); // freelancer | team
     const [companyName, setCompanyName] = useState("");
+    const [workspaceName, setWorkspaceName] = useState("");
     const [status, setStatus] = useState("idle"); // idle | loading | success | error
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -683,6 +662,7 @@ function SignupCard({ ctx }) {
                                 token: tokenResponse.access_token,
                                 type,
                                 companyName: type === "team" ? companyName : undefined,
+                        workspaceName: type === "team" ? undefined : workspaceName,
                                 planConfig: {
                                     tier: ctx.tier ?? null,
                                     sets: ctx.sets,
@@ -702,7 +682,7 @@ function SignupCard({ ctx }) {
                                     description: 'Subscription Payment',
                                     handler: async (response) => {
                                         try {
-                                            const adminApiUrl = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:5000';
+                                            const adminApiUrl = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:4001';
                                             const verifyRes = await axios.post(`${adminApiUrl}/api/payments/verify`, {
                                                 razorpay_order_id: response.razorpay_order_id,
                                                 razorpay_payment_id: response.razorpay_payment_id,
@@ -804,6 +784,7 @@ function SignupCard({ ctx }) {
                         token,
                         type,
                         companyName: type === "team" ? companyName : undefined,
+                        workspaceName: type === "team" ? undefined : workspaceName,
                         planConfig: {
                             tier: ctx.tier ?? null,
                             sets: ctx.sets,
@@ -823,7 +804,7 @@ function SignupCard({ ctx }) {
                             description: 'Subscription Payment',
                             handler: async (response) => {
                                 try {
-                                    const adminApiUrl = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:5000';
+                                    const adminApiUrl = import.meta.env.VITE_ADMIN_API_URL || 'http://localhost:4001';
                                     const verifyRes = await axios.post(`${adminApiUrl}/api/payments/verify`, {
                                         razorpay_order_id: response.razorpay_order_id,
                                         razorpay_payment_id: response.razorpay_payment_id,
@@ -912,6 +893,7 @@ function SignupCard({ ctx }) {
                 password: pwd,
                 type,
                 companyName: type === "team" ? companyName : undefined,
+                workspaceName: type === "team" ? undefined : workspaceName,
                 planConfig: {
                     tier: ctx.tier ?? null,
                     sets: ctx.sets,
@@ -1028,6 +1010,7 @@ function SignupCard({ ctx }) {
                     value={email}
                     onChange={setEmail}
                     testid="signup-email"
+                    autoComplete="email"
                 />
                 <FormField
                     label="Full Name"
@@ -1037,6 +1020,7 @@ function SignupCard({ ctx }) {
                     value={name}
                     onChange={setName}
                     testid="signup-name"
+                    autoComplete="name"
                 />
                 {type === "team" && (
                     <FormField
@@ -1047,7 +1031,37 @@ function SignupCard({ ctx }) {
                         value={companyName}
                         onChange={setCompanyName}
                         testid="signup-company"
+                        autoComplete="organization"
                     />
+                )}
+                {/*
+                    Optional for a freelancer, and asked here rather than after
+                    login because the subdomain is derived from it. Left blank,
+                    the workspace is named after the person — putting their own
+                    name in a URL they share with clients, and forcing the app
+                    to ask for a name later and rename the subdomain, which
+                    changes origin and bounces them through the login page.
+                */}
+                {type === "freelancer" && (
+                    <FormField
+                        label="Workspace Name (optional)"
+                        icon={Building2}
+                        type="text"
+                        placeholder="Northlight Studio"
+                        value={workspaceName}
+                        onChange={setWorkspaceName}
+                        testid="signup-workspace"
+                        autoComplete="organization"
+                    />
+                )}
+                {(type === "team" ? companyName : workspaceName || name).trim() && (
+                    <p className="text-[12px] text-zinc-500 -mt-1">
+                        Your workspace will live at{" "}
+                        <span className="font-medium text-zukvo-ink">
+                            {slugPreview(type === "team" ? companyName : workspaceName || name)}
+                            {WORKSPACE_DOMAIN}
+                        </span>
+                    </p>
                 )}
                 <div>
                     <label className="block text-[12px] font-medium text-zukvo-ink mb-1.5">
@@ -1057,11 +1071,17 @@ function SignupCard({ ctx }) {
                         <span className="pl-3.5 text-zinc-400">
                             <Lock className="size-4" />
                         </span>
+                        {/* "new-password", not "current-password": it tells the
+                            browser this form CREATES an account rather than
+                            signing in to one, which stops saved credentials
+                            being offered against the form at all — and with
+                            them, the mis-aimed username fill above. */}
                         <input
                             type={showPwd ? "text" : "password"}
                             value={pwd}
                             onChange={(e) => setPwd(e.target.value)}
                             placeholder="At least 8 characters"
+                            autoComplete="new-password"
                             data-testid="signup-password"
                             className="flex-1 bg-transparent px-3 py-3 text-[14px] text-zukvo-ink placeholder:text-zinc-400 focus:outline-none"
                         />
@@ -1150,18 +1170,26 @@ function SignupCard({ ctx }) {
 
             <div className="mt-6 text-center text-[12.5px] text-zinc-500">
                 Already have an account?{" "}
-                <a
-                    href={`${import.meta.env.VITE_APP_URL || "http://localhost:3005"}/login`}
+                <Link
+                    to="/signin"
                     className="text-zukvo-600 font-medium hover:text-zukvo-700"
                 >
                     Sign in
-                </a>
+                </Link>
             </div>
         </div>
     );
 }
 
-function FormField({ label, icon: Icon, type, placeholder, value, onChange, testid }) {
+/**
+ * `autoComplete` is required, not optional, on purpose.
+ *
+ * Every field here used to be anonymous — no autocomplete, no name — so Chrome
+ * fell back to its heuristic: find the password input, treat the nearest text
+ * input ABOVE it as the username. That is Workspace Name, which is how a saved
+ * email address ended up filled into the field that names the workspace.
+ */
+function FormField({ label, icon: Icon, type, placeholder, value, onChange, testid, autoComplete }) {
     return (
         <div>
             <label className="block text-[12px] font-medium text-zukvo-ink mb-1.5">
@@ -1176,6 +1204,7 @@ function FormField({ label, icon: Icon, type, placeholder, value, onChange, test
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     placeholder={placeholder}
+                    autoComplete={autoComplete}
                     data-testid={testid}
                     className="flex-1 bg-transparent px-3 py-3 text-[14px] text-zukvo-ink placeholder:text-zinc-400 focus:outline-none"
                 />

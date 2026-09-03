@@ -55,6 +55,12 @@ export const ROUTES = {
       "Create your free Zukvo account and start running your work, clients and finances in one place.",
     noindex: true,
   },
+  "/signin": {
+    title: "Sign in",
+    description:
+      "Open your Zukvo workspace. Enter your workspace name and we'll take you to its sign-in page.",
+    noindex: true,
+  },
   "/products": {
     title: "Products",
     description:
